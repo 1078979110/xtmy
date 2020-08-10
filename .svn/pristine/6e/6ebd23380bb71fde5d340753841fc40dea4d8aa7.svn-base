@@ -1,0 +1,293 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
+use App\Salelist;
+use App\Medicinal;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Hospitalprice;
+use App\Hospital;
+use App\Mycart;
+use App\Order;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+class IndexController extends Controller
+{   
+    use AuthenticatesUsers;
+    public $user;
+    public $hospital;
+    public function __construct(Request $request){
+            $this->user = Auth::guard('api')->user();
+            if(empty($this->user)){
+                return $this->errorData('请登录');
+            }
+            $token = $request['token'];
+            if($token != $this->user['_token']){
+                return $this->errorData('_token不匹配');
+            };
+    }
+    
+    public function username(){
+        return 'telephone';
+    }
+    /**
+     * 登陆认证
+     * @param Request $request
+     * @return number[]|unknown[]|number[]|unknown[]|string[]
+     */
+    public function auth(Request $request){
+        if ($this->attemptLogin($request)) {
+            $user = $this->guard()->user();
+            $user->generateToken();
+            session()->put('user.info',$user->toArray());
+            $this->user = $user;
+            return $this->successData('登陆成功',['data' => session('user.info')]); 
+        }
+        return $this->errorData('登陆失败');
+    }   
+    
+    /**
+     * 医院列表
+     * @return number[]|unknown[]
+     */
+    public function hospitalList(){
+        $lists = Hospital::pluck('hospital','id')->toArray(true);
+        return $this->successData('医院列表',['data'=>$lists]);
+    }
+    
+    /**
+     * 选择医院
+     * @param Request $request
+     * @return number[]|unknown[]|string[]|number[]|unknown[]
+     */
+    public function selectHospital(Request $request){
+        $hid = $request['hid'];
+        $hospitalinfo = Hospital::find($hid);
+        if(empty($hospitalinfo)){
+            return $this->errorData('不存在的数据');
+        }
+        $this->hospital = $hospitalinfo;
+        session()->put('user.hospital', $hospitalinfo->toArray());
+        return $this->successData('选择医院成功');
+    }
+    /**
+     * 首页，筛选，搜索
+     * @return number[]|unknown[]
+     */
+    public function indexSearch(){
+        $request = request();
+        $producerid = isset($request['pid'])?$request['pid']:'';
+        $lineid = isset($request['lid'])?$request['lid']:'';
+        $categoryid = isset($request['cid'])?$request['cid']:'';
+        $q = isset($request['q'])?$request['q']:'';
+        $data = [];
+        $data = Medicinal::where(function($db) use($producerid, $lineid, $categoryid){
+            if($producerid != ''){
+                $db->where('producer_id' , $producerid)->where(function($db) use($lineid, $categoryid){
+                    if($lineid != ''){
+                        $db->where('line_id',$lineid)->where(function($db) use($categoryid){
+                            if($categoryid != ''){
+                                $db->where('category_id', $categoryid);
+                            }
+                        });
+                    }else{
+                        if($categoryid != ''){
+                            $db->where('category_id', $categoryid);
+                        }
+                    }
+                });
+            }else{
+                $db->where(function($db) use($lineid, $categoryid){
+                    if($lineid != ''){
+                        $db->where('line_id',$lineid)->where(function($db) use($categoryid){
+                            if($categoryid != ''){
+                                $db->where('category_id', $categoryid);
+                            }
+                        });
+                    }else{
+                        if($categoryid != ''){
+                            $db->where('category_id', $categoryid);
+                        }
+                    }
+                });
+            }
+        })
+        ->where(function($db)use($q){
+        if($q !=''){
+            $db->orWhere('medicinal','like','%'.$q.'%')->orWhere('specification',$q);
+        }
+        })->paginate()->toArray(true);
+        $this->user = session()->get('user.info');
+        if($this->user['type'] == 2){//医院用获取医院价格
+            $this->hospital = session('user.hospital');
+            foreach ($data['data'] as $key => $val){
+                $data['data'][$key]['price'] = Hospitalprice::where([['hospitalid',$this->hospital['id']],['medicinalid', $val['id']]])->value('price');
+            }
+        }
+        return $this->successData('搜索',$data);
+    }
+    
+    /**
+     * 购物车列表
+     */
+    public function myCart(){
+        $userinfo = session('user.info');
+        $lists = Mycart::where('buyerid',$userinfo['id'])->where(function($model)use($userinfo){
+            if($userinfo['type'] == 2){
+                $hospitalinfo = session('user.hospital');
+                $model->where('hospitalid',$hospitalinfo['id']);
+            }
+        })->get();
+        return $this->successData('购物车',['data'=>$lists]);
+    }
+    
+    /**
+     * 添加购物车
+     */
+    public function addCart(){
+        $request = request();
+        $userinfo = session('user.info');
+        $mid = $request['mid'];
+        $specification = $request['specification'];
+        $num = $request['num'];
+        if($userinfo['type'] == 2){
+            $hospitalinfo = session('user.hospital');
+            $price = Hospitalprice::where([['hospitalid',$hospitalinfo['id']],['medicinalid',$mid]])->value('price');
+        }else{
+            $price = $request['price'];
+        }
+        $data = [
+            'buyerid'=>$userinfo['id'],
+            'hospitalid' => $hospitalinfo['id'],
+            'specification' => $specification,
+            'medicinalid' => $mid,
+            'num' =>$num,
+            'price'=> $price
+        ];
+        $result = Mycart::insert($data);
+        if($result){
+            $this->successData('添加成功!',[]);
+        }else{
+            $this->errorData('添加失败');
+        }
+    }
+    /**
+     * 修改购物车商品数量
+     */
+    public function changeNum(){
+        $request = request();
+        $cartid = $request['id'];
+        $num = $request['num'];
+        $result = Mycart::where('id', $cartid)->update(['num'=>$num]);
+        if($result){
+            $this->successData('修改成功!',[]);
+        }else{
+            $this->errorData('修改失败');
+        }
+    }
+    
+    /**
+     * 删除购物车中的商品
+     */
+    public function delCartMedicinals(){
+        $request = request();
+        $cartid = $request['id'];
+        $cartid_arr = explode(',', $cartid);
+        foreach ($cartid_arr as $key=>$val){
+            Mycart::where('id',$val)->delete();
+        }
+        $this->successData('删除成功!',[]);
+    }
+    
+    /**
+     * 下单
+     */
+    public function addOrder(){
+        $request = request();
+        $lists = $request['data'];
+        $data = [];
+        $data['orderid'] = date('Ymd',time()).rand(1000,9999);
+        $data['ordermonth'] = date('Ym', time());
+        $userinfo = session('user.info');
+        if($userinfo['type'] == 2){
+            $data['orderstatus'] = 1;
+            $hospitalinfo = session('user.hospital');
+            $data['hospital'] = $hospitalinfo['id'];
+        }else{
+            $data['orderstatus'] = 2;
+        }
+        $data['buyerid'] = $userinfo['id'];
+        $data['buyertype'] = $userinfo['type'];
+        $orderinfo = [];
+        $total = 0;
+        foreach ($lists as $key=>$val){
+            $medicinalinfo = Medicinal::find($val['id']);
+            $price = $val['price']?$val['price']:$medicinalinfo['price'];
+            $total += $val['num']*$price; 
+            $info = [
+                'id'=>$val['id'],
+                'medicinal' => $medicinalinfo['medicinal'],
+                'specification' =>$medicinalinfo['specification'],
+                'price'=>$price,
+                'unit'=>$medicinalinfo['unit'],
+                'num'=>$val['num']
+            ];
+            $orderinfo[] = $info;
+        }
+        $data['totalprice'] = $total;
+        $data['orderinfo'] = json_encode($orderinfo);
+        $result = Order::insert($data);
+        $responseData = ['orderid'=>$data['orderid'],'total'=>$total,'ordertime'=>date('Y-m-d H:i:s', time())];
+        if($result){
+            $this->successData('下单成功!',['data'=>$responseData]);
+        }else{
+            $this->errorData('下单失败');
+        }
+    }
+    
+    /**
+     * 我的订单
+     * @return number[]|unknown[]
+     */
+    public function myOrder(){
+        $userinfo = session('user.info');
+        $lists = Order::where('buyerid',$userinfo['id'])->get(['orderid','orderinfo','totalprice','created_at'])->toArray(true);
+        return $this->successData('订单',['data'=>$lists]);
+    }
+    
+    
+    /**
+     * 修改密码
+     * @return number[]|unknown[]
+     */
+    public function changePassword(){
+        $request = request();
+        $userinfo = session('user.info');
+        $password = $request['password'];
+        if(!Hash::check($password,$userinfo['password'])){
+            $this->errorData('原密码不正确');
+        }
+        Salelist::where('id',$userinfo['id'])->update(['password'=>bcrypt($password)]);
+        DB::table('admin_user')->where('username',$userinfo['telephone'])->update(['password'=>bcrypt($password)]);
+        return $this->successData('修改成功',[]);
+    }
+    
+    /**
+     * 退出
+     * @param Request $request
+     * @return number[]|unknown[]
+     */
+    public function logout(Request $request){
+        $user = Auth::guard('api')->user();
+        
+        if ($user) {
+            $user->api_token = null;
+            $user->save();
+        }
+        return $this->successData('退出成功');
+    }
+}

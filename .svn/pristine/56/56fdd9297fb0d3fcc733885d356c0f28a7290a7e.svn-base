@@ -1,0 +1,101 @@
+<?php
+
+namespace App\Admin\Controllers;
+
+use App\Order;
+use Encore\Admin\Controllers\AdminController;
+use Encore\Admin\Form;
+use Encore\Admin\Grid;
+use Encore\Admin\Show;
+use App\Salelist;
+use App\Hospital;
+use Encore\Admin\Facades\Admin;
+use Illuminate\Support\Facades\DB;
+class OrderController extends AdminController
+{
+    /**
+     * Title for current resource.
+     *
+     * @var string
+     */
+    protected $title = '订单';
+
+    /**
+     * Make a grid builder.
+     *
+     * @return Grid
+     */
+    protected function grid()
+    {
+        $grid = new Grid(new Order());
+        $grid->quickSearch(function($model, $query){
+            $model->orWhere('orderid','like','%'.$query.'%');
+            $buyerid = Salelist::where('name',$query)->orWhere('telephone',$query)->value('id');
+            if($buyerid){
+                $model->orWhere('buyerid', $buyerid);
+            }
+            $hospitalid = Hospital::where('hospital','like','%'.$query.'%')->value('id');
+            if($hospitalid){
+                $model->orWhere('hospital', $hospitalid);
+            }
+        });
+        $user_id = Admin::user()->id;
+        $username = DB::table('admin_users')->where('id',$user_id)->value('username');
+        $buyerid = Salelist::where('telephone',$username)->value('id');
+        $buyertype = Salelist::where('telephone',$username)->value('type');
+        $user_roles = Admin::user()->roles->toArray();
+        if($user_roles[0]['slug'] !='administrator' || $user_roles[0]['slug'] !='xtmy'){
+            $grid->model()->where(function($query) use($buyerid){
+                $query->where('buyerid', $buyerid);
+            });
+        }
+        $grid->column('orderid','订单号');
+        $grid->column('totalprice', '订单金额');
+        $grid->column('orderstatus','订单状态');
+        $grid->column('buyerid','下单人')->display(function($buyerid){
+            return Salelist::where('id',$buyerid)->value('name');
+        });
+        if($buyertype ==2){
+            $grid->column('gift','赠品')->display(function($gift){
+                if(empty($gift)){
+                    $this->editable();
+                }else{
+                    return $gift;
+                }
+            });
+        }
+        $grid->disableFilter();
+        $grid->disableCreateButton();
+        $grid->disableColumnSelector();
+        return $grid;
+    }
+
+    /**
+     * Make a show builder.
+     *
+     * @param mixed $id
+     * @return Show
+     */
+    protected function detail($id)
+    {
+        $show = new Show(Order::findOrFail($id));
+
+
+
+        return $show;
+    }
+
+    /**
+     * Make a form builder.
+     *
+     * @return Form
+     */
+    protected function form()
+    {
+        $form = new Form(new Order());
+
+
+
+        return $form;
+    }
+}

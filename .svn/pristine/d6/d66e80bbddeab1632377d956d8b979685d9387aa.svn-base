@@ -1,0 +1,142 @@
+<?php
+namespace App\Admin\Controllers;
+
+use App\Medicinal;
+use App\Order;
+use App\Salelist;
+use App\Site;
+use Encore\Admin\Controllers\AdminController;
+use Maatwebsite\Excel\Facades\Excel;
+class PrintController extends AdminController{
+    /*
+     * @检查
+     */
+    protected $title = '商品随货同行单';
+    protected $defaults = ['购货单位：','收货单位：','单据号：','日期：','合计：','发货员：','复核员：','储运条件：','签收：','发货地址：','联系电话：'];
+    protected $column = ['A','B','C','D','E','F','G','H','I','J','K','L','M','M','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+    public function startPrint(){
+        $orderid = $_GET['id'];
+        $orderAllInfo = Order::find($orderid)->toArray(true);
+        if($orderAllInfo['buyertype'] == 1){//经销商
+            $this->agent($orderAllInfo);
+        }else{//医院
+            
+        }
+    }
+    /*
+     * 经销商
+     */
+    protected function agent($data){
+        $orderCompany = Salelist::where('id',$data['buyerid'])->value('name');//收货单位
+        $orderAddress = Salelist::where('id',$data['buyerid'])->value('address');//收货地址
+        $orderSendCompany = Site::where('id',1)->value('sitename');//发货单位
+        $orderSendAddress = Site::where('id',1)->value('siteaddress');//发货地址
+        $orderPhone = Site::where('id',1)->value('telephone');//联系电话
+        $orderId = $data['orderid'];//订单号
+        $orderDate = Date('Y-m-d', time());//出货日期
+        $orderData = json_decode($data['orderinfo'], true);
+        $fullData = [];
+        foreach ($orderData as $key=>$val){
+            $t_t = [];//临时存储完整的药品信息
+            $t_ = Medicinal::find($val['id']);
+            $t_t = array(
+                //'id'=>$val['id'],
+                'medicinal' => $val['medicinal'],
+                'manufactur' =>$t_['manufactur'],
+                'medicinalnum' => $t_['medicinalnum'],
+                'manufacturinglicense' =>$t_['manufacturinglicense'],
+                'specification' => $t_['specification'],
+                'unit' => $t_['unit'],
+                'num' => $val['num'],
+                
+                'batchnumber' => $t_['batchnumber'],
+                'registnum' => $t_['registnum'],
+                'makedate' => $t_['makedate'],
+                'invalidate' => $t_['invalidate'],
+                'storagecondition' => $t_['storagecondition']
+            );
+            $fullData[] = $t_t;
+            $orderintro = array(//订单的基本信息
+                'company' => $orderCompany,
+                'address' => $orderAddress,
+                'sendcompany' => $orderSendCompany,
+                'sendaddress' => $orderSendAddress,
+                'orderid' =>$orderId,
+                'orderdate' =>$orderDate,
+                'orderphone' => $orderPhone,
+                'orderprice' => $data['totalprice']                
+            );
+        }
+        $this->exportExcel($orderintro,$fullData);
+    }
+    
+    
+    /**
+     * 经销商    生成excel并且下载
+     * @$orderintro array 订单基本信息
+     *   company  string 收货公司
+     *   address  string 收货地址
+     *   sendcompany string 发货公司
+     *   sendaddress string 发货地址
+     *   orderid string 订单编号
+     *   orderdate string 发货日期
+     *   orderphone string 订单联系电话
+     *   orderprice mixed 订单总价
+     * 
+     * @data array 需要导出的数据
+     */
+    
+    public function exportExcel($orderintro, $data){
+        $title = $orderintro['company'].$orderintro['orderdate'];
+        $datat = [];//表头部信息
+        //$title = [];//列标题
+        Excel::create($title, function($excel) use($data, $orderintro,$datat){
+            $datat[] = [$orderintro['sendcompany'].$this->title];
+            $datat[] = [$this->defaults[0].$orderintro['company'],$this->defaults[2].$orderintro['orderid']];
+            $datat[] = [$this->defaults[1].$orderintro['address'],$this->defaults[3].$orderintro['orderdate']];
+            $datat[][] = ['药品名称','生产厂商','药品编号','生产许可证','规格型号','单位','数量','批号','注册证书','生产日期','失效日期','储存条件'];
+            array_splice($data,0,1,$datat[3]);
+            $excel->sheet($orderintro['sendcompany'].$this->title, function($sheet) use($orderintro,$datat, $data){
+                $sheet->mergeCells("A1:L1");
+                $sheet->mergeCells("A2:F2");
+                $sheet->mergeCells('G2:L2');
+                $sheet->mergeCells("A3:F3");
+                $sheet->mergeCells('G3:L3');
+                $sheet->setValueOfCell($datat[0][0],'A','1');
+                $sheet->setValueOfCell($datat[1][0],'A','2');
+                $sheet->setValueOfCell($datat[2][0],'A','3');
+                $sheet->setValueOfCell($datat[1][1],'G','2');
+                $sheet->setValueOfCell($datat[2][1],'G','3');
+                
+                $sheet->cells("A1", function ($cells) {
+                    $cells->setAlignment('center');
+                    $cells->setFontWeight('bold');
+                    $cells->setFontSize(20);
+                });
+                $sheet->cells("A2", function ($cells) {
+                    $cells->setAlignment('left');
+                    $cells->setFontSize(12);
+                });
+                $sheet->cells("G2", function ($cells) {
+                    $cells->setAlignment('right');
+                    $cells->setFontSize(12);
+                });
+                $sheet->cells("A3", function ($cells) {
+                    $cells->setAlignment('left');
+                    $cells->setFontSize(12);
+                });
+                $sheet->cells("G3", function ($cells) {
+                    $cells->setAlignment('right');
+                    $cells->setFontSize(12);
+                });
+                $sheet->setAutoSize(true);
+                $endRow = sizeof($data)+3;
+                $sheet->fromArray($data, null, 'A4', false, false)->setFontSize(12);
+                $sheet->setAutoSize(['A','B','C','D','E','F','G','H','I','J','K','L']);
+                $array_style = array('borders'=>array('allborders'=>array('style'=>\PHPExcel_Style_Border::BORDER_THIN)));
+                $sheet->getStyle('A4:L'.$endRow)->applyFromArray($array_style);
+            });
+            
+        })->export('xls');
+    }
+}
