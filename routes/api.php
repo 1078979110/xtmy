@@ -24,6 +24,7 @@ Route::any('unAuth', function () {
 Route::group(['namespace' => 'Api'], function () {
 	Route::post('/login', 'IndexController@auth');
 	Route::get('/index', 'IndexController@indexSearch');
+	Route::get('/filter', 'IndexController@getFilter');
 	Route::get('/siteinfo', 'IndexController@getSiteInfo');
 	Route::group(['middleware' => 'auth:api'], function () {
 		Route::get('/hospital', 'IndexController@hospitalList');

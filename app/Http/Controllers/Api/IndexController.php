@@ -12,6 +12,7 @@ use App\Order;
 use App\Producer;
 use App\Productline;
 use App\Salelist;
+use App\Site;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -58,12 +59,26 @@ class IndexController extends Controller {
 		return $this->errorData('登陆失败');
 	}
 
+	protected function checKSession() {
+		$userinfo = session('user.info');
+		if (!$userinfo) {
+			$userinfo = Salelist::where('api_token', request()->get('api_token'))->first()->toArray(true);
+			if (empty($userinfo)) {
+				return $this->errorData('登陆失效');
+			} else {
+				return $userinfo;
+			}
+		}
+	}
+
 	/**
 	 * 医院列表
 	 * @return number[]|unknown[]
 	 */
 	public function hospitalList() {
-		$lists = Hospital::pluck('hospital', 'id')->toArray(true);
+		$userinfo = $this->checKSession();
+		$uid = $userinfo['id'];
+		$lists = Hospital::where('belongto', $uid)->pluck('hospital', 'id')->toArray(true);
 		return $this->successData('医院列表', ['hospital' => $lists]);
 	}
 
@@ -80,11 +95,41 @@ class IndexController extends Controller {
 		}
 		$this->hospital = $hospitalinfo;
 		session()->put('user.hospital', $hospitalinfo->toArray());
-		return $this->successData('选择医院成功');
+		return $this->successData('选择医院成功', ['hospital' => $hospitalinfo]);
 	}
 
-	public function homeList() {
+	/**
+	 * [厂家列表]
+	 * @return [type] [description]
+	 */
+	public function producerList() {
+		$producer = Producer::pluck('name');
+		return $this->successData('厂家', []);
+	}
 
+	/**
+	 * [产品线列表]
+	 * @return [type] [description]
+	 */
+	public function lineList() {
+		$lines = Productline::pluck('linename');
+		return $this->successData('产品线', []);
+	}
+
+	/**
+	 * [分类列表]
+	 * @return [type] [description]
+	 */
+	public function categoryList() {
+		$categories = Category::pluck('categoryname');
+		return $this->successData('分类', ['caetgory' => $categories]);
+	}
+
+	public function getFilter() {
+		$producer = Producer::pluck('name');
+		$lines = Productline::pluck('linename');
+		$categories = Category::pluck('categoryname');
+		return $this->successData('筛选', [$producer, $lines, $categories]);
 	}
 
 	/**
