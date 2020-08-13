@@ -23,10 +23,10 @@ Route::group([
     $router->resource('dollar', HospitalpriceController::class);
     $router->resource('templates', TemplateController::class);
     $router->resource('products', ProductController::class);
-    
+    $router->resource('/sites', SiteController::class);
     //自定义页面
     
-    $router->get('/sites', 'SiteController@site');
+    
     $router->get('/api/line', 'ApiController@line');
     $router->get('/api/category', 'ApiController@category');
     $router->get('/password/setadmin', 'PasswordController@setAdmin');

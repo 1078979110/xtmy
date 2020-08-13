@@ -8,7 +8,7 @@ class Site extends Model
 {
     //
     protected $talbe='siteinfo';
-    
+    protected $fillable = [];
     public function setBannersAttribute($Banners)
     {
         if (is_array($Banners)) {
