@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2020-08-07 14:36:22
+Date: 2020-08-13 15:55:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -70,7 +70,7 @@ CREATE TABLE `admin_operation_log` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `admin_operation_log_user_id_index` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6842 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6893 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of admin_operation_log
@@ -6916,6 +6916,57 @@ INSERT INTO `admin_operation_log` VALUES ('6838', '1', 'admin/setting/info', 'GE
 INSERT INTO `admin_operation_log` VALUES ('6839', '1', 'admin/salelists', 'GET', '::1', '{\"_pjax\":\"#pjax-container\"}', '2020-08-07 09:09:28', '2020-08-07 09:09:28');
 INSERT INTO `admin_operation_log` VALUES ('6840', '1', 'admin/products', 'GET', '::1', '{\"_pjax\":\"#pjax-container\"}', '2020-08-07 09:09:37', '2020-08-07 09:09:37');
 INSERT INTO `admin_operation_log` VALUES ('6841', '1', 'admin/salelists', 'GET', '::1', '{\"_pjax\":\"#pjax-container\"}', '2020-08-07 09:09:39', '2020-08-07 09:09:39');
+INSERT INTO `admin_operation_log` VALUES ('6842', '1', 'admin', 'GET', '::1', '[]', '2020-08-07 15:34:39', '2020-08-07 15:34:39');
+INSERT INTO `admin_operation_log` VALUES ('6843', '1', 'admin/orders', 'GET', '::1', '[]', '2020-08-07 15:34:39', '2020-08-07 15:34:39');
+INSERT INTO `admin_operation_log` VALUES ('6844', '1', 'admin/producers', 'GET', '::1', '{\"_pjax\":\"#pjax-container\"}', '2020-08-07 16:25:12', '2020-08-07 16:25:12');
+INSERT INTO `admin_operation_log` VALUES ('6845', '1', 'admin/salelists', 'GET', '::1', '{\"_pjax\":\"#pjax-container\"}', '2020-08-07 19:55:41', '2020-08-07 19:55:41');
+INSERT INTO `admin_operation_log` VALUES ('6846', '1', 'admin/setting/info', 'GET', '::1', '{\"_pjax\":\"#pjax-container\"}', '2020-08-07 19:55:45', '2020-08-07 19:55:45');
+INSERT INTO `admin_operation_log` VALUES ('6847', '1', 'admin/orders', 'GET', '::1', '{\"_pjax\":\"#pjax-container\"}', '2020-08-07 19:55:47', '2020-08-07 19:55:47');
+INSERT INTO `admin_operation_log` VALUES ('6848', '1', 'admin/medicinals', 'GET', '::1', '{\"_pjax\":\"#pjax-container\"}', '2020-08-07 19:55:50', '2020-08-07 19:55:50');
+INSERT INTO `admin_operation_log` VALUES ('6849', '1', 'admin', 'GET', '::1', '[]', '2020-08-11 15:56:37', '2020-08-11 15:56:37');
+INSERT INTO `admin_operation_log` VALUES ('6850', '1', 'admin/orders', 'GET', '::1', '[]', '2020-08-11 15:56:37', '2020-08-11 15:56:37');
+INSERT INTO `admin_operation_log` VALUES ('6851', '1', 'admin/sites', 'GET', '::1', '{\"_pjax\":\"#pjax-container\"}', '2020-08-11 15:56:41', '2020-08-11 15:56:41');
+INSERT INTO `admin_operation_log` VALUES ('6852', '1', 'admin/sites', 'GET', '::1', '[]', '2020-08-11 15:57:33', '2020-08-11 15:57:33');
+INSERT INTO `admin_operation_log` VALUES ('6853', '1', 'admin/sites/siteinfo', 'POST', '::1', '{\"sitename\":\"\\u534f\\u540c\\u8d38\\u6613\",\"siteaddress\":\"ssssssssssssss\",\"telephone\":\"400-4000-4000\",\"copyright\":\"Copyright \\u7248\\u6743\\u6240\\u6709 \\u00a9 \\u67d0\\u67d0\\u5316\\u5986\\u54c1 www.xxxx.com \\u67d0\\u67d0\\u5316\\u5986\\u54c1\\u6709\\u9650\\u516c\\u53f8 \\u6caaICP\\u5907xxxxxx\\u53f7-x\",\"id\":\"1\",\"_token\":\"8T16DWSZ9Jfc3xK3Nyxuhuw5vO7KSzeMV0ezIxy9\"}', '2020-08-11 15:58:03', '2020-08-11 15:58:03');
+INSERT INTO `admin_operation_log` VALUES ('6854', '1', 'admin/sites', 'GET', '::1', '[]', '2020-08-11 15:58:03', '2020-08-11 15:58:03');
+INSERT INTO `admin_operation_log` VALUES ('6855', '1', 'admin/sites/siteinfo', 'POST', '::1', '{\"sitename\":\"\\u534f\\u540c\\u8d38\\u6613\",\"siteaddress\":\"ssssssssssssss\",\"telephone\":\"400-4000-4000\",\"copyright\":\"Copyright \\u7248\\u6743\\u6240\\u6709 \\u00a9 \\u6b66\\u6c49\\u534f\\u540c\\u8d38\\u6613\\u6709\\u9650\\u516c\\u53f8 \\u6caaICP\\u5907xxxxxx\\u53f7-x\",\"id\":\"1\",\"_token\":\"8T16DWSZ9Jfc3xK3Nyxuhuw5vO7KSzeMV0ezIxy9\"}', '2020-08-11 15:58:47', '2020-08-11 15:58:47');
+INSERT INTO `admin_operation_log` VALUES ('6856', '1', 'admin/sites', 'GET', '::1', '[]', '2020-08-11 15:58:47', '2020-08-11 15:58:47');
+INSERT INTO `admin_operation_log` VALUES ('6857', '1', 'admin', 'GET', '::1', '[]', '2020-08-12 09:05:03', '2020-08-12 09:05:03');
+INSERT INTO `admin_operation_log` VALUES ('6858', '1', 'admin', 'GET', '::1', '[]', '2020-08-12 09:05:03', '2020-08-12 09:05:03');
+INSERT INTO `admin_operation_log` VALUES ('6859', '1', 'admin/orders', 'GET', '::1', '[]', '2020-08-12 09:05:04', '2020-08-12 09:05:04');
+INSERT INTO `admin_operation_log` VALUES ('6860', '1', 'admin/orders', 'GET', '::1', '[]', '2020-08-12 19:11:10', '2020-08-12 19:11:10');
+INSERT INTO `admin_operation_log` VALUES ('6861', '1', 'admin/medicinals', 'GET', '::1', '{\"_pjax\":\"#pjax-container\"}', '2020-08-12 19:17:07', '2020-08-12 19:17:07');
+INSERT INTO `admin_operation_log` VALUES ('6862', '1', 'admin', 'GET', '::1', '[]', '2020-08-13 09:57:56', '2020-08-13 09:57:56');
+INSERT INTO `admin_operation_log` VALUES ('6863', '1', 'admin/orders', 'GET', '::1', '[]', '2020-08-13 09:57:58', '2020-08-13 09:57:58');
+INSERT INTO `admin_operation_log` VALUES ('6864', '1', 'admin/productlines', 'GET', '::1', '{\"_pjax\":\"#pjax-container\"}', '2020-08-13 09:58:03', '2020-08-13 09:58:03');
+INSERT INTO `admin_operation_log` VALUES ('6865', '1', 'admin/productlines/37/edit', 'GET', '::1', '{\"_pjax\":\"#pjax-container\"}', '2020-08-13 09:58:10', '2020-08-13 09:58:10');
+INSERT INTO `admin_operation_log` VALUES ('6866', '1', 'admin/productlines/37', 'PUT', '::1', '{\"linename\":\"\\u8d39\\u68ee\\u5c24\\u65af\\u4ea7\\u54c1\\u7ebf\",\"producer_id\":\"10\",\"_token\":\"bG9lB2jWkAtjtOM7pt4EClFtepTco7h2GGKNijKb\",\"_method\":\"PUT\",\"_previous_\":\"http:\\/\\/xtmynew.localhost\\/admin\\/productlines\"}', '2020-08-13 09:58:35', '2020-08-13 09:58:35');
+INSERT INTO `admin_operation_log` VALUES ('6867', '1', 'admin/productlines', 'GET', '::1', '[]', '2020-08-13 09:58:36', '2020-08-13 09:58:36');
+INSERT INTO `admin_operation_log` VALUES ('6868', '1', 'admin/productlines/38/edit', 'GET', '::1', '{\"_pjax\":\"#pjax-container\"}', '2020-08-13 09:58:40', '2020-08-13 09:58:40');
+INSERT INTO `admin_operation_log` VALUES ('6869', '1', 'admin/productlines/38', 'PUT', '::1', '{\"linename\":\"\\u6c5f\\u897f3L\\u4ea7\\u54c1\\u7ebf\",\"producer_id\":\"11\",\"_token\":\"bG9lB2jWkAtjtOM7pt4EClFtepTco7h2GGKNijKb\",\"_method\":\"PUT\",\"_previous_\":\"http:\\/\\/xtmynew.localhost\\/admin\\/productlines\"}', '2020-08-13 09:58:49', '2020-08-13 09:58:49');
+INSERT INTO `admin_operation_log` VALUES ('6870', '1', 'admin/productlines', 'GET', '::1', '[]', '2020-08-13 09:58:49', '2020-08-13 09:58:49');
+INSERT INTO `admin_operation_log` VALUES ('6871', '1', 'admin/medicinals', 'GET', '::1', '{\"_pjax\":\"#pjax-container\"}', '2020-08-13 10:00:08', '2020-08-13 10:00:08');
+INSERT INTO `admin_operation_log` VALUES ('6872', '1', 'admin/medicinals', 'GET', '::1', '{\"_pjax\":\"#pjax-container\",\"id\":null,\"medicinal\":null,\"producer_id\":\"10\"}', '2020-08-13 10:00:16', '2020-08-13 10:00:16');
+INSERT INTO `admin_operation_log` VALUES ('6873', '1', 'admin/medicinals', 'GET', '::1', '{\"_pjax\":\"#pjax-container\",\"id\":null,\"medicinal\":null,\"producer_id\":\"11\"}', '2020-08-13 10:00:33', '2020-08-13 10:00:33');
+INSERT INTO `admin_operation_log` VALUES ('6874', '1', 'admin/medicinals', 'GET', '::1', '{\"_pjax\":\"#pjax-container\",\"id\":null,\"medicinal\":null,\"producer_id\":\"10\"}', '2020-08-13 10:00:44', '2020-08-13 10:00:44');
+INSERT INTO `admin_operation_log` VALUES ('6875', '1', 'admin/medicinals/1395/edit', 'GET', '::1', '{\"_pjax\":\"#pjax-container\"}', '2020-08-13 10:00:50', '2020-08-13 10:00:50');
+INSERT INTO `admin_operation_log` VALUES ('6876', '1', 'admin/api/line', 'GET', '::1', '{\"q\":\"11\"}', '2020-08-13 10:01:08', '2020-08-13 10:01:08');
+INSERT INTO `admin_operation_log` VALUES ('6877', '1', 'admin/api/category', 'GET', '::1', '{\"q\":\"38\"}', '2020-08-13 10:01:08', '2020-08-13 10:01:08');
+INSERT INTO `admin_operation_log` VALUES ('6878', '1', 'admin/api/category', 'GET', '::1', '{\"q\":null}', '2020-08-13 10:01:18', '2020-08-13 10:01:18');
+INSERT INTO `admin_operation_log` VALUES ('6879', '1', 'admin/api/line', 'GET', '::1', '{\"q\":\"10\"}', '2020-08-13 10:01:23', '2020-08-13 10:01:23');
+INSERT INTO `admin_operation_log` VALUES ('6880', '1', 'admin/api/category', 'GET', '::1', '{\"q\":\"37\"}', '2020-08-13 10:01:23', '2020-08-13 10:01:23');
+INSERT INTO `admin_operation_log` VALUES ('6881', '1', 'admin/medicinals/1395', 'PUT', '::1', '{\"medicinal\":\"\\u6ce8\\u5c04\\u6cf5\",\"medicinalnum\":\"xt-1395\",\"manufacturinglicense\":\"\\u6e58\\u98df\\u836f\\u76d1\\u68b0\\u751f\\u4ea7\\u8bb820150092\\u53f7\",\"producer_id\":\"10\",\"line_id\":\"37\",\"category_id\":\"134\",\"manufactur\":\"\\u8d39\\u68ee\\u5c24\\u65af\\u5361\\u6bd4\\u5065\\u6e90\\uff08\\u957f\\u6c99\\uff09\\u533b\\u7597\\u79d1\\u6280\\u6709\\u9650\\u516c\\u53f8\",\"specification\":\"SP7.SP7S\",\"unit\":\"\\u53f0\",\"stock\":\"0\",\"batchnumber\":null,\"makedate\":null,\"invalidate\":null,\"registnum\":\"\\u6e58\\u68b0\\u6ce8\\u51c620152540020\",\"registivalidate\":\"2020-03-03\",\"storagecondition\":\"\\u5e38\\u6e29\",\"_token\":\"bG9lB2jWkAtjtOM7pt4EClFtepTco7h2GGKNijKb\",\"_method\":\"PUT\",\"_previous_\":\"http:\\/\\/xtmynew.localhost\\/admin\\/medicinals?&id=&medicinal=&producer_id=10\"}', '2020-08-13 10:01:28', '2020-08-13 10:01:28');
+INSERT INTO `admin_operation_log` VALUES ('6882', '1', 'admin/medicinals', 'GET', '::1', '{\"id\":null,\"medicinal\":null,\"producer_id\":\"10\"}', '2020-08-13 10:01:28', '2020-08-13 10:01:28');
+INSERT INTO `admin_operation_log` VALUES ('6883', '1', 'admin/medicinals/1396/edit', 'GET', '::1', '{\"_pjax\":\"#pjax-container\"}', '2020-08-13 10:01:34', '2020-08-13 10:01:34');
+INSERT INTO `admin_operation_log` VALUES ('6884', '1', 'admin/api/category', 'GET', '::1', '{\"q\":null}', '2020-08-13 10:01:37', '2020-08-13 10:01:37');
+INSERT INTO `admin_operation_log` VALUES ('6885', '1', 'admin/api/line', 'GET', '::1', '{\"q\":\"9\"}', '2020-08-13 10:01:42', '2020-08-13 10:01:42');
+INSERT INTO `admin_operation_log` VALUES ('6886', '1', 'admin/api/category', 'GET', '::1', '{\"q\":\"35\"}', '2020-08-13 10:01:42', '2020-08-13 10:01:42');
+INSERT INTO `admin_operation_log` VALUES ('6887', '1', 'admin/api/line', 'GET', '::1', '{\"q\":\"10\"}', '2020-08-13 10:01:43', '2020-08-13 10:01:43');
+INSERT INTO `admin_operation_log` VALUES ('6888', '1', 'admin/api/category', 'GET', '::1', '{\"q\":\"37\"}', '2020-08-13 10:01:43', '2020-08-13 10:01:43');
+INSERT INTO `admin_operation_log` VALUES ('6889', '1', 'admin/medicinals/1396', 'PUT', '::1', '{\"medicinal\":\"\\u8f93\\u6db2\\u6cf5\",\"medicinalnum\":\"xt-1396\",\"manufacturinglicense\":\"\\u6e58\\u98df\\u836f\\u76d1\\u68b0\\u751f\\u4ea7\\u8bb820150092\\u53f7\",\"producer_id\":\"10\",\"line_id\":\"37\",\"category_id\":\"134\",\"manufactur\":\"\\u8d39\\u68ee\\u5c24\\u65af\\u5361\\u6bd4\\u5065\\u6e90\\uff08\\u957f\\u6c99\\uff09\\u533b\\u7597\\u79d1\\u6280\\u6709\\u9650\\u516c\\u53f8\",\"specification\":\"VP7.VP7S\",\"unit\":\"\\u53f0\",\"stock\":\"0\",\"batchnumber\":null,\"makedate\":null,\"invalidate\":null,\"registnum\":\"\\u6e58\\u68b0\\u6ce8\\u51c620152540019\",\"registivalidate\":\"2020-03-03\",\"storagecondition\":\"\\u5e38\\u6e29\",\"_token\":\"bG9lB2jWkAtjtOM7pt4EClFtepTco7h2GGKNijKb\",\"_method\":\"PUT\",\"_previous_\":\"http:\\/\\/xtmynew.localhost\\/admin\\/medicinals?&id=&medicinal=&producer_id=10\"}', '2020-08-13 10:01:46', '2020-08-13 10:01:46');
+INSERT INTO `admin_operation_log` VALUES ('6890', '1', 'admin/medicinals', 'GET', '::1', '{\"id\":null,\"medicinal\":null,\"producer_id\":\"10\"}', '2020-08-13 10:01:46', '2020-08-13 10:01:46');
+INSERT INTO `admin_operation_log` VALUES ('6891', '1', 'admin/api/medicinalstatus', 'POST', '::1', '{\"id\":\"1395\",\"status\":\"0\"}', '2020-08-13 10:02:03', '2020-08-13 10:02:03');
+INSERT INTO `admin_operation_log` VALUES ('6892', '1', 'admin/medicinals', 'GET', '::1', '{\"id\":null,\"medicinal\":null,\"producer_id\":\"10\"}', '2020-08-13 10:02:08', '2020-08-13 10:02:08');
 
 -- ----------------------------
 -- Table structure for admin_permissions
@@ -7190,8 +7241,8 @@ CREATE TABLE `categories` (
   `line_id` int(11) NOT NULL COMMENT '产品线id',
   `producer_id` int(11) NOT NULL COMMENT '生产商id',
   `image` varchar(255) DEFAULT NULL COMMENT '分类图片',
-  `created_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=136 DEFAULT CHARSET=utf8mb4 COMMENT='产品分类表';
 
@@ -7225,8 +7276,8 @@ CREATE TABLE `hospital` (
   `address` varchar(255) DEFAULT NULL COMMENT '医院地址',
   `belongto` int(11) NOT NULL COMMENT '所属业务员',
   `department` text COMMENT '科室，',
-  `created_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8mb4 COMMENT='医院列表';
 
@@ -7254,8 +7305,8 @@ CREATE TABLE `hospitalprice` (
   `hospitalid` int(11) NOT NULL COMMENT '医院ID',
   `medicinalid` int(11) DEFAULT NULL COMMENT '药品id',
   `price` decimal(10,2) DEFAULT NULL COMMENT '价格',
-  `created_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`,`hospitalid`,`medicinalid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1443 DEFAULT CHARSET=utf8mb4 COMMENT='药品针对医院的价格表';
@@ -8593,16 +8644,16 @@ CREATE TABLE `medicinal` (
   `registivalidate` varchar(30) DEFAULT NULL COMMENT '注册证失效日期',
   `storagecondition` varchar(255) DEFAULT NULL COMMENT '存储条件',
   `status` int(1) DEFAULT '0' COMMENT '状态，0-》上架状态，1-》下架状态',
-  `created_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1513 DEFAULT CHARSET=utf8mb4 COMMENT='器械药品列表';
 
 -- ----------------------------
 -- Records of medicinal
 -- ----------------------------
-INSERT INTO `medicinal` VALUES ('1395', '注射泵', 'xt-1395', '湘食药监械生产许20150092号', '费森尤斯卡比健源（长沙）医疗科技有限公司', '10', '38', '134', 'SP7.SP7S', '台', '0', '', '', '', '湘械注准20152540020', '2020-03-03 00:00:00.000000', '常温', '0', '2020-08-06 16:36:36', '2020-08-06 16:36:36');
-INSERT INTO `medicinal` VALUES ('1396', '输液泵', 'xt-1396', '湘食药监械生产许20150092号', '费森尤斯卡比健源（长沙）医疗科技有限公司', '10', '38', '134', 'VP7.VP7S', '台', '0', '', '', '', '湘械注准20152540019', '2020-03-03 00:00:00.000000', '常温', '0', '2020-08-06 16:40:22', '2020-08-06 16:40:22');
+INSERT INTO `medicinal` VALUES ('1395', '注射泵', 'xt-1395', '湘食药监械生产许20150092号', '费森尤斯卡比健源（长沙）医疗科技有限公司', '10', '37', '134', 'SP7.SP7S', '台', '0', null, null, null, '湘械注准20152540020', '2020-03-03', '常温', '1', '2020-08-13 10:02:03', '2020-08-13 10:02:03');
+INSERT INTO `medicinal` VALUES ('1396', '输液泵', 'xt-1396', '湘食药监械生产许20150092号', '费森尤斯卡比健源（长沙）医疗科技有限公司', '10', '37', '134', 'VP7.VP7S', '台', '0', null, null, null, '湘械注准20152540019', '2020-03-03', '常温', '0', '2020-08-13 10:01:46', '2020-08-13 10:01:46');
 INSERT INTO `medicinal` VALUES ('1397', '一次性使用无菌导尿管', 'xt-1397', '赣洪食药监械经营许20160174号', 'URO TECHNOLOGY SDN BHD', '11', '38', '135', '2111230', '根', '0', '', '', '', '国械注进20172660335', '2022-01-21 00:00:00.000000', '常温', '0', '2020-08-06 16:36:42', '2020-08-06 16:36:42');
 INSERT INTO `medicinal` VALUES ('1398', '一次性使用无菌导尿管', 'xt-1398', '赣洪食药监械经营许20160174号', 'URO TECHNOLOGY SDN BHD', '11', '38', '135', '2111430', '根', '0', '', '', '', '国械注进20172660335', '2022-01-21 00:00:00.000000', '常温', '0', '2020-08-06 16:36:44', '2020-08-06 16:36:44');
 INSERT INTO `medicinal` VALUES ('1399', '一次性使用无菌导尿管', 'xt-1399', '赣洪食药监械经营许20160174号', 'URO TECHNOLOGY SDN BHD', '11', '38', '135', '4111430', '根', '0', '', '', '', '国械注进20172660335', '2022-01-21 00:00:00.000000', '常温', '0', '2020-08-06 16:36:46', '2020-08-06 16:36:46');
@@ -8755,8 +8806,8 @@ CREATE TABLE `mycart` (
   `medicinalid` int(11) DEFAULT NULL COMMENT '药品id',
   `specification` varchar(255) DEFAULT NULL COMMENT '规格',
   `num` varchar(7) DEFAULT NULL COMMENT '数量',
-  `created_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='购物车表';
 
@@ -8777,10 +8828,10 @@ CREATE TABLE `orders` (
   `buyerid` int(11) DEFAULT NULL COMMENT '下单人ID',
   `buyertype` int(11) DEFAULT NULL COMMENT '下单人类型',
   `hospital` int(11) DEFAULT NULL COMMENT '医院ID，针对业务员下单',
-  `created_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT NULL,
   `gift` text COMMENT '赠品内容，针对业务员给医院下单专用列',
   `orderinfo` text COMMENT '订单所有商品列,json串保存，json串包含字段：商品名，规格，单价，单位，数量',
-  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1212 DEFAULT CHARSET=utf8mb4 COMMENT='订单主表';
 
@@ -8963,8 +9014,8 @@ CREATE TABLE `prints` (
   `templateslug` varchar(50) DEFAULT NULL COMMENT '模板标识',
   `images` varchar(255) DEFAULT NULL COMMENT '模板打印结果示例图',
   `type` int(1) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
@@ -8983,10 +9034,10 @@ CREATE TABLE `producer` (
   `name` varchar(255) NOT NULL COMMENT '厂家名称',
   `productionlicense` varchar(255) DEFAULT NULL COMMENT '厂家生产许可证',
   `productionaddress` varchar(255) DEFAULT NULL COMMENT '生产厂商',
-  `created_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COMMENT='生产厂家列表';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COMMENT='生产厂家列表';
 
 -- ----------------------------
 -- Records of producer
@@ -9015,8 +9066,8 @@ CREATE TABLE `product` (
   `certificate` varchar(255) DEFAULT NULL COMMENT '注册证书',
   `certificatedate` varchar(11) DEFAULT NULL COMMENT '注册证书有效期',
   `sku` text COMMENT 'sku，json串，包含规格，数量',
-  `created_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='药品列表';
 
@@ -9031,8 +9082,8 @@ DROP TABLE IF EXISTS `productlines`;
 CREATE TABLE `productlines` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `linename` varchar(20) NOT NULL COMMENT '产品线名称',
-  `created_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   `producer_id` int(11) DEFAULT NULL COMMENT '所属生产商id',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COMMENT='产品线列表';
@@ -9042,8 +9093,8 @@ CREATE TABLE `productlines` (
 -- ----------------------------
 INSERT INTO `productlines` VALUES ('35', 'SIVT', '2020-08-06 15:41:04', '2020-08-06 15:41:04', '9');
 INSERT INTO `productlines` VALUES ('36', 'OPM', '2020-08-06 15:41:12', '2020-08-06 15:41:12', '9');
-INSERT INTO `productlines` VALUES ('37', '特级产品线', '2020-08-06 15:41:33', '2020-08-06 15:41:33', '10');
-INSERT INTO `productlines` VALUES ('38', '特级产品线', '2020-08-06 15:41:43', '2020-08-06 15:41:43', '11');
+INSERT INTO `productlines` VALUES ('37', '费森尤斯产品线', '2020-08-13 09:58:36', '2020-08-13 09:58:36', '10');
+INSERT INTO `productlines` VALUES ('38', '江西3L产品线', '2020-08-13 09:58:49', '2020-08-13 09:58:49', '11');
 INSERT INTO `productlines` VALUES ('39', '慢伤', '2020-08-06 15:42:36', '2020-08-06 15:42:36', '12');
 INSERT INTO `productlines` VALUES ('40', '皮护', '2020-08-06 15:42:45', '2020-08-06 15:42:45', '12');
 INSERT INTO `productlines` VALUES ('41', '洗手液', '2020-08-06 15:42:58', '2020-08-06 15:42:58', '12');
@@ -9059,8 +9110,8 @@ CREATE TABLE `salelists` (
   `type` int(11) DEFAULT NULL COMMENT '销售分类id',
   `address` varchar(255) DEFAULT NULL COMMENT '针对经销商',
   `status` int(1) DEFAULT '0' COMMENT '状态，是否被禁用，0=》正常，1=》被禁用',
-  `created_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COMMENT='销售列表（包括经销商和业务员）';
 
@@ -9097,15 +9148,16 @@ CREATE TABLE `sites` (
   `sitename` varchar(255) DEFAULT NULL COMMENT '网站标题',
   `siteaddress` varchar(255) DEFAULT NULL COMMENT '地址',
   `telephone` varchar(15) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `copyright` text COMMENT '版权',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='网站信息表';
 
 -- ----------------------------
 -- Records of sites
 -- ----------------------------
-INSERT INTO `sites` VALUES ('1', '协同贸易', 'ssssssssssssss', '400-4000-4000', '2020-07-30 17:12:27', '2020-07-30 17:12:27');
+INSERT INTO `sites` VALUES ('1', '协同贸易', 'ssssssssssssss', '400-4000-4000', 'Copyright 版权所有 © 武汉协同贸易有限公司 沪ICP备xxxxxx号-x', '2020-08-11 15:58:47', '2020-08-11 15:58:47');
 
 -- ----------------------------
 -- Table structure for users
@@ -9138,7 +9190,7 @@ INSERT INTO `users` VALUES ('4', 'fvHuC', '18950364757', null, '1', '1', '$2y$10
 INSERT INTO `users` VALUES ('5', 'ciGzc', '18931177692', null, '1', '0', '$2y$10$9CSJK4UZP20liUWda15txe2rw3PFz.RJvQAa.sYSIQBjroM9V5nrW', null, null, 'Tz5NI83R0nyH6Xa6WKjGcGQoKDWnpol8UFwYU3YAeTiCnpmbwgu35DZLlZV6rPIDEb2E2Fd7kVZaEMhKoeY2zELGYE2QFkML3FvuvmZ6QNnHkceA4mZmIZHKsOWb5vAgfuZEImQ4Ofor2ErfX81Z4LzvWC3FbYdiLF373VQfUPCPu8XbE4df', 'asdfsdfsdfsdf', '2020-07-28 19:22:11', '2020-08-04 15:41:28');
 INSERT INTO `users` VALUES ('6', '4Z4mV', '18967252815', null, '2', '0', '$2y$10$ryv/6CM30LCKYrdGFFuDde3vTbDp3bvaDJPh77tvewRIF4mVaquYy', null, null, null, null, '2020-07-28 19:22:11', '2020-07-28 19:29:11');
 INSERT INTO `users` VALUES ('7', 'zuw9M', '18975337072', null, '2', '1', '$2y$10$Tvd.NwzS4RnnIpNGJ9lHr.tjYpokZZwGBgcaTX5817n2pSf8Gy/h2', null, null, null, null, '2020-07-28 19:22:11', '2020-07-28 19:29:11');
-INSERT INTO `users` VALUES ('8', 'bohdD', '18920275214', null, '2', '0', '$2y$10$N86Gb6erwWsHqHwcmbTbLeNXLWVCnv6ld0cU35Ap.Muyw9sqWfhIy', null, 'pnqMTM3xn2sCy4d7lQSg6S0zd1vQPH2gW9MNkW6jJUxqkSl14XzZrIrRTsrV', 'veDAL9fmmxDOPpcTSmoTOP9gY6uGzX7U41isXBfBQLqL5axwtOhqv7wmDJ5B9YMzcQDA7LbxNOXKc5rc2EmV0iWExboCG7b1VBpUDZyGqdmMhjysMm8ufxMzn8d69RrJ', null, '2020-07-28 19:22:12', '2020-08-05 18:38:07');
+INSERT INTO `users` VALUES ('8', 'bohdD', '18920275214', null, '2', '0', '$2y$10$N86Gb6erwWsHqHwcmbTbLeNXLWVCnv6ld0cU35Ap.Muyw9sqWfhIy', null, 'pnqMTM3xn2sCy4d7lQSg6S0zd1vQPH2gW9MNkW6jJUxqkSl14XzZrIrRTsrV', null, null, '2020-07-28 19:22:12', '2020-08-13 15:08:38');
 INSERT INTO `users` VALUES ('9', 'YUIqA', '18976282751', null, '1', '1', '$2y$10$NNuDSprW3V11hO1ZzfNa/e8mMG6ZtrCWtkK7RVoATjZ1y0OQSE0GW', null, 'mXxn1ByDZPakFni1jcZ7sBsZNA0Dtkie9VLftqykkDDaWVAt9oKRjRXiZ3Bf', null, null, '2020-07-28 19:22:12', '2020-07-28 19:29:36');
 INSERT INTO `users` VALUES ('10', 'XnGvN', '18943437840', null, '1', '1', '$2y$10$qImrjHCFatyheQQBRLC3DOeUZ/rhuqoTt5Gb7fxl2C436B2aF86kq', null, null, null, null, '2020-07-28 19:22:12', '2020-07-28 19:29:36');
 INSERT INTO `users` VALUES ('11', 'd5bY2', '18970094046', null, '1', '1', '$2y$10$1MNhh5ujw5K4UcTlZyr89eCWOf1ye8/IukMp4z4Ny4zgeesBnrSlu', null, null, null, null, '2020-07-28 19:22:12', '2020-07-28 19:29:36');
@@ -9159,8 +9211,8 @@ DROP TABLE IF EXISTS `usertypes`;
 CREATE TABLE `usertypes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `usertype` varchar(10) DEFAULT NULL COMMENT '客户类型名称',
-  `created_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='客户类型表';
 

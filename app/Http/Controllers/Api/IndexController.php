@@ -49,6 +49,7 @@ class IndexController extends Controller {
 	 * @return number[]|unknown[]|number[]|unknown[]|string[]
 	 */
 	public function auth(Request $request) {
+		$userinfo = $this->checkSession();
 		if ($this->attemptLogin($request)) {
 			$user = $this->guard()->user();
 			$user->generateToken();
@@ -59,15 +60,15 @@ class IndexController extends Controller {
 		return $this->errorData('登陆失败');
 	}
 
-	protected function checKSession() {
+	protected function checkSession() {
 		$userinfo = session('user.info');
 		if (!$userinfo) {
 			$userinfo = Salelist::where('api_token', request()->get('api_token'))->first()->toArray(true);
 			if (empty($userinfo)) {
 				return $this->errorData('登陆失效');
-			} else {
-				return $userinfo;
 			}
+		} else {
+			return $userinfo;
 		}
 	}
 
@@ -76,7 +77,7 @@ class IndexController extends Controller {
 	 * @return number[]|unknown[]
 	 */
 	public function hospitalList() {
-		$userinfo = $this->checKSession();
+		$userinfo = $this->checkSession();
 		$uid = $userinfo['id'];
 		$lists = Hospital::where('belongto', $uid)->pluck('hospital', 'id')->toArray(true);
 		return $this->successData('医院列表', ['hospital' => $lists]);
@@ -88,6 +89,7 @@ class IndexController extends Controller {
 	 * @return number[]|unknown[]|string[]|number[]|unknown[]
 	 */
 	public function selectHospital(Request $request) {
+		$userinfo = $this->checkSession();
 		$hid = $request['hid'];
 		$hospitalinfo = Hospital::find($hid);
 		if (empty($hospitalinfo)) {
@@ -125,10 +127,21 @@ class IndexController extends Controller {
 		return $this->successData('分类', ['caetgory' => $categories]);
 	}
 
+	public function homeFilter() {
+		$producer = Producer::get(['id', 'name'])->take(3)->toArray(true);
+		foreach ($producer as $key => $value) {
+			$producer[$key]['line'] = Productline::where('producer_id', $value['id'])->value('linename');
+		}
+		return $this->successData('首页筛选位', ['filter' => $producer]);
+	}
+
 	public function getFilter() {
-		$producer = Producer::pluck('name');
-		$lines = Productline::pluck('linename');
-		$categories = Category::pluck('categoryname');
+		$producer = Producer::pluck('name')->toArray(true);
+		$lines = Productline::pluck('linename')->toArray(true);
+		$categories = Category::pluck('categoryname')->toArray(true);
+		array_splice($producer, 0, 0, '厂家');
+		array_splice($lines, 0, 0, '产品线');
+		array_splice($categories, 0, 0, '分类');
 		return $this->successData('筛选', [$producer, $lines, $categories]);
 	}
 
@@ -138,11 +151,23 @@ class IndexController extends Controller {
 	 */
 	public function indexSearch() {
 		$request = request();
-		$producerid = isset($request['pid']) ? $request['pid'] : '';
-		$lineid = isset($request['lid']) ? $request['lid'] : '';
-		$categoryid = isset($request['cid']) ? $request['cid'] : '';
+		$pid = isset($request['pid']) ? $request['pid'] : '';
+		$lid = isset($request['lid']) ? $request['lid'] : '';
+		$cid = isset($request['cid']) ? $request['cid'] : '';
 		$q = isset($request['q']) ? $request['q'] : '';
 		$data = [];
+		$producerid = '';
+		$lineid = '';
+		$categoryid = '';
+		if ($pid) {
+			$producerid = Producer::where('name', $pid)->value('id');
+		}
+		if ($lid) {
+			$lineid = Productline::where('linename', $lid)->value('id');
+		}
+		if ($cid) {
+			$categoryid = Category::where('categoryname', $cid)->value('id');
+		}
 		$data = Medicinal::where('status', 0)->where(function ($db) use ($producerid, $lineid, $categoryid) {
 			if ($producerid != '') {
 				$db->where('producer_id', $producerid)->where(function ($db) use ($lineid, $categoryid) {
@@ -178,7 +203,8 @@ class IndexController extends Controller {
 				if ($q != '') {
 					$db->orWhere('medicinal', 'like', '%' . $q . '%')->orWhere('specification', $q);
 				}
-			})->paginate()->toArray(true);
+			})->paginate();
+		$data = $data->toArray(true);
 		$this->user = session()->get('user.info');
 		foreach ($data['data'] as $key => $value) {
 			$data['data'][$key]['line'] = Productline::where('id', $value['line_id'])->value('linename');
@@ -202,13 +228,31 @@ class IndexController extends Controller {
 	 * 购物车列表
 	 */
 	public function myCart() {
-		$userinfo = session('user.info');
+		$userinfo = $this->checkSession();
 		$lists = Mycart::where('buyerid', $userinfo['id'])->where(function ($model) use ($userinfo) {
 			if ($userinfo['type'] == 2) {
 				$hospitalinfo = session('user.hospital');
 				$model->where('hospitalid', $hospitalinfo['id']);
 			}
 		})->get();
+		$data = [];
+		foreach ($lists as $key => $value) {
+			$medicinalinfo = Medicinal::where('id', $value['medicinalid'])->get(['producer_id', 'medicinal', 'unit'])->first()->toArray(true);
+			$producer = Producer::where('id', $medicinal['producer_id'])->value('name');
+			if ($userinfo['type'] == 2) {
+				$hospitalinfo = session('user.hospital');
+				$price = Hospitalprice::where('hospitalid', $hospitalinfo['id'])->where('medicinalid', $medicinalinfo['id'])->value('price');
+			} else {
+				$price = $value['price'];
+			}
+			$data[] = [
+				'id' => $key,
+				'name' => $producer . ' ' . $medicinalinfo['medicinal'] . $value['specification'],
+				'price' => $price,
+				'unit' => $medicinalinfo['unit'],
+				'num' => $value['num'],
+			];
+		}
 		return $this->successData('购物车', ['cart' => $lists]);
 	}
 
@@ -216,8 +260,8 @@ class IndexController extends Controller {
 	 * 添加购物车
 	 */
 	public function addCart() {
+		$userinfo = $this->checkSession();
 		$request = request();
-		$userinfo = session('user.info');
 		$mid = $request['mid'];
 		$specification = $request['specification'];
 		$num = $request['num'];
@@ -246,6 +290,7 @@ class IndexController extends Controller {
 	 * 修改购物车商品数量
 	 */
 	public function changeNum() {
+		$userinfo = $this->checkSession();
 		$request = request();
 		$cartid = $request['id'];
 		$num = $request['num'];
@@ -261,6 +306,7 @@ class IndexController extends Controller {
 	 * 删除购物车中的商品
 	 */
 	public function delCartMedicinals() {
+		$userinfo = $this->checkSession();
 		$request = request();
 		$cartid = $request['id'];
 		$cartid_arr = explode(',', $cartid);
@@ -274,12 +320,12 @@ class IndexController extends Controller {
 	 * 下单
 	 */
 	public function addOrder() {
+		$userinfo = $this->checkSession();
 		$request = request();
 		$lists = $request['data'];
 		$data = [];
 		$data['orderid'] = date('Ymd', time()) . rand(1000, 9999);
 		$data['ordermonth'] = date('Ym', time());
-		$userinfo = session('user.info');
 		if ($userinfo['type'] == 2) {
 			$data['orderstatus'] = 1;
 			$hospitalinfo = session('user.hospital');
@@ -321,8 +367,8 @@ class IndexController extends Controller {
 	 * @return number[]|unknown[]
 	 */
 	public function myOrder() {
-		$userinfo = session('user.info');
-		$lists = Order::where('buyerid', $userinfo['id'])->get(['orderid', 'orderinfo', 'totalprice', 'created_at'])->toArray(true);
+		$userinfo = $this->checkSession();
+		$lists = Order::where('buyerid', $userinfo['id'])->get(['orderid', 'orderinfo', 'totalprice', 'orderstatus', 'created_at'])->toArray(true);
 		return $this->successData('订单', ['order' => $lists]);
 	}
 
@@ -331,15 +377,17 @@ class IndexController extends Controller {
 	 * @return number[]|unknown[]
 	 */
 	public function changePassword() {
+		$userinfo = $this->checkSession();
 		$request = request();
-		$userinfo = session('user.info');
 		$password = $request['password'];
+		$newpassword = $request['newpassword'];
 		if (!Hash::check($password, $userinfo['password'])) {
 			$this->errorData('原密码不正确');
 		}
-		Salelist::where('id', $userinfo['id'])->update(['password' => bcrypt($password)]);
-		DB::table('admin_user')->where('username', $userinfo['telephone'])->update(['password' => bcrypt($password)]);
-		return $this->successData('修改成功', []);
+		Salelist::where('id', $userinfo['id'])->update(['password' => bcrypt($newpassword)]);
+		DB::table('admin_user')->where('username', $userinfo['telephone'])->update(['password' => bcrypt($newpassword)]);
+		$userinfo = Salelist::where('id', $userinfo['id'])->get()->toArray(true);
+		return $this->successData('修改成功', ['user' => $userinfo]);
 	}
 
 	/**

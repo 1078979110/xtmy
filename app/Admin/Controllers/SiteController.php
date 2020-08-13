@@ -17,6 +17,8 @@ class SiteController extends AdminController
         $form->text('sitename','网站名称');
         $form->text('siteaddress','地址');
         $form->text('telephone','电话');
+        $form->text('copyright','版权');
+        $form->multipleImage('banners','轮播图')->sortable()->removable()->help('轮播图推荐尺寸为：1200*280像素');
         $form->hidden('id');
         $content->body($form);
         return $content;
