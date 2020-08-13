@@ -19,7 +19,7 @@ class Site extends Model
     public function getBannersAttribute($Banners)
     {
         if(is_null(json_decode($Banners))){
-            return '';
+            return [];
         }else{
             return json_decode($Banners, true);
         }
