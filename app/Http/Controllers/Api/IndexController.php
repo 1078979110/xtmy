@@ -62,13 +62,16 @@ class IndexController extends Controller {
 
 	protected function checkSession() {
 		$userinfo = session('user.info');
+		
 		if (!$userinfo) {
 			$userinfo = Salelist::where('api_token', request()->get('api_token'))->first()->toArray(true);
 			if (empty($userinfo)) {
 				return $this->errorData('登陆失效');
+			}else{
+			    return $userinfo;
 			}
 		} else {
-			return $userinfo;
+		    return $userinfo;
 		}
 	}
 
@@ -381,11 +384,12 @@ class IndexController extends Controller {
 		$request = request();
 		$password = $request['password'];
 		$newpassword = $request['newpassword'];
+		$userinfo['password'] = Salelist::where('id', $userinfo['id'])->value('password');
 		if (!Hash::check($password, $userinfo['password'])) {
 			$this->errorData('原密码不正确');
 		}
 		Salelist::where('id', $userinfo['id'])->update(['password' => bcrypt($newpassword)]);
-		DB::table('admin_user')->where('username', $userinfo['telephone'])->update(['password' => bcrypt($newpassword)]);
+		DB::table('admin_users')->where('username', $userinfo['telephone'])->update(['password' => bcrypt($newpassword)]);
 		$userinfo = Salelist::where('id', $userinfo['id'])->get()->toArray(true);
 		return $this->successData('修改成功', ['user' => $userinfo]);
 	}
