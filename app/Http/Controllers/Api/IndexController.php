@@ -240,6 +240,7 @@ class IndexController extends Controller {
 		$request = request();
 		$hid = isset($request['hid']) ? $request['hid'] : 0;
 		$userinfo = $this->checkSession();
+		$hospitalinfo = [];
 		$lists = Mycart::where('buyerid', $userinfo['id'])->where(function ($model) use ($userinfo, $hid) {
 			if ($userinfo['type'] == 2) {
 				if ($hid != 0) {
@@ -255,7 +256,7 @@ class IndexController extends Controller {
 			$medicinalinfo = Medicinal::where('id', $value['medicinalid'])->get(['producer_id', 'medicinal', 'unit'])->first()->toArray(true);
 			$producer = Producer::where('id', $medicinalinfo['producer_id'])->value('name');
 			if ($userinfo['type'] == 2) {
-				$hospitalinfo = session('user.hospital');
+				//$hospitalinfo = session('user.hospital');
 				$price = Hospitalprice::where('hospitalid', $hospitalinfo['id'])->where('medicinalid', $medicinalinfo['id'])->value('price');
 			} else {
 				$price = $value['price'];
