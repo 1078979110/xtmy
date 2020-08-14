@@ -64,7 +64,7 @@ class IndexController extends Controller {
 		$userinfo = session('user.info');
 
 		if (!$userinfo) {
-			$userinfo = Salelist::where('api_token', request()->get('api_token'))->first()->toArray(true);
+			$userinfo = Salelist::where('api_token', request()->get('api_token'))->first();
 			if (empty($userinfo)) {
 				return $this->errorData('登陆失效');
 			} else {
@@ -214,14 +214,15 @@ class IndexController extends Controller {
 			$data['data'][$key]['category'] = Category::where('id', $value['category_id'])->value('categoryname');
 			$producer = Producer::where('id', $value['producer_id'])->value('name');
 			$data['data'][$key]['newname'] = $producer . ' ' . $value['medicinal'];
-			$data['data'][$key]['stocks'] = '库存' . $value['stock'];
+			$data['data'][$key]['unit'] = $val['unit'];
+			$data['data'][$key]['stocks'] = $value['stock'];
 		}
 		if ($this->user['type'] == 2) {
 //医院用获取医院价格
 			$this->hospital = session('user.hospital');
 			foreach ($data['data'] as $key => $val) {
 				$price = Hospitalprice::where([['hospitalid', $this->hospital['id']], ['medicinalid', $val['id']]])->value('price');
-				$data['data'][$key]['price'] = $price . '/' . $val['unit'];
+				$data['data'][$key]['price'] = $price;
 			}
 		}
 		return $this->successData('搜索', ['list' => $data]);
@@ -417,7 +418,6 @@ class IndexController extends Controller {
 	 */
 	public function logout(Request $request) {
 		$user = Auth::guard('api')->user();
-
 		if ($user) {
 			$user->api_token = null;
 			$user->save();
