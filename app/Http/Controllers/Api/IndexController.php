@@ -62,16 +62,16 @@ class IndexController extends Controller {
 
 	protected function checkSession() {
 		$userinfo = session('user.info');
-		
+
 		if (!$userinfo) {
 			$userinfo = Salelist::where('api_token', request()->get('api_token'))->first()->toArray(true);
 			if (empty($userinfo)) {
 				return $this->errorData('登陆失效');
-			}else{
-			    return $userinfo;
+			} else {
+				return $userinfo;
 			}
 		} else {
-		    return $userinfo;
+			return $userinfo;
 		}
 	}
 
@@ -269,7 +269,11 @@ class IndexController extends Controller {
 		$specification = $request['specification'];
 		$num = $request['num'];
 		if ($userinfo['type'] == 2) {
-			$hospitalinfo = session('user.hospital');
+			if ($request['hid']) {
+				$hospitalinfo = Hospital::find($request['hid']);
+			} else {
+				$hospitalinfo = session('user.hospital');
+			}
 			$price = Hospitalprice::where([['hospitalid', $hospitalinfo['id']], ['medicinalid', $mid]])->value('price');
 		} else {
 			$price = $request['price'];
