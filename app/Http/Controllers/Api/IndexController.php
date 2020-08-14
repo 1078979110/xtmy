@@ -218,8 +218,13 @@ class IndexController extends Controller {
 			$data['data'][$key]['stocks'] = $value['stock'];
 		}
 		if ($this->user['type'] == 2) {
-//医院用获取医院价格
-			$this->hospital = session('user.hospital');
+			//医院用获取医院价格
+			if ($request['hid']) {
+				$this->hospital = Hospital::find($request['hid']);
+			} else {
+				$this->hospital = session('user.hospital');
+			}
+
 			foreach ($data['data'] as $key => $val) {
 				$price = Hospitalprice::where([['hospitalid', $this->hospital['id']], ['medicinalid', $val['id']]])->value('price');
 				$data['data'][$key]['price'] = $price;
