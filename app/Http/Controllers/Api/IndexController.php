@@ -402,6 +402,13 @@ class IndexController extends Controller {
 		return $this->successData('修改成功', ['user' => $userinfo]);
 	}
 
+	public function getSpecification() {
+		$mid = $request['mid'];
+		$specification = Medicinal::where('id', $mid)->value('specification');
+		return $this->successData('商品规格', ['specification' => $specification]);
+
+	}
+
 	/**
 	 * 退出
 	 * @param Request $request

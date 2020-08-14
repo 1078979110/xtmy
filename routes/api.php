@@ -44,6 +44,8 @@ Route::group(['namespace' => 'Api'], function () {
 		Route::get('/order', 'IndexController@myOrder');
 		//退出登录
 		Route::get('/logout', 'IndexController@logout');
+		//获取商品规格
+		Route::get('/specification', 'IndexController@getSpecification');
 		//选择医院
 		Route::post('/selecthospital', 'IndexController@selectHospital');
 		//添加到购物车
