@@ -214,7 +214,7 @@ class IndexController extends Controller {
 			$data['data'][$key]['category'] = Category::where('id', $value['category_id'])->value('categoryname');
 			$producer = Producer::where('id', $value['producer_id'])->value('name');
 			$data['data'][$key]['newname'] = $producer . ' ' . $value['medicinal'];
-			$data['data'][$key]['unit'] = $val['unit'];
+			$data['data'][$key]['unit'] = $value['unit'];
 			$data['data'][$key]['stocks'] = $value['stock'];
 		}
 		if ($this->user['type'] == 2) {
