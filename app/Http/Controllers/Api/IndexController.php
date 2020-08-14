@@ -403,6 +403,7 @@ class IndexController extends Controller {
 	}
 
 	public function getSpecification() {
+		$request = request();
 		$mid = $request['mid'];
 		$specification = Medicinal::where('id', $mid)->value('specification');
 		return $this->successData('商品规格', ['specification' => $specification]);
