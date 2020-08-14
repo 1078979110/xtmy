@@ -295,15 +295,21 @@ class IndexController extends Controller {
 		} else {
 			$price = $request['price'];
 		}
-		$data = [
-			'buyerid' => $userinfo['id'],
-			'hospitalid' => $hospitalinfo['id'],
-			'specification' => $specification,
-			'medicinalid' => $mid,
-			'num' => $num,
-			'price' => $price,
-		];
-		$result = Mycart::insert($data);
+		$isInCart = Mycart::where('buyerid', $userinfo['id'])->where('medicinalid', $mid)->find()->toArray(true);
+		if (empty($isInCart)) {
+			$data = [
+				'buyerid' => $userinfo['id'],
+				'hospitalid' => $hospitalinfo['id'],
+				'specification' => $specification,
+				'medicinalid' => $mid,
+				'num' => $num,
+				'price' => $price,
+			];
+			$result = Mycart::insert($data);
+		} else {
+			$result = Mycart::where('buyerid', $userinfo['id'])->where('medicinalid', $mid)->update(['num' => $num + $isInCart['num']]);
+		}
+
 		if ($result) {
 			$this->successData('添加成功!', []);
 		} else {
