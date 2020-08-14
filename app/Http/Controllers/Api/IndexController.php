@@ -295,7 +295,7 @@ class IndexController extends Controller {
 		} else {
 			$price = $request['price'];
 		}
-		$isInCart = Mycart::where('buyerid', $userinfo['id'])->where('medicinalid', $mid)->find()->toArray(true);
+		$isInCart = Mycart::where('buyerid', $userinfo['id'])->where('medicinalid', $mid)->first()->toArray(true);
 		if (empty($isInCart)) {
 			$data = [
 				'buyerid' => $userinfo['id'],
