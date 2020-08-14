@@ -42,6 +42,8 @@ Route::group(['namespace' => 'Api'], function () {
 		Route::get('/cart', 'IndexController@myCart');
 		//获取订单列表
 		Route::get('/order', 'IndexController@myOrder');
+		//订单详情
+		Route::get('/orderinfo', 'IndexController@orderInfo');
 		//退出登录
 		Route::get('/logout', 'IndexController@logout');
 		//获取商品规格

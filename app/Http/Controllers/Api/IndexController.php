@@ -411,6 +411,17 @@ class IndexController extends Controller {
 		return $this->successData('订单', ['order' => $lists]);
 	}
 
+	public function orderInfo() {
+		$request = request();
+		$id = $request['oid'];
+		$orderInfo = Order::where('id', $id)->first();
+		if ($orderInfo) {
+			return $this->successData('订单详情!', ['info' => $orderInfo]);
+		} else {
+			return $this->errorData('查询失败');
+		}
+	}
+
 	/**
 	 * 修改密码
 	 * @return number[]|unknown[]
