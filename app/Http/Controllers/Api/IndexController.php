@@ -237,17 +237,23 @@ class IndexController extends Controller {
 	 * 购物车列表
 	 */
 	public function myCart() {
+		$request = request();
+		$hid = isset($request['hid']) ? $request['hid'] : 0;
 		$userinfo = $this->checkSession();
-		$lists = Mycart::where('buyerid', $userinfo['id'])->where(function ($model) use ($userinfo) {
+		$lists = Mycart::where('buyerid', $userinfo['id'])->where(function ($model) use ($userinfo, $hid) {
 			if ($userinfo['type'] == 2) {
-				$hospitalinfo = session('user.hospital');
+				if ($hid != 0) {
+					$hospitalinfo = Hospital::find($hid);
+				} else {
+					$hospitalinfo = session('user.hospital');
+				}
 				$model->where('hospitalid', $hospitalinfo['id']);
 			}
 		})->get();
 		$data = [];
 		foreach ($lists as $key => $value) {
 			$medicinalinfo = Medicinal::where('id', $value['medicinalid'])->get(['producer_id', 'medicinal', 'unit'])->first()->toArray(true);
-			$producer = Producer::where('id', $medicinal['producer_id'])->value('name');
+			$producer = Producer::where('id', $medicinalinfo['producer_id'])->value('name');
 			if ($userinfo['type'] == 2) {
 				$hospitalinfo = session('user.hospital');
 				$price = Hospitalprice::where('hospitalid', $hospitalinfo['id'])->where('medicinalid', $medicinalinfo['id'])->value('price');
@@ -262,7 +268,7 @@ class IndexController extends Controller {
 				'num' => $value['num'],
 			];
 		}
-		return $this->successData('购物车', ['cart' => $lists]);
+		return $this->successData('购物车', ['cart' => $data]);
 	}
 
 	/**
