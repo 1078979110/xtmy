@@ -253,10 +253,14 @@ class IndexController extends Controller {
 		})->get();
 		$data = [];
 		foreach ($lists as $key => $value) {
-			$medicinalinfo = Medicinal::where('id', $value['medicinalid'])->get(['producer_id', 'medicinal', 'unit'])->first()->toArray(true);
+			$medicinalinfo = Medicinal::where('id', $value['medicinalid'])->get(['id', 'producer_id', 'medicinal', 'unit'])->first()->toArray(true);
 			$producer = Producer::where('id', $medicinalinfo['producer_id'])->value('name');
 			if ($userinfo['type'] == 2) {
-				//$hospitalinfo = session('user.hospital');
+				if ($hid != 0) {
+					$hospitalinfo = Hospital::find($hid);
+				} else {
+					$hospitalinfo = session('user.hospital');
+				}
 				$price = Hospitalprice::where('hospitalid', $hospitalinfo['id'])->where('medicinalid', $medicinalinfo['id'])->value('price');
 			} else {
 				$price = $value['price'];
