@@ -327,9 +327,9 @@ class IndexController extends Controller {
 		$num = $request['num'];
 		$result = Mycart::where('id', $cartid)->update(['num' => $num]);
 		if ($result) {
-			$this->successData('修改成功!', []);
+			return $this->successData('修改成功!', []);
 		} else {
-			$this->errorData('修改失败');
+			return $this->errorData('修改失败');
 		}
 	}
 
@@ -344,7 +344,7 @@ class IndexController extends Controller {
 		foreach ($cartid_arr as $key => $val) {
 			Mycart::where('id', $val)->delete();
 		}
-		$this->successData('删除成功!', []);
+		return $this->successData('删除成功!', []);
 	}
 
 	/**
@@ -372,7 +372,7 @@ class IndexController extends Controller {
 		$data['buyertype'] = $userinfo['type'];
 		$orderinfo = [];
 		$total = 0;
-		foreach ($lists as $key => $val) {
+		foreach (json_decode($lists, true) as $key => $val) {
 			$medicinalinfo = Medicinal::find($val['id']);
 			$price = $val['price'] ? $val['price'] : $medicinalinfo['price'];
 			$total += $val['num'] * $price;
@@ -391,9 +391,9 @@ class IndexController extends Controller {
 		$result = Order::insert($data);
 		$responseData = ['orderid' => $data['orderid'], 'total' => $total, 'ordertime' => date('Y-m-d H:i:s', time())];
 		if ($result) {
-			$this->successData('下单成功!', ['orderinfo' => $responseData]);
+			return $this->successData('下单成功!', ['orderinfo' => $responseData]);
 		} else {
-			$this->errorData('下单失败');
+			return $this->errorData('下单失败');
 		}
 	}
 
@@ -418,7 +418,7 @@ class IndexController extends Controller {
 		$newpassword = $request['newpassword'];
 		$userinfo['password'] = Salelist::where('id', $userinfo['id'])->value('password');
 		if (!Hash::check($password, $userinfo['password'])) {
-			$this->errorData('原密码不正确');
+			return $this->errorData('原密码不正确');
 		}
 		Salelist::where('id', $userinfo['id'])->update(['password' => bcrypt($newpassword)]);
 		DB::table('admin_users')->where('username', $userinfo['telephone'])->update(['password' => bcrypt($newpassword)]);
