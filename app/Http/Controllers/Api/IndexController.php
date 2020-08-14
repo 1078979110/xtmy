@@ -374,7 +374,8 @@ class IndexController extends Controller {
 		$data['buyertype'] = $userinfo['type'];
 		$orderinfo = [];
 		$total = 0;
-		foreach (json_decode($lists, true) as $key => $val) {
+		$lists_arr = json_decode($lists, true);
+		foreach ($lists_arr as $key => $val) {
 			$medicinalinfo = Medicinal::find($val['id']);
 			$price = $val['price'] ? $val['price'] : $medicinalinfo['price'];
 			$total += $val['num'] * $price;
