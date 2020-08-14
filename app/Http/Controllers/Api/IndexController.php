@@ -295,7 +295,8 @@ class IndexController extends Controller {
 		} else {
 			$price = $request['price'];
 		}
-		$isInCart = Mycart::where('buyerid', $userinfo['id'])->where('medicinalid', $mid)->first()->toArray(true);
+		$isInCart = Mycart::where('buyerid', $userinfo['id'])->where('medicinalid', $mid)->first();
+
 		if (empty($isInCart)) {
 			$data = [
 				'buyerid' => $userinfo['id'],
@@ -311,9 +312,9 @@ class IndexController extends Controller {
 		}
 
 		if ($result) {
-			$this->successData('添加成功!', []);
+			return $this->successData('添加成功!', []);
 		} else {
-			$this->errorData('添加失败');
+			return $this->errorData('添加失败');
 		}
 	}
 	/**
