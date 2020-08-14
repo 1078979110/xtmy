@@ -300,12 +300,14 @@ class IndexController extends Controller {
 		if (empty($isInCart)) {
 			$data = [
 				'buyerid' => $userinfo['id'],
-				'hospitalid' => $hospitalinfo['id'],
 				'specification' => $specification,
 				'medicinalid' => $mid,
 				'num' => $num,
 				'price' => $price,
 			];
+			if ($request['hid']) {
+				$data['hospitalid'] = $hospitalinfo['id'];
+			}
 			$result = Mycart::insert($data);
 		} else {
 			$result = Mycart::where('buyerid', $userinfo['id'])->where('medicinalid', $mid)->update(['num' => $num + $isInCart['num']]);
