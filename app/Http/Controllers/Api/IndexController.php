@@ -335,7 +335,11 @@ class IndexController extends Controller {
 		$data['ordermonth'] = date('Ym', time());
 		if ($userinfo['type'] == 2) {
 			$data['orderstatus'] = 1;
-			$hospitalinfo = session('user.hospital');
+			if ($hid = $request['hid']) {
+				$hospitalinfo = Hospital::find($hid);
+			} else {
+				$hospitalinfo = session('user.hospital');
+			}
 			$data['hospital'] = $hospitalinfo['id'];
 		} else {
 			$data['orderstatus'] = 2;
