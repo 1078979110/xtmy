@@ -140,6 +140,7 @@ class IndexController extends Controller {
 		$producer = Producer::where('is_top', 1)->get(['id', 'name', 'image'])->take(3)->toArray(true);
 		foreach ($producer as $key => $value) {
 			$producer[$key]['line'] = Productline::where('producer_id', $value['id'])->value('linename');
+			$producer[$key]['image'] = '/storage/' . $value['image'];
 		}
 		return $this->successData('首页筛选位', ['filter' => $producer]);
 	}
