@@ -421,7 +421,7 @@ class IndexController extends Controller {
 		$request = request();
 		$id = $request['oid'];
 		$orderInfo = Order::where('id', $id)->first();
-		$order_arr = json_decode($orderinfo, true);
+		$order_arr = json_decode($orderInfo, true);
 		$total = 0;
 		$totalnum = 0;
 		foreach ($order_arr as $key => $value) {
