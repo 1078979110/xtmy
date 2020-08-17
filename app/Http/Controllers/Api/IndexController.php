@@ -421,6 +421,15 @@ class IndexController extends Controller {
 		$request = request();
 		$id = $request['oid'];
 		$orderInfo = Order::where('id', $id)->first();
+		$order_arr = json_decode($orderinfo, true);
+		$total = 0;
+		$totalnum = 0;
+		foreach ($order_arr as $key => $value) {
+			$total += $value['price'] * $value['num'];
+			$totalnum += $value['num'];
+		}
+		$orderinfo['total'] = $total;
+		$orderinfo['totalnum'] = $totalnum;
 		if ($orderInfo) {
 			return $this->successData('订单详情!', ['info' => json_encode($orderInfo)]);
 		} else {
