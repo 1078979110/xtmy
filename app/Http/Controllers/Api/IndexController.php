@@ -40,6 +40,12 @@ class IndexController extends Controller {
 
 	public function getSiteInfo() {
 		$info = Site::find(1);
+		//$images = json_decode($info['banners'], true);
+		$images = [];
+		foreach ($info['banners'] as $key => $value) {
+			$images[] = '/storage/' . $value;
+		}
+		$info['banners'] = $images;
 		return $this->successData('全站信息', ['site' => $info]);
 	}
 
