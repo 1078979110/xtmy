@@ -215,7 +215,7 @@ class IndexController extends Controller {
 				}
 			})->paginate();
 		$data = $data->toArray(true);
-		$this->user = session()->get('user.info');
+		$this->user = $this->checkSession();
 		foreach ($data['data'] as $key => $value) {
 			$data['data'][$key]['line'] = Productline::where('id', $value['line_id'])->value('linename');
 			$data['data'][$key]['category'] = Category::where('id', $value['category_id'])->value('categoryname');
@@ -228,8 +228,6 @@ class IndexController extends Controller {
 			//医院用获取医院价格
 			if ($request['hid']) {
 				$this->hospital = Hospital::find($request['hid']);
-			} else {
-				$this->hospital = session('user.hospital');
 			}
 
 			foreach ($data['data'] as $key => $val) {
