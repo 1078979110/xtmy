@@ -213,7 +213,7 @@ class IndexController extends Controller {
 				if ($q != '') {
 					$db->orWhere('medicinal', 'like', '%' . $q . '%')->orWhere('specification', $q);
 				}
-			})->paginate();
+			})->paginate(20);
 		$data = $data->toArray(true);
 		$this->user = $this->checkSession();
 		foreach ($data['data'] as $key => $value) {
