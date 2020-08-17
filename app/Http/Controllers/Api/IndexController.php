@@ -131,7 +131,7 @@ class IndexController extends Controller {
 	}
 
 	public function homeFilter() {
-		$producer = Producer::get(['id', 'name'])->take(3)->toArray(true);
+		$producer = Producer::where('is_top', 1)->get(['id', 'name', 'image'])->take(3)->toArray(true);
 		foreach ($producer as $key => $value) {
 			$producer[$key]['line'] = Productline::where('producer_id', $value['id'])->value('linename');
 		}
