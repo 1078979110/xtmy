@@ -428,8 +428,8 @@ class IndexController extends Controller {
 			$total += $value['price'] * $value['num'];
 			$totalnum += $value['num'];
 		}
-		$orderinfo['total'] = $total;
-		$orderinfo['totalnum'] = $totalnum;
+		$orderInfo['total'] = $total;
+		$orderInfo['totalnum'] = $totalnum;
 		if ($orderInfo) {
 			return $this->successData('订单详情!', ['info' => json_encode($orderInfo)]);
 		} else {
