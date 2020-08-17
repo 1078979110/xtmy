@@ -378,11 +378,12 @@ class IndexController extends Controller {
 		$total = 0;
 		$lists_arr = json_decode($lists, true);
 		foreach ($lists_arr as $key => $val) {
-			$medicinalinfo = Medicinal::find($val['id']);
+			$medicinalid = myCart::where('id', $val['id'])->value('medicinalid');
+			$medicinalinfo = Medicinal::find($medicinalid);
 			$price = $val['price'] ? $val['price'] : $medicinalinfo['price'];
 			$total += $val['num'] * $price;
 			$info = [
-				'id' => $val['id'],
+				'id' => $medicinalid,
 				'medicinal' => $medicinalinfo['medicinal'],
 				'specification' => $medicinalinfo['specification'],
 				'price' => $price,
