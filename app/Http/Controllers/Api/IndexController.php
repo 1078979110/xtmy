@@ -392,6 +392,7 @@ class IndexController extends Controller {
 		}
 		$data['totalprice'] = $total;
 		$data['orderinfo'] = json_encode($orderinfo);
+		$data['created_at'] = date('Y-m-d H:i:s', time());
 		$result = Order::insertGetId($data);
 
 		$responseData = ['id' => $result, 'orderid' => $data['orderid'], 'total' => $total, 'ordertime' => date('Y-m-d H:i:s', time())];
