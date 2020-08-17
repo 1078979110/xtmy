@@ -392,8 +392,9 @@ class IndexController extends Controller {
 		}
 		$data['totalprice'] = $total;
 		$data['orderinfo'] = json_encode($orderinfo);
-		$result = Order::insert($data);
-		$responseData = ['orderid' => $data['orderid'], 'total' => $total, 'ordertime' => date('Y-m-d H:i:s', time())];
+		$result = Order::insertGetId($data);
+
+		$responseData = ['id' => $result, 'orderid' => $data['orderid'], 'total' => $total, 'ordertime' => date('Y-m-d H:i:s', time())];
 		if ($result) {
 			return $this->successData('下单成功!', ['orderinfo' => $responseData]);
 		} else {
