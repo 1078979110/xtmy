@@ -228,11 +228,10 @@ class IndexController extends Controller {
 			//医院用获取医院价格
 			if ($request['hid']) {
 				$this->hospital = Hospital::find($request['hid']);
-			}
-
-			foreach ($data['data'] as $key => $val) {
-				$price = Hospitalprice::where([['hospitalid', $this->hospital['id']], ['medicinalid', $val['id']]])->value('price');
-				$data['data'][$key]['price'] = $price;
+				foreach ($data['data'] as $key => $val) {
+					$price = Hospitalprice::where([['hospitalid', $this->hospital['id']], ['medicinalid', $val['id']]])->value('price');
+					$data['data'][$key]['price'] = $price;
+				}
 			}
 		}
 		return $this->successData('搜索', ['list' => $data]);
