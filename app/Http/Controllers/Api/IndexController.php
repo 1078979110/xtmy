@@ -418,7 +418,7 @@ class IndexController extends Controller {
 		$id = $request['oid'];
 		$orderInfo = Order::where('id', $id)->first();
 		if ($orderInfo) {
-			return $this->successData('订单详情!', ['info' => $orderInfo]);
+			return $this->successData('订单详情!', ['info' => json_encode($orderInfo)]);
 		} else {
 			return $this->errorData('查询失败');
 		}
