@@ -267,6 +267,7 @@ class IndexController extends Controller {
 			}
 			$data[] = [
 				'id' => $value['id'],
+				'medicinalid' => $value['medicinalid'],
 				'name' => $producer . ' ' . $medicinalinfo['medicinal'] . $value['specification'],
 				'price' => $price,
 				'unit' => $medicinalinfo['unit'],
