@@ -43,7 +43,7 @@ class IndexController extends Controller {
 		//$images = json_decode($info['banners'], true);
 		$images = [];
 		foreach ($info['banners'] as $key => $value) {
-			$images[] = en('APP_URL') . '/storage/' . $value;
+			$images[] = env('APP_URL') . '/storage/' . $value;
 		}
 		$info['banners'] = $images;
 		return $this->successData('全站信息', ['site' => $info]);
@@ -140,7 +140,7 @@ class IndexController extends Controller {
 		$producer = Producer::where('is_top', 1)->get(['id', 'name', 'image'])->take(3)->toArray(true);
 		foreach ($producer as $key => $value) {
 			$producer[$key]['line'] = Productline::where('producer_id', $value['id'])->value('linename');
-			$producer[$key]['image'] = en('APP_URL') . '/storage/' . $value['image'];
+			$producer[$key]['image'] = env('APP_URL') . '/storage/' . $value['image'];
 		}
 		return $this->successData('首页筛选位', ['filter' => $producer]);
 	}
