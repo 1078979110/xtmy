@@ -70,6 +70,8 @@ class OrderController extends AdminController
                 $query->where('buyerid',$buyerid);
             },'名称');
             if($user_roles[0]['id'] !=4 && $user_roles[0]['id'] !=5){
+                $stat = ['1'=>'待确认','2'=>'待报价(经销商)','3'=>'待报价','4'=>'待审核','5'=>'待发货','6'=>'已发货'];
+                $filter->equal('orderstatus','订单状态')->select($stat);
                 $arr = ['1'=>'经销商','2'=>'医院'];
                 $filter->equal('buyertype','订单类型')->select($arr);
             }
