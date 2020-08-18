@@ -434,7 +434,7 @@ class IndexController extends Controller {
 	 */
 	public function myOrder() {
 		$userinfo = $this->checkSession();
-		$lists = Order::where('buyerid', $userinfo['id'])->get(['id', 'orderid', 'orderinfo', 'totalprice', 'orderstatus', 'created_at'])->toArray(true);
+		$lists = Order::where('buyerid', $userinfo['id'])->get(['id', 'orderid', 'orderinfo', 'totalprice', 'orderstatus', 'created_at'])->orderBy('created_at', 'desc')->toArray(true);
 		return $this->successData('订单', ['order' => $lists]);
 	}
 
