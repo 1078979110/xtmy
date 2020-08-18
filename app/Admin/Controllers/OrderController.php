@@ -162,7 +162,7 @@ EOT;
             });
 EOT;
             $str = '';
-            $button_ = ['待确认','待确认','待报价','待审核','待发货','已完成','已完成'];
+            $button_ = ['待确认','待报价','待报价','待审核','待发货','已完成','已完成'];
             if($user_roles[0]['id'] == 4){//业务员组
                 if($orderstatus ==1){
                     $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button> | <button class="btn btn-warning btn-xs comfirmorder" data-id="'.$this->id.'">确认订单</button>';
@@ -171,12 +171,12 @@ EOT;
                 }
             }else if($user_roles[0]['id'] == 5){//经销商组
                 if($orderstatus ==2){
-                    $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button> | <button class="btn btn-warning btn-xs comfirmorder" data-id="'.$this->id.'">确认订单</button>';
+                    $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button>';
                 }else{
                     $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button>';
                 }
             }else if($user_roles[0]['id'] == 6){//批发部
-                if($orderstatus ==3){
+                if($orderstatus == 3 || $orderstatus ==2){
                     $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button> | <button class="btn btn-warning btn-xs comfirmorder" data-id="'.$this->id.'">确认报价</button> | <button class="btn btn-danger btn-xs changeprice" data-id="'.$this->id.'">改价</button>';
                 }else{
                     $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button>';
