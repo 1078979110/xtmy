@@ -382,27 +382,37 @@ class IndexController extends Controller {
 		$total = 0;
 		$totalnum = 0;
 		$lists_arr = json_decode($lists, true);
-		foreach ($lists_arr as $key => $val) {
-			$medicinalid = myCart::where('id', $val['id'])->value('medicinalid');
-			$medicinalinfo = Medicinal::find($medicinalid);
-			$price = $val['price'] ? $val['price'] : $medicinalinfo['price'];
-			$total += $val['num'] * $price;
-			$totalnum += $val['num'];
-			$info = [
-				'id' => $medicinalid,
-				'medicinal' => $medicinalinfo['medicinal'],
-				'specification' => $medicinalinfo['specification'],
-				'price' => $price,
-				'unit' => $medicinalinfo['unit'],
-				'num' => $val['num'],
-			];
-			$orderinfo[] = $info;
-		}
-		$data['totalprice'] = $total;
-		$data['orderinfo'] = json_encode($orderinfo);
-		$data['created_at'] = date('Y-m-d H:i:s', time());
-		$result = Order::insertGetId($data);
+		DB::beginTransaction();
+		try{
+            foreach ($lists_arr as $key => $val) {
+                $medicinalid = myCart::where('id', $val['id'])->value('medicinalid');
+                $medicinalinfo = Medicinal::find($medicinalid);
+                $price = $val['price'] ? $val['price'] : $medicinalinfo['price'];
+                $total += $val['num'] * $price;
+                $totalnum += $val['num'];
+                $info = [
+                    'id' => $medicinalid,
+                    'medicinal' => $medicinalinfo['medicinal'],
+                    'specification' => $medicinalinfo['specification'],
+                    'price' => $price,
+                    'unit' => $medicinalinfo['unit'],
+                    'num' => $val['num'],
+                ];
+                $medicinalinfo['stock'] = $medicinalinfo['stock'] - $val['num'];
+                Medicinal::where('id', $medicinalid)->update(['stock' => $medicinalinfo['stock']]);
+                Mycart::where('id', $val['id'])->delete();
+                $orderinfo[] = $info;
+            }
 
+            $data['totalprice'] = $total;
+            $data['orderinfo'] = json_encode($orderinfo);
+            $data['created_at'] = date('Y-m-d H:i:s', time());
+            $result = Order::insertGetId($data);
+            DB::commit();
+        }catch (\Exception $e){
+		    DB::rollBack();
+		    return $this->errorData('下单失败,'.$e->getMessage());
+        }
 		$responseData = ['id' => $result, 'orderid' => $data['orderid'], 'total' => $total, 'totalnum' => $totalnum, 'ordertime' => date('Y-m-d H:i:s', time())];
 		if ($result) {
 			return $this->successData('下单成功!', ['orderinfo' => $responseData]);
