@@ -156,7 +156,7 @@ class ApiController extends AdminController {
 					$producers = Producer::pluck('id', 'name');
 					$lines = Productline::pluck('id', 'linename');
 					$categories = Category::pluck('id', 'categoryname');
-					if (!is_file('storage\\' . $filename)) {
+					if (!is_file('storage\\'.date("Y_m_d") .'\\' . $filename)) {
 						admin_toastr('文件不存在！', 'error');
 						return redirect('/admin/excel/medicinals');
 					}
@@ -220,7 +220,7 @@ class ApiController extends AdminController {
 				$filename = $re['info'];
 
 				$medicinals = Medicinal::pluck('id', 'medicinalnum');
-				if (!is_file('storage\\' . $filename)) {
+				if (!is_file('storage\\'.date("Y_m_d") .'\\' . $filename)) {
 					admin_toastr('文件不存在！', 'error');
 					return redirect('/admin/excel/setprice');
 				}
