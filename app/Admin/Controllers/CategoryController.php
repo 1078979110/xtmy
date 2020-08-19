@@ -26,7 +26,14 @@ class CategoryController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Category());
-
+        $grid->filter(function($filter){
+            $filter->disableIdFilter();
+            $filter->equal('categoryname', '分类名称');
+            $line = Productline::pluck('linename','id');
+            $filter->equal('line_id','产品线')->select($line);
+            $producer = Producer::pluck('name', 'id');
+            $filter->equal('producer_id','厂家')->select($line);
+        });
         $grid->column('id', 'ID');
         $grid->column('categoryname', '分类名称');
         $grid->column('line_id','产品线')->display(function($line_id){
@@ -43,7 +50,7 @@ class CategoryController extends AdminController
         }); */
         $grid->column('created_at', '创建时间');
         $grid->column('updated_at', '更新时间');
-        $grid->disableFilter();
+
         $grid->disableExport();
         $grid->disableRowSelector();
         $grid->disableColumnSelector();
