@@ -163,7 +163,7 @@ class ApiController extends AdminController {
 					}
 
 					Excel::load($real_file, function ($reader) use ($producers, $lines, $categories) {
-						$data = $reader->get()->toArray(true);
+						$data = $reader->all()->toArray(true);
 						$medicinalnum = 0;
 						$value = [];
 						foreach ($data as $k => $v) {
