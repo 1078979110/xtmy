@@ -230,16 +230,18 @@ class ApiController extends AdminController {
 					Excel::load($real_file, function ($reader) use ($medicinals, $hospital) {
 						$data = $reader->all()->toArray(true);
 						$value = [];
-						foreach ($data as $key => $val) {
-							if (!isset($val['产品编号']) || empty($val['产品编号'] || !isset($val['price']) || empty($val['price']))) {
-								admin_toastr('excel表数据结构与模板不相符，请修改后再进行导入！', 'error');
-								return redirect('/admin/excel/setprice');
-							}
-							$value['hospitalid'] = $hospital;
-							$value['medicinalid'] = $medicinals[$val['产品编号']];
-							$value['price'] = $val['价格'];
-							Hospitalprice::create($value);
-						}
+						foreach($data as $k=>$v){
+                            foreach ($v as $key => $val) {
+                                if (!isset($val['产品编号']) || empty($val['产品编号'] || !isset($val['price']) || empty($val['price']))) {
+                                    admin_toastr('excel表数据结构与模板不相符，请修改后再进行导入！', 'error');
+                                    return redirect('/admin/excel/setprice');
+                                }
+                                $value['hospitalid'] = $hospital;
+                                $value['medicinalid'] = $medicinals[$val['产品编号']];
+                                $value['price'] = $val['价格'];
+                                Hospitalprice::create($value);
+                            }
+                        }
 					});
 					admin_toastr('导入成功', 'success');
 					return redirect('/admin/excel/setprice');
