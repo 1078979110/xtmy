@@ -70,7 +70,7 @@ class IndexController extends Controller {
 		$userinfo = session('user.info');
 
 		if (!$userinfo) {
-			$userinfo = Salelist::where('api_token', request()->get('api_token'))->first()->toArray(true);
+			$userinfo = Salelist::where('api_token', request()->get('api_token'))->first();
 			if (empty($userinfo)) {
 				return $this->errorData('登陆失效');
 			} else {
