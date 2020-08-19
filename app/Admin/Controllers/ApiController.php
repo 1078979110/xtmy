@@ -156,12 +156,13 @@ class ApiController extends AdminController {
 					$producers = Producer::pluck('id', 'name');
 					$lines = Productline::pluck('id', 'linename');
 					$categories = Category::pluck('id', 'categoryname');
-					if (!is_file('storage/' . $filename)) {
+					$real_file = str_replace('\\','/','storage/' . $filename);
+					if (!is_file($real_file)) {
 						admin_toastr('文件不存在！', 'error');
 						return redirect('/admin/excel/medicinals');
 					}
 
-					Excel::load('storage\\' . $filename, function ($reader) use ($producers, $lines, $categories) {
+					Excel::load($real_file, function ($reader) use ($producers, $lines, $categories) {
 						$data = $reader->get()->toArray(true);
 						$medicinalnum = 0;
 						$value = [];
@@ -220,12 +221,13 @@ class ApiController extends AdminController {
 				$filename = $re['info'];
 
 				$medicinals = Medicinal::pluck('id', 'medicinalnum');
-				if (!is_file('storage/' . $filename)) {
+                $real_file = str_replace('\\','/','storage/' . $filename);
+				if (!is_file($real_file)) {
 					admin_toastr('文件不存在！', 'error');
 					return redirect('/admin/excel/setprice');
 				}
 				try {
-					Excel::load('storage\\' . $filename, function ($reader) use ($medicinals, $hospital) {
+					Excel::load($real_file, function ($reader) use ($medicinals, $hospital) {
 						$data = $reader->all()->toArray(true);
 						$value = [];
 						foreach ($data as $key => $val) {
