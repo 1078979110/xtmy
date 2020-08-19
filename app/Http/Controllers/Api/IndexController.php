@@ -178,7 +178,7 @@ class IndexController extends Controller {
 		if ($cid) {
 			$categoryid = Category::where('categoryname', $cid)->value('id');
 		}
-		$data = Medicinal::where('status', 0)->where(function ($db) use ($producerid, $lineid, $categoryid) {
+		$data = Medicinal::where('status', 0)->where('stock','>','0')->where(function ($db) use ($producerid, $lineid, $categoryid) {
 			if ($producerid != '') {
 				$db->where('producer_id', $producerid)->where(function ($db) use ($lineid, $categoryid) {
 					if ($lineid != '') {
@@ -213,7 +213,7 @@ class IndexController extends Controller {
 				if ($q != '') {
 					$db->orWhere('medicinal', 'like', '%' . $q . '%')->orWhere('specification', $q);
 				}
-			})->where('stock','>','0')->paginate(20);
+			})->paginate(20);
 		$data = $data->toArray(true);
 		$this->user = $this->checkSession();
 		foreach ($data['data'] as $key => $value) {
