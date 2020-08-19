@@ -105,6 +105,7 @@ class SalelistController extends AdminController
         $form->select('type','销售类型')->options(function(){
            return Salelist::getTypeIdName(); 
         });
+        $form->password('password','密码');
         $form->select('status','状态')->options(['0'=>'正常','1'=>'冻结']);
         $form->text('depart','部门')->help('经销商填写,业务员忽略');
         $form->tools(function (Form\Tools $tools) {
