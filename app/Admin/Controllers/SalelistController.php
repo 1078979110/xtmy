@@ -29,24 +29,7 @@ class SalelistController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Salelist());
-        /* $type = 0;
-        if(request()->has('type')){
-            $type = request()->get('type');
-        }
-        $key='';
-        if(request()->has('key')){
-            $key = request()->get('key');
-        }
-        if($type >0){
-            $grid->model()->where('type',$type)->where(function($query) use ($key){
-                $query->orWhere('telephone','like','%'.$key.'%')->orWhere('name','like','%'.$key.'%');
-            });
-        }
-        if($key !=''){
-            $grid->model()->orWhere('telephone','like','%'.$key.'%')->orWhere('name','like','%'.$key.'%')->where(function($query) use ($type){
-                $query->where('type',$type);
-            });
-        } */
+
         $grid->filter(function($filter){
             $filter->like('name', '姓名');
             $arr = Usertype::pluck('usertype','id');
@@ -106,6 +89,9 @@ class SalelistController extends AdminController
            return Salelist::getTypeIdName(); 
         });
         $form->password('password','密码')->required();
+        $form->saving(function(Form $form){
+            $form->password = bcrypt($form->password);
+        });
         $form->select('status','状态')->options(['0'=>'正常','1'=>'冻结']);
         $form->text('depart','部门')->help('经销商填写,业务员忽略');
         $form->tools(function (Form\Tools $tools) {
