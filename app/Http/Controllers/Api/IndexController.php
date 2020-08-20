@@ -224,7 +224,6 @@ class IndexController extends Controller {
 			$data['data'][$key]['unit'] = $value['unit'];
 			$data['data'][$key]['stocks'] = $value['stock'];
 		}
-		var_dump($this->user);
 		if ($this->user['type'] == 2) {
 			//医院用获取医院价格
 			if ($request['hid']) {
