@@ -59,8 +59,14 @@ class IndexController extends Controller {
 		if ($this->attemptLogin($request)) {
 			$user = $this->guard()->user();
 			$user->generateToken();
-			session()->put('user.info', $user->toArray());
-			$this->user = $user;
+			$status = Salelist::where('telephone', request()->get('telephone'))->value('status');
+			if($status ==1){
+                $user->api_token = null;
+                $user->save();
+			    return $this->errorData('该账号已被冻结');
+            }
+            session()->put('user.info', $user->toArray());
+            $this->user = $user;
 			return $this->successData('登陆成功', ['user' => session('user.info')]);
 		}
 		return $this->errorData('登陆失败');
@@ -71,6 +77,10 @@ class IndexController extends Controller {
 
 		if (!$userinfo) {
 			$userinfo = Salelist::where('api_token', request()->get('api_token'))->first();
+			if($userinfo['status'] ==1){
+                Salelist::where('telephone', $userinfo['telephone'])->update(['api_token'=>'']);
+			    return $this->errorData('该账号已被冻结');
+            }
 			if (empty($userinfo)) {
 				return $this->errorData('登陆失效');
 			} else {
