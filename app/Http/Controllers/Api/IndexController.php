@@ -235,7 +235,7 @@ class IndexController extends Controller {
 			$data['data'][$key]['unit'] = $value['unit'];
 			$data['data'][$key]['stocks'] = $value['stock'];
 		}
-		//var_dump($this->user);
+		var_dump($this->user);
 		if(!isset($this->user['type'])){
 		    $this->user['type'] = Salelist::where('telephone',$this->user['telephone'])->value('type');
         }
