@@ -65,6 +65,7 @@ class IndexController extends Controller {
                 $user->save();
 			    return $this->errorData('该账号已被冻结');
             }
+            $user->type = Salelist::where('telephone', request()->get('telephone'))->value('type');
             session()->put('user.info', $user->toArray());
             $this->user = $user;
 			return $this->successData('登陆成功', ['user' => session('user.info')]);
@@ -74,7 +75,6 @@ class IndexController extends Controller {
 
 	protected function checkSession() {
 		$userinfo = session('user.info');
-
 		if (!$userinfo) {
 			$userinfo = Salelist::where('api_token', request()->get('api_token'))->first();
 			if($userinfo['status'] ==1){
@@ -234,6 +234,9 @@ class IndexController extends Controller {
 			$data['data'][$key]['unit'] = $value['unit'];
 			$data['data'][$key]['stocks'] = $value['stock'];
 		}
+		if(!isset($this->user['type'])){
+		    $this->user['type'] = Salelist::where('telephone',$this->user['telephone'])->value('type');
+        }
 		if ($this->user['type'] == 2) {
 			//医院用获取医院价格
 			if ($request['hid']) {
@@ -256,6 +259,9 @@ class IndexController extends Controller {
 		$userinfo = $this->checkSession();
 		$hospitalinfo = [];
 		$lists = Mycart::where('buyerid', $userinfo['id'])->where(function ($model) use ($userinfo, $hid) {
+            if(!isset($userinfo['type'])){
+                $userinfo['type'] = Salelist::where('telephone',$this->user['telephone'])->value('type');
+            }
 			if ($userinfo['type'] == 2) {
 				if ($hid != 0) {
 					$hospitalinfo = Hospital::find($hid);
@@ -269,6 +275,9 @@ class IndexController extends Controller {
 		foreach ($lists as $key => $value) {
 			$medicinalinfo = Medicinal::where('id', $value['medicinalid'])->get(['id', 'producer_id', 'medicinal', 'unit'])->first()->toArray(true);
 			$producer = Producer::where('id', $medicinalinfo['producer_id'])->value('name');
+            if(!isset($userinfo['type'])){
+                $userinfo['type'] = Salelist::where('telephone',$this->user['telephone'])->value('type');
+            }
 			if ($userinfo['type'] == 2) {
 				if ($hid != 0) {
 					$hospitalinfo = Hospital::find($hid);
@@ -300,6 +309,9 @@ class IndexController extends Controller {
 		$mid = $request['mid'];
 		$specification = $request['specification'];
 		$num = $request['num'];
+        if(!isset($userinfo['type'])){
+            $userinfo['type'] = Salelist::where('telephone',$this->user['telephone'])->value('type');
+        }
 		if ($userinfo['type'] == 2) {
 			if ($request['hid']) {
 				$hospitalinfo = Hospital::find($request['hid']);
@@ -377,6 +389,9 @@ class IndexController extends Controller {
 		$data = [];
 		$data['orderid'] = date('Ymd', time()) . rand(1000, 9999);
 		$data['ordermonth'] = date('Ym', time());
+        if(!isset($userinfo['type'])){
+            $userinfo['type'] = Salelist::where('telephone',$this->user['telephone'])->value('type');
+        }
 		if ($userinfo['type'] == 2) {
 			$data['orderstatus'] = 1;
 			$hid = $request['hid'];
