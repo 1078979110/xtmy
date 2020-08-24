@@ -4,14 +4,14 @@
     <form class="form-inline" action="/admin/api/changeprice" method="post">
     	<table class="table">
 			<thead>
-				<tr><th>id</th><th>药品名称</th><th>药品编号</th><th>数量</th><th>单位</th><th>价格</th></tr>
+				<tr><th>id</th><th>药品名称</th><th>药品规格</th><th>数量</th><th>单位</th><th>价格</th></tr>
 			</thead>
 			<tbody>
 			@foreach($info as $i=>$in)
 				<tr>
 				<td>{{$in['id']}}<input type="hidden" value="{{$in['id']}}" name="info[{{$i}}][id]"></td>
 				<td>{{$in['medicinal']}}<input type="hidden" value="{{$in['medicinal']}}" name="info[{{$i}}][medicinal]"></td>
-				<td>{{$in['medicinalnum']}}<input type="hidden" value="{{$in['medicinalnum']}}" name="info[{{$i}}][medicinalnum]"></td>
+				<td>{{$in['specification']}}<input type="hidden" value="{{$in['specification']}}" name="info[{{$i}}][specification]"></td>
 				<td>{{$in['num']}}<input type="hidden" value="{{$in['num']}}" name="info[{{$i}}][num]"></td>
 				<td>{{$in['unit']}}<input type="hidden" value="{{$in['unit']}}" name="info[{{$i}}][unit]"></td>
 				<td><input type="text" value="{{$in['price']}}" name="info[{{$i}}][price]" class="form-control"></td></tr>
