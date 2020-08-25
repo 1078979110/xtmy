@@ -224,7 +224,7 @@ class IndexController extends Controller {
 		})
 			->where(function ($db) use ($q) {
 				if ($q != '') {
-					$db->orWhere('medicinal', 'like', '%' . $q . '%')->orWhere('specification', $q);
+					$db->orWhere('medicinal', 'like', '%' . $q . '%')->orWhere('specification', 'like', '%' . $q . '%')->orWhere('medicinalnum', 'like', '%' . $q . '%');
 				}
 			})->paginate(20);
 		$data = $data->toArray(true);
