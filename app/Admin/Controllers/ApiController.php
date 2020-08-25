@@ -95,9 +95,7 @@ class ApiController extends AdminController {
 			$data = request()->post('gift');
 			$gift = [];
 			foreach ($data as $key => $val) {
-				if ($val['num'] <= $val['stock'] && $val['num'] > 0) {
-					$gift[] = ['id' => $val['id'], 'medicinal' => $val['medicinal'], 'specification' => $val['specification'], 'num' => $val['num']];
-				}
+                $gift[] = ['id' => $val['id'], 'medicinal' => $val['medicinal'], 'specification' => $val['specification'], 'num' => $val['num']];
 			}
 			$result = Order::where('id', $id)->update(['gift' => json_encode($gift)]);
 			if ($result) {
