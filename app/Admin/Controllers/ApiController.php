@@ -94,19 +94,21 @@ class ApiController extends AdminController {
 			$id = request()->post('id');
 			$data = request()->post('gift');
 			$gift = [];
-			foreach ($data as $key => $val) {
-				if ($val['num'] > 0) {
-					$gift[] = ['id' => $val['id'], 'medicinal' => $val['medicinal'], 'specification' => $val['specification'], 'num' => $val['num']];
-				}
-			}
-			$result = Order::where('id', $id)->update(['gift' => json_encode($gift)]);
-			if ($result) {
-				admin_toastr('赠品设置成功！', 'success');
-				return redirect('/admin/orders');
-			} else {
-				admin_toastr('设置失败，请稍后重试', 'error');
-				return redirect('/admin/orders');
-			}
+			if(!empty($data)){
+                foreach ($data as $key => $val) {
+                    if ($val['num'] > 0) {
+                        $gift[] = ['id' => $val['id'], 'medicinal' => $val['medicinal'], 'specification' => $val['specification'], 'num' => $val['num']];
+                    }
+                }
+                $result = Order::where('id', $id)->update(['gift' => json_encode($gift)]);
+                if ($result) {
+                    admin_toastr('赠品设置成功！', 'success');
+                    return redirect('/admin/orders');
+                } else {
+                    admin_toastr('设置失败，请稍后重试', 'error');
+                    return redirect('/admin/orders');
+                }
+            }
 		}
 	}
 
