@@ -24,6 +24,12 @@ Route::any('unAuth', function () {
 Route::group(['namespace' => 'Api'], function () {
 	//登陆
 	Route::post('/login', 'IndexController@auth');
+	//获取筛选厂家
+	Route::get('getproducer','IndexController@producerList');
+	//获取筛选产品线
+    Route::get('getline','IndexController@lineList');
+    //获取筛选分类
+    Route::get('getcategories','IndexController@categoryList');
 	//搜索页，包括筛选页面
 	Route::get('/index', 'IndexController@indexSearch');
 	//获取筛选项
