@@ -28,7 +28,7 @@
 				if(res.length<1){
 					return toastr.warning('搜索结果为空！')}
 					for(var i in res){
-						tablestr += '<tr><td>'+res[i]['medicinal']+'<input type="hidden" name="gift['+i+'][medicinal]" value="'+res[i]['medicinal']+'"></td><td>'+res[i]['specification']+'<input type="hidden" name="gift['+i+'][specification]" value="'+res[i]['specification']+'"></td><td>'+res[i]['stock']+'<input type="hidden" name="gift['+i+'][stock]" value="'+res[i]['stock']+'"></td><td><input type="number" value="" name="gift['+i+'][num]" min="0" max="'+res[i]['stock']+'" class="form-control"><input type="hidden" name="gift['+i+'][id]" value="'+res[i]['id']+'"></td></tr>';
+						tablestr += '<tr><td>'+res[i]['medicinal']+'<input type="hidden" name="gift['+i+'][medicinal]" value="'+res[i]['medicinal']+'"></td><td>'+res[i]['specification']+'<input type="hidden" name="gift['+i+'][specification]" value="'+res[i]['specification']+'"></td><td>'+res[i]['stock']+'<input type="hidden" name="gift['+i+'][stock]" value="'+res[i]['stock']+'"></td><td><input type="number" value="" name="gift['+i+'][num]" min="0" class="form-control"><input type="hidden" name="gift['+i+'][id]" value="'+res[i]['id']+'"></td></tr>';
 					}
 					$("#result").html(tablestr);
 				}
