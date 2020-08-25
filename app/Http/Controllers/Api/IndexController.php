@@ -189,7 +189,7 @@ class IndexController extends Controller {
 		if ($cid) {
 			$categoryid = Category::where('categoryname', $cid)->value('id');
 		}
-		$data = Medicinal::where('status', 0)->where('stock','>','0')->where(function ($db) use ($producerid, $lineid, $categoryid) {
+		$data = Medicinal::where('status', 0)->where(function ($db) use ($producerid, $lineid, $categoryid) {
 			if ($producerid != '') {
 				$db->where('producer_id', $producerid)->where(function ($db) use ($lineid, $categoryid) {
 					if ($lineid != '') {
@@ -316,10 +316,7 @@ class IndexController extends Controller {
 			$price = $request['price'];
 		}
 		$isInCart = Mycart::where('buyerid', $userinfo['id'])->where('medicinalid', $mid)->first();
-        $stock = Medicinal::where('id',$mid)->value('stock');
-        if($stock <$num){
-            return $this->errorData('添加失败,库存数量不足');
-        }
+
 		if (empty($isInCart)) {
 			$data = [
 				'buyerid' => $userinfo['id'],
