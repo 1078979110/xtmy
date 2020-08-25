@@ -98,10 +98,6 @@ class ApiController extends AdminController {
 				if ($val['num'] <= $val['stock'] && $val['num'] > 0) {
 					$gift[] = ['id' => $val['id'], 'medicinal' => $val['medicinal'], 'specification' => $val['specification'], 'num' => $val['num']];
 				}
-				if ($val['num'] > $val['stock']) {
-					admin_toastr($val['medicinal'] . '赠送数量超过库存，请重新设置', 'warning');
-					return false;
-				}
 			}
 			$result = Order::where('id', $id)->update(['gift' => json_encode($gift)]);
 			if ($result) {
