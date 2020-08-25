@@ -126,24 +126,26 @@ class IndexController extends Controller {
 	 */
 	public function producerList() {
 		$producer = Producer::pluck('name');
-		return $this->successData('厂家', []);
+		return $this->successData('厂家', ['list'=>$producer]);
 	}
 
 	/**
 	 * [产品线列表]
 	 * @return [type] [description]
 	 */
-	public function lineList() {
-		$lines = Productline::pluck('linename');
-		return $this->successData('产品线', []);
+	public function lineList(Request $request) {
+	    $pid = $request->pid;
+		$lines = Productline::where('producer_id', $pid)->pluck('linename');
+		return $this->successData('产品线', ['list'=>$lines]);
 	}
 
 	/**
 	 * [分类列表]
 	 * @return [type] [description]
 	 */
-	public function categoryList() {
-		$categories = Category::pluck('categoryname');
+	public function categoryList(Request $request) {
+	    $lid = $request->lid;
+		$categories = Category::where('line_id', $lid)->pluck('categoryname');
 		return $this->successData('分类', ['caetgory' => $categories]);
 	}
 
