@@ -134,7 +134,8 @@ class IndexController extends Controller {
 	 * @return [type] [description]
 	 */
 	public function lineList(Request $request) {
-	    $pid = $request->pid;
+	    $pname = $request->pid;
+	    $pid = Producer::where('name',$pname)->value('id');
 		$lines = Productline::where('producer_id', $pid)->pluck('linename');
 		return $this->successData('产品线', ['list'=>$lines]);
 	}
@@ -144,7 +145,8 @@ class IndexController extends Controller {
 	 * @return [type] [description]
 	 */
 	public function categoryList(Request $request) {
-	    $lid = $request->lid;
+	    $lname = $request->lid;
+	    $lid = Productline::where('linename',$lname)->value('id');
 		$categories = Category::where('line_id', $lid)->pluck('categoryname');
 		return $this->successData('分类', ['caetgory' => $categories]);
 	}
