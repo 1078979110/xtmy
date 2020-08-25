@@ -1,17 +1,17 @@
 <div class="panel panel-default">
   <div class="panel-heading">赠品设置</div>
   <div class="panel-body">
-  	<div class="form-group">
-  		<div class="form-inline pull-left"><input name="q" value="" placeholder="请输入药品名或者规格" class="form-control" style="width: 200px"><button id="search" class="btn btn-primary"><i class="fa fa-search"></i></button></div>
-  		<div class="form-inline pull-right"><input type="hidden" value="{{ csrf_token() }}" name="_token" ><input type="hidden" value="{{$id}}" name="id"><button class="btn btn-primary com">确定</button></div>
-	</div>
-  	<form action="/admin/api/gift" method="post">
-  	<div class="form-group">
-		<table class="table">
-			<thead><tr><th>名称</th><th>规格</th><th>库存</th><th>赠送数量</th></tr></thead>
-			<tbody id="result"></tbody>
-		</table>
-	</div>
+	  <form action="/admin/api/gift" method="post">
+		<div class="form-group">
+			<div class="form-inline pull-left"><input name="q" value="" placeholder="请输入药品名或者规格" class="form-control" style="width: 200px"><button id="search" class="btn btn-primary"><i class="fa fa-search"></i></button></div>
+			<div class="form-inline pull-right"><input type="hidden" value="{{ csrf_token() }}" name="_token" ><input type="hidden" value="{{$id}}" name="id"><button type="submit" class="btn btn-primary com">确定</button></div>
+		</div>
+		<div class="form-group">
+			<table class="table">
+				<thead><tr><th>名称</th><th>规格</th><th>库存</th><th>赠送数量</th></tr></thead>
+				<tbody id="result"></tbody>
+			</table>
+		</div>
 	</form>
   </div>
 </div>
