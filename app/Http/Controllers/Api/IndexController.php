@@ -126,6 +126,7 @@ class IndexController extends Controller {
 	 */
 	public function producerList() {
 		$producer = Producer::pluck('name');
+        array_splice($producer, 0, 0, '厂家');
 		return $this->successData('厂家', ['list'=>$producer]);
 	}
 
@@ -137,6 +138,7 @@ class IndexController extends Controller {
 	    $pname = $request->pid;
 	    $pid = Producer::where('name',$pname)->value('id');
 		$lines = Productline::where('producer_id', $pid)->pluck('linename');
+        array_splice($lines, 0, 0, '产品线');
 		return $this->successData('产品线', ['list'=>$lines]);
 	}
 
@@ -148,7 +150,8 @@ class IndexController extends Controller {
 	    $lname = $request->lid;
 	    $lid = Productline::where('linename',$lname)->value('id');
 		$categories = Category::where('line_id', $lid)->pluck('categoryname');
-		return $this->successData('分类', ['caetgory' => $categories]);
+        array_splice($categories, 0, 0, '分类');
+		return $this->successData('分类', ['list' => $categories]);
 	}
 
 	public function homeFilter() {
