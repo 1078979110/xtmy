@@ -243,7 +243,7 @@ class PrintsController extends AdminController{
                 ['tabletitle'=>$tabletitle,'datatitle'=>$dataname['et'],'lists'=>$data, 'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn]
                 )->render());
             return $content;
-        }else if($hospitalinfo['hospital'] == '同济医院'){
+        }else if($hospitalinfo['hospital'] == '同济医院' || $hospitalinfo['hospital'] == '同济生活服务部'){
             $title = $sendcompany.$ext;
             $tabletitle = [$title,
                 $headername['tj'][0].$sendcompany,
@@ -259,7 +259,7 @@ class PrintsController extends AdminController{
                 ['tabletitle'=>$tabletitle,'datatitle'=>$dataname['tj'],'lists'=>$data, 'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn]
                 )->render());
             return $content;
-        }else if($hospitalinfo['hospital'] == '武汉市第四医院'){
+        }else if($hospitalinfo['hospital'] == '武汉市第四医院' || $hospitalinfo['hospital'] == '武汉市第四医院西院'){
             $title = $sendcompany.$ext;
             $tabletitle = [$title,
                 $headername['ds'][0].$hospitalinfo['hospital'],
@@ -321,7 +321,7 @@ class PrintsController extends AdminController{
                 ['tabletitle'=>$tabletitle,'datatitle'=>$dataname['zx'],'lists'=>$data, 'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn]
                 )->render());
             return $content;
-        }else if($hospitalinfo['hospital'] == '武汉大学中南医院'){
+        }else if($hospitalinfo['hospital'] == '武汉大学中南医院' || $hospitalinfo['hospital'] == '湖北楚汉精诚医药有限公司武昌分公司'){
             $title = $sendcompany.$ext;
             $tabletitle = [$title,
                 $headername['zn'][0].$hospitalinfo['hospital'],
