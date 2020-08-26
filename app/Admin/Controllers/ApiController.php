@@ -173,6 +173,10 @@ class ApiController extends AdminController {
 									admin_toastr('excel表数据结构与模板不相符，请修改后再进行导入！', 'error');
 									return redirect('/admin/excel/medicinals');
 								}
+								$has_insert = Medicinal::where('specification',$val['规格型号'])->first();
+								if(!empty($has_insert)){
+								    break;
+                                }
 								$makedate = (array) $val['生产日期'] ? (array) $val['生产日期'] : '';
 								$invalidate = (array) $val['失效日期'] ? (array) $val['失效日期'] : '';
 								$registivalidate = (array) $val['注册证失效日期'] ? (array) $val['注册证失效日期'] : '';
