@@ -43,7 +43,7 @@ class PrintsController extends AdminController{
                 'unit' => $medicinal['unit'],
                 'num' => $val['num'],
                 'batchnumber' => $medicinal['batchnumber'],
-                'invalidate' => $medicinal['invalidate'],
+                'invalidate' => date('Y-m-d H:i:s',strtotime($medicinal['invalidate'])),
                 'registnum' => $medicinal['registnum'],
                 'manufactur' => $medicinal['manufactur'],
                 'price' => $val['price'],
