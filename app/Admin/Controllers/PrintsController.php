@@ -140,8 +140,9 @@ class PrintsController extends AdminController{
         $totalprice = 0;
         foreach ($orderinfo as $key=>$val){
             $medicinal = Medicinal::find($val['id']);
-            $price = Hospitalprice::where([['hospitalid',$orderAllInfo['hospital']],['medicinalid',$val['id']]])->value('price');
-            $totalprice +=  $val['num']*$price;
+
+            //$price = Hospitalprice::where([['hospitalid',$orderAllInfo['hospital']],['medicinalid',$val['id']]])->value('price');
+            $totalprice +=  $val['num']*$val['price'];
             $registivalidate = date('Y-m-d', strtotime($medicinal['registivalidate']));
             $data[] = array(
                 //药品基础信息
