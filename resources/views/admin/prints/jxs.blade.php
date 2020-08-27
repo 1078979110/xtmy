@@ -191,7 +191,7 @@ $("select[name='template']").change(function(){
 function print_view(){
 	LODOP=getLodop(); 
 	LODOP.PRINT_INIT();
-	LODOP.ADD_PRINT_TABLE(40,10,"RightMargin:0.9cm",'100%',document.getElementById('template'+tid).innerHTML);
+	LODOP.ADD_PRINT_TABLE(40,10,"RightMargin:0.3cm",'100%',document.getElementById('template'+tid).innerHTML);
 	check_isnull(data);
 	if(isnull == true){
 		isprint = confirm('该出货单中存在未填写的项,确定打印？');
@@ -204,7 +204,7 @@ function print_view(){
 function print(){
 	LODOP=getLodop(); 
 	LODOP.PRINT_INIT();
-	LODOP.ADD_PRINT_TABLE(40,10,"RightMargin:0.9cm",'100%',document.getElementById('template'+tid).innerHTML);
+	LODOP.ADD_PRINT_TABLE(40,10,"RightMargin:0.3cm",'100%',document.getElementById('template'+tid).innerHTML);
 	check_isnull(data);
 	if(isnull == true){
 		isprint = confirm('该出货单中存在未填写的项,确定打印？');
