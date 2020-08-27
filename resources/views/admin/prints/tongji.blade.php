@@ -1,12 +1,12 @@
 <div class="panel panel-default">
   <div class="panel-heading">{{$tabletitle[0]}}</div>
   <div class="panel-body" id="table">
-    <table  style="font-size:12px" cellpadding="0" cellspacing="0">
+    <table  style="font-size:14px" cellpadding="0" cellspacing="0">
     	<tbody>
-    		<tr><td colspan="5">{{$tabletitle[1]}}</td><td colspan="5">{{$tabletitle[2]}}</td></tr>
-    		<tr><td colspan="11">{{$tabletitle[3]}}</td></tr>
-    		<tr><td colspan="3">{{$tabletitle[4]}}</td><td colspan="3">{{$tabletitle[5]}}</td><td colspan="5">{{$tabletitle[6]}}</td></tr>
-    		<tr>
+    		<tr style="line-height: 30px; height: 30px"><td colspan="5">{{$tabletitle[1]}}</td><td colspan="5">{{$tabletitle[2]}}</td></tr>
+    		<tr style="line-height: 30px; height: 30px"><td colspan="11">{{$tabletitle[3]}}</td></tr>
+    		<tr style="line-height: 30px; height: 30px"><td colspan="3">{{$tabletitle[4]}}</td><td colspan="3">{{$tabletitle[5]}}</td><td colspan="5">{{$tabletitle[6]}}</td></tr>
+    		<tr style="line-height: 30px; height: 30px">
     			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:50px">{{$datatitle[0]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width:150px">{{$datatitle[1]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px">{{$datatitle[2]}}</td>
@@ -20,7 +20,7 @@
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width:250px">{{$datatitle[10]}}</td>
     		</tr>
     		@foreach($lists as $key => $list)
-    		<tr>
+    		<tr style="line-height: 30px; height: 30px">
     			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000">{{$list['medicinalnum']}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000">{{$list['medicinal']}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000">{{$list['specification']}}</td>
@@ -35,8 +35,8 @@
 
     		</tr>
     		@endforeach
-    		<tr><td colspan="11" style="border-top: 1px solid #000;border-left:1px solid #000;border-right:1px solid #000;">{{$tabletitle[7]}}{{$total}}</td></tr>
-    		<tr>
+    		<tr style="line-height: 30px; height: 30px"><td colspan="11" style="border-top: 1px solid #000;border-left:1px solid #000;border-right:1px solid #000;">{{$tabletitle[7]}}{{$total}}</td></tr>
+    		<tr style="line-height: 30px; height: 30px">
     			<td colspan="11" style="border-top: 1px solid #000">{{$tabletitle[8]}}</td>
     		</tr>
     	</tbody>
