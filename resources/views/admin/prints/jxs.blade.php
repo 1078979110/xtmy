@@ -126,7 +126,7 @@
       				<tr style="line-height: 30px; height: 30px"><td colspan="5" align="left">{{$tabletitle[3][2]}}</td><td colspan="5" align="right">{{$tabletitle[3][3]}}</td></tr>
       				<tr style="line-height: 30px; height: 30px">
             			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:120px">{{$datatitle[3][0]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:220px">{{$datatitle[3][1]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:120px">{{$datatitle[3][1]}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px">{{$datatitle[3][2]}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000; width:30px">{{$datatitle[3][3]}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px">{{$datatitle[3][4]}}</td>
@@ -152,7 +152,7 @@
             		@endforeach
             		<tr style="line-height: 30px; height: 30px">
             			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="4" align="left">{{$tabletitle[3][4]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" colspan="3" align="left">{{$tabletitle[3][5]}}元</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" colspan="3" align="left">{{$tabletitle[3][5]}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000" colspan="3" align="left">{{$tabletitle[3][6]}}<span tindex="7" tdata="SubSum" format="###,###,###,###,###.00">##########元</span></td>
             		</tr>
             		<tr style="line-height: 30px; height: 30px">
