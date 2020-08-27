@@ -159,8 +159,8 @@ class PrintsController extends AdminController{
                 'invalidate' => empty($medicinal['invalidate'])?'':date('Y-m-d',strtotime($medicinal['invalidate'])),
                 'storagecondition' => $medicinal['storagecondition'],
                 //订单信息
-                'price' => $price,
-                'prices' => $val['num']*$price,
+                'price' => $val['price'],
+                'prices' => $val['num']*$val['price'],
                 'num' => $val['num'],
                 'gift' => $orderAllInfo['gift'],
                 //额外信息
