@@ -61,10 +61,10 @@ class OrderController extends AdminController
         $grid->filter(function($filter)use($user_roles){
             $filter->disableIdFilter();
             $filter->like('orderid','订单号');
-            $filter->where(function($query){
+            /*$filter->where(function($query){
                 $buyerid = Salelist::where('telephone',$this->input)->value('id');
                 $query->where('buyerid',$buyerid);
-            },'手机号');
+            },'手机号');*/
             $filter->where(function($query){
                 $buyerid = Salelist::where('name',$this->input)->value('id');
                 $query->where('buyerid',$buyerid);
