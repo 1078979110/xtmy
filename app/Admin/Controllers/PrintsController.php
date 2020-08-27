@@ -17,7 +17,7 @@ class PrintsController extends AdminController{
         $jxsinfo = Salelist::find($jxsid)->toArray(true);//经销商信息
         $orderinfo = Order::find($orderid)->toArray(true);
         $siteinfo = Site::find(1);
-        $ext = '出货单';
+        $ext = '销售单';
         $tabletitle = [];
         $datatitle = [];
         $tabletitle[0] = ['购货单位：','编号：','日期：','合计：','发货员：'];
