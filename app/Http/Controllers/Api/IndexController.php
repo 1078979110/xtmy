@@ -410,10 +410,10 @@ class IndexController extends Controller {
             foreach ($lists_arr as $key => $val) {
                 $medicinalid = myCart::where('id', $val['id'])->value('medicinalid');
                 $medicinalinfo = Medicinal::find($medicinalid);
-                if($medicinalinfo['stock'] < $val['num']){
-                    DB::rollBack();
-                    return $this->errorData('下单失败,'.$medicinalinfo['medicinal'].'数量不足');
-                }
+//                if($medicinalinfo['stock'] < $val['num']){
+//                    DB::rollBack();
+//                    return $this->errorData('下单失败,'.$medicinalinfo['medicinal'].'数量不足');
+//                }
                 $price = $val['price'] ? $val['price'] : $medicinalinfo['price'];
                 $total += $val['num'] * $price;
                 $totalnum += $val['num'];
