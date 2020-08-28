@@ -11,6 +11,7 @@
       				<option value="2">模板二</option>
       				<option value="3">模板三</option>
       				<option value="4">模板四</option>
+					<option value="5">模板五</option>
       			</select>
       		</div>
       	</div>
@@ -164,6 +165,57 @@
       			</tbody>
       		</table>
       	</div>
+		  <div class="form-group col-sm-offset-2 template" id="template5" style="display: none;margin:0; padding:0">
+			  <label class="col-sm-2 control-label">模板</label>
+			  <table style="font-size:14px;" cellpadding="0" cellspacing="0">
+				  <tbody>
+				  <tr style="line-height: 30px; height: 30px"><td colspan="10" align="center" style="font-size: 16px; font-weight:bold">{{$title}}</td></tr>
+				  <tr style="line-height: 30px; height: 30px"><td colspan="5" align="left">{{$tabletitle[4][0]}}</td><td colspan="5" align="right">{{$tabletitle[4][1]}}</td></tr>
+				  <tr style="line-height: 30px; height: 30px"><td colspan="5" align="left">{{$tabletitle[4][2]}}</td><td colspan="5" align="right">{{$tabletitle[4][3]}}</td></tr>
+				  <tr style="line-height: 30px; height: 30px">
+					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:120px" align="center">{{$datatitle[4][0]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:120px" align="center">{{$datatitle[4][1]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[4][2]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:30px" align="center">{{$datatitle[4][3]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[4][4]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[4][5]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[4][6]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$datatitle[4][7]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:60px" align="center">{{$datatitle[4][8]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:70px" align="center">{{$datatitle[4][9]}}</td>
+				  </tr>
+				  @foreach($lists as $key => $list)
+					  <tr style="line-height: 30px; height: 30px">
+						  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['manufactur']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['manufacturinglicense']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['specification']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['batchnumber']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['registnum']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['makedate']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['invalidate']}}</td>
+					  </tr>
+				  @endforeach
+				  <tr style="line-height: 30px; height: 30px">
+					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="7" align="left">{{$tabletitle[4][4]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000" colspan="3" align="left">{{$tabletitle[4][5]}}<span tindex="7" tdata="SubSum" format="###,###,###,###,###.00">##########元</span></td>
+				  </tr>
+				  <tr style="line-height: 30px; height: 30px">
+					  <td colspan="2" style="border-top: 1px solid #000">{{$tabletitle[4][6]}}</td>
+					  <td colspan="3" style="border-top: 1px solid #000">{{$tabletitle[4][7]}}</td>
+					  <td colspan="3" style="border-top: 1px solid #000">{{$tabletitle[4][8]}}</td>
+					  <td colspan="2" style="border-top: 1px solid #000">{{$tabletitle[4][9]}}</td>
+				  </tr>
+				  <tr style="line-height: 30px; height: 30px">
+					  <td colspan="4">{{$tabletitle[4][10]}}</td>
+					  <td colspan="4">{{$tabletitle[4][11]}}</td>
+					  <td colspan="2">{{$tabletitle[4][12]}}</td>
+				  </tr>
+				  </tbody>
+			  </table>
+		  </div>
   	</div>
   </div>
   <div class="panel-footer">

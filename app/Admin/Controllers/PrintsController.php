@@ -24,10 +24,12 @@ class PrintsController extends AdminController{
         $tabletitle[1] = ['购货单位：','编号：','部门：','日期：','合计：','发货员：','复核员：','客户签收：'];
         $tabletitle[2] = ['购货单位：','编号：','部门：','日期：','合计：','发货员：','复核员：','客户签收：'];
         $tabletitle[3] = ['购货单位：','单据号：','地址：','日期：','合计(大写)：','总金额：','本页小计：','发货员：','复核员：','储运条件：常温库','签收：','发货地址：','联系电话：','非质量问题概不退换'];
+        $tabletitle[4] = ['购货单位：','单据号：','收货地址：', '日期：', '合计（大写）：','本页小计：', '发货员：', '复核员：', '储运条件：常温库', '签收：','发货地址：','联系电话：','非质量问题概不退换'];
         $datatitle[0] = ['序号','产品名称','规格型号','数量','单位','批号','失效日期','注册证号'];
         $datatitle[1] = ['器械名称','规格型号','单位','数量','单价','批号','有效期至'];
         $datatitle[2] = ['器械名称','规格型号','单位','数量','批号','有效期至'];
         $datatitle[3] = ['器械名称','生产商','规格型号','单位','数量','单价','金额','批号','注册证号','有效期至'];
+        $datatitle[4] = ['器械名称', '生产厂商', '生产企业许可证', '规格型号', '单位','数量', '批号', '注册证号', '生产日期', '失效日期'];
         $dataname = [];//表格各项信息
         $totalprice = 0;
         $data = [];
@@ -36,16 +38,20 @@ class PrintsController extends AdminController{
             $medicinal = Medicinal::find($val['id']);
             $totalprice +=  $val['num']*$val['price'];
             $registivalidate = date('Y-m-d', strtotime($medicinal['registivalidate']));
-            $val['price'] = isset($val['price'])?$val['price']:'5.00';
+            $invalidate = date('Y-m-d',strtotime($medicinal['invalidate']));
+            $makedate = date('Y-m-d', strtotime($medicinal['makedate']));
+            //$val['price'] = $val['price'];
             $t_ = [
                 'medicinal' => $medicinal['medicinal'],
                 'specification' => $medicinal['specification'],
                 'unit' => $medicinal['unit'],
                 'num' => $val['num'],
+                'manufacturinglicense' => $medicinal['manufacturinglicense'],
                 'batchnumber' => $medicinal['batchnumber'],
-                'invalidate' => date('Y-m-d',strtotime($medicinal['invalidate'])),
+                'invalidate' => empty($medicinal['invalidate'])?$medicinal['invalidate']:$invalidate,
                 'registnum' => $medicinal['registnum'],
                 'manufactur' => $medicinal['manufactur'],
+                'makedate' => empty($medicinal['makedate'])?$medicinal['makedate']:$makedate,
                 'price' => $val['price'],
                 'prices' => $val['num']*$val['price']
             ];
@@ -84,6 +90,22 @@ class PrintsController extends AdminController{
             $tabletitle[3][11].$siteinfo['address'],
             $tabletitle[3][12].$siteinfo['telephone'],
             $tabletitle[3][13]
+        ];
+        $dataname[4] = [
+            $tabletitle[4][0].$jxsinfo['name'],
+            $tabletitle[4][1].$orderinfo['orderid'],
+            $tabletitle[4][2].$jxsinfo['address'],
+            $tabletitle[4][3].date('Y/m/d', time()),
+            $tabletitle[4][4].$this->get_amount($totalprice),
+            $tabletitle[4][5],
+            $tabletitle[4][6],
+            $tabletitle[4][7],
+            $tabletitle[4][8],
+            $tabletitle[4][9],
+            $tabletitle[4][10].$siteinfo['siteaddress'],
+            $tabletitle[4][11].$siteinfo['telephone'],
+            $tabletitle[4][12]
+
         ];
         $totalcn = $this->get_amount($totalprice);
         if(isset($totalcn['status'])){
