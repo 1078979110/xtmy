@@ -76,7 +76,7 @@ class OrderController extends AdminController
                 $filter->equal('buyertype','订单类型')->select($arr);
             }
         });
-        
+        $grid->model()->orderBy('created_at');
         $grid->column('orderid','订单号');
         $grid->column('totalprice', '订单金额');
         $grid->column('orderinfo','订单详情')->display(function(){
@@ -130,7 +130,7 @@ EOT;
                 }
             });
         }
-        
+        $grid->column('created_at','下单时间');
         $grid->column('orderstatus','订单状态')->display(function($orderstatus) use($user_roles){
             $js = <<<EOT
             $(".comfirmorder").click(function(){
