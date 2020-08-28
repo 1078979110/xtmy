@@ -421,8 +421,6 @@ class IndexController extends Controller {
                     'unit' => $medicinalinfo['unit'],
                     'num' => $val['num'],
                 ];
-                $medicinalinfo['stock'] = $medicinalinfo['stock'] - $val['num'];
-                Medicinal::where('id', $medicinalid)->update(['stock' => $medicinalinfo['stock']]);
                 Mycart::where('id', $val['id'])->delete();
                 $orderinfo[] = $info;
             }
