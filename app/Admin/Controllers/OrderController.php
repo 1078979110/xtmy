@@ -192,7 +192,7 @@ EOT;
             }else if($user_roles[0]['id'] == 8){//仓库
                 if($orderstatus ==5){
                     $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button> | <button class="btn btn-warning btn-xs comfirmorder" data-id="'.$this->id.'">确认发货</button>';
-                }else if( $orderstatus == 6 ){//确定发货，打印出货单
+                }else if( $orderstatus >= 6 ){//确定发货，打印出货单
                     $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button> | <button class="btn btn-warning btn-xs print" data-type="'.$this->buyertype.'" data-id="'.$this->id.'">打印出货单</button>';
                 }else{
                     $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button>';
