@@ -5,7 +5,7 @@
     	<div class="form-group">
     		<label class="col-sm-1 control-label">@if(isset($info['telephone']))电话 @else用户名@endif</label>
     		<div class="col-sm-5">
-    		<input type="text" name="telephone" value="{{ isset($info['telephone'])?$info['telephone']:$info['name'] }}" readonly="readonly" class="form-control">
+    		<input type="text" name="telephone" value="{{ isset($info['telephone'])?$info['telephone']:$info['username'] }}" readonly="readonly" class="form-control">
     		</div>
     	</div>
     	<div class="form-group">
