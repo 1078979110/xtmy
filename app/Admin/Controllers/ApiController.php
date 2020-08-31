@@ -60,7 +60,11 @@ class ApiController extends AdminController {
 		if (request()->isMethod('post')) {
 			$id = $_POST['id'];
 			$curr_status = Order::where('id', $id)->value('orderstatus');
-			$curr_status++;
+			if($curr_status == 1 || $curr_status ==2){
+			    $curr_status = 3;
+            }else{
+			    $curr_status++;
+            }
 			$result = Order::where('id', $id)->update(['orderstatus' => $curr_status]);
 			if ($result) {
 				return ['status' => true, 'title' => '订单', 'msg' => '操作成功'];
