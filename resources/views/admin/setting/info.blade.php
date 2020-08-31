@@ -3,15 +3,15 @@
   <div class="panel-body">
     <form class="form-horizontal" action="/admin/api/changeinfo" method="post">
     	<div class="form-group">
-    		<label class="col-sm-1 control-label">@if(isset($info['telephone']))电话 @else用户名@endif</label>
+    		<label class="col-sm-1 control-label">@if(isset($info->telephone))电话 @else用户名@endif</label>
     		<div class="col-sm-5">
-    		<input type="text" name="telephone" value="{{ isset($info['telephone'])?$info['telephone']:$info['username'] }}" readonly="readonly" class="form-control">
+    		<input type="text" name="telephone" value="{{ isset($info->telephone)?$info->telephone:$info->username }}" readonly="readonly" class="form-control">
     		</div>
     	</div>
     	<div class="form-group">
     		<label class="col-sm-1 control-label">名称</label>
     		<div class="col-sm-5">
-    		<input type="text" name="name" value="{{ $info['name'] }}" class="form-control">
+    		<input type="text" name="name" value="{{ $info->name }}" class="form-control">
     		</div>
     	</div>
     	<div class="form-group">
@@ -20,11 +20,11 @@
     		<input type="password" name="password" value="" class="form-control" placeholder="请输入新密码，否则请忽略">
     		</div>
     	</div>
-    	@if(isset($info['type']) && ( $info['type']==1))
+    	@if(isset($info->type) && ( $info->type==1))
         	<div class="form-group">
         		<label class="col-sm-1 control-label">地址</label>
         		<div class="col-sm-5">
-        		<input type="text" name="address" value="{{ $info['address'] }}" class="form-control">
+        		<input type="text" name="address" value="{{ $info->address }}" class="form-control">
         		</div>
         	</div>
     	@endif
