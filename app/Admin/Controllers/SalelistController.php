@@ -101,7 +101,7 @@ class SalelistController extends AdminController
             $tools->disableView();
         });
         $form->footer(function ($footer) {
-            $footer->disableReset();
+            //$footer->disableReset();
             $footer->disableViewCheck();
             $footer->disableEditingCheck();
             $footer->disableCreatingCheck();
