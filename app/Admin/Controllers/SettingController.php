@@ -11,11 +11,10 @@ class SettingController extends AdminController{
     public function info(Content $content){
         $content->title('账号设置');
         $telephone = Admin::user()->username; 
-        $info = Salelist::where('telephone',$telephone)->get()->toArray(true);
-        $info[0]['username'] = $info[0]['telephone'];
+        $info = Salelist::where('telephone',$telephone)->first();
+
         if(empty($info)){
-            $infos = DB::table('admin_users')->where('username', $telephone)->get()->toArray(true);
-            $info = (array)$infos[0];
+            $info = DB::table('admin_users')->where('username', $telephone)->first();
         }
         $curr_info = $info;
         $content->body(view('admin.setting.info',['info'=>$curr_info])->render());
