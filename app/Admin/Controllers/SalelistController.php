@@ -55,7 +55,7 @@ class SalelistController extends AdminController
             $action->disableview();
         });
         $grid->tools(function ($tools) {
-            $tools->append(new SetAdmin());
+            //$tools->append(new SetAdmin());
         });
         return $grid;
     }
@@ -101,7 +101,7 @@ class SalelistController extends AdminController
             $tools->disableView();
         });
         $form->footer(function ($footer) {
-            //$footer->disableReset();
+            $footer->disableReset();
             $footer->disableViewCheck();
             $footer->disableEditingCheck();
             $footer->disableCreatingCheck();
