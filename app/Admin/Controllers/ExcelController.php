@@ -56,6 +56,7 @@ class ExcelController extends AdminController{
         foreach ($infos as $key=>$info){
             $infos[$key]['batchnumber'] = empty($info['batchnumber'])?'':$info['batchnumber'];
             $infos[$key]['invalidate'] = empty($info['invalidate'])?'':$info['invalidate'];
+            $infos[$key]['makedate'] = empty($info['makedate'])?'':$info['makedate'];
             $infos[$key]['boxformat'] = empty($info['boxformat'])?'':$info['boxformat'];
             $infos[$key]['novirus'] = empty($info['novirus'])?'':$info['novirus'];
         }
