@@ -7,10 +7,6 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
-use App\Admin\Extensions\Tools\SetAdmin;
-use App\Admin\Extensions\Tools\Search;
-use Encore\Admin\Grid\Model;
-use Illuminate\Support\Facades\DB;
 use App\Usertype;
 class SalelistController extends AdminController
 {
@@ -31,6 +27,7 @@ class SalelistController extends AdminController
         $grid = new Grid(new Salelist());
 
         $grid->filter(function($filter){
+            $filter->disableIdFilter();
             $filter->like('name', '姓名');
             $arr = Usertype::pluck('usertype','id');
             $filter->equal('type','类型')->select($arr);
@@ -40,12 +37,11 @@ class SalelistController extends AdminController
         $grid->column('type','销售类型')->display(function($type){
             return Salelist::getTypeNameByTypeId($type);
         });
-        $grid->column('status', '状态')->display(function($status){
-            return $status?'<button class="btn btn-warning">冻结</button>':'<button class="btn btn-info">正常</button>';
-        });
-        $grid->column('password', '重置密码')->display(function(){
-            return '<a class="btn btn-warning" href="/admin/password/setpwd/'.$this->id.'">去重置</a>';
-        });
+        $state = [
+            'on'=>['value'=>0,'text'=>'正常', 'color'=>'success'],
+            'off'=>['value'=>1,'text'=>'冻结', 'color'=>'danger']
+        ];
+        $grid->column('status', '状态')->switch($state);
         $grid->column('created_at', '创建时间');
         $grid->column('updated_at', '修改时间');
         $grid->disableExport();
@@ -92,7 +88,11 @@ class SalelistController extends AdminController
         $form->saving(function(Form $form){
             $form->password = bcrypt($form->password);
         });
-        $form->select('status','状态')->options(['0'=>'正常','1'=>'冻结']);
+        $state = [
+            'on'=>['value'=>0,'text'=>'正常', 'color'=>'success'],
+            'off'=>['value'=>1,'text'=>'冻结', 'color'=>'danger']
+        ];
+        $form->switch('status','状态')->states($state);
         $form->text('depart','部门')->help('经销商填写,业务员忽略');
         $form->text('address','地址')->help('经销商填写,业务员忽略');
         $form->tools(function (Form\Tools $tools) {

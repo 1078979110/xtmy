@@ -31,7 +31,7 @@ class HospitalpriceController extends AdminController
 
         $grid->filter(function($filter){
             $hospital = Hospital::pluck('hospital','id');
-            $filter->equal('medicinalid','药品编号');
+            $filter->equal('specification','规格型号');
             $filter->equal('hospitalid','医院')->select($hospital);
         });
         
@@ -41,12 +41,7 @@ class HospitalpriceController extends AdminController
         $grid->column('medicinalid', __('药品'))->display(function($medicinalid){
             return Medicinal::where('id',$medicinalid)->value('medicinal');
         });
-        $grid->column( __('产品编号'))->display(function(){
-            return Medicinal::where('id',$this->medicinalid)->value('medicinalnum');
-        });
-            $grid->column(__('规格'))->display(function(){
-            return Medicinal::where('id',$this->medicinalid)->value('specification');
-        });
+        $grid->column('medicinalnum',__('产品货号'));
         //$grid->disableFilter();
         $grid->disableRowSelector();
         $grid->disableColumnSelector();
@@ -101,7 +96,10 @@ class HospitalpriceController extends AdminController
              return Medicinal::where('id',$medicinalid)->pluck('medicinal','id');
          })->ajax('/admin/api/getmedicinals'); 
         $form->decimal('price', __('价格'));
-
+        $form->saved(function(Form $form){
+            $form->medicinalnum = Medicinal::where('id',$form->medicinalid)->value('medicinalnum');
+            Hospitalprice::where('id',$form->model()->id)->update(['medicinalnum'=>$form->medicinalnum]);
+        });
         return $form;
     }
 }

@@ -53,7 +53,7 @@ class MedicinalController extends AdminController
             return Category::getCategoryNameById($category_id);
         });
         $grid->column('manufactur','生产厂商');
-        $grid->column('specification','规格');
+        $grid->column('specification','规格型号');
         $grid->column('batchnumber','批次');
         $grid->column('makedate','生产日期')->display(function($makedate){
             if(empty($makedate)){
