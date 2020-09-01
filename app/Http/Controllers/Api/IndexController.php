@@ -40,7 +40,6 @@ class IndexController extends Controller {
 
 	public function getSiteInfo() {
 		$info = Site::find(1);
-		//$images = json_decode($info['banners'], true);
 		$images = [];
 		foreach ($info['banners'] as $key => $value) {
 			$images[] = env('APP_URL') . '/storage/' . $value;
@@ -74,10 +73,10 @@ class IndexController extends Controller {
 	}
 
 	protected function checkSession() {
-		$userinfo = session('user.info');
+		$userinfo = Auth::user();
 		if (!$userinfo) {
 			$userinfo = Salelist::where('api_token', request()->get('api_token'))->first();
-			if($userinfo['status'] ==1){
+			if($userinfo->status ==1){
                 Salelist::where('telephone', $userinfo['telephone'])->update(['api_token'=>'']);
 			    return $this->errorData('该账号已被冻结');
             }
@@ -98,7 +97,7 @@ class IndexController extends Controller {
 	 */
 	public function hospitalList() {
 		$userinfo = $this->checkSession();
-		$uid = $userinfo['id'];
+		$uid = $userinfo->id;
 		$lists = Hospital::where('belongto', $uid)->pluck('hospital', 'id')->toArray(true);
 		return $this->successData('医院列表', ['hospital' => $lists]);
 	}
@@ -494,8 +493,8 @@ class IndexController extends Controller {
 	public function getSpecification() {
 		$request = request();
 		$mid = $request['mid'];
-		$specification = Medicinal::where('id', $mid)->value('specification');
-		return $this->successData('商品规格', ['specification' => $specification]);
+		$medicinalnum = Medicinal::where('id', $mid)->value('medicinalnum');
+		return $this->successData('商品规格', ['medicinalnum' => $medicinalnum]);
 
 	}
 
