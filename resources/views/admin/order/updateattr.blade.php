@@ -7,7 +7,7 @@
             </div>
             <div class="form-group">
                 <table class="table">
-                    <thead><tr><th>名称</th><th>规格</th><th>数量</th><th>价格</th><th>批号</th><th>灭菌批号</th><th>失效日期</th><th>装箱规格</th></tr></thead>
+                    <thead><tr><th>名称</th><th>规格</th><th>数量</th><th>价格</th><th>批号</th><th>灭菌批号</th><th>生产日期</th><th>失效日期</th><th>装箱规格</th></tr></thead>
                     <tbody>
                     @foreach($products as $key => $product)
                         <tr>
@@ -17,6 +17,7 @@
                             <td>{{$product['price']}}</td>
                             <td><input type="text" name="info[{{$product['id']}}][batchnumber]" value="{{$product['batchnumber']}}" class="form-control"></td>
                             <td><input type="text" name="info[{{$product['id']}}][novirus]" value="{{$product['novirus']}}" class="form-control"></td>
+                            <td><input type="text" name="info[{{$product['id']}}][makedate]" value="{{$product['makedate']}}" class="form-control"></td>
                             <td><input type="text" name="info[{{$product['id']}}][invalidate]" value="{{$product['invalidate']}}" class="form-control"></td>
                             <td><input type="text" name="info[{{$product['id']}}][boxformat]" value="{{$product['boxformat']}}" class="form-control"></td>
                         </tr>

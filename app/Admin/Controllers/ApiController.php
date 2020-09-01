@@ -304,6 +304,7 @@ class ApiController extends AdminController {
         $infos = json_decode($orderinfo, true);
         foreach ($infos as $key => $info){
             $infos[$key]['batchnumber'] = $data['info'][$info['id']]['batchnumber'];
+            $infos[$key]['makedate'] = $data['info'][$info['id']]['makedate'];
             $infos[$key]['invalidate'] = $data['info'][$info['id']]['invalidate'];
             $infos[$key]['boxformat'] = $data['info'][$info['id']]['boxformat'];
             $infos[$key]['novirus'] = $data['info'][$info['id']]['novirus'];

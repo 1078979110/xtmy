@@ -4,6 +4,9 @@
 /storage/*.key
 /vendor
 /.svn
+.buildpath
+.project
+/.idea
 .env
 .phpunit.result.cache
 Homestead.json

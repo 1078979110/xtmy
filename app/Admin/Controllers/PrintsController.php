@@ -37,10 +37,6 @@ class PrintsController extends AdminController{
         foreach ($infos as $key=>$val){
             $medicinal = Medicinal::find($val['id']);
             $totalprice +=  $val['num']*$val['price'];
-            $registivalidate = date('Y-m-d', strtotime($medicinal['registivalidate']));
-            $invalidate = date('Y-m-d',strtotime($medicinal['invalidate']));
-            $makedate = date('Y-m-d', strtotime($medicinal['makedate']));
-            //$val['price'] = $val['price'];
             $t_ = [
                 'medicinal' => $medicinal['medicinal'],
                 'specification' => $medicinal['specification'],
@@ -48,10 +44,10 @@ class PrintsController extends AdminController{
                 'num' => $val['num'],
                 'manufacturinglicense' => $medicinal['manufacturinglicense'],
                 'batchnumber' => isset($val['batchnumber'])?$val['batchnumber']:$medicinal['batchnumber'],
-                'invalidate' => isset($val['invalidate'])?$val['invalidate']:$medicinal['invalidate'],
+                'invalidate' => isset($val['invalidate'])?$val['invalidate']:'',
                 'registnum' => $medicinal['registnum'],
                 'manufactur' => $medicinal['manufactur'],
-                'makedate' => empty($medicinal['makedate'])?$medicinal['makedate']:$makedate,
+                'makedate' => isset($val['makedate'])?$val['makedate']:'',
                 'price' => $val['price'],
                 'prices' => $val['num']*$val['price']
             ];
@@ -174,11 +170,11 @@ class PrintsController extends AdminController{
                 'manufactur' => $medicinal['manufactur'],
                 'specification' => $medicinal['specification'],
                 'unit' => $medicinal['unit'],
-                'batchnumber' => $val['batchnumber'],
-                'makedate' => empty($medicinal['makedate'])?'':date('Y-m-d',strtotime($medicinal['makedate'])),
+                'batchnumber' => isset($val['batchnumber'])?$val['batchnumber']:'',
+                'makedate' => isset($val['makedate'])?$val['makedate']:'',
                 'registnum' => $medicinal['registnum'],
                 'registivalidate' => empty($registivalidate)?$medicinal['registivalidate']:$registivalidate,
-                'invalidate' => $val['invalidate'],
+                'invalidate' => isset($val['invalidate'])?$val['invalidate']:'',
                 'storagecondition' => $medicinal['storagecondition'],
                 //订单信息
                 'price' => $val['price'],
@@ -186,8 +182,8 @@ class PrintsController extends AdminController{
                 'num' => $val['num'],
                 'gift' => $orderAllInfo['gift'],
                 //额外信息
-                'boxformat' =>$val['boxformat'],//装箱规格
-                'novirus' =>$val['novirus'],//灭菌批号
+                'boxformat' =>isset($val['boxformat'])?$val['boxformat']:'',//装箱规格
+                'novirus' =>isset($val['novirus'])?$val['novirus']:'',//灭菌批号
                 'depart' => '',//部门
             );
         }
