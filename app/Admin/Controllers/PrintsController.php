@@ -47,8 +47,8 @@ class PrintsController extends AdminController{
                 'unit' => $medicinal['unit'],
                 'num' => $val['num'],
                 'manufacturinglicense' => $medicinal['manufacturinglicense'],
-                'batchnumber' => $medicinal['batchnumber'],
-                'invalidate' => empty($medicinal['invalidate'])?$medicinal['invalidate']:$invalidate,
+                'batchnumber' => isset($val['batchnumber'])?$val['batchnumber']:$medicinal['batchnumber'],
+                'invalidate' => isset($val['invalidate'])?$val['invalidate']:$medicinal['invalidate'],
                 'registnum' => $medicinal['registnum'],
                 'manufactur' => $medicinal['manufactur'],
                 'makedate' => empty($medicinal['makedate'])?$medicinal['makedate']:$makedate,
@@ -174,11 +174,11 @@ class PrintsController extends AdminController{
                 'manufactur' => $medicinal['manufactur'],
                 'specification' => $medicinal['specification'],
                 'unit' => $medicinal['unit'],
-                'batchnumber' => $medicinal['batchnumber'],
+                'batchnumber' => $val['batchnumber'],
                 'makedate' => empty($medicinal['makedate'])?'':date('Y-m-d',strtotime($medicinal['makedate'])),
                 'registnum' => $medicinal['registnum'],
                 'registivalidate' => empty($registivalidate)?$medicinal['registivalidate']:$registivalidate,
-                'invalidate' => empty($medicinal['invalidate'])?'':date('Y-m-d',strtotime($medicinal['invalidate'])),
+                'invalidate' => $val['invalidate'],
                 'storagecondition' => $medicinal['storagecondition'],
                 //订单信息
                 'price' => $val['price'],
@@ -186,8 +186,8 @@ class PrintsController extends AdminController{
                 'num' => $val['num'],
                 'gift' => $orderAllInfo['gift'],
                 //额外信息
-                'boxformat' =>'',//装箱规格
-                'novirus' =>'',//灭菌批号
+                'boxformat' =>$val['boxformat'],//装箱规格
+                'novirus' =>$val['novirus'],//灭菌批号
                 'depart' => '',//部门
             );
         }

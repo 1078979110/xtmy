@@ -153,6 +153,10 @@ EOT;
                 id = $(this).attr('data-id');
                 window.location.href='/admin/excel/changeprice?id='+id;
             });
+            $(".updateattr").click(function(){
+                id = $(this).attr('data-id');
+                window.location.href='/admin/excel/updateattr?id='+id;
+            });
             $(".print").click(function(){
                 id = $(this).attr('data-id');
                 type = $(this).attr('data-type');
@@ -191,9 +195,9 @@ EOT;
                 }
             }else if($user_roles[0]['id'] == 8){//仓库
                 if($orderstatus ==5){
-                    $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button> | <button class="btn btn-warning btn-xs comfirmorder" data-id="'.$this->id.'">确认发货</button>';
+                    $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button> | <button class="btn btn-warning btn-xs updateattr" data-id="'.$this->id.'">补充信息</button> | <button class="btn btn-warning btn-xs comfirmorder" data-id="'.$this->id.'">确认发货</button>';
                 }else if( $orderstatus >= 6 ){//确定发货，打印出货单
-                    $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button> | <button class="btn btn-warning btn-xs print" data-type="'.$this->buyertype.'" data-id="'.$this->id.'">打印出货单</button>';
+                    $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button> | <button class="btn btn-warning btn-xs updateattr" data-id="'.$this->id.'">补充信息</button> | <button class="btn btn-warning btn-xs print" data-type="'.$this->buyertype.'" data-id="'.$this->id.'">打印出货单</button>';
                 }else{
                     $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button>';
                 }

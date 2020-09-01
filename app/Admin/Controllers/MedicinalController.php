@@ -36,14 +36,14 @@ class MedicinalController extends AdminController
         $grid->filter(function($filter){
             $filter->disableIdFilter();
             $filter->like('medicinal','药品名称');
-            $filter->like('medicinalnum','产品编号');
+            $filter->like('medicinalnum','货号');
             $filter->like('specification','规格');
             $producer = Producer::pluck('name','id');
             $filter->equal('producer_id','厂家')->select($producer);
         });
         
         $grid->column('medicinal', '药品名称');
-        $grid->column('medicinalnum', '产品编号');
+        $grid->column('medicinalnum', '货号');
         $grid->column('producer_id', '厂家')->display(function($producer_id){
             return Producer::getProducerNameById($producer_id);
         });
@@ -55,7 +55,6 @@ class MedicinalController extends AdminController
         });
         $grid->column('manufactur','生产厂商');
         $grid->column('specification','规格');
-        $grid->column('stock','库存');
         $grid->column('batchnumber','批次');
         $grid->column('makedate','生产日期')->display(function($makedate){
             if(empty($makedate)){
@@ -118,15 +117,12 @@ SCRIPT;
             $str .= ($status==1)?'<a href="javascript:void(0)" data-id="'.$this->id.'" data-status="'.$this->status.'" class="changeup">上架</a>':'<a href="javascript:void(0)" data-id="'.$this->id.'" data-status="'.$this->status.'" class="changedown">下架</a>';
             return $str;
         });
-        //$grid->disableFilter();
         $grid->exporter('MyCsvExporter');
         $grid->disableRowSelector();
         $grid->disableColumnSelector();
         $grid->tools(function($tools){
-            //$tools->append(new SearchMedicinal());
             $tools->append(new ExcelImport());
             $tools->append(new SetPrice());
-            //$tools->append(new ShowImg('excel_medicinal.png'));
         });
         return $grid;
     }
@@ -142,7 +138,7 @@ SCRIPT;
         $show = new Show(Medicinal::findOrFail($id));
         $show->field('id','ID');
         $show->field('medicinal','器械名称');
-        $show->field('medicinalnum', '产品编号');
+        $show->field('medicinalnum', '货号');
         $show->field('manufacturinglicense', '许可证号');
         $show->field('manufactur', '生产厂商');
         $show->field('producer_id','厂家')->as(function($producer_id){
@@ -156,7 +152,6 @@ SCRIPT;
         });
         $show->field('specification','规格型号');
         $show->field('unit','单位');
-        $show->field('stock','数量');
         $show->field('batchnumber','批号');
         $show->field('makedate','生产日期')->format('YYYY-MM-DD');
         $show->field('invalidate','失效日期')->format('YYYY-MM-DD');
@@ -175,7 +170,7 @@ SCRIPT;
     {
         $form = new Form(new Medicinal());
         $form->text('medicinal','器械名称');
-        $form->text('medicinalnum','产品编号');
+        $form->text('medicinalnum','货号');
         $form->text('manufacturinglicense','许可证号');
         $form->select('producer_id', '厂家')->options(function(){
             return Productline::getProducerIdName();
@@ -189,7 +184,6 @@ SCRIPT;
         $form->text('manufactur','生产厂商');
         $form->text('specification','规格型号');
         $form->text('unit','单位');
-        $form->text('stock','数量');
         $form->text('batchnumber','批号');
         $form->date('makedate','生产日期')->format('YYYY-MM-DD');
         $form->date('invalidate','失效日期')->format('YYYY-MM-DD');

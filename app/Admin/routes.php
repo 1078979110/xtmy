@@ -41,6 +41,7 @@ Route::group([
     $router->get('/print/hostpital','PrintsController@hospitalPrint');
     $router->get('/print/jxs','PrintsController@jxsPrint');
     $router->get('/api/gifts','ApiController@gifts');
+    $router->get('/excel/updateattr', 'ExcelController@updateAttr');
     
     //自定义接收数据页面
     $router->post('/password/setadmin', 'PasswordController@setAdmin');
@@ -54,4 +55,5 @@ Route::group([
     $router->post('/api/changeinfo', 'ApiController@changeInfo');
     $router->post('/sites/siteinfo', 'SiteController@siteInfo');
     $router->post('/api/searchm', 'ApiController@searchmedicinal');
+    $router->post('/api/updateattr', 'ApiController@updateAttr');
 });

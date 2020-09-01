@@ -1,16 +1,13 @@
 <?php
 namespace App\Admin\Controllers;
 
+use App\Medicinal;
 use Encore\Admin\Controllers\AdminController;
-use Encore\Admin\Form;
 use Encore\Admin\Layout\Content;
 use Illuminate\Support\Facades\DB;
-use Encore\Admin\Admin;
-use Illuminate\Support\Facades\Redirect;
 use App\Hospital;
 use App\Order;
 use Illuminate\Http\Request;
-use Encore\Admin\Widgets\Table;
 class ExcelController extends AdminController{
     public function excel(Content $content){
         $url = $_SERVER['HTTP_REFERER'];
@@ -46,6 +43,23 @@ class ExcelController extends AdminController{
         $info = json_decode($info,true);
         //$form = new \Encore\Admin\Widgets\Form(['info'=>$info]);
         $content->body(view('admin.extension.changeprice',['info'=>$info, 'id'=>$request->get('id')])->render());
+        return $content;
+    }
+
+    public function updateAttr(Content $content){
+        $content->title('补充信息');
+        $request = request();
+        $oid = $request->id;
+        $orderinfo = Order::where('id',$oid)->value('orderinfo');
+        $products = [];
+        $infos = json_decode($orderinfo, true);
+        foreach ($infos as $key=>$info){
+            $infos[$key]['batchnumber'] = empty($info['batchnumber'])?'':$info['batchnumber'];
+            $infos[$key]['invalidate'] = empty($info['invalidate'])?'':$info['invalidate'];
+            $infos[$key]['boxformat'] = empty($info['boxformat'])?'':$info['boxformat'];
+            $infos[$key]['novirus'] = empty($info['novirus'])?'':$info['novirus'];
+        }
+        $content->body(view('admin.order.updateattr', ['products'=>$infos,'id'=>$oid])->render());
         return $content;
     }
     
