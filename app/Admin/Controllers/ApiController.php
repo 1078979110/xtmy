@@ -146,6 +146,9 @@ class ApiController extends AdminController {
 
 	public function medicinals() {
 		if (request()->isMethod('post')) {
+		    $producer_id = request()->post('producer_id');
+            $line_id = request()->post('line_id');
+            $category_id = request()->post('category_id');
 			$excel = request()->file('excel');
 			$ext_arr = ['xls', 'xlsx'];
 			$re = $this->uploadFile($excel, $ext_arr);
@@ -155,55 +158,45 @@ class ApiController extends AdminController {
 			} else {
 				try {
 					$filename = $re['info'];
-					$producers = Producer::pluck('id', 'name');
-					$lines = Productline::pluck('id', 'linename');
-					$categories = Category::pluck('id', 'categoryname');
 					$real_file = str_replace('\\','/','storage/' . $filename);
 					if (!is_file($real_file)) {
 						admin_toastr('文件不存在！', 'error');
 						return redirect('/admin/excel/medicinals');
 					}
 
-					Excel::load($real_file, function ($reader) use ($producers, $lines, $categories) {
+					Excel::load($real_file, function ($reader) use ($producer_id, $line_id, $category_id) {
 						$data = $reader->all()->toArray(true);
-						if(sizeof($data)>1){
-                            admin_toastr('请只保留一个表格', 'error');
-                            return redirect('/admin/excel/medicinals');
-                        }
 						$value = [];
-                        foreach ($data as $key => $val) {
-                            if ($key == 0) {
-                                $medicinalnum = Medicinal::orderBy('id', 'desc')->limit(1)->value('id');
+						foreach ($data as $k=>$v) {
+                            foreach ($v as $key => $val) {
+                                if (!isset($val['器械名称']) || empty($val['器械名称'])) {
+                                    admin_toastr('excel表数据结构与模板不相符，请修改后再进行导入！', 'error');
+                                    return redirect('/admin/excel/medicinals');
+                                }
+                                /*$has_insert = Medicinal::where('specification', $val['规格型号'])->first();
+                                if (!empty($has_insert)) {
+                                    break;
+                                }*/
+                                $makedate = (array)$val['生产日期'] ? (array)$val['生产日期'] : '';
+                                $invalidate = (array)$val['失效日期'] ? (array)$val['失效日期'] : '';
+                                $registivalidate = (array)$val['注册证失效日期'] ? (array)$val['注册证失效日期'] : '';
+                                $value['medicinal'] = $val['器械名称'];
+                                $value['manufacturinglicense'] = $val['许可证号'] ? $val['许可证号'] : '';
+                                $value['manufactur'] = $val['生产厂商'] ? $val['生产厂商'] : '';
+                                $value['producer_id'] = $producer_id;
+                                $value['line_id'] = $line_id;
+                                $value['category_id'] = $category_id;
+                                $value['specification'] = $val['规格型号'] ? $val['规格型号'] : '';
+                                $value['unit'] = $val['单位'];
+                                $value['batchnumber'] = $val['批号'] ? $val['批号'] : '';
+                                $value['makedate'] = isset($makedate['date']) ? $makedate['date'] : (empty($makedate) ? '' : $makedate[0]);
+                                $value['invalidate'] = isset($invalidate['date']) ? $invalidate['date'] : (empty($invalidate) ? '' : $invalidate[0]);
+                                $value['registnum'] = $val['注册证号'] ? $val['注册证号'] : '';
+                                $value['registivalidate'] = isset($registivalidate['date']) ? $registivalidate['date'] : (empty($registivalidate) ? '' : $registivalidate[0]);
+                                $value['storagecondition'] = $val['储存条件'] ? $val['储存条件'] : '';
+                                $value['status'] = isset($val['status']) ? $val['status'] : 0;
+                                DB::table('medicinal')->insert($value);
                             }
-                            if (!isset($val['器械名称']) || empty($val['器械名称'])) {
-                                admin_toastr('excel表数据结构与模板不相符，请修改后再进行导入！', 'error');
-                                return redirect('/admin/excel/medicinals');
-                            }
-                            $has_insert = Medicinal::where('specification',$val['规格型号'])->first();
-                            if(!empty($has_insert)){
-                                break;
-                            }
-                            $makedate = (array) $val['生产日期'] ? (array) $val['生产日期'] : '';
-                            $invalidate = (array) $val['失效日期'] ? (array) $val['失效日期'] : '';
-                            $registivalidate = (array) $val['注册证失效日期'] ? (array) $val['注册证失效日期'] : '';
-                            $value['medicinal'] = $val['器械名称'];
-                            $value['medicinalnum'] = $val['货号'];
-                            $value['manufacturinglicense'] = $val['许可证号'] ? $val['许可证号'] : '';
-                            $value['manufactur'] = $val['生产厂商'] ? $val['生产厂商'] : '';
-                            $value['producer_id'] = $producers[$val['厂家']] ? $producers[$val['厂家']] : '';
-                            $value['line_id'] = $lines[$val['产品线']] ? $lines[$val['产品线']] : '';
-                            $value['category_id'] = $categories[$val['产品分类']] ? $categories[$val['产品分类']] : '';
-                            $value['specification'] = $val['规格型号'] ? $val['规格型号'] : '';
-                            $value['unit'] = $val['单位'];
-                            $value['stock'] = $val['数量'] ? $val['数量'] : 0;
-                            $value['batchnumber'] = $val['批号'] ? $val['批号'] : '';
-                            $value['makedate'] = isset($makedate['date']) ? $makedate['date'] : (empty($makedate) ? '' : $makedate[0]);
-                            $value['invalidate'] = isset($invalidate['date']) ? $invalidate['date'] : (empty($invalidate) ? '' : $invalidate[0]);
-                            $value['registnum'] = $val['注册证号'] ? $val['注册证号'] : '';
-                            $value['registivalidate'] = isset($registivalidate['date']) ? $registivalidate['date'] : (empty($registivalidate) ? '' : $registivalidate[0]);
-                            $value['storagecondition'] = $val['储存条件'] ? $val['储存条件'] : '';
-                            $value['status'] = isset($val['status']) ? $val['status'] : 0;
-                            DB::table('medicinal')->insert($value);
                         }
 					});
 					admin_toastr('导入成功', 'success');
@@ -226,8 +219,7 @@ class ApiController extends AdminController {
 				return redirect('/admin/excel/setprice');
 			} else {
 				$filename = $re['info'];
-
-				$medicinals = Medicinal::pluck('id', 'medicinalnum');
+				$medicinals = Medicinal::pluck('id', 'specification');
                 $real_file = str_replace('\\','/','storage/' . $filename);
 				if (!is_file($real_file)) {
 					admin_toastr('文件不存在！', 'error');
@@ -235,20 +227,16 @@ class ApiController extends AdminController {
 				}
 				try {
 					Excel::load($real_file, function ($reader) use ($medicinals, $hospital) {
-						$data = $reader->all()->toArray(true);
-						if(sizeof($data)>1){
-                            admin_toastr('请只保留一个表格', 'error');
-                            return redirect('/admin/excel/medicinals');
-                        }
+						$data = $reader->get()->toArray(true);
 						$value = [];
 						foreach($data as $k=>$v){
                             foreach ($v as $key => $val) {
-                                if (!isset($val['货号']) || empty($val['货号'] || !isset($val['price']) || empty($val['price']))) {
+                                if (!isset($val['规格型号']) || empty($val['规格型号'] || !isset($val['价格']) || empty($val['价格']))) {
                                     admin_toastr('excel表数据结构与模板不相符，请修改后再进行导入！', 'error');
                                     return redirect('/admin/excel/setprice');
                                 }
                                 $value['hospitalid'] = $hospital;
-                                $value['medicinalid'] = $medicinals[$val['产品编号']];
+                                $value['medicinalid'] = $medicinals[$val['规格型号']];
                                 $value['price'] = $val['价格'];
                                 Hospitalprice::create($value);
                             }
@@ -269,9 +257,6 @@ class ApiController extends AdminController {
 	 * @param array $option 后缀名，数组
 	 */
 	protected function uploadFile($file, $option, $disk = 'admin') {
-		if (!$file->isValid()) {
-			return array('status' => 'error', 'msg' => '文件已上传');
-		}
 		$fileExtension = $file->getClientOriginalExtension();
 		if (!in_array($fileExtension, $option)) {
 			return array('status' => 'error', 'msg' => '文件类型不正确');

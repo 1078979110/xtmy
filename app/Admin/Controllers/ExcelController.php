@@ -2,6 +2,7 @@
 namespace App\Admin\Controllers;
 
 use App\Medicinal;
+use App\Producer;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Layout\Content;
 use Illuminate\Support\Facades\DB;
@@ -20,6 +21,11 @@ class ExcelController extends AdminController{
         $form = new \Encore\Admin\Widgets\Form();
         $form->action('/admin/api/medicinals');
         $form->file('excel','数据源')->rules('mimes:xls,xlsx')->move(env('APP_URL').'/upload/');
+        $form->select('producer_id','厂家')->options(function(){
+            return Producer::pluck('name','id');
+        })->load('line_id','/admin/api/line');
+        $form->select('line_id','产品线')->load('category_id','/admin/api/category');
+        $form->select('category_id','产品分类');
         $content->body($form);
         return $content;
     }
