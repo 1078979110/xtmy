@@ -303,7 +303,8 @@ class IndexController extends Controller {
                 'gift'=>[
                     'id' => $value['originid'],
                     'originname'=>Medicinal::where('id',$value['originid'])->value('medicinal'),
-                    'originnum' => $value['originnum']
+                    'originnum' => $value['originnum'],
+                    'medicinalnum' => Medicinal::where('id',$value['originid'])->value('medicinalnum')
                 ]
 			];
 		}
