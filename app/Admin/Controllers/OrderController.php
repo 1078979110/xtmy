@@ -112,7 +112,6 @@ class OrderController extends AdminController
                 $s = [];
                 foreach ($gift_arr as $key=>$val){
                     $medicinalinfo = Medicinal::where('id', $val['id'])->first();
-
                     $s[$key]['id'] = $key+1;
                     $s[$key]['medicinal'] = $medicinalinfo->medicinal;
                     $s[$key]['medicinalnum'] = $medicinalinfo->medicinalnum;
