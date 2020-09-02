@@ -301,6 +301,7 @@ class IndexController extends Controller {
 				'unit' => $medicinalinfo['unit'],
 				'num' => $value['num'],
                 'gift'=>[
+                    'id' => $value['originid'],
                     'originname'=>Medicinal::where('id',$value['originid'])->value('medicinal'),
                     'originnum' => $value['originnum']
                 ]
