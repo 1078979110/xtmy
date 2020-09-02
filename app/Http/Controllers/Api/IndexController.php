@@ -350,6 +350,12 @@ class IndexController extends Controller {
 		}
 	}
 
+	public function searchGift(Request $request){
+        $q = $request->q;
+        $lists = Medicinal::where([['status',0],['medicinalnum','like','%'.$q.'%']])->simplePaginate(20);
+        return $this->successData('赠品搜索页',['data'=>$lists]);
+    }
+
 	public function addGift(Request $request){
 	    $userinfo = $this->checkSession();
 	    if($userinfo->type !=2){

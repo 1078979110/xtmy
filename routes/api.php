@@ -70,6 +70,8 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('/importcart', 'IndexController@importCart');
         //添加赠品
         Route::post('addgift','IndexController@addGift');
+        //赠品搜索
+        Route::get('searchgift', 'IndexController@searchGift');
 
 	});
 });
