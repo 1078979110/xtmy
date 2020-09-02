@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
 
 class IndexController extends Controller {
 	use AuthenticatesUsers;
@@ -332,7 +333,7 @@ class IndexController extends Controller {
 				'medicinalnum' => $medicinalnum,
 				'medicinalid' => $mid,
 				'num' => $num,
-				'price' => $price,
+				'price' => $price
 			];
 			if ($request['hid']) {
 				$data['hospitalid'] = $hospitalinfo['id'];
@@ -348,6 +349,18 @@ class IndexController extends Controller {
 			return $this->errorData('添加失败');
 		}
 	}
+
+	public function addGift(Request $request){
+	    $userinfo = $this->checkSession();
+	    if($userinfo->type !=2){
+	        return $this->errorData('只有业务员才能设置赠品');
+        }
+	    $carid = $request->id;
+	    $originid = $request->originid;
+	    $num = $request->num;
+	    DB::table('mycart')->where('id', $carid)->update(['originid'=>$originid, 'originnum'=>$num]);
+	    return $this->successData('赠品添加成功',[]);
+    }
 	/**
 	 * 修改购物车商品数量
 	 */
@@ -380,8 +393,8 @@ class IndexController extends Controller {
 
 	public function importCart(Request $request){
 	    $userinfo = $this->checkSession();
-	    if($userinfo->type == 2){
-	        $hid = $request->hid;
+        $hid = $request->hid?$request->hid:0;
+        if($userinfo->type == 2){
 	        if(!$hid){
                 throw new \Exception('请选择医院后再导入');
             }
@@ -398,34 +411,51 @@ class IndexController extends Controller {
         }
         $fileName = date('Y_m_d') . '/' . md5(time()) . mt_rand(0, 9999) . '.' . $fileExtension;
         Storage::disk('public')->put($fileName, file_get_contents($tmpFile));
-        if (!is_file($fileName)) {
+        $realfile = $real_file = str_replace('\\','/','storage/' . $fileName);
+        if (!is_file($realfile)) {
             throw new \Exception('文件上传失败！');
         }
         try{
-            Excel::load($fileName, function($reader)use($userinfo,$hid){
+            Excel::load($realfile, function($reader)use($userinfo,$hid){
+
                 $data = $reader->get()->toArray(true);
                 $insertData = [];
                 foreach ($data as $key=>$value){
                     foreach ($value as $k=>$v){
-                        if(!isset($v['产品货号']) || empty($v['产品货号']) || $v['产品货号'] == 'null'){
-                            continue;
+                        if(!isset($v['产品货号']) || empty($v['产品货号']) || $v['产品货号'] == 'null' ){
+                            throw new \Exception('产品货号列不存在');
                         }
+                        if(!isset($v['数量']) || empty($v['数量']) || $v['数量'] == 'null' ){
+                            throw new \Exception('数量列不存在');
+                        }
+                        if(!isset($v['价格']) || empty($v['价格']) || $v['价格'] == 'null' ){
+                            throw new \Exception('价格列不存在');
+                        }
+
                         $medicinalinfo = Medicinal::where('medicinalnum', $v['产品货号'])->first();
 
                         $_info = [
-                            'id'=> $medicinalinfo->id,
+                            'medicinalid'=> $medicinalinfo->id,
                             'medicinalnum' => $medicinalinfo->medicinalnum,
-                            'num' => $v['数量']
+                            'num' => $v['数量'],
+                            'buyerid' => $userinfo->id,
+                            'originid' => null,
+                            'originnum' => null
                         ];
                         if(isset($v['赠品货号']) && $v['赠品货号'] != 'null'){
+                            if(!isset($v['赠品数量']) || empty($v['赠品数量']) || $v['赠品数量'] == 'null' ){
+                                throw new \Exception('赠品数量列不存在');
+                            }
                             $giftorigin = Medicinal::where('medicinalnum', $v['赠品货号'])->first();
                             $_info['originid'] = $giftorigin->id;
+                            $_info['originnum'] = $v['赠品数量'];
                         }
                         if($userinfo->type == 2){
                             $price = Hospitalprice::where([['hospitalid',$hid],['medicinalid',$medicinalinfo->id]])->value('price');
                             $_info['price'] = $price;
+                            $_info['hospitalid'] = $hid;
                         }else{
-                            $_info['price'] = $v['price'];
+                            $_info['price'] = $v['价格'];
                         }
                         $insertData[] = $_info;
                     }
