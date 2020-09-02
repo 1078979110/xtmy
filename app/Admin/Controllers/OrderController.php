@@ -91,7 +91,7 @@ class OrderController extends AdminController
                 $tp += $arr[$key]['price_t'];
             }
             $arr[] = ['','','','','','<b>总计</b>','<b>'.$tp.'</b>'];
-            return new Table(['id','药品名称','产品编号','数量','单价','单位','小计'], $arr);
+            return new Table(['id','药品名称','产品编号','单价','单位','数量','小计'], $arr);
         });
         
         $grid->column('buyerid','下单人')->display(function($buyerid){
