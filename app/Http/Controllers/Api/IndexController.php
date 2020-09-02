@@ -355,7 +355,7 @@ class IndexController extends Controller {
 
 	public function searchGift(Request $request){
         $q = $request->q;
-        $lists = Medicinal::where([['status',0],['medicinalnum','like','%'.$q.'%']])->simplePaginate(20);
+        $lists = Medicinal::where([['status',0],['medicinalnum','like','%'.$q.'%']])->simplePaginate(100);
         return $this->successData('赠品搜索页',['data'=>$lists]);
     }
 
@@ -504,29 +504,37 @@ class IndexController extends Controller {
 		$data['buyerid'] = $userinfo['id'];
 		$data['buyertype'] = $userinfo['type'];
 		$orderinfo = [];
+        $giftinfo = [];
 		$total = 0;
 		$totalnum = 0;
 		$lists_arr = json_decode($lists, true);
 		DB::beginTransaction();
 		try{
             foreach ($lists_arr as $key => $val) {
-                $medicinalid = myCart::where('id', $val['id'])->value('medicinalid');
-                $medicinalinfo = Medicinal::find($medicinalid);
-                $price = $val['price'] ? $val['price'] : $medicinalinfo->price;
-                $total += $val['num'] * $price;
-                $totalnum += $val['num'];
+                $cartinfo = myCart::where('id', $val['id'])->first();
+                $total += $cartinfo['price']*$cartinfo['num'];
+                $totalnum += $cartinfo['num'];
+                $medicinalinfo = Medicinal::find($cartinfo['medicinalid']);
                 $info = [
-                    'id' => $medicinalid,
+                    'id'=>$medicinalinfo->id,
                     'medicinal' => $medicinalinfo->medicinal,
-                    'medicinalnum' => $medicinalinfo['medicinalnum'],
-                    'price' => $price,
-                    'unit' => $medicinalinfo['unit'],
-                    'num' => $val['num'],
+                    'medicinalnum' => $medicinalinfo->medicinalnum,
+                    'price'=> $cartinfo->price,
+                    'unit' => $medicinalinfo->unit,
+                    'num' => $cartinfo->num,
                 ];
-                Mycart::where('id', $val['id'])->delete();
                 $orderinfo[] = $info;
+                if($cartinfo->originid){
+                    $ginfo = [
+                        'id'=>$cartinfo->originid,
+                        'num' => $cartinfo->originnum,
+                        'originid'=>$cartinfo->medicinalid
+                    ];
+                    $giftinfo[] = $ginfo;
+                }
+                Mycart::where('id', $val['id'])->delete();
             }
-            $data['gift'] = json_encode($gift);
+            $data['gift'] = json_encode($giftinfo);
             $data['totalprice'] = $total;
             $data['orderinfo'] = json_encode($orderinfo);
             $data['created_at'] = date('Y-m-d H:i:s', time());
