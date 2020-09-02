@@ -343,7 +343,7 @@ class IndexController extends Controller {
 		if (empty($isInCart)) {
 			$data = [
 				'buyerid' => $userinfo['id'],
-				'medicinalnum' => $medicinalnum,
+				'medicinalnum' => Medicinal::where('id', $mid)->value('medicinalnum'),
 				'medicinalid' => $mid,
 				'num' => $num,
 				'price' => $price,
