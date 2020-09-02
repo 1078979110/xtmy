@@ -35,6 +35,21 @@
     		</tr>
     		@endforeach
     		<tr style="line-height: 30px; height: 30px"><td style="border-bottom:1px solid #000;border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="12" >{{$tabletitle[4]}}{{$total}}</td></tr>
+			<tr style="line-height: 30px; height: 30px"><td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="12" align="center">赠品信息</td></tr>
+			<tr style="line-height: 30px; height: 30px">
+				<td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="3">名称</td>
+				<td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="3">产品货号</td>
+				<td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="3">数量</td>
+				<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center" colspan="3">来源</td>
+			</tr>
+			@foreach($gift as $key=>$val)
+				<tr style="line-height: 30px; height: 30px">
+					<td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="3">{{$val['medicinal']}}</td>
+					<td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="3">{{$val['medicinalnum']}}</td>
+					<td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="3">{{$val['num']}}</td>
+					<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center" colspan="3">{{$val['origin']}}</td>
+				</tr>
+			@endforeach
     	</tbody>
     </table>
   </div>

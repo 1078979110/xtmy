@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Medicinal;
 use App\Order;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -89,47 +90,38 @@ class OrderController extends AdminController
                 $arr[$key]['price_t'] = $val['num']*$val['price'];
                 $tp += $arr[$key]['price_t'];
             }
-            $arr[] = ['','','','','','','<b>总计</b>','<b>'.$tp.'</b>'];
-            return new Table(['id','药品名称','产品编号','规格','单位','数量','单价','小计'], $arr);
+            $arr[] = ['','','','','','<b>总计</b>','<b>'.$tp.'</b>'];
+            return new Table(['id','药品名称','产品编号','数量','单价','单位','小计'], $arr);
         });
         
         $grid->column('buyerid','下单人')->display(function($buyerid){
             return Salelist::where('id',$buyerid)->value('name');
         });
-        if($user_roles[0]['id'] != 5){
-            $grid->column('hospital','医院')->display(function($hospital) {
-                return Hospital::where('id',$hospital)->value('hospital');
-            });
-            $grid->column('赠品内容')->display(function($gift)use($user_roles){
-                if(empty($this->gift)){
-                    return '无赠品';
-                }else{
-                  return '<button class="btn btn-primary btn-xs">查看</button>';
+        $grid->column('hospital','医院')->display(function($hospital) {
+            return Hospital::where('id',$hospital)->value('hospital');
+        });
+        $grid->column('赠品内容')->display(function()use($user_roles){
+            if(empty($this->gift) || ($this->gift == 'null')){
+                return '无赠品';
+            }else{
+              return '<button class="btn btn-primary btn-xs">查看</button>';
+            }
+        })->modal('赠品内容',function(){
+            if(!empty($this->gift) && ($this->gift != 'null')){
+                $gift_arr = json_decode($this->gift, true);
+                $s = [];
+                foreach ($gift_arr as $key=>$val){
+                    $medicinalinfo = Medicinal::where('id', $val['id'])->first();
+                    $origin = Medicinal::where('id', $val['origin'])->first();
+                    $s[$key]['id'] = $key+1;
+                    $s[$key]['medicinal'] = $medicinalinfo->medicinal;
+                    $s[$key]['medicinalnum'] = $medicinalinfo->medicinalnum;
+                    $s[$key]['num'] = $val['num'];
+                    $s[$key]['origin'] = $origin->medicinal.'/'.$origin->medicinalnum;
                 }
-            })->modal('赠品内容',function(){
-                if(!empty($this->gift)){
-                    $gift_arr = json_decode($this->gift, true);
-                    foreach ($gift_arr as $key=>$val){
-                        $gift_arr[$key]['id'] = $key+1;
-                    }
-                    return new Table(['ID','名称','规格', '数量'],$gift_arr);
-                }
-            });
-                $grid->column('gift','赠品')->display(function($gift)use($user_roles){
-                if($this->orderstatus ==1){
-                    if($user_roles[0]['id'] == 4){
-                        $js = <<<EOT
-                            $(".gift").click(function(){
-                                id = $(this).attr('data-id');
-                                window.location.href="/admin/api/gifts?id="+id
-                            });
-EOT;
-                        Admin::script($js);
-                        return '<span><button class="btn btn-primary btn-xs gift" data-id="'.$this->id.'">去设置</button></span>';
-                    }
-                }
-            });
-        }
+                return new Table(['ID','名称','产品货号', '数量','赠品来源'],$s);
+            }
+        });
         $grid->column('created_at','下单时间');
         $grid->column('orderstatus','订单状态')->display(function($orderstatus) use($user_roles){
             $js = <<<EOT

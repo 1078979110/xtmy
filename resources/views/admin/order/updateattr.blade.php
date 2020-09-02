@@ -12,7 +12,7 @@
                     @foreach($products as $key => $product)
                         <tr>
                             <td>{{$product['medicinal']}}</td>
-                            <td>{{$product['specification']}}</td>
+                            <td>{{$product['medicinalnum']}}</td>
                             <td>{{$product['num']}}
                             <td>{{$product['price']}}</td>
                             <td><input type="text" name="info[{{$product['id']}}][batchnumber]" value="{{$product['batchnumber']}}" class="form-control"></td>

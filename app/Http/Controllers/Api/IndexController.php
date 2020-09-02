@@ -18,13 +18,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class IndexController extends Controller {
 	use AuthenticatesUsers;
 	public $user;
 	public $hospital;
 	public function __construct(Request $request) {
-		$this->user = Auth::guard('api')->user();
+		$this->user = Auth::user();
 		if (empty($this->user)) {
 			return $this->errorData('请登录');
 		}
@@ -57,7 +58,7 @@ class IndexController extends Controller {
 		$userinfo = $this->checkSession();
 		if ($this->attemptLogin($request)) {
 			$user = $this->guard()->user();
-			$user->generateToken();
+            $user->generateToken();
 			$status = Salelist::where('telephone', request()->get('telephone'))->value('status');
 			if($status ==1){
                 $user->api_token = null;
@@ -65,9 +66,9 @@ class IndexController extends Controller {
 			    return $this->errorData('该账号已被冻结');
             }
             $user->type = Salelist::where('telephone', request()->get('telephone'))->value('type');
-            session()->put('user.info', $user->toArray());
-            $this->user = $user;
-			return $this->successData('登陆成功', ['user' => session('user.info')]);
+            $userinfo = Auth::user();
+            $this->user = $userinfo;
+            return $this->successData('登陆成功', ['user' => $userinfo]);
 		}
 		return $this->errorData('登陆失败');
 	}
@@ -114,8 +115,6 @@ class IndexController extends Controller {
 		if (empty($hospitalinfo)) {
 			return $this->errorData('不存在的数据');
 		}
-		$this->hospital = $hospitalinfo;
-		session()->put('user.hospital', $hospitalinfo->toArray());
 		return $this->successData('选择医院成功', ['hospital' => $hospitalinfo]);
 	}
 
@@ -232,7 +231,7 @@ class IndexController extends Controller {
 				}
 			})->paginate(20);
 		$data = $data->toArray(true);
-		$this->user = $this->checkSession();
+		$userinfo = $this->checkSession();
 		foreach ($data['data'] as $key => $value) {
 			$data['data'][$key]['line'] = Productline::where('id', $value['line_id'])->value('linename');
 			$data['data'][$key]['category'] = Category::where('id', $value['category_id'])->value('categoryname');
@@ -242,12 +241,12 @@ class IndexController extends Controller {
 			$data['data'][$key]['stocks'] = $value['stock'];
 		}
 
-		if (isset($this->user['type']) &&$this->user['type'] == 2) {
+		if (isset($userinfo->type) &&$userinfo->type == 2) {
 			//医院用获取医院价格
 			if ($request['hid']) {
-				$this->hospital = Hospital::find($request['hid']);
+				$hospital = Hospital::find($request['hid']);
 				foreach ($data['data'] as $key => $val) {
-					$price = Hospitalprice::where([['hospitalid', $this->hospital['id']], ['medicinalid', $val['id']]])->value('price');
+					$price = Hospitalprice::where([['hospitalid', $hospital->id], ['medicinalid', $val['id']]])->value('price');
 					$data['data'][$key]['price'] = $price;
 				}
 			}
@@ -262,30 +261,34 @@ class IndexController extends Controller {
 		$request = request();
 		$hid = isset($request['hid']) ? $request['hid'] : 0;
 		$userinfo = $this->checkSession();
+        if (isset($userinfo->type) && $userinfo->type == 2) {
+            if ($hid == 0) {
+                return $this->successData('请选择医院',['cart'=>[]]);
+            }
+        }
 		$hospitalinfo = [];
-		$lists = Mycart::where('buyerid', $userinfo['id'])->where(function ($model) use ($userinfo, $hid) {
-
-			if (isset($userinfo['type']) && $userinfo['type'] == 2) {
+		$lists = Mycart::where('buyerid', $userinfo->id)->where(function ($model) use ($userinfo, $hid) {
+			if (isset($userinfo->type) && $userinfo->type == 2) {
 				if ($hid != 0) {
 					$hospitalinfo = Hospital::find($hid);
-				} else {
-					$hospitalinfo = session('user.hospital');
-				}
-				$model->where('hospitalid', $hospitalinfo['id']);
+				}else{
+                    return $this->successData('请选择医院',['cart'=>[]]);
+                }
+				$model->where('hospitalid', $hospitalinfo->id);
 			}
 		})->get();
 		$data = [];
 		foreach ($lists as $key => $value) {
 			$medicinalinfo = Medicinal::where('id', $value['medicinalid'])->get(['id', 'producer_id', 'medicinal', 'unit'])->first()->toArray(true);
 			$producer = Producer::where('id', $medicinalinfo['producer_id'])->value('name');
-            if (isset($userinfo['type']) && $userinfo['type'] == 2) {
+            if (isset($userinfo->type) && $userinfo->type == 2) {
 
                 if ($hid != 0) {
 					$hospitalinfo = Hospital::find($hid);
-				} else {
-					$hospitalinfo = session('user.hospital');
-				}
-				$price = Hospitalprice::where('hospitalid', $hospitalinfo['id'])->where('medicinalid', $medicinalinfo['id'])->value('price');
+				}else{
+                    return $this->successData('请选择医院',['cart'=>[]]);
+                }
+				$price = Hospitalprice::where('hospitalid', $hospitalinfo->id)->where('medicinalid', $medicinalinfo['id'])->value('price');
 			} else {
 				$price = $value['price'];
 			}
@@ -308,25 +311,25 @@ class IndexController extends Controller {
 		$userinfo = $this->checkSession();
 		$request = request();
 		$mid = $request['mid'];
-		$specification = $request['specification'];
+		$medicinalnum = $request['medicinalnum'];
 		$num = $request['num'];
-        if (isset($userinfo['type']) && $userinfo['type'] == 2) {
+        if (isset($userinfo->type) && $userinfo->type == 2) {
 
             if ($request['hid']) {
 				$hospitalinfo = Hospital::find($request['hid']);
 			} else {
-				$hospitalinfo = session('user.hospital');
+				return $this->successData('请选择医院',['cart'=>[]]);
 			}
-			$price = Hospitalprice::where([['hospitalid', $hospitalinfo['id']], ['medicinalid', $mid]])->value('price');
+			$price = Hospitalprice::where([['hospitalid', $hospitalinfo->id], ['medicinalid', $mid]])->value('price');
 		} else {
 			$price = $request['price'];
 		}
-		$isInCart = Mycart::where('buyerid', $userinfo['id'])->where('medicinalid', $mid)->first();
+		$isInCart = Mycart::where('buyerid', $userinfo['id'])->where([['medicinalid', $mid],['price',$price]])->first();
 
 		if (empty($isInCart)) {
 			$data = [
 				'buyerid' => $userinfo['id'],
-				'specification' => $specification,
+				'medicinalnum' => $medicinalnum,
 				'medicinalid' => $mid,
 				'num' => $num,
 				'price' => $price,
@@ -336,7 +339,7 @@ class IndexController extends Controller {
 			}
 			$result = Mycart::insert($data);
 		} else {
-			$result = Mycart::where('buyerid', $userinfo['id'])->where('medicinalid', $mid)->update(['num' => $num + $isInCart['num']]);
+			$result = Mycart::where('buyerid', $userinfo['id'])->where([['medicinalid', $mid],['price',$price]])->update(['num' => $num + $isInCart['num']]);
 		}
 
 		if ($result) {
@@ -375,6 +378,61 @@ class IndexController extends Controller {
 		return $this->successData('删除成功!', []);
 	}
 
+	public function importCart(Request $request){
+	    $userinfo = $this->checkSession();
+	    if($userinfo->type == 2){
+	        $hid = $request->hid;
+	        if(!$hid){
+                throw new \Exception('请选择医院后再导入');
+            }
+        }
+	    $File = $request->file('file');
+	    $option = ['xls','xlsx'];
+        $fileExtension = $File->getClientOriginalExtension();
+        if (!in_array($fileExtension, $option)) {
+            throw new \Exception('文件类型不正确，只能上传.xls或者.xlsx后缀的文件');
+        }
+        $tmpFile = $File->getRealPath();
+        if (!is_uploaded_file($tmpFile)) {
+            throw new \Exception('非法上传途径');
+        }
+        $fileName = date('Y_m_d') . '/' . md5(time()) . mt_rand(0, 9999) . '.' . $fileExtension;
+        Storage::disk('public')->put($fileName, file_get_contents($tmpFile));
+        if (!is_file($fileName)) {
+            throw new \Exception('文件上传失败！');
+        }
+        try{
+            Excel::load($fileName, function($reader)use($userinfo,$hid){
+                $data = $reader->get()->toArray(true);
+                $insertData = [];
+                foreach ($data as $key=>$value){
+                    foreach ($value as $k=>$v){
+                        $medicinalinfo = Medicinal::where('medicinalnum', $v['产品货号'])->first();
+                        $giftorigin = Medicinal::where('medicinalnum', $v['赠品货号'])->first();
+                        $_info = [
+                            'id'=> $medicinalinfo->id,
+                            'medicinalnum' => $medicinalinfo->medicinalnum,
+                            'num' => $v['数量'],
+                            'originid'=> $giftorigin->id
+                        ];
+                        if($userinfo->type == 2){
+                            $price = Hospitalprice::where([['hospitalid',$hid],['medicinalid',$giftorigin->id]])->value('price');
+                            $_info['price'] = $price;
+                        }else{
+                            $_info['price'] = $v['price'];
+                        }
+                        $insertData[] = $_info;
+                    }
+                }
+                DB::table('mycart')->insert($insertData);
+                return $this->successData('导入成功',[]);
+            });
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
+
+    }
+
 	/**
 	 * 下单
 	 */
@@ -382,21 +440,22 @@ class IndexController extends Controller {
 		$userinfo = $this->checkSession();
 		$request = request();
 		$lists = $request['data'];
+		$gift = $request->gift;
 		$data = [];
 		$data['orderid'] = date('Ymd', time()) . rand(1000, 9999);
 		$data['ordermonth'] = date('Ym', time());
-        if (isset($userinfo['type']) && $userinfo['type'] == 2) {
+        if (isset($userinfo->type) && $userinfo->type == 2) {
 
             $data['orderstatus'] = 1;
 			$hid = $request['hid'];
 			if ($hid) {
 				$hospitalinfo = Hospital::find($hid);
 			} else {
-				$hospitalinfo = session('user.hospital');
+                return $this->successData('请选择医院',['cart'=>[]]);
 			}
-			$data['hospital'] = $hospitalinfo['id'];
+			$data['hospital'] = $hospitalinfo->id;
 		} else {
-			$data['orderstatus'] = 2;
+			$data['orderstatus'] = 3;
 		}
 		$data['buyerid'] = $userinfo['id'];
 		$data['buyertype'] = $userinfo['type'];
@@ -409,13 +468,13 @@ class IndexController extends Controller {
             foreach ($lists_arr as $key => $val) {
                 $medicinalid = myCart::where('id', $val['id'])->value('medicinalid');
                 $medicinalinfo = Medicinal::find($medicinalid);
-                $price = $val['price'] ? $val['price'] : $medicinalinfo['price'];
+                $price = $val['price'] ? $val['price'] : $medicinalinfo->price;
                 $total += $val['num'] * $price;
                 $totalnum += $val['num'];
                 $info = [
                     'id' => $medicinalid,
-                    'medicinal' => $medicinalinfo['medicinal'],
-                    'specification' => $medicinalinfo['specification'],
+                    'medicinal' => $medicinalinfo->medicinal,
+                    'medicinalnum' => $medicinalinfo['medicinalnum'],
                     'price' => $price,
                     'unit' => $medicinalinfo['unit'],
                     'num' => $val['num'],
@@ -423,7 +482,7 @@ class IndexController extends Controller {
                 Mycart::where('id', $val['id'])->delete();
                 $orderinfo[] = $info;
             }
-
+            $data['gift'] = json_encode($gift);
             $data['totalprice'] = $total;
             $data['orderinfo'] = json_encode($orderinfo);
             $data['created_at'] = date('Y-m-d H:i:s', time());
@@ -447,7 +506,7 @@ class IndexController extends Controller {
 	 */
 	public function myOrder() {
 		$userinfo = $this->checkSession();
-		$lists = Order::where('buyerid', $userinfo['id'])->orderBy('id', 'desc')->get(['id', 'orderid', 'orderinfo', 'totalprice', 'orderstatus', 'created_at'])->toArray(true);
+		$lists = Order::where('buyerid', $userinfo->id)->orderBy('id', 'desc')->get(['id', 'orderid', 'orderinfo', 'totalprice', 'orderstatus', 'created_at'])->toArray(true);
 		return $this->successData('订单', ['order' => $lists]);
 	}
 
@@ -455,7 +514,7 @@ class IndexController extends Controller {
 		$request = request();
 		$id = $request['oid'];
 		$orderInfo = Order::where('id', $id)->first();
-		$order_arr = json_decode($orderInfo['orderinfo'], true);
+		$order_arr = json_decode($orderInfo->orderinfo, true);
 		$total = 0;
 		$totalnum = 0;
 		foreach ($order_arr as $key => $value) {
@@ -484,9 +543,9 @@ class IndexController extends Controller {
 		if (!Hash::check($password, $userinfo['password'])) {
 			return $this->errorData('原密码不正确');
 		}
-		Salelist::where('id', $userinfo['id'])->update(['password' => bcrypt($newpassword)]);
-		DB::table('admin_users')->where('username', $userinfo['telephone'])->update(['password' => bcrypt($newpassword)]);
-		$userinfo = Salelist::where('id', $userinfo['id'])->get()->toArray(true);
+		Salelist::where('id', $userinfo->id)->update(['password' => bcrypt($newpassword)]);
+		$userinfo = Auth::user();
+		$userinfo->password = bcrypt($newpassword);
 		return $this->successData('修改成功', ['user' => $userinfo]);
 	}
 
