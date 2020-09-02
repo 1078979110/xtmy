@@ -407,16 +407,22 @@ class IndexController extends Controller {
                 $insertData = [];
                 foreach ($data as $key=>$value){
                     foreach ($value as $k=>$v){
+                        if(!isset($v['产品货号']) || empty($v['产品货号']) || $v['产品货号'] == 'null'){
+                            continue;
+                        }
                         $medicinalinfo = Medicinal::where('medicinalnum', $v['产品货号'])->first();
-                        $giftorigin = Medicinal::where('medicinalnum', $v['赠品货号'])->first();
+
                         $_info = [
                             'id'=> $medicinalinfo->id,
                             'medicinalnum' => $medicinalinfo->medicinalnum,
-                            'num' => $v['数量'],
-                            'originid'=> $giftorigin->id
+                            'num' => $v['数量']
                         ];
+                        if(isset($v['赠品货号']) && $v['赠品货号'] != 'null'){
+                            $giftorigin = Medicinal::where('medicinalnum', $v['赠品货号'])->first();
+                            $_info['originid'] = $giftorigin->id;
+                        }
                         if($userinfo->type == 2){
-                            $price = Hospitalprice::where([['hospitalid',$hid],['medicinalid',$giftorigin->id]])->value('price');
+                            $price = Hospitalprice::where([['hospitalid',$hid],['medicinalid',$medicinalinfo->id]])->value('price');
                             $_info['price'] = $price;
                         }else{
                             $_info['price'] = $v['price'];
