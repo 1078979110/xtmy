@@ -313,13 +313,14 @@ class IndexController extends Controller {
 		$request = request();
 		$mid = $request['mid'];
 		$medicinalnum = $request['medicinalnum'];
+		$originid = isset($request['originid'])?$request['originid']:null;
+		$originnum = isset($request['originnum'])?$request['originnum']:null;
 		$num = $request['num'];
         if (isset($userinfo->type) && $userinfo->type == 2) {
-
             if ($request['hid']) {
 				$hospitalinfo = Hospital::find($request['hid']);
 			} else {
-				return $this->successData('请选择医院',['cart'=>[]]);
+				return $this->errorData('请选择医院',['cart'=>[]]);
 			}
 			$price = Hospitalprice::where([['hospitalid', $hospitalinfo->id], ['medicinalid', $mid]])->value('price');
 		} else {
@@ -333,7 +334,9 @@ class IndexController extends Controller {
 				'medicinalnum' => $medicinalnum,
 				'medicinalid' => $mid,
 				'num' => $num,
-				'price' => $price
+				'price' => $price,
+                'originid'=>$originid,
+                'originnum' => $originnum
 			];
 			if ($request['hid']) {
 				$data['hospitalid'] = $hospitalinfo['id'];
@@ -423,9 +426,8 @@ class IndexController extends Controller {
         }
         try{
             Excel::load($realfile, function($reader)use($userinfo,$hid){
-
-                $data = $reader->get()->toArray(true);
                 $insertData = [];
+                $data = $reader->get()->toArray(true);
                 foreach ($data as $key=>$value){
                     foreach ($value as $k=>$v){
                         if(!isset($v['产品货号']) || empty($v['产品货号']) || $v['产品货号'] == 'null' ){
@@ -448,15 +450,15 @@ class IndexController extends Controller {
                             'originid' => null,
                             'originnum' => null
                         ];
-                        if(isset($v['赠品货号']) && $v['赠品货号'] != 'null'){
-                            if(!isset($v['赠品数量']) || empty($v['赠品数量']) || $v['赠品数量'] == 'null' ){
-                                throw new \Exception('赠品数量列不存在');
-                            }
-                            $giftorigin = Medicinal::where('medicinalnum', $v['赠品货号'])->first();
-                            $_info['originid'] = $giftorigin->id;
-                            $_info['originnum'] = $v['赠品数量'];
-                        }
                         if($userinfo->type == 2){
+                            if(isset($v['赠品货号']) && $v['赠品货号'] != 'null'){
+                                if(!isset($v['赠品数量']) || empty($v['赠品数量']) || $v['赠品数量'] == 'null' ){
+                                    throw new \Exception('赠品数量列不存在');
+                                }
+                                $giftorigin = Medicinal::where('medicinalnum', $v['赠品货号'])->first();
+                                $_info['originid'] = $giftorigin->id;
+                                $_info['originnum'] = $v['赠品数量'];
+                            }
                             $price = Hospitalprice::where([['hospitalid',$hid],['medicinalid',$medicinalinfo->id]])->value('price');
                             $_info['price'] = $price;
                             $_info['hospitalid'] = $hid;
@@ -467,9 +469,9 @@ class IndexController extends Controller {
                     }
                 }
                 DB::table('mycart')->insert($insertData);
-                return $this->successData('导入成功',[]);
             });
-        }catch (\Exception $e){
+            return $this->successData('导入成功',[]);
+        }catch(\Exception $e){
             return $e->getMessage();
         }
 
