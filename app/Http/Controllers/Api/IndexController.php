@@ -296,10 +296,14 @@ class IndexController extends Controller {
 			$data[] = [
 				'id' => $value['id'],
 				'medicinalid' => $value['medicinalid'],
-				'name' => $producer . ' ' . $medicinalinfo['medicinal'] . $value['specification'],
+				'name' => $producer . ' ' . $medicinalinfo['medicinal'] . $value['medicinalnum'],
 				'price' => $price,
 				'unit' => $medicinalinfo['unit'],
 				'num' => $value['num'],
+                'gift'=>[
+                    'originname'=>Medicinal::where('id',$value['originid'])->value('medicinal'),
+                    'originnum' => $value['originnum']
+                ]
 			];
 		}
 		return $this->successData('购物车', ['cart' => $data]);
