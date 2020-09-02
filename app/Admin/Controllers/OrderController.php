@@ -85,13 +85,19 @@ class OrderController extends AdminController
         })->modal('订单内容',function(){
             $arr = json_decode($this->orderinfo, true);
             $tp = 0;
+            $sarr = [];
             foreach ($arr as $key =>$val){
-                $arr[$key]['id'] = $key+1;
-                $arr[$key]['price_t'] = $val['num']*$val['price'];
-                $tp += $arr[$key]['price_t'];
+                $sarr[$key]['id'] = $key+1;
+                $sarr[$key]['medicinal'] = $val['medicinal'];
+                $sarr[$key]['medicinalnum'] = $val['medicinalnum'];
+                $sarr[$key]['price'] = $val['price'];
+                $sarr[$key]['unit'] = $val['unit'];
+                $sarr[$key]['num'] = $val['num'];
+                $sarr[$key]['price_t'] = $val['num']*$val['price'];
+                $tp += $sarr[$key]['price_t'];
             }
             $arr[] = ['','','','','','<b>总计</b>','<b>'.$tp.'</b>'];
-            return new Table(['id','药品名称','产品编号','单价','单位','数量','小计'], $arr);
+            return new Table(['id','药品名称','产品货号','单价','单位','数量','小计'], $sarr);
         });
         
         $grid->column('buyerid','下单人')->display(function($buyerid){
