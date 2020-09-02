@@ -311,6 +311,12 @@ class IndexController extends Controller {
 		return $this->successData('购物车', ['cart' => $data]);
 	}
 
+	public function delGift(Request $request){
+	    $carid = $request->id;
+	    DB::table('mycart')->where('id',$carid)->update(['originid'=>null,'originnum'=>null]);
+	    return $this->successData('删除成功',[]);
+    }
+
 	/**
 	 * 添加购物车
 	 */

@@ -72,6 +72,8 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('addgift','IndexController@addGift');
         //赠品搜索
         Route::get('searchgift', 'IndexController@searchGift');
+        //删除赠品
+        Route::get('delgift', 'IndexController@delGift');
 
 	});
 });
