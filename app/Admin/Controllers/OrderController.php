@@ -110,14 +110,16 @@ class OrderController extends AdminController
             if(!empty($this->gift) && ($this->gift != 'null')){
                 $gift_arr = json_decode($this->gift, true);
                 $s = [];
-                if(sizeof($gift_arr)>0){
-                    foreach ($gift_arr as $key=>$val){
-                        $medicinalinfo = Medicinal::where('id', $val['id'])->first();
-                        $origin = Medicinal::where('id', $val['origin'])->first();
-                        $s[$key]['id'] = $key+1;
-                        $s[$key]['medicinal'] = $medicinalinfo->medicinal;
-                        $s[$key]['medicinalnum'] = $medicinalinfo->medicinalnum;
-                        $s[$key]['num'] = $val['num'];
+                foreach ($gift_arr as $key=>$val){
+                    $medicinalinfo = Medicinal::where('id', $val['id'])->first();
+
+                    $s[$key]['id'] = $key+1;
+                    $s[$key]['medicinal'] = $medicinalinfo->medicinal;
+                    $s[$key]['medicinalnum'] = $medicinalinfo->medicinalnum;
+                    $s[$key]['num'] = $val['num'];
+                    $s[$key]['origin'] = '';
+                    if(isset($val['originid'])){
+                        $origin = Medicinal::where('id', $val['originid'])->first();
                         $s[$key]['origin'] = $origin->medicinal.'/'.$origin->medicinalnum;
                     }
                 }
