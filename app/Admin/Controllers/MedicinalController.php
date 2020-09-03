@@ -36,7 +36,7 @@ class MedicinalController extends AdminController
         $grid->filter(function($filter){
             $filter->disableIdFilter();
             $filter->like('medicinal','药品名称');
-            $filter->like('meidicinalnum','产品货号');
+            $filter->like('medicinalnum','产品货号');
             $producer = Producer::pluck('name','id');
             $filter->equal('producer_id','厂家')->select($producer);
         });
