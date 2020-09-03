@@ -82,7 +82,12 @@ class MedicinalController extends AdminController
             }
         });
         $grid->column('storagecondition','存储条件');
-        $grid->column('status','状态')->display(function($status){
+        $state = [
+            'on'=>['value'=>0, 'text'=>'上架','color'=>'success'],
+            'off'=> ['value'=>1, 'text'=> '下架','color'=> 'danger']
+        ];
+        $grid->column('status','状态')->switch($state);
+        /*$grid->column('status','状态')->display(function($status){
             $js = <<<SCRIPT
             $(".changeup").click(function(){
                 var id = $(this).attr("data-id");
@@ -115,7 +120,7 @@ SCRIPT;
             $str = ($status==1)?'<button class="btn btn-warning btn-xs">已下架</button>':'<button class="btn btn-info btn-xs">已上架</button>';
             $str .= ($status==1)?'<a href="javascript:void(0)" data-id="'.$this->id.'" data-status="'.$this->status.'" class="changeup">上架</a>':'<a href="javascript:void(0)" data-id="'.$this->id.'" data-status="'.$this->status.'" class="changedown">下架</a>';
             return $str;
-        });
+        });*/
         $grid->exporter('MyCsvExporter');
         $grid->disableRowSelector();
         $grid->disableColumnSelector();
@@ -169,7 +174,7 @@ SCRIPT;
     {
         $form = new Form(new Medicinal());
         $form->text('medicinal','器械名称');
-        $form->text('medicinalnum','货号');
+        $form->text('medicinalnum','产品货号');
         $form->text('manufacturinglicense','许可证号');
         $form->select('producer_id', '厂家')->options(function(){
             return Productline::getProducerIdName();
@@ -189,7 +194,11 @@ SCRIPT;
         $form->text('registnum','注册证号');
         $form->date('registivalidate','注册证失效日期')->format('YYYY-MM-DD');
         $form->text('storagecondition','储存条件');
-
+        $state = [
+            'on'=>['value'=>0, 'text'=>'上架','color'=>'success'],
+            'off'=> ['value'=>1, 'text'=> '下架','color'=> 'danger']
+        ];
+        $form->switch('status','状态')->states($state);
         $form->tools(function (Form\Tools $tools) {
             $tools->disableList();
             $tools->disableDelete();
