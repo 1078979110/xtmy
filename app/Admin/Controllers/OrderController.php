@@ -39,33 +39,10 @@ class OrderController extends AdminController
         if($user_roles[0]['id'] ==4 || $user_roles[0]['id'] ==5){//如果是销售人员（包括经销商）则只能查询自己名下的订单，其他分组不受限制
             $grid->model()->where('buyerid',$buyerid);
         }
-        /*
-        $grid->quickSearch(function($model, $query) use ($user_roles, $buyerid){
-            if($query == '医院'){
-                $type = 2;
-            }elseif($query == '经销商'){
-                $type = 1;
-            }
-            $hospitalid = Hospital::where('hospital','like','%'.$query.'%')->value('id');
-            $bid = Salelist::where('name','like','%'.$query.'%')->orWhere('telephone',$query)->value('id');
-            if(isset($type)){//订单类型
-                $model->where('buyertype',$type);
-            }else if($hospitalid !=''){//医院
-                $model->where('hospital', $hospitalid);
-            }else if($bid != ''){//下单人或下单人电话
-                $model->where('buyerid',$bid);
-            }else{//订单号
-                $model->where('orderid','like','%'.$query.'%');
-            }
-        }); */
         
         $grid->filter(function($filter)use($user_roles){
             $filter->disableIdFilter();
             $filter->like('orderid','订单号');
-            /*$filter->where(function($query){
-                $buyerid = Salelist::where('telephone',$this->input)->value('id');
-                $query->where('buyerid',$buyerid);
-            },'手机号');*/
             $filter->where(function($query){
                 $buyerid = Salelist::where('name',$this->input)->value('id');
                 $query->where('buyerid',$buyerid);
@@ -169,8 +146,8 @@ class OrderController extends AdminController
             });
 EOT;
             $str = '';
-            $button_ = ['待确认','待报价','待报价','待审核','待发货','已完成','已完成'];
-            if($user_roles[0]['id'] == 4){//业务员组
+            $button_ = ['待确认','待报价','待报价','待审核','待发货','已完成','已出库'];
+            /*if($user_roles[0]['id'] == 4){//业务员组
                 if($orderstatus ==1){
                     $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button> | <button class="btn btn-warning btn-xs comfirmorder" data-id="'.$this->id.'">确认订单</button>';
                 }else{
@@ -182,7 +159,7 @@ EOT;
                 }else{
                     $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button>';
                 }
-            }else if($user_roles[0]['id'] == 6){//批发部
+            }else*/ if($user_roles[0]['id'] == 6){//批发部
                 if($orderstatus == 3 || $orderstatus ==2){
                     $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button> | <button class="btn btn-warning btn-xs comfirmorder" data-id="'.$this->id.'">确认报价</button> | <button class="btn btn-danger btn-xs changeprice" data-id="'.$this->id.'">改价</button>';
                 }else{
@@ -197,10 +174,10 @@ EOT;
             }else if($user_roles[0]['id'] == 8){//仓库
                 if($orderstatus ==5){
                     $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button> | <button class="btn btn-warning btn-xs updateattr" data-id="'.$this->id.'">补充信息</button> | <button class="btn btn-warning btn-xs comfirmorder" data-id="'.$this->id.'">确认发货</button>';
-                }else if( $orderstatus >= 6 ){//确定发货，打印出货单
+                }else if( $orderstatus == 6 ){//确定发货，打印出货单
                     $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button> | <button class="btn btn-warning btn-xs updateattr" data-id="'.$this->id.'">补充信息</button> | <button class="btn btn-warning btn-xs print" data-type="'.$this->buyertype.'" data-id="'.$this->id.'">打印出货单</button>';
                 }else{
-                    $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button>';
+                    $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus].'</button>';
                 }
             }else{
                 $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button>';

@@ -2,13 +2,15 @@
 
 namespace App\Admin\Controllers;
 
+use App\Hospitalprice;
 use App\Salelist;
+use Encore\Admin\Widgets\Table;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use App\Usertype;
-use Illuminate\Support\Facades\Hash;
+use App\Hospital;
 class SalelistController extends AdminController
 {
     /**
@@ -37,6 +39,12 @@ class SalelistController extends AdminController
         $grid->column('telephone','手机号');
         $grid->column('type','销售类型')->display(function($type){
             return Salelist::getTypeNameByTypeId($type);
+        });
+        $grid->column('名下医院')->display(function(){
+            return '查看';
+        })->expand(function(){
+            $list = Hospital::where('belongto', $this->id)->get(['hospital', 'contactman','telephone','address'])->toArray(true);
+            return new Table(['医院', '联系人', '联系电话', '地址'], $list);
         });
         $state = [
             'on'=>['value'=>0,'text'=>'正常', 'color'=>'success'],

@@ -39,6 +39,7 @@ class PrintsController extends AdminController{
             $totalprice +=  $val['num']*$val['price'];
             $t_ = [
                 'medicinal' => $medicinal['medicinal'],
+                'medicinalnum' => $medicinal['medicinalnum'],
                 'specification' => $medicinal['specification'],
                 'unit' => $medicinal['unit'],
                 'num' => $val['num'],
@@ -57,7 +58,7 @@ class PrintsController extends AdminController{
         $gifts = [];
         foreach ($gift_arr as $key => $arr){
             $medicinalinfo = Medicinal::where('id', $arr['id'])->first();
-            $origin = Medicinal::where('id', $arr['origin'])->first();
+            $origin = Medicinal::where('id', $arr['originid'])->first();
             $info = [
                 'medicinal' => $medicinalinfo->medicinal,
                 'medicinalnum' => $medicinalinfo->medicinalnum,
@@ -204,7 +205,7 @@ class PrintsController extends AdminController{
         $gifts = [];
         foreach ($gift_arr as $key => $arr){
             $medicinalinfo = Medicinal::where('id', $arr['id'])->first();
-            $origin = Medicinal::where('id', $arr['origin'])->first();
+            $origin = Medicinal::where('id', $arr['originid'])->first();
             $info = [
                 'medicinal' => $medicinalinfo->medicinal,
                 'medicinalnum' => $medicinalinfo->medicinalnum,

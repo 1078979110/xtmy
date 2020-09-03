@@ -90,7 +90,6 @@ class IndexController extends Controller {
 				return $userinfo;
 			}
 		} else {
-            $userinfo = Salelist::where('api_token', $request->telephone)->first();
 			return $userinfo;
 		}
 	}
