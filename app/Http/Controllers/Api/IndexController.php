@@ -597,6 +597,7 @@ class IndexController extends Controller {
 	}
 
 	public function orderInfo() {
+        $userinfo = $this->checkSession();
 		$request = request();
 		$id = $request['oid'];
 		$orderInfo = Order::where('id', $id)->first();
@@ -617,6 +618,7 @@ class IndexController extends Controller {
 	}
 
 	public function confirmOrder(){
+        $userinfo = $this->checkSession();
 	    $request = request();
 	    $orderid = $request->id;
 	    DB::table('orders')->where('id', $orderid)->update(['orderstatus'=>3,'updated_at'=>date('Y-m-d H:i:s', time())]);
