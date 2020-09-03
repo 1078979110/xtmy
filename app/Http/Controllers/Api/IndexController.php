@@ -616,6 +616,13 @@ class IndexController extends Controller {
 		}
 	}
 
+	public function confirmOrder(){
+	    $request = request();
+	    $orderid = $request->id;
+	    DB::table('orders')->where('id', $orderid)->update(['orderstatus'=>3,'updated_at'=>date('Y-m-d H:i:s', time())]);
+	    return $this->successData('确认订单',[]);
+    }
+
 	/**
 	 * 修改密码
 	 * @return number[]|unknown[]

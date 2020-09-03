@@ -11,7 +11,7 @@
 				<tr>
 				<td>{{$in['id']}}<input type="hidden" value="{{$in['id']}}" name="info[{{$i}}][id]"></td>
 				<td>{{$in['medicinal']}}<input type="hidden" value="{{$in['medicinal']}}" name="info[{{$i}}][medicinal]"></td>
-				<td>{{$in['specification']}}<input type="hidden" value="{{$in['specification']}}" name="info[{{$i}}][specification]"></td>
+				<td>{{$in['medicinalnum']}}<input type="hidden" value="{{$in['medicinalnum']}}" name="info[{{$i}}][medicinalnum]"></td>
 				<td>{{$in['num']}}<input type="hidden" value="{{$in['num']}}" name="info[{{$i}}][num]"></td>
 				<td>{{$in['unit']}}<input type="hidden" value="{{$in['unit']}}" name="info[{{$i}}][unit]"></td>
 				<td><input type="text" value="{{$in['price']}}" name="info[{{$i}}][price]" class="form-control"></td></tr>

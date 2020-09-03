@@ -74,7 +74,7 @@ class OrderController extends AdminController
                     $sarr[$key]['price_t'] = $val['num'] * $val['price'];
                     $tp += $sarr[$key]['price_t'];
                 }
-                $arr[] = ['', '', '', '', '', '<b>总计</b>', '<b>' . $tp . '</b>'];
+                $sarr[] = ['', '', '', '', '', '<b>总计</b>', '<b>' . $tp . '</b>'];
                 return new Table(['id', '药品名称', '产品货号', '单价', '单位', '数量', '小计'], $sarr);
             }
         });
