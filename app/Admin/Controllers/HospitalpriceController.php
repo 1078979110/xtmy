@@ -31,7 +31,7 @@ class HospitalpriceController extends AdminController
 
         $grid->filter(function($filter){
             $hospital = Hospital::pluck('hospital','id');
-            $filter->equal('specification','规格型号');
+            $filter->equal('medicinalnum','产品货号');
             $filter->equal('hospitalid','医院')->select($hospital);
         });
         
