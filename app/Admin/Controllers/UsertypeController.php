@@ -34,6 +34,7 @@ class UsertypeController extends AdminController
         $grid->disableExport();
         $grid->disableRowSelector();
         $grid->disableColumnSelector();
+        $grid->disableActions();
         return $grid;
     }
 
