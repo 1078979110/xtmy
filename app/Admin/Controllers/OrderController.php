@@ -105,7 +105,7 @@ class OrderController extends AdminController
                         $s[$key]['origin'] = $origin->medicinal.'/'.$origin->medicinalnum;
                     }
                 }
-                return new Table(['ID','名称','产品货号', '数量','赠品来源'],$s);
+                return new Table(['ID','赠品名称','赠品货号', '赠品数量','赠品来源'],$s);
             }
         });
         $grid->column('created_at','下单时间');

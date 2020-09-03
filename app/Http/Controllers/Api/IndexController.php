@@ -571,7 +571,23 @@ class IndexController extends Controller {
 	 */
 	public function myOrder() {
 		$userinfo = $this->checkSession();
-		$lists = Order::where('buyerid', $userinfo->id)->orderBy('id', 'desc')->get(['id', 'orderid', 'orderinfo', 'totalprice', 'orderstatus', 'created_at'])->toArray(true);
+		//DB::connection()->enableQueryLog();
+		$hid = request()->hid;
+		$lists = Order::where([['buyerid', $userinfo->id],['hospital',$hid]])->orderBy('id', 'desc')->get(['id', 'orderid', 'gift','orderinfo', 'totalprice', 'orderstatus', 'created_at'])->toArray(true);
+		foreach ($lists as $key=>$list){
+            $gift = json_decode($list['gift'], true);
+            $g = [];
+            foreach ($gift as $k=>$v){
+                $medicinal = Medicinal::where('id',$v['id'])->first();
+                //print_r(DB::getQueryLog());
+                $origin = Medicinal::where('id',$v['originid'])->first();
+                $g[$k]['medicinal'] = $medicinal['medicinal'];
+                $g[$k]['medicinalnum'] = $medicinal['medicinalnum'];
+                $g[$k]['num'] = $v['num'];
+                $g[$k]['origin'] = $origin['medicinal'].'/'.$origin['medicinalnum'];
+            }
+            $lists[$key]['gift'] = json_encode($g);
+        }
 		return $this->successData('订单', ['order' => $lists]);
 	}
 
