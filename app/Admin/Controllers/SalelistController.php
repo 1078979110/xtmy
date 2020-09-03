@@ -8,6 +8,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use App\Usertype;
+use Illuminate\Support\Facades\Hash;
 class SalelistController extends AdminController
 {
     /**
@@ -85,8 +86,10 @@ class SalelistController extends AdminController
            return Salelist::getTypeIdName(); 
         });
         $form->password('password','密码')->required();
-        $form->saving(function(Form $form){
-            $form->password = bcrypt($form->password);
+        $form->saving(function (Form $form) {
+            if ($form->password && $form->model()->password != $form->password) {
+                $form->password = bcrypt($form->password);
+            }
         });
         $state = [
             'on'=>['value'=>0,'text'=>'正常', 'color'=>'success'],
@@ -95,8 +98,8 @@ class SalelistController extends AdminController
         $form->switch('status','状态')->states($state);
         $form->text('depart','部门')->help('经销商填写,业务员忽略');
         $form->text('address','地址')->help('经销商填写,业务员忽略');
+
         $form->tools(function (Form\Tools $tools) {
-            $tools->disableList();
             $tools->disableDelete();
             $tools->disableView();
         });

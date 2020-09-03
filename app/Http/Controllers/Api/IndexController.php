@@ -56,17 +56,18 @@ class IndexController extends Controller {
 	 * @return number[]|unknown[]|number[]|unknown[]|string[]
 	 */
 	public function auth(Request $request) {
-		$userinfo = $this->checkSession();
-		if ($this->attemptLogin($request)) {
-			$user = $this->guard()->user();
+        $status = Salelist::where('telephone', $request->telephone)->value('status');
+        if($status ==1){
+            return $this->errorData('该账号已被冻结');
+        }
+        $password = Salelist::where('telephone', $request->telephone)->value('password');
+        if(!$password){
+            return $this->errorData('该账号不存在');
+        }
+		if (Auth::attempt(['telephone'=>$request->telephone,'password'=>$request->password])){
+			$user = $this->guard('api')->user();
             $user->generateToken();
-			$status = Salelist::where('telephone', request()->get('telephone'))->value('status');
-			if($status ==1){
-                $user->api_token = null;
-                $user->save();
-			    return $this->errorData('该账号已被冻结');
-            }
-            $user->type = Salelist::where('telephone', request()->get('telephone'))->value('type');
+            //$user->type = Salelist::where('telephone', request()->get('telephone'))->value('type');
             $userinfo = Auth::user();
             $this->user = $userinfo;
             return $this->successData('登陆成功', ['user' => $userinfo]);
@@ -76,8 +77,9 @@ class IndexController extends Controller {
 
 	protected function checkSession() {
 		$userinfo = Auth::user();
+		$request = request();
 		if (!$userinfo) {
-			$userinfo = Salelist::where('api_token', request()->get('api_token'))->first();
+			$userinfo = Salelist::where('api_token', $request->telephone)->first();
 			if($userinfo->status ==1){
                 Salelist::where('telephone', $userinfo['telephone'])->update(['api_token'=>'']);
 			    return $this->errorData('该账号已被冻结');
@@ -88,7 +90,7 @@ class IndexController extends Controller {
 				return $userinfo;
 			}
 		} else {
-            $userinfo = Salelist::where('api_token', request()->get('api_token'))->first();
+            $userinfo = Salelist::where('api_token', $request->telephone)->first();
 			return $userinfo;
 		}
 	}
@@ -603,12 +605,11 @@ class IndexController extends Controller {
 		$request = request();
 		$password = $request['password'];
 		$newpassword = $request['newpassword'];
-		$userinfo['password'] = Salelist::where('id', $userinfo['id'])->value('password');
-		if (!Hash::check($password, $userinfo['password'])) {
+		$userinfo['password'] = Salelist::where('id', $userinfo->id)->value('password');
+		if (!Hash::check($password, $userinfo->password)) {
 			return $this->errorData('原密码不正确');
 		}
 		Salelist::where('id', $userinfo->id)->update(['password' => bcrypt($newpassword)]);
-		$userinfo = Auth::user();
 		$userinfo->password = bcrypt($newpassword);
 		return $this->successData('修改成功', ['user' => $userinfo]);
 	}
