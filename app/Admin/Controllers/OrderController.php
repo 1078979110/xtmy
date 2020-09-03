@@ -59,22 +59,24 @@ class OrderController extends AdminController
         $grid->column('totalprice', '订单金额');
         $grid->column('orderinfo','订单详情')->display(function(){
             return '<button class="btn btn-primary btn-xs">查看</button>';
-        })->modal('订单内容',function(){
-            $arr = json_decode($this->orderinfo, true);
-            $tp = 0;
-            $sarr = [];
-            foreach ($arr as $key =>$val){
-                $sarr[$key]['id'] = $key+1;
-                $sarr[$key]['medicinal'] = $val['medicinal'];
-                $sarr[$key]['medicinalnum'] = $val['medicinalnum'];
-                $sarr[$key]['price'] = $val['price'];
-                $sarr[$key]['unit'] = $val['unit'];
-                $sarr[$key]['num'] = $val['num'];
-                $sarr[$key]['price_t'] = $val['num']*$val['price'];
-                $tp += $sarr[$key]['price_t'];
+        })->modal('订单内容',function() {
+            if (!empty($this->gift) && ($this->gift != 'null')){
+                $arr = json_decode($this->orderinfo, true);
+                $tp = 0;
+                $sarr = [];
+                foreach ($arr as $key => $val) {
+                    $sarr[$key]['id'] = $key + 1;
+                    $sarr[$key]['medicinal'] = $val['medicinal'];
+                    $sarr[$key]['medicinalnum'] = $val['medicinalnum'];
+                    $sarr[$key]['price'] = $val['price'];
+                    $sarr[$key]['unit'] = $val['unit'];
+                    $sarr[$key]['num'] = $val['num'];
+                    $sarr[$key]['price_t'] = $val['num'] * $val['price'];
+                    $tp += $sarr[$key]['price_t'];
+                }
+                $arr[] = ['', '', '', '', '', '<b>总计</b>', '<b>' . $tp . '</b>'];
+                return new Table(['id', '药品名称', '产品货号', '单价', '单位', '数量', '小计'], $sarr);
             }
-            $arr[] = ['','','','','','<b>总计</b>','<b>'.$tp.'</b>'];
-            return new Table(['id','药品名称','产品货号','单价','单位','数量','小计'], $sarr);
         });
         
         $grid->column('buyerid','下单人')->display(function($buyerid){
