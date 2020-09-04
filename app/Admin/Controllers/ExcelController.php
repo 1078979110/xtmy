@@ -20,12 +20,12 @@ class ExcelController extends AdminController{
         $content->title('药品导入');
         $form = new \Encore\Admin\Widgets\Form();
         $form->action('/admin/api/medicinals');
-        $form->file('excel','数据源')->rules('mimes:xls,xlsx')->move(env('APP_URL').'/upload/');
+        $form->file('excel','数据源')->rules('mimes:xls,xlsx')->move(env('APP_URL').'/upload/')->help('必须包含器械名称和产品货号两列');
         $form->select('producer_id','厂家')->options(function(){
             return Producer::pluck('name','id');
-        })->load('line_id','/admin/api/line');
-        $form->select('line_id','产品线')->load('category_id','/admin/api/category');
-        $form->select('category_id','产品分类');
+        })->load('line_id','/admin/api/line')->required();
+        $form->select('line_id','产品线')->load('category_id','/admin/api/category')->required();
+        $form->select('category_id','产品分类')->required();
         $content->body($form);
         return $content;
     }
@@ -35,10 +35,10 @@ class ExcelController extends AdminController{
         $form = new \Encore\Admin\Widgets\Form();
         
         $form->action('/admin/api/setprice');
-        $form->file('excel','数据源')->rules('mimes:xls,xlsx')->move(env('APP_URL').'/upload/');
+        $form->file('excel','数据源')->rules('mimes:xls,xlsx')->move(env('APP_URL').'/upload/')->help('必须包含产品货号和价格两列')->required();
         $form->select('hospitalid','医院')->options(function(){
             return Hospital::pluck('hospital','id');
-        });
+        })->required();
         $content->body($form);
         return $content;
     }
