@@ -20,7 +20,7 @@ class ExcelController extends AdminController{
         $content->title('药品导入');
         $form = new \Encore\Admin\Widgets\Form();
         $form->action('/admin/api/medicinals');
-        $form->file('excel','数据源')->rules('mimes:xls,xlsx')->move(env('APP_URL').'/upload/')->help('必须包含器械名称和产品货号两列');
+        $form->file('excel','数据源')->rules('mimes:xls,xlsx')->move(env('APP_URL').'/upload/')->required()->help('必须包含器械名称和产品货号两列');
         $form->select('producer_id','厂家')->options(function(){
             return Producer::pluck('name','id');
         })->load('line_id','/admin/api/line')->required();
