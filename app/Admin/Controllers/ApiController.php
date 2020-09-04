@@ -170,7 +170,7 @@ class ApiController extends AdminController {
 						$value = [];
 						foreach ($data as $k=>$v) {
                             foreach ($v as $key => $val) {
-                                if(empty($val['产品货号'])){
+                                if(empty($val['产品货号'])){//检测到产品货号为空，则认为导入成功，之后的数据是空行
                                     break 2;
                                 }
                                 if (!isset($val['器械名称'])) {
@@ -241,7 +241,7 @@ class ApiController extends AdminController {
 						$value = [];
 						foreach($data as $k=>$v){
                             foreach ($v as $key => $val) {
-                                if(empty($val['产品货号'])){
+                                if(empty($val['产品货号'])){//检测到产品货号为空，则认为是导入成功，直接跳出
                                    break 2;
                                 }
                                 if (!isset($val['产品货号']) || empty($val['产品货号']) || !isset($val['价格']) || empty($val['价格'])) {
