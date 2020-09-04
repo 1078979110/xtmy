@@ -170,17 +170,18 @@ class ApiController extends AdminController {
 						$value = [];
 						foreach ($data as $k=>$v) {
                             foreach ($v as $key => $val) {
-                                if(empty($val['产品货号'])){
-                                    continue;
-                                }
                                 if (!isset($val['器械名称'])) {
                                     throw new \Exception('数据表格式不正确,没有设置器械名称列');
                                 }
-                                if (!isset($val['产品货号']) && !is_null($val['产品货号'])) {
-                                    var_dump($val['产品货号']);
-                                    throw new \Exception('数据表格式不正确,没有设置产品货号列,第'.($k+1).'行');
+                                if(!isset($val['产品货号'])){
+                                    throw new \Exception('数据表格式不正确,没有设置产品货号列');
                                 }
-
+                                if (is_null($val['产品货号'])) {
+                                    throw new \Exception('数据表数据不正确,第'.($k+1).'行没有设置产品货号,');
+                                }
+                                if(empty($val['产品货号'])){
+                                    continue;
+                                }
                                 $has_insert = Medicinal::where('medicinalnum', $val['产品货号'])->first();
                                 if (!empty($has_insert)) {
                                     continue;
@@ -228,7 +229,6 @@ class ApiController extends AdminController {
 				return redirect('/admin/excel/setprice');
 			} else {
 				$filename = $re['info'];
-				//$medicinals = Medicinal::pluck('id', 'medicinalnum');
                 $real_file = str_replace('\\','/','storage/' . $filename);
 				if (!is_file($real_file)) {
 					admin_toastr('文件不存在！', 'error');
