@@ -170,6 +170,9 @@ class ApiController extends AdminController {
 						$value = [];
 						foreach ($data as $k=>$v) {
                             foreach ($v as $key => $val) {
+                                if(empty($val['产品货号'])){
+                                    break 2;
+                                }
                                 if (!isset($val['器械名称'])) {
                                     throw new \Exception('数据表格式不正确,没有设置器械名称列');
                                 }
@@ -179,9 +182,7 @@ class ApiController extends AdminController {
                                 if (is_null($val['产品货号'])) {
                                     throw new \Exception('数据表数据不正确,第'.($k+1).'行没有设置产品货号,');
                                 }
-                                if(empty($val['产品货号'])){
-                                    continue;
-                                }
+
                                 $has_insert = Medicinal::where('medicinalnum', $val['产品货号'])->first();
                                 if (!empty($has_insert)) {
                                     continue;
@@ -241,7 +242,7 @@ class ApiController extends AdminController {
 						foreach($data as $k=>$v){
                             foreach ($v as $key => $val) {
                                 if(empty($val['产品货号'])){
-                                    continue;
+                                   break 2;
                                 }
                                 if (!isset($val['产品货号']) || empty($val['产品货号']) || !isset($val['价格']) || empty($val['价格'])) {
                                     throw new \Exception('数据表格式不正确');
