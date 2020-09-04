@@ -247,8 +247,13 @@ class ApiController extends AdminController {
                                 if (!isset($val['产品货号']) || empty($val['产品货号']) || !isset($val['价格']) || empty($val['价格'])) {
                                     throw new \Exception('数据表格式不正确');
                                 }
+                                $medicinalid = Medicinal::where('medicinalnum', $val['产品货号'])->value('id');
+                                $has = Hospitalprice::where([['medicinalid', $medicinalid],['hospitalid', $hospital]])->exists();//过滤重复的价格设置
+                                if($has){
+                                    continue;
+                                }
                                 $value['hospitalid'] = $hospital;
-                                $value['medicinalid'] = Medicinal::where('medicinalnum', $val['产品货号'])->value('id');
+                                $value['medicinalid'] = $medicinalid;
                                 $value['medicinalnum'] = $val['产品货号'];
                                 $value['price'] = $val['价格'];
                                 DB::table('hospitalprice')->insert($value);
