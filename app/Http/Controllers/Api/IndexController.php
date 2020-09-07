@@ -449,13 +449,15 @@ class IndexController extends Controller {
                 foreach ($data as $key=>$value){
                     foreach ($value as $k=>$v){
                         if(!isset($v['产品货号']) || empty($v['产品货号']) || $v['产品货号'] == 'null' ){
-                            throw new \Exception('产品货号列不存在');
+                            throw new \Exception('产品货号不能为空');
                         }
                         if(!isset($v['数量']) || empty($v['数量']) || $v['数量'] == 'null' ){
-                            throw new \Exception('数量列不存在');
+                            throw new \Exception('数量不能为空');
                         }
-                        if(!isset($v['价格']) || empty($v['价格']) || $v['价格'] == 'null' ){
-                            throw new \Exception('价格列不存在');
+                        if($userinfo->type == 1){
+                            if(!isset($v['价格']) || empty($v['价格']) || $v['价格'] == 'null' ){
+                                throw new \Exception('价格不能为空');
+                            }
                         }
 
                         $medicinalinfo = Medicinal::where('medicinalnum', $v['产品货号'])->first();
