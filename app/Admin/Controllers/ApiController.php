@@ -146,9 +146,9 @@ class ApiController extends AdminController {
 
 	public function medicinals() {
 		if (request()->isMethod('post')) {
-		    $producer_id = request()->post('producer_id');
-            $line_id = request()->post('line_id');
-            $category_id = request()->post('category_id');
+		    //$producer_id = request()->post('producer_id');
+            //$line_id = request()->post('line_id');
+            //$category_id = request()->post('category_id');
 			$excel = request()->file('excel');
 			$ext_arr = ['xls', 'xlsx'];
 			$re = $this->uploadFile($excel, $ext_arr);
@@ -164,7 +164,7 @@ class ApiController extends AdminController {
 						return redirect('/admin/excel/medicinals');
 					}
 
-					Excel::load($real_file, function ($reader) use ($producer_id, $line_id, $category_id) {
+					Excel::load($real_file, function ($reader) {
 						$data = $reader->get()->toArray(true);
 						$value = [];
 						foreach ($data as $k=>$v) {
@@ -185,10 +185,21 @@ class ApiController extends AdminController {
                                 if (!$val['器械名称']) {
                                     throw new \Exception('数据表数据不正确,第'.($k+1).'行没有设置器械名称');
                                 }
-
                                 $has_insert = Medicinal::where('medicinalnum', $val['产品货号'])->first();
                                 if (!empty($has_insert)) {
                                     continue;
+                                }
+                                $producer_id = Producer::where('name',$val['厂家'])->value('id');
+                                if(!$producer_id){
+                                    $producer_id = DB::table('producer')->insertGetId(['name'=>$val['厂家']]);
+                                }
+                                $line_id = Productline::where([['linename', $val['产品线']],['producer_id', $producer_id]])->value('id');
+                                if(!$line_id){
+                                    $line_id = DB::table('productlines')->insertGetId(['linename'=>$val['产品线'],'producer_id'=>$producer_id]);
+                                }
+                                $category_id = Category::where([['categoryname',$val['产品分类']],['line_id', $line_id],['producer_id',$producer_id]])->value('id');
+                                if(!$category_id){
+                                    $category_id = DB::table('categories')->insertGetId(['categoryname'=>$val['产品分类'],'line_id'=> $line_id,'producer_id'=>$producer_id]);
                                 }
                                 $makedate = is_object($val['生产日期']) ? $val['生产日期']->format('Y-m-d H:i:s') : $val['生产日期'];
                                 $invalidate = is_object($val['失效日期']) ? $val['失效日期']->format('Y-m-d H:i:s') : $val['失效日期'];
@@ -200,7 +211,7 @@ class ApiController extends AdminController {
                                 $value['producer_id'] = $producer_id;
                                 $value['line_id'] = $line_id;
                                 $value['category_id'] = $category_id;
-                                $value['specification'] = isset($val['规格型号']) ? $val['规格型号'] : '';
+                                $value['specification'] = isset($val['规格']) ? $val['规格'] : '';
                                 $value['unit'] = isset($val['单位'])?$val['单位']:'';
                                 $value['batchnumber'] = isset($val['批号']) ? $val['批号'] : '';
                                 $value['makedate'] = $makedate;
