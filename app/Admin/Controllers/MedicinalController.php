@@ -87,42 +87,8 @@ class MedicinalController extends AdminController
             'off'=> ['value'=>1, 'text'=> '下架','color'=> 'danger']
         ];
         $grid->column('status','状态')->switch($state);
-        /*$grid->column('status','状态')->display(function($status){
-            $js = <<<SCRIPT
-            $(".changeup").click(function(){
-                var id = $(this).attr("data-id");
-                var status = $(this).attr("data-status");
-                $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
-                $.ajax({
-                    url:"/admin/api/medicinalstatus",
-                    method:"post",
-                    data:{'id':id,'status':status},
-                    success:function(res){  
-                            toastr.success(res.msg,res.title,setTimeout(function (){window.location.reload();}, 4000))
-                    }
-                });
-            });
-            $(".changedown").click(function(){
-                var id = $(this).attr("data-id");
-                var status = $(this).attr("data-status");
-                $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
-                $.ajax({
-                    url:"/admin/api/medicinalstatus",
-                    method:"post",
-                    data:{'id':id,'status':status},
-                    success:function(res){  
-                            toastr.success(res.msg,res.title,setTimeout(function (){window.location.reload();}, 4000))
-                    }
-                });
-            });
-SCRIPT;
-            Admin::script($js);
-            $str = ($status==1)?'<button class="btn btn-warning btn-xs">已下架</button>':'<button class="btn btn-info btn-xs">已上架</button>';
-            $str .= ($status==1)?'<a href="javascript:void(0)" data-id="'.$this->id.'" data-status="'.$this->status.'" class="changeup">上架</a>':'<a href="javascript:void(0)" data-id="'.$this->id.'" data-status="'.$this->status.'" class="changedown">下架</a>';
-            return $str;
-        });*/
         $grid->exporter('MyCsvExporter');
-        $grid->disableRowSelector();
+        //$grid->disableRowSelector();
         $grid->disableColumnSelector();
         $grid->tools(function($tools){
             $tools->append(new ExcelImport());
