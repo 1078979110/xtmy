@@ -43,7 +43,7 @@ class HospitalpriceController extends AdminController
         });
         $grid->column('medicinalnum',__('产品货号'));
         //$grid->disableFilter();
-        $grid->disableRowSelector();
+        //$grid->disableRowSelector();
         $grid->disableColumnSelector();
         $grid->column('price', __('价格'));
         $grid->actions(function($action){
