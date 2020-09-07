@@ -29,10 +29,11 @@ class CategoryController extends AdminController
         $grid->filter(function($filter){
             $filter->disableIdFilter();
             $filter->equal('categoryname', '分类名称');
+            $producer = Producer::pluck('name', 'id');
+            $filter->equal('producer_id','厂家')->select($producer);
             $line = Productline::pluck('linename','id');
             $filter->equal('line_id','产品线')->select($line);
-            $producer = Producer::pluck('name', 'id');
-            $filter->equal('producer_id','厂家')->select($line);
+
         });
         $grid->column('id', 'ID');
         $grid->column('categoryname', '分类名称');
