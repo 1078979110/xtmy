@@ -166,21 +166,24 @@ class ApiController extends AdminController {
 
 					Excel::load($real_file, function ($reader) use ($producer_id, $line_id, $category_id) {
 						$data = $reader->get()->toArray(true);
-                        $reader->ignoreEmpty();
 						$value = [];
 						foreach ($data as $k=>$v) {
                             foreach ($v as $key => $val) {
                                 if(empty($val['产品货号'])){//检测到产品货号为空，则认为导入成功，之后的数据是空行
                                     break 2;
                                 }
-                                if (!isset($val['器械名称'])) {
+                                /*if (!isset($val['器械名称']) || $val['器械名称'] == '' || $val['器械名称'] == 'null') {
                                     throw new \Exception('数据表格式不正确,没有设置器械名称列');
                                 }
-                                if(!isset($val['产品货号'])){
+                                if(!isset($val['产品货号']) || $val['产品货号'] == '' || $val['产品货号'] == 'null'){
                                     throw new \Exception('数据表格式不正确,没有设置产品货号列');
+                                }*/
+                                if (!$val['产品货号']) {
+                                    throw new \Exception('数据表数据不正确,第'.($k+1).'行没有设置产品货号');
                                 }
-                                if (is_null($val['产品货号'])) {
-                                    throw new \Exception('数据表数据不正确,第'.($k+1).'行没有设置产品货号,');
+
+                                if (!$val['器械名称']) {
+                                    throw new \Exception('数据表数据不正确,第'.($k+1).'行没有设置器械名称');
                                 }
 
                                 $has_insert = Medicinal::where('medicinalnum', $val['产品货号'])->first();
