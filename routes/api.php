@@ -66,6 +66,7 @@ Route::group(['namespace' => 'Api'], function () {
 		Route::post('/addorder', 'IndexController@addOrder');
 		//修改密码
 		Route::post('/changepwd', 'IndexController@changePassword');
+		Route::post('/uploadexcel', 'IndexController@uploadExcel');
         //导入购物车
         Route::post('/importcart', 'IndexController@importCart');
         //添加赠品

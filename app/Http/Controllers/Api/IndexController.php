@@ -413,16 +413,9 @@ class IndexController extends Controller {
 		return $this->successData('删除成功!', []);
 	}
 
-	public function importCart(Request $request){
-	    $userinfo = $this->checkSession();
-        $hid = $request->hid?$request->hid:0;
-        if($userinfo->type == 2){
-	        if(!$hid){
-                throw new \Exception('请选择医院后再导入');
-            }
-        }
-	    $File = $request->file('file');
-	    $option = ['xls','xlsx'];
+	public function uploadExcel(Request $request){
+        $File = $request->file('file');
+        $option = ['xls','xlsx'];
         $fileExtension = $File->getClientOriginalExtension();
         if (!in_array($fileExtension, $option)) {
             throw new \Exception('文件类型不正确，只能上传.xls或者.xlsx后缀的文件');
@@ -437,6 +430,18 @@ class IndexController extends Controller {
         if (!is_file($realfile)) {
             throw new \Exception('文件上传失败！');
         }
+        return $this->successData('上传成功',['file'=>$realfile]);
+    }
+
+	public function importCart(Request $request){
+	    $userinfo = $this->checkSession();
+        $hid = $request->hid?$request->hid:0;
+        if($userinfo->type == 2){
+	        if(!$hid){
+                throw new \Exception('请选择医院后再导入');
+            }
+        }
+        $realfile = $request->file;
         try{
             Excel::load($realfile, function($reader)use($userinfo,$hid){
                 $insertData = [];
