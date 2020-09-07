@@ -256,6 +256,9 @@ class ApiController extends AdminController {
                                     throw new \Exception('数据表格式不正确');
                                 }
                                 $medicinalid = Medicinal::where('medicinalnum', $val['产品货号'])->value('id');
+                                if(!$medicinalid){//过滤产品库不存在的货号产品
+                                    continue;
+                                }
                                 $has = Hospitalprice::where([['medicinalid', $medicinalid],['hospitalid', $hospital]])->exists();//过滤重复的价格设置
                                 if($has){
                                     continue;
