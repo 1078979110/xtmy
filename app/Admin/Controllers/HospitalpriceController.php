@@ -100,6 +100,15 @@ class HospitalpriceController extends AdminController
             $form->medicinalnum = Medicinal::where('id',$form->medicinalid)->value('medicinalnum');
             Hospitalprice::where('id',$form->model()->id)->update(['medicinalnum'=>$form->medicinalnum]);
         });
+        $form->tools(function (Form\Tools $tools) {
+            $tools->disableDelete();
+            $tools->disableView();
+        });
+        $form->footer(function ($footer) {
+            $footer->disableViewCheck();
+            $footer->disableEditingCheck();
+            $footer->disableCreatingCheck();
+        });
         return $form;
     }
 }
