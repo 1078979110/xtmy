@@ -301,6 +301,7 @@ class IndexController extends Controller {
 				'price' => $price,
 				'unit' => $medicinalinfo['unit'],
 				'num' => $value['num'],
+                't_price' => $price * $value['num'],
                 'gift'=>[
                     'id' => $value['originid'],
                     'originname'=>Medicinal::where('id',$value['originid'])->value('medicinal'),
@@ -462,7 +463,7 @@ class IndexController extends Controller {
 
                         $medicinalinfo = Medicinal::where('medicinalnum', $v['产品货号'])->first();
                         if(!$medicinalinfo){
-                            throw new \Exception('第'.($k+1).'行产品在产品库不存在');
+                            throw new \Exception('第'.($k+2).'行产品货号为：'.$v['产品货号'].'的产品在产品库不存在');
                         }
                         $_info = [
                             'medicinalid'=> $medicinalinfo->id,
