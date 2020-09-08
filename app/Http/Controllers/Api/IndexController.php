@@ -335,7 +335,7 @@ class IndexController extends Controller {
 			} else {
 				return $this->errorData('请选择医院',['cart'=>[]]);
 			}
-			$price = Hospitalprice::where([['hospitalid', $hospitalinfo->id], ['medicinalid', $mid]])->value('price');
+			$price = Hospitalprice::where([['hospitalid', $hospitalinfo['id']], ['medicinalid', $mid]])->value('price');
 		} else {
 			$price = $request['price'];
 		}
