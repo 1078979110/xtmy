@@ -54,7 +54,7 @@ class SalelistController extends AdminController
         $grid->column('created_at', '创建时间');
         $grid->column('updated_at', '修改时间');
         $grid->disableExport();
-        $grid->disableRowSelector();
+        //$grid->disableRowSelector();
         $grid->disableColumnSelector();
         $grid->actions(function($action){
             $action->disableview();
