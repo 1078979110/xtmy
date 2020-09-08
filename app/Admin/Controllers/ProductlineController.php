@@ -36,6 +36,9 @@ class ProductlineController extends AdminController
         $grid->disableExport();
         //$grid->disableRowSelector();
         $grid->disableColumnSelector();
+        $grid->actions(function($actions){
+            $actions->disableView();
+        });
         return $grid;
     }
 
