@@ -98,13 +98,13 @@ class OrderController extends AdminController
                 foreach ($gift_arr as $key=>$val){
                     $medicinalinfo = Medicinal::where('id', $val['id'])->first();
                     $s[$key]['id'] = $key+1;
-                    $s[$key]['medicinal'] = $medicinalinfo->medicinal;
-                    $s[$key]['medicinalnum'] = $medicinalinfo->medicinalnum;
+                    $s[$key]['medicinal'] = $medicinalinfo['medicinal'];
+                    $s[$key]['medicinalnum'] = $medicinalinfo['medicinalnum'];
                     $s[$key]['num'] = $val['num'];
                     $s[$key]['origin'] = '';
                     if(isset($val['originid'])){
                         $origin = Medicinal::where('id', $val['originid'])->first();
-                        $s[$key]['origin'] = $origin->medicinal.'/'.$origin->medicinalnum;
+                        $s[$key]['origin'] = $origin['medicinal'].'/'.$origin['medicinalnum'];
                     }
                 }
                 return new Table(['ID','赠品名称','赠品货号', '赠品数量','赠品来源'],$s);
