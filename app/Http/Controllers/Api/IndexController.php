@@ -281,7 +281,7 @@ class IndexController extends Controller {
 		})->get();
 		$data = [];
 		foreach ($lists as $key => $value) {
-			$medicinalinfo = Medicinal::where('id', $value['medicinalid'])->get(['id', 'producer_id', 'medicinal', 'unit'])->first()->toArray(true);
+			$medicinalinfo = Medicinal::where('id', $value['medicinalid'])->get(['id', 'producer_id', 'medicinal', 'unit'])->first();
 			$producer = Producer::where('id', $medicinalinfo['producer_id'])->value('name');
             if (isset($userinfo->type) && $userinfo->type == 2) {
 
