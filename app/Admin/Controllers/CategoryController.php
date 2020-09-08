@@ -53,7 +53,7 @@ class CategoryController extends AdminController
         $grid->column('updated_at', '更新时间');
 
         $grid->disableExport();
-        $grid->disableRowSelector();
+        //$grid->disableRowSelector();
         $grid->disableColumnSelector();
         $grid->actions(function($actions){
             $actions->disableView();

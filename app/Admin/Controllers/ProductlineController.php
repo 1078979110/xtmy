@@ -34,7 +34,7 @@ class ProductlineController extends AdminController
         $grid->column('updated_at', '修改时间');
         $grid->disableFilter();
         $grid->disableExport();
-        $grid->disableRowSelector();
+        //$grid->disableRowSelector();
         $grid->disableColumnSelector();
         return $grid;
     }
