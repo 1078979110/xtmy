@@ -281,7 +281,7 @@ class IndexController extends Controller {
 		})->get();
 		$data = [];
 		foreach ($lists as $key => $value) {
-			$medicinalinfo = Medicinal::where('id', $value['medicinalid'])->get(['id', 'producer_id', 'medicinal', 'unit'])->first();
+			$medicinalinfo = Medicinal::where('id', $value['medicinalid'])->get(['id', 'producer_id', 'medicinal', 'unit'])->first()->toArray(true);
 			$producer = Producer::where('id', $medicinalinfo['producer_id'])->value('name');
             if (isset($userinfo->type) && $userinfo->type == 2) {
 
@@ -335,15 +335,15 @@ class IndexController extends Controller {
 			} else {
 				return $this->errorData('请选择医院',['cart'=>[]]);
 			}
-			$price = Hospitalprice::where([['hospitalid', $hospitalinfo['id']], ['medicinalid', $mid]])->value('price');
+			$price = Hospitalprice::where([['hospitalid', $hospitalinfo->id], ['medicinalid', $mid]])->value('price');
 		} else {
 			$price = $request['price'];
 		}
-		$isInCart = Mycart::where('buyerid', $userinfo['id'])->where([['medicinalid', $mid],['price',$price]])->first();
+		$isInCart = Mycart::where('buyerid', $userinfo->id)->where([['medicinalid', $mid],['price',$price]])->first();
 
 		if (empty($isInCart)) {
 			$data = [
-				'buyerid' => $userinfo['id'],
+				'buyerid' => $userinfo->id,
 				'medicinalnum' => Medicinal::where('id', $mid)->value('medicinalnum'),
 				'medicinalid' => $mid,
 				'num' => $num,
@@ -352,11 +352,11 @@ class IndexController extends Controller {
                 'originnum' => $originnum
 			];
 			if ($request['hid']) {
-				$data['hospitalid'] = $hospitalinfo['id'];
+				$data['hospitalid'] = $hospitalinfo->id;
 			}
 			$result = Mycart::insert($data);
 		} else {
-			$result = Mycart::where('buyerid', $userinfo['id'])->where([['medicinalid', $mid],['price',$price]])->update(['num' => $num + $isInCart['num']]);
+			$result = Mycart::where('buyerid', $userinfo->id)->where([['medicinalid', $mid],['price',$price]])->update(['num' => $num + $isInCart->num]);
 		}
 
 		if ($result) {
@@ -461,7 +461,9 @@ class IndexController extends Controller {
                         }
 
                         $medicinalinfo = Medicinal::where('medicinalnum', $v['产品货号'])->first();
-
+                        if(!$medicinalinfo){
+                            throw new \Exception('第'.$k.'行产品在产品库不存在');
+                        }
                         $_info = [
                             'medicinalid'=> $medicinalinfo->id,
                             'medicinalnum' => $medicinalinfo->medicinalnum,
