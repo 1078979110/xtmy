@@ -62,15 +62,18 @@ class ApiController extends AdminController {
 			$curr_status = Order::where('id', $id)->value('orderstatus');
 			if($curr_status == 1 || $curr_status ==2){
 			    $curr_status = 3;
-            }else if($curr_status ==3){
+            }else if($curr_status ==3 ){
+			    if(Admin::user()->isRole('wholesale'))
 			    $curr_status = 4;
             }else if($curr_status ==4){
+                if(Admin::user()->isRole('finance'))
                 $curr_status = 5;
             }else if($curr_status ==5){
+                if(Admin::user()->isRole('warehouse'))
                 $curr_status = 6;
             }
 			$result = Order::where('id', $id)->update(['orderstatus' => $curr_status]);
-			if ($result) {
+			if ($result >=0) {
 				return ['status' => true, 'title' => '订单', 'msg' => '操作成功'];
 			} else {
 				return ['status' => false, 'title' => '订单', 'msg' => '失败，请稍后再试'];
