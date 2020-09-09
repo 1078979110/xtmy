@@ -81,7 +81,7 @@ class IndexController extends Controller {
 		if (!$userinfo) {
 			$userinfo = Salelist::where('api_token', $request->telephone)->first();
 			if($userinfo->status ==1){
-                Salelist::where('telephone', $userinfo['telephone'])->update(['api_token'=>'']);
+                Salelist::where('telephone', $userinfo->telephone)->update(['api_token'=>'']);
 			    return $this->errorData('该账号已被冻结');
             }
 			if (empty($userinfo)) {
