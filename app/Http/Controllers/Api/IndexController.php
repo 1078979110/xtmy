@@ -539,9 +539,9 @@ class IndexController extends Controller {
                 $totalnum += $cartinfo['num'];
                 $medicinalinfo = Medicinal::find($cartinfo['medicinalid']);
                 $info = [
-                    'id'=>$medicinalinfo['id'],
-                    'medicinal' => $medicinalinfo['medicinal'],
-                    'medicinalnum' => $medicinalinfo['medicinalnum'],
+                    'id'=>$medicinalinfo->id,
+                    'medicinal' => $medicinalinfo->medicinal,
+                    'medicinalnum' => $medicinalinfo->medicinalnum,
                     'price'=> $cartinfo->price,
                     'unit' => $medicinalinfo->unit,
                     'num' => $cartinfo->num,
