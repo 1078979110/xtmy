@@ -62,8 +62,12 @@ class ApiController extends AdminController {
 			$curr_status = Order::where('id', $id)->value('orderstatus');
 			if($curr_status == 1 || $curr_status ==2){
 			    $curr_status = 3;
-            }else{
-			    $curr_status++;
+            }else if($curr_status ==3){
+			    $curr_status = 4;
+            }else if($curr_status ==4){
+                $curr_status = 5;
+            }else if($curr_status ==5){
+                $curr_status = 6;
             }
 			$result = Order::where('id', $id)->update(['orderstatus' => $curr_status]);
 			if ($result) {
