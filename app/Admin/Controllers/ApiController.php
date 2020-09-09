@@ -173,23 +173,32 @@ class ApiController extends AdminController {
                                     break 2;
                                 }
                                 if (!$val['产品货号']) {
-                                    throw new \Exception('数据表数据不正确,第'.($k+1).'行没有设置产品货号');
+                                    throw new \Exception('数据表数据不正确,第'.($key+2).'行没有设置产品货号');
                                 }
 
                                 if (!$val['器械名称']) {
-                                    throw new \Exception('数据表数据不正确,第'.($k+1).'行没有设置器械名称');
+                                    throw new \Exception('数据表数据不正确,第'.($key+2).'行没有设置器械名称');
                                 }
                                 $has_insert = Medicinal::where('medicinalnum', $val['产品货号'])->first();
                                 if (!empty($has_insert)) {
                                     continue;
                                 }
+                                if(!$val['厂家']){
+                                    throw new \Exception('数据表数据不正确,第'.($key+2).'行没有设置厂家');
+                                }
                                 $producer_id = Producer::where('name',$val['厂家'])->value('id');
                                 if(!$producer_id){
                                     $producer_id = DB::table('producer')->insertGetId(['name'=>$val['厂家']]);
                                 }
+                                if(!$val['产品线']){
+                                    throw new \Exception('数据表数据不正确,第'.($key+2).'行没有设置产品线');
+                                }
                                 $line_id = Productline::where([['linename', $val['产品线']],['producer_id', $producer_id]])->value('id');
                                 if(!$line_id){
                                     $line_id = DB::table('productlines')->insertGetId(['linename'=>$val['产品线'],'producer_id'=>$producer_id]);
+                                }
+                                if(!$val['产品分类']){
+                                    throw new \Exception('数据表数据不正确,第'.($key+2).'行没有设置产品分类');
                                 }
                                 $category_id = Category::where([['categoryname',$val['产品分类']],['line_id', $line_id],['producer_id',$producer_id]])->value('id');
                                 if(!$category_id){
