@@ -189,7 +189,10 @@ EOT;
         });
         $grid->disableCreateButton();
         $grid->disableColumnSelector();
-        $grid->disableActions();
+        $grid->actions(function($actions){
+            $actions->disableView();
+            $actions->disableEdit();
+        });
         return $grid;
     }
 
