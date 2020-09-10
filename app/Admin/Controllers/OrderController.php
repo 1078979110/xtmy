@@ -48,7 +48,7 @@ class OrderController extends AdminController
                 $query->where('buyerid',$buyerid);
             },'下单人');
             if($user_roles[0]['id'] !=4 && $user_roles[0]['id'] !=5){
-                $stat = ['1'=>'待确认','2'=>'待报价(经销商)','3'=>'待报价','4'=>'待审核','5'=>'待发货','6'=>'已发货'];
+                $stat = ['1'=>'待确认','2'=>'待报价(经销商)','3'=>'待报价','4'=>'待审核','5'=>'待发货','6'=>'已出库','7'=>'已完成'];
                 $filter->equal('orderstatus','订单状态')->select($stat);
                 $arr = ['1'=>'经销商','2'=>'医院'];
                 $filter->equal('buyertype','订单类型')->select($arr);
@@ -146,9 +146,26 @@ class OrderController extends AdminController
                 window.location.href='/admin/print/hostpital?id='+id;
                 }
             });
+            $(".over").click(function(){
+                id = $(this).attr('data-id');
+                $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+                $.ajax({
+                    url:'/admin/api/changestatus',
+                    method:'post',
+                    data:{'id':id},
+                    success:function(res){
+                        if(res.status){        
+                                toastr.success(res.msg,res.title,setTimeout(function (){window.location.reload();}, 4000))
+                            }else{
+                                toastr.warning(res.msg,res.title,setTimeout(function (){window.location.reload();}, 4000))
+                        }
+                    }
+                });
+            });
+            
 EOT;
             $str = '';
-            $button_ = ['待确认','待报价','待报价','待审核','待发货','已完成','已出库'];
+            $button_ = ['待确认','待报价','待报价','待审核','待发货','已出库','已完成'];
             /*if($user_roles[0]['id'] == 4){//业务员组
                 if($orderstatus ==1){
                     $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button> | <button class="btn btn-warning btn-xs comfirmorder" data-id="'.$this->id.'">确认订单</button>';
@@ -175,11 +192,13 @@ EOT;
                 }
             }else if($user_roles[0]['id'] == 8){//仓库
                 if($orderstatus ==5){
-                    $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button> | <button class="btn btn-warning btn-xs updateattr" data-id="'.$this->id.'">补充信息</button> | <button class="btn btn-warning btn-xs comfirmorder" data-id="'.$this->id.'">确认发货</button>';
+                    $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button> | <button class="btn btn-warning btn-xs updateattr" data-id="'.$this->id.'">补充信息</button> | <button class="btn btn-warning btn-xs comfirmorder" data-id="'.$this->id.'">开始发货</button>';
                 }else if( $orderstatus == 6 ){//确定发货，打印出货单
-                    $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button> | <button class="btn btn-warning btn-xs updateattr" data-id="'.$this->id.'">补充信息</button> | <button class="btn btn-warning btn-xs print" data-type="'.$this->buyertype.'" data-id="'.$this->id.'">打印出货单</button>';
+                    $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button> | <button class="btn btn-warning btn-xs updateattr" data-id="'.$this->id.'">补充信息</button> | 
+                            <button class="btn btn-warning btn-xs print" data-type="'.$this->buyertype.'" data-id="'.$this->id.'">打印出货单</button> | 
+                            <button class="btn btn-danger btn-xs over" data-id="'.$this->id.'">确认完成</button>';
                 }else{
-                    $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus].'</button>';
+                    $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button>';
                 }
             }else{
                 $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button>';

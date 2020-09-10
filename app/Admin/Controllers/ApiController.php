@@ -73,6 +73,9 @@ class ApiController extends AdminController {
             }else if($curr_status ==5){
                 if(Admin::user()->isRole('warehouse'))
                 $curr_status = 6;
+            }else if($curr_status ==6){
+                if(Admin::user()->isRole('warehouse'))
+                    $curr_status = 7;
             }
 			$result = Order::where('id', $id)->update(['orderstatus' => $curr_status]);
 			if ($result >=0) {
