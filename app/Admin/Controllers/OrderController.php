@@ -46,7 +46,7 @@ class OrderController extends AdminController
             $filter->where(function($query){
                 $buyerid = Salelist::where('name',$this->input)->value('id');
                 $query->where('buyerid',$buyerid);
-            },'名称');
+            },'下单人');
             if($user_roles[0]['id'] !=4 && $user_roles[0]['id'] !=5){
                 $stat = ['1'=>'待确认','2'=>'待报价(经销商)','3'=>'待报价','4'=>'待审核','5'=>'待发货','6'=>'已发货'];
                 $filter->equal('orderstatus','订单状态')->select($stat);
