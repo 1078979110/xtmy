@@ -438,6 +438,8 @@ class IndexController extends Controller {
 
 	public function importCart(Request $request){
 	    $userinfo = $this->checkSession();
+	    $this->errorrow = '';
+	    $this->errornum = 0;
         $hid = $request->hid?$request->hid:0;
         if($userinfo->type == 2){
 	        if(!$hid){

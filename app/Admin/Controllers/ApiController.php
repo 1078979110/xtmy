@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ApiController extends AdminController {
+    public $errorrow = '';
+    public $errornum = 0;
 	public function line() {
 		$producer_id = $_GET['q'];
 		return Category::getLineIdNameById($producer_id);
@@ -153,6 +155,8 @@ class ApiController extends AdminController {
 
 	public function medicinals() {
 		if (request()->isMethod('post')) {
+		    $this->errorrow = '';
+		    $this->errornum = 0;
 		    //$producer_id = request()->post('producer_id');
             //$line_id = request()->post('line_id');
             //$category_id = request()->post('category_id');
@@ -176,21 +180,26 @@ class ApiController extends AdminController {
 						$value = [];
 						foreach ($data as $k=>$v) {
                             foreach ($v as $key => $val) {
-                                if(empty($val['产品货号'])){//检测到产品货号为空跳过改行数据
-                                    continue;
-                                }
                                 if (!$val['产品货号']) {
+                                    $this->errornum ++;
+                                    $this->errorrow .= '第'.($k+2).'行产品货号为空，';
                                     continue;
                                 }
 
                                 if (!$val['器械名称']) {
+                                    $this->errornum ++;
+                                    $this->errorrow .= '第'.($k+2).'行器械名称为空，';
                                     continue;
                                 }
                                 $has_insert = Medicinal::where('medicinalnum', $val['产品货号'])->first();
                                 if (!empty($has_insert)) {
+                                    $this->errornum ++;
+                                    $this->errorrow .= '第'.($k+2).'行已存在，';
                                     continue;
                                 }
                                 if(!$val['厂家']){
+                                    $this->errornum ++;
+                                    $this->errorrow .= '第'.($k+2).'行，';
                                     continue;
                                 }
                                 $producer_id = Producer::where('name',$val['厂家'])->value('id');
@@ -198,6 +207,8 @@ class ApiController extends AdminController {
                                     $producer_id = DB::table('producer')->insertGetId(['name'=>$val['厂家']]);
                                 }
                                 if(!$val['产品线']){
+                                    $this->errornum ++;
+                                    $this->errorrow .= '第'.($k+2).'行，';
                                     continue;
                                 }
                                 $line_id = Productline::where([['linename', $val['产品线']],['producer_id', $producer_id]])->value('id');
@@ -205,6 +216,8 @@ class ApiController extends AdminController {
                                     $line_id = DB::table('productlines')->insertGetId(['linename'=>$val['产品线'],'producer_id'=>$producer_id]);
                                 }
                                 if(!$val['产品分类']){
+                                    $this->errornum ++;
+                                    $this->errorrow .= '第'.($k+2).'行，';
                                     continue;
                                 }
                                 $category_id = Category::where([['categoryname',$val['产品分类']],['line_id', $line_id],['producer_id',$producer_id]])->value('id');
@@ -234,7 +247,13 @@ class ApiController extends AdminController {
                             }
                         }
 					});
-					admin_toastr('导入成功', 'success');
+					if($this->errornum == 0){
+                        admin_toastr('导入成功', 'success');
+                    }else{
+					    $msg = '共'.$this->errornum.'未导入,结果为：'.$this->errorrow;
+					    admin_warning('警告',$msg);
+                    }
+
 					return redirect('/admin/medicinals');
 				} catch (\Exception $e) {
 					return $e->getMessage();
@@ -245,6 +264,8 @@ class ApiController extends AdminController {
 
 	public function setPrice() {
 		if (request()->isMethod('post')) {
+		    $this->errornum = 0;
+		    $this->errorrow = '';
 			$excel = request()->file('excel');
 			$ext_arr = ['xls', 'xlsx'];
 			$re = $this->uploadFile($excel, $ext_arr);
@@ -265,18 +286,21 @@ class ApiController extends AdminController {
 						$value = [];
 						foreach($data as $k=>$v){
                             foreach ($v as $key => $val) {
-                                if(empty($val['产品货号'])){//检测到产品货号为空，则认为是导入成功，直接跳出
-                                    continue;
-                                }
                                 if (!isset($val['产品货号']) || empty($val['产品货号']) || !isset($val['价格']) || empty($val['价格'])) {
+                                    $this->errornum ++;
+                                    $this->errorrow .= '第'.($key+2).'行,';
                                     continue;
                                 }
                                 $medicinalid = Medicinal::where('medicinalnum', $val['产品货号'])->value('id');
                                 if(!$medicinalid){//过滤产品库不存在的货号产品
+                                    $this->errornum ++;
+                                    $this->errorrow .= '第'.($key+2).'行产品不存在,';
                                     continue;
                                 }
                                 $has = Hospitalprice::where([['medicinalid', $medicinalid],['hospitalid', $hospital]])->exists();//过滤重复的价格设置
                                 if($has){
+                                    $this->errornum ++;
+                                    $this->errorrow .= '第'.($key+2).'行已存在,';
                                     continue;
                                 }
                                 $value['hospitalid'] = $hospital;
@@ -287,7 +311,12 @@ class ApiController extends AdminController {
                             }
                         }
 					});
-					admin_toastr('导入成功', 'success');
+					if($this->errornum == 0) {
+                        admin_toastr('导入成功', 'success');
+                    }else{
+                        $msg = '共'.$this->errornum.'未导入,结果为：'.$this->errorrow;
+                        admin_warning('警告',$msg);
+                    }
 					return redirect('/admin/excel/setprice');
 				} catch (\Exception $e) {
 					return $e->getMessage();
