@@ -199,10 +199,10 @@ EOT;
                             <button class="btn btn-warning btn-xs print" data-type="'.$this->buyertype.'" data-id="'.$this->id.'">打印出货单</button> | 
                             <button class="btn btn-danger btn-xs over" data-id="'.$this->id.'">确认完成</button>';
                 }else{
-                    $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button>';
+                    $str = '<button class="btn btn-info btn-xs">'.$button_[$orderstatus-1].'</button>';
                 }
             }else{
-                $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button>';
+                $str = '<button class="btn btn-info btn-xs">'.$button_[$orderstatus-1].'</button>';
             }
             Admin::script($js);
             return $str;
