@@ -253,7 +253,7 @@ class ApiController extends AdminController {
 					if($this->errornum == 0){
                         admin_toastr('导入成功', 'success');
                     }else{
-					    $msg = '共'.$this->errornum.'未导入,结果为：'.$this->errorrow;
+					    $msg = '共'.$this->errornum.'行未导入,结果为：'.$this->errorrow;
 					    admin_warning('警告',$msg);
                     }
 
