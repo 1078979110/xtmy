@@ -176,7 +176,7 @@ class ApiController extends AdminController {
 						$value = [];
 						foreach ($data as $k=>$v) {
                             foreach ($v as $key => $val) {
-                                if(empty($val['产品货号'])){//检测到产品货号为空，则认为导入成功，之后的数据是空行
+                                if(empty($val['产品货号'])){//检测到产品货号为空跳过改行数据
                                     continue;
                                 }
                                 if (!$val['产品货号']) {
