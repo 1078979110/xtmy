@@ -480,9 +480,13 @@ class IndexController extends Controller {
                         if($userinfo->type == 2){
                             if(isset($v['赠品货号']) && $v['赠品货号'] != 'null'){
                                 if(!isset($v['赠品数量']) || empty($v['赠品数量']) || $v['赠品数量'] == 'null' ){
-                                    throw new \Exception('第'.($k+2).'行赠品数量列不存在');
+                                    //throw new \Exception('第'.($k+2).'行赠品数量列不存在');
+                                    continue;
                                 }
                                 $giftorigin = Medicinal::where('medicinalnum', $v['赠品货号'])->first();
+                                if(!$giftorigin){
+                                    continue;
+                                }
                                 $_info['originid'] = $giftorigin->id;
                                 $_info['originnum'] = $v['赠品数量'];
                             }
