@@ -25,6 +25,8 @@ class IndexController extends Controller {
 	use AuthenticatesUsers;
 	public $user;
 	public $hospital;
+	public $errornum = 0;
+	public $errorrow = '';
 	public function __construct(Request $request) {
 		$this->user = Auth::user();
 		if (empty($this->user)) {
@@ -444,25 +446,34 @@ class IndexController extends Controller {
         }
         $realfile = $request->file;
         try{
-            Excel::load($realfile, function($reader)use($userinfo,$hid){
+            Excel::load($realfile, function( $reader )use($userinfo, $hid){
+
                 $insertData = [];
                 $data = $reader->get()->toArray(true);
                 foreach ($data as $key=>$value){
                     foreach ($value as $k=>$v){
                         if(!isset($v['产品货号']) || empty($v['产品货号']) || $v['产品货号'] == 'null' ){
+                            $this->errornum++;
+                            $this->errorrow .= '第'.($k+2).'行,';
                             continue;
                         }
                         if(!isset($v['数量']) || empty($v['数量']) || $v['数量'] == 'null' ){
+                            $this->errornum++;
+                            $this->errorrow .= '第'.($k+2).'行,';
                             continue;
                         }
                         if($userinfo->type == 1){
                             if(!isset($v['价格']) || empty($v['价格']) || $v['价格'] == 'null' ){
+                                $this->errornum++;
+                                $this->errorrow .= '第'.($k+2).'行,';
                                 continue;
                             }
                         }
 
                         $medicinalinfo = Medicinal::where('medicinalnum', $v['产品货号'])->first();
                         if(!$medicinalinfo){
+                            $this->errornum++;
+                            $this->errorrow .= '第'.($k+2).'行,';
                             continue;
                         }
                         $_info = [
@@ -476,10 +487,14 @@ class IndexController extends Controller {
                         if($userinfo->type == 2){
                             if(isset($v['赠品货号']) && $v['赠品货号'] != 'null'){
                                 if(!isset($v['赠品数量']) || empty($v['赠品数量']) || $v['赠品数量'] == 'null' ){
+                                    $this->errornum++;
+                                    $this->errorrow .= '第'.($k+2).'行,';
                                     continue;
                                 }
                                 $giftorigin = Medicinal::where('medicinalnum', $v['赠品货号'])->first();
                                 if(!$giftorigin){
+                                    $this->errornum++;
+                                    $this->errorrow .= '第'.($k+2).'行,';
                                     continue;
                                 }
                                 $_info['originid'] = $giftorigin->id;
@@ -496,7 +511,12 @@ class IndexController extends Controller {
                 }
                 DB::table('mycart')->insert($insertData);
             });
-            return $this->successData('导入成功',[]);
+            if($this->errornum == 0){
+                $msg = '导入成功';
+            }else{
+                $msg = '导入成功，共有'.$this->errornum.'行未导入，为：'.$this->errorrow;
+            }
+            return $this->successData($msg,[]);
         }catch(\Exception $e){
             return $e->getMessage();
         }
