@@ -421,17 +421,17 @@ class IndexController extends Controller {
         $option = ['xls','xlsx'];
         $fileExtension = $File->getClientOriginalExtension();
         if (!in_array($fileExtension, $option)) {
-            throw new \Exception('文件类型不正确，只能上传.xls或者.xlsx后缀的文件');
+            return $this->successData('文件类型不正确，只能上传.xls或者.xlsx后缀的文件');
         }
         $tmpFile = $File->getRealPath();
         if (!is_uploaded_file($tmpFile)) {
-            throw new \Exception('非法上传途径');
+            return $this->successData('非法上传途径');
         }
         $fileName = date('Y_m_d') . '/' . md5(time()) . mt_rand(0, 9999) . '.' . $fileExtension;
         Storage::disk('public')->put($fileName, file_get_contents($tmpFile));
         $realfile = $real_file = str_replace('\\','/','storage/' . $fileName);
         if (!is_file($realfile)) {
-            throw new \Exception('文件上传失败！');
+            return $this->successData('文件上传失败！');
         }
         return $this->successData('上传成功',['file'=>$realfile]);
     }
@@ -443,7 +443,7 @@ class IndexController extends Controller {
         $hid = $request->hid?$request->hid:0;
         if($userinfo->type == 2){
 	        if(!$hid){
-                throw new \Exception('请选择医院后再导入');
+                return $this->successData('请选择医院之后再操作');
             }
         }
         $realfile = $request->file;
