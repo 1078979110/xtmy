@@ -44,7 +44,7 @@
             			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['registnum']}}</td>
             		</tr>
             		@endforeach
-					<tr style="line-height: 30px; height: 30px"><td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="8" align="center">赠品信息</td></tr>
+					{{--<tr style="line-height: 30px; height: 30px"><td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="8" align="center">赠品信息</td></tr>
 					<tr style="line-height: 30px; height: 30px">
 						<td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="2">名称</td>
 						<td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="2">产品货号</td>
@@ -58,7 +58,7 @@
 							<td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="2">{{$val['num']}}</td>
 							<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center" colspan="2">{{$val['origin']}}</td>
 						</tr>
-					@endforeach
+					@endforeach--}}
             		<tr style="line-height: 30px; height: 30px"><td style="border-top:1px solid #000" colspan="6" align="left">{{$tabletitle[0][3]}}</td><td style="border-top:1px solid #000" colspan="2" align="left">{{$tabletitle[0][4]}}</td></tr>
       			</tbody>
       		</table>
@@ -91,7 +91,7 @@
             		</tr>
             		@endforeach
             		<tr style="line-height: 30px; height: 30px"><td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="7" align="left">{{$tabletitle[1][4]}}</td></tr>
-					<tr style="line-height: 30px; height: 30px"><td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="7" align="center">赠品信息</td></tr>
+					{{--<tr style="line-height: 30px; height: 30px"><td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="7" align="center">赠品信息</td></tr>
 					<tr style="line-height: 30px; height: 30px">
 						<td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="2">名称</td>
 						<td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="2">产品货号</td>
@@ -105,7 +105,7 @@
 							<td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="1">{{$val['num']}}</td>
 							<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center" colspan="2">{{$val['origin']}}</td>
 						</tr>
-					@endforeach
+					@endforeach--}}
             		<tr style="line-height: 30px; height: 30px">
             			<td colspan="3" style="border-top: 1px solid #000">{{$tabletitle[1][5]}}</td>
             			<td colspan="2" style="border-top: 1px solid #000">{{$tabletitle[1][6]}}</td>
@@ -140,7 +140,7 @@
             		</tr>
             		@endforeach
             		<tr style="line-height: 30px; height: 30px"><td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="6" align="left">{{$tabletitle[2][4]}}</td></tr>
-					<tr style="line-height: 30px; height: 30px"><td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="6" align="center">赠品信息</td></tr>
+					{{--<tr style="line-height: 30px; height: 30px"><td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="6" align="center">赠品信息</td></tr>
 					<tr style="line-height: 30px; height: 30px">
 						<td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="2">名称</td>
 						<td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="1">产品货号</td>
@@ -154,7 +154,7 @@
 							<td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="1">{{$val['num']}}</td>
 							<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center" colspan="2">{{$val['origin']}}</td>
 						</tr>
-					@endforeach
+					@endforeach--}}
             		<tr style="line-height: 30px; height: 30px">
             			<td colspan="2" style="border-top: 1px solid #000">{{$tabletitle[2][5]}}</td>
             			<td colspan="2" style="border-top: 1px solid #000">{{$tabletitle[2][6]}}</td>
@@ -201,7 +201,7 @@
             			<td style="border-right:1px solid #000;border-top:1px solid #000" colspan="3" align="left">{{$tabletitle[3][5]}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000" colspan="3" align="left">{{$tabletitle[3][6]}}<span tindex="7" tdata="SubSum" format="###,###,###,###,###.00">##########元</span></td>
             		</tr>
-					<tr style="line-height: 30px; height: 30px"><td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="10" align="center">赠品信息</td></tr>
+					{{--<tr style="line-height: 30px; height: 30px"><td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="10" align="center">赠品信息</td></tr>
 					<tr style="line-height: 30px; height: 30px">
 						<td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="3">名称</td>
 						<td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="2">产品货号</td>
@@ -215,7 +215,7 @@
 							<td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="2">{{$val['num']}}</td>
 							<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center" colspan="3">{{$val['origin']}}</td>
 						</tr>
-					@endforeach
+					@endforeach--}}
             		<tr style="line-height: 30px; height: 30px">
             			<td colspan="2" style="border-top: 1px solid #000">{{$tabletitle[3][7]}}</td>
             			<td colspan="3" style="border-top: 1px solid #000">{{$tabletitle[3][8]}}</td>
@@ -261,7 +261,7 @@
 				  <tr style="line-height: 30px; height: 30px">
 					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="10" align="left">{{$tabletitle[4][4]}}</td>
 				  </tr>
-				  <tr style="line-height: 30px; height: 30px"><td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="10" align="center">赠品信息</td></tr>
+				  {{--<tr style="line-height: 30px; height: 30px"><td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="10" align="center">赠品信息</td></tr>
 				  <tr style="line-height: 30px; height: 30px">
 					  <td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="3">名称</td>
 					  <td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="2">产品货号</td>
@@ -275,7 +275,7 @@
 						  <td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="2">{{$val['num']}}</td>
 						  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center" colspan="3">{{$val['origin']}}</td>
 					  </tr>
-				  @endforeach
+				  @endforeach--}}
 				  <tr style="line-height: 30px; height: 30px">
 					  <td colspan="2" style="border-top: 1px solid #000">{{$tabletitle[4][6]}}</td>
 					  <td colspan="3" style="border-top: 1px solid #000">{{$tabletitle[4][7]}}</td>
