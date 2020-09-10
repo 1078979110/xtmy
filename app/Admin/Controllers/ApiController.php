@@ -180,12 +180,10 @@ class ApiController extends AdminController {
                                     continue;
                                 }
                                 if (!$val['产品货号']) {
-                                    //throw new \Exception('数据表数据不正确,第'.($key+2).'行没有设置产品货号');
                                     continue;
                                 }
 
                                 if (!$val['器械名称']) {
-                                    //throw new \Exception('数据表数据不正确,第'.($key+2).'行没有设置器械名称');
                                     continue;
                                 }
                                 $has_insert = Medicinal::where('medicinalnum', $val['产品货号'])->first();
@@ -193,7 +191,6 @@ class ApiController extends AdminController {
                                     continue;
                                 }
                                 if(!$val['厂家']){
-                                    //throw new \Exception('数据表数据不正确,第'.($key+2).'行没有设置厂家');
                                     continue;
                                 }
                                 $producer_id = Producer::where('name',$val['厂家'])->value('id');
@@ -201,7 +198,6 @@ class ApiController extends AdminController {
                                     $producer_id = DB::table('producer')->insertGetId(['name'=>$val['厂家']]);
                                 }
                                 if(!$val['产品线']){
-                                    //throw new \Exception('数据表数据不正确,第'.($key+2).'行没有设置产品线');
                                     continue;
                                 }
                                 $line_id = Productline::where([['linename', $val['产品线']],['producer_id', $producer_id]])->value('id');
@@ -209,7 +205,6 @@ class ApiController extends AdminController {
                                     $line_id = DB::table('productlines')->insertGetId(['linename'=>$val['产品线'],'producer_id'=>$producer_id]);
                                 }
                                 if(!$val['产品分类']){
-                                    //throw new \Exception('数据表数据不正确,第'.($key+2).'行没有设置产品分类');
                                     continue;
                                 }
                                 $category_id = Category::where([['categoryname',$val['产品分类']],['line_id', $line_id],['producer_id',$producer_id]])->value('id');
@@ -271,11 +266,9 @@ class ApiController extends AdminController {
 						foreach($data as $k=>$v){
                             foreach ($v as $key => $val) {
                                 if(empty($val['产品货号'])){//检测到产品货号为空，则认为是导入成功，直接跳出
-                                   //break 2;
                                     continue;
                                 }
                                 if (!isset($val['产品货号']) || empty($val['产品货号']) || !isset($val['价格']) || empty($val['价格'])) {
-                                    //throw new \Exception('数据表格式不正确');
                                     continue;
                                 }
                                 $medicinalid = Medicinal::where('medicinalnum', $val['产品货号'])->value('id');
