@@ -54,7 +54,8 @@ class OrderController extends AdminController
                 $filter->equal('buyertype','订单类型')->select($arr);
             }
         });
-        $grid->model()->orderBy('created_at','desc');
+        $grid->model()->orderBy('id','desc');
+        //$grid->column('id','Id')->sortable();
         $grid->column('orderid','订单号');
         $grid->column('totalprice', '订单金额');
         $grid->column('orderinfo','订单详情')->display(function(){
