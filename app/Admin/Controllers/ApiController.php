@@ -185,24 +185,24 @@ class ApiController extends AdminController {
                             foreach ($v as $key => $val) {
                                 if (!$val['产品货号']) {
                                     $this->errornum ++;
-                                    $this->errorrow .= '第'.($k+2).'行产品货号为空，';
+                                    $this->errorrow .= '第'.($k+1).'表第'.($key+2).'行产品货号为空，';
                                     continue;
                                 }
 
                                 if (!$val['器械名称']) {
                                     $this->errornum ++;
-                                    $this->errorrow .= '第'.($k+2).'行器械名称为空，';
+                                    $this->errorrow .= '第'.($k+1).'表第'.($key+2).'行器械名称为空，';
                                     continue;
                                 }
                                 $has_insert = Medicinal::where('medicinalnum', $val['产品货号'])->first();
                                 if (!empty($has_insert)) {
                                     $this->errornum ++;
-                                    $this->errorrow .= '第'.($k+2).'行已存在，';
+                                    $this->errorrow .= '第'.($k+1).'表第'.($key+2).'行已存在，';
                                     continue;
                                 }
                                 if(!$val['厂家']){
                                     $this->errornum ++;
-                                    $this->errorrow .= '第'.($k+2).'行厂家为空，';
+                                    $this->errorrow .= '第'.($k+1).'表第'.($key+2).'行厂家为空，';
                                     continue;
                                 }
                                 $producer_id = Producer::where('name',$val['厂家'])->value('id');
@@ -211,7 +211,7 @@ class ApiController extends AdminController {
                                 }
                                 if(!$val['产品线']){
                                     $this->errornum ++;
-                                    $this->errorrow .= '第'.($k+2).'行产品线为空，';
+                                    $this->errorrow .= '第'.($k+1).'表第'.($key+2).'行产品线为空，';
                                     continue;
                                 }
                                 $line_id = Productline::where([['linename', $val['产品线']],['producer_id', $producer_id]])->value('id');
@@ -220,7 +220,7 @@ class ApiController extends AdminController {
                                 }
                                 if(!$val['产品分类']){
                                     $this->errornum ++;
-                                    $this->errorrow .= '第'.($k+2).'行产品分类为空，';
+                                    $this->errorrow .= '第'.($k+1).'表第'.($key+2).'行产品分类为空，';
                                     continue;
                                 }
                                 $category_id = Category::where([['categoryname',$val['产品分类']],['line_id', $line_id],['producer_id',$producer_id]])->value('id');
