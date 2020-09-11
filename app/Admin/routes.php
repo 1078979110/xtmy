@@ -42,6 +42,7 @@ Route::group([
     $router->get('/print/jxs','PrintsController@jxsPrint');
     $router->get('/api/gifts','ApiController@gifts');
     $router->get('/excel/updateattr', 'ExcelController@updateAttr');
+    $router->get('excel/order', 'ExcelController@Order');
     
     //自定义接收数据页面
     $router->post('/password/setadmin', 'PasswordController@setAdmin');
@@ -56,4 +57,5 @@ Route::group([
     $router->post('/sites/siteinfo', 'SiteController@siteInfo');
     $router->post('/api/searchm', 'ApiController@searchmedicinal');
     $router->post('/api/updateattr', 'ApiController@updateAttr');
+    $router->post('/api/orders', 'ApiController@Orders');
 });

@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Extensions\Tools\OrderImport;
 use App\Medicinal;
 use App\Order;
 use Encore\Admin\Controllers\AdminController;
@@ -13,8 +14,6 @@ use App\Hospital;
 use Encore\Admin\Facades\Admin;
 use Illuminate\Support\Facades\DB;
 use Encore\Admin\Widgets\Table;
-use App\User;
-use Encore\Admin\Layout\Content;
 class OrderController extends AdminController
 {
     /**
@@ -59,7 +58,7 @@ class OrderController extends AdminController
         $grid->column('orderinfo','订单详情')->display(function(){
             return '<button class="btn btn-primary btn-xs">查看</button>';
         })->modal('订单内容',function() {
-            if (!empty($this->gift) && ($this->gift != 'null')){
+            if (!empty($this->orderinfo) && ($this->gift != 'orderinfo')){
                 $arr = json_decode($this->orderinfo, true);
                 $tp = 0;
                 $sarr = [];
@@ -85,7 +84,7 @@ class OrderController extends AdminController
             return Hospital::where('id',$hospital)->value('hospital');
         });
         $grid->column('赠品内容')->display(function()use($user_roles){
-            if(empty($this->gift) || ($this->gift == 'null')){
+            if(($this->gift == null) || ($this->gift == '[]')){
                 return '无赠品';
             }else{
               return '<button class="btn btn-primary btn-xs">查看</button>';
@@ -213,9 +212,10 @@ EOT;
         });
         $grid->disableCreateButton();
         $grid->disableColumnSelector();
-        $grid->actions(function($actions){
-            $actions->disableView();
-            $actions->disableEdit();
+        $grid->disableActions();
+        $grid->tools(function($tools){
+            //if(Admin::user()->isRole('administrator')) //批量导入经销商订单
+            //$tools->append(new OrderImport());
         });
         return $grid;
     }
