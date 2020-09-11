@@ -202,17 +202,17 @@ EOT;
                 }
             }else {
                 if ($orderstatus == 1) {
-                    $str = '<button class="btn btn-default btn-xs">' . $button_[$orderstatus - 1] . '</button>';
+                    $str = '<button class="btn btn-default btn-xs" style="background-color: #932ab6; border-color:#932ab6; color: white">' . $button_[$orderstatus - 1] . '</button>';
                 }else if($orderstatus == 3){
-                    $str = '<button class="btn btn-primary btn-xs">' . $button_[$orderstatus - 1] . '</button>';
+                    $str = '<button class="btn btn-warning btn-xs" style="background-color: greenyellow; border-color:greenyellow; color: black">' . $button_[$orderstatus - 1] . '</button>';
                 }else if($orderstatus == 4){
-                    $str = '<button class="btn btn-info btn-xs">' . $button_[$orderstatus - 1] . '</button>';
+                    $str = '<button class="btn btn-danger btn-xs" style="background-color: gold; border-color:gold; color: black">' . $button_[$orderstatus - 1] . '</button>';
                 }else if($orderstatus == 5){
-                    $str = '<button class="btn btn-warning btn-xs">' . $button_[$orderstatus - 1] . '</button>';
+                    $str = '<button class="btn btn-primary btn-xs" style="background-color: orangered; border-color: orangered">' . $button_[$orderstatus - 1] . '</button>';
                 }else if($orderstatus == 6){
-                    $str = '<button class="btn btn-danger btn-xs">' . $button_[$orderstatus - 1] . '</button>';
+                    $str = '<button class="btn btn-info btn-xs">' . $button_[$orderstatus - 1] . '</button>';
                 }else{
-                    $str = '<button class="btn btn-success btn-xs">'.$button_[$orderstatus-1].'</button>';
+                    $str = '<button class="btn btn-success btn-xs" style="background-color: #985f0d; border-color:#985f0d">'.$button_[$orderstatus-1].'</button>';
                 }
             }
             Admin::script($js);
