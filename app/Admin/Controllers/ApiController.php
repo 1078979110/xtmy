@@ -195,12 +195,7 @@ class ApiController extends AdminController {
                                     $this->errorrow .= '第'.($k+1).'表第'.($key+2).'行器械名称为空，';
                                     continue;
                                 }
-                                $has_insert = DB::table('medicinal')->where('medicinalnum', $val['产品货号'])->exists();
-                                if ($has_insert) {
-                                    $this->errornum ++;
-                                    $this->errorrow .= '第'.($k+1).'表第'.($key+2).'行已存在，';
-                                    continue;
-                                }
+
                                 if(!$val['厂家']){
                                     $this->errornum ++;
                                     $this->errorrow .= '第'.($k+1).'表第'.($key+2).'行厂家为空，';
@@ -227,6 +222,12 @@ class ApiController extends AdminController {
                                 $category_id = Category::where([['categoryname',$val['产品分类']],['line_id', $line_id],['producer_id',$producer_id]])->value('id');
                                 if(!$category_id){
                                     $category_id = DB::table('categories')->insertGetId(['categoryname'=>$val['产品分类'],'line_id'=> $line_id,'producer_id'=>$producer_id, 'created_at'=>date('Y-m-d H:i:s'), 'updated_at'=>date('Y-m-d H:i:s')]);
+                                }
+                                $has_insert = DB::table('medicinal')->where([['medicinalnum', $val['产品货号']],['producer_id', $producer_id],['line_id',$line_id],['category_id',$category_id]])->exists();
+                                if ($has_insert) {
+                                    $this->errornum ++;
+                                    $this->errorrow .= '第'.($k+1).'表第'.($key+2).'行已存在，';
+                                    continue;
                                 }
                                 $makedate = is_object($val['生产日期']) ? $val['生产日期']->format('Y-m-d H:i:s') : $val['生产日期'];
                                 $invalidate = is_object($val['失效日期']) ? $val['失效日期']->format('Y-m-d H:i:s') : $val['失效日期'];
