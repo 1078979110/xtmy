@@ -22,6 +22,7 @@ use Maatwebsite\Excel\Facades\Excel;
 class ApiController extends AdminController {
     public $errorrow = '';
     public $errornum = 0;
+    public $errorsheet = '';
 	public function line() {
 		$producer_id = $_GET['q'];
 		return Category::getLineIdNameById($producer_id);
@@ -207,7 +208,7 @@ class ApiController extends AdminController {
                                 }
                                 $producer_id = Producer::where('name',$val['厂家'])->value('id');
                                 if(!$producer_id){
-                                    $producer_id = DB::table('producer')->insertGetId(['name'=>$val['厂家']]);
+                                    $producer_id = DB::table('producer')->insertGetId(['name'=>$val['厂家'],'productionlicense'=>$val['许可证号'], 'productionaddress'=> $val['生产厂商'], 'created_at'=>date('Y-m-d H:i:s'), 'updated_at'=>date('Y-m-d H:i:s')]);
                                 }
                                 if(!$val['产品线']){
                                     $this->errornum ++;
@@ -216,7 +217,7 @@ class ApiController extends AdminController {
                                 }
                                 $line_id = Productline::where([['linename', $val['产品线']],['producer_id', $producer_id]])->value('id');
                                 if(!$line_id){
-                                    $line_id = DB::table('productlines')->insertGetId(['linename'=>$val['产品线'],'producer_id'=>$producer_id]);
+                                    $line_id = DB::table('productlines')->insertGetId(['linename'=>$val['产品线'],'producer_id'=>$producer_id, 'created_at'=>date('Y-m-d H:i:s'), 'updated_at'=>date('Y-m-d H:i:s')]);
                                 }
                                 if(!$val['产品分类']){
                                     $this->errornum ++;
@@ -225,7 +226,7 @@ class ApiController extends AdminController {
                                 }
                                 $category_id = Category::where([['categoryname',$val['产品分类']],['line_id', $line_id],['producer_id',$producer_id]])->value('id');
                                 if(!$category_id){
-                                    $category_id = DB::table('categories')->insertGetId(['categoryname'=>$val['产品分类'],'line_id'=> $line_id,'producer_id'=>$producer_id]);
+                                    $category_id = DB::table('categories')->insertGetId(['categoryname'=>$val['产品分类'],'line_id'=> $line_id,'producer_id'=>$producer_id, 'created_at'=>date('Y-m-d H:i:s'), 'updated_at'=>date('Y-m-d H:i:s')]);
                                 }
                                 $makedate = is_object($val['生产日期']) ? $val['生产日期']->format('Y-m-d H:i:s') : $val['生产日期'];
                                 $invalidate = is_object($val['失效日期']) ? $val['失效日期']->format('Y-m-d H:i:s') : $val['失效日期'];
@@ -253,8 +254,7 @@ class ApiController extends AdminController {
 					if($this->errornum == 0){
                         admin_toastr('导入成功', 'success');
                     }else{
-					    $msg = '共'.$this->errornum.'行未导入,结果为：'.$this->errorrow;
-					    admin_warning('警告',$msg);
+                        admin_warning('共'.$this->errornum.'未导入','结果为：'.$this->errorrow);
                     }
 
 					return redirect('/admin/medicinals');
@@ -317,8 +317,7 @@ class ApiController extends AdminController {
 					if($this->errornum == 0) {
                         admin_toastr('导入成功', 'success');
                     }else{
-                        $msg = '共'.$this->errornum.'未导入,结果为：'.$this->errorrow;
-                        admin_warning('警告',$msg);
+                        admin_warning('共'.$this->errornum.'未导入','结果为：'.$this->errorrow);
                     }
 					return redirect('/admin/excel/setprice');
 				} catch (\Exception $e) {
@@ -374,5 +373,97 @@ class ApiController extends AdminController {
         Order::where('id', $data['id'])->update(['orderinfo'=>json_encode($infos)]);
         admin_toastr('操作成功', 'success');
         return redirect('/admin/orders');
+    }
+
+    public function orders(Request $request){
+        if (request()->isMethod('post')) {
+            $this->errornum = 0;
+            $this->errorrow = '';
+            $ext_arr = ['xls', 'xlsx'];
+            $re = $this->uploadFile($request->file('file'), $ext_arr);
+            if ($re['status'] == 'error') {
+                admin_toastr($re['msg'], $re['status']);
+                return redirect('/admin/orders');
+            } else {
+                $filename = $re['info'];
+                $real_file = str_replace('\\','/','storage/' . $filename);
+                if (!is_file($real_file)) {
+                    admin_toastr('文件不存在！', 'error');
+                    return redirect('/admin/orders');
+                }
+                try{
+                    Excel::load($real_file, function ($reader){
+                        $insertdata = $reader->all()->toArray(true);
+                        foreach ($insertdata as $key=>$val){
+                            $data = [
+                                'orderid' => date('Ymd', time()) . rand(1000, 9999),
+                                'ordermonth' => date('Ym', time()),
+                                'buyertype' => 1,
+                                'orderstatus' => 3,
+                                'totalprice' => 0,
+                                'created_at' => date('Y-m-d H:i:s', time()),
+                                'updated_at' => date('Y-m-d H:i:s', time())
+                            ];
+                            $info = [];
+                            foreach ($val as $k=>$v){
+                                if($k == 0){
+                                    $data['buyerid'] = Salelist::where('telephone', $v['经销商'])->value('id');
+                                    if(!$data['buyerid']){
+                                        $this->errornum++;
+                                        $this->errorsheet = $v['经销商'].'表：经销商不存在';
+                                        break 2;
+                                    }else{
+                                        $this->errorsheet = $v['经销商'].'表：';
+                                    }
+                                }
+                                if(!$v['产品货号']){
+                                    $this->errornum++;
+                                    $this->errorsheet .= '第'.($k+2).'行产品货号不存在';
+                                    break 2;
+                                }
+                                if(!$v['数量']){
+                                    $this->errornum++;
+                                    $this->errorsheet .= '第'.($k+2).'行数量不存在';
+                                    break 2;
+                                }
+                                if(!$v['价格']){
+                                    $this->errornum++;
+                                    $this->errorsheet .= '第'.($k+2).'行价格不存在';
+                                    break 2;
+                                }
+                                $medicinalinfo = Medicinal::where('medicinalnum', $v['产品货号'])->first();
+                                if(!$medicinalinfo){
+                                    $this->errornum++;
+                                    $this->errorsheet .= '第'.($k+2).'行产品货号产品不存在';
+                                    break 2;
+                                }
+
+                                $info[] = [
+                                    'id' => $medicinalinfo->id,
+                                    'medicinal' => $medicinalinfo->medicinal,
+                                    'medicinalnum' => $v['产品货号'],
+                                    'price' => round($v['价格'],2),
+                                    'unit' => $medicinalinfo->unit,
+                                    'num' => $v['数量']
+                                ];
+                                $data['totalprice'] += round($v['价格'],2)*$v['数量'];
+                                $data['orderinfo'] = json_encode($info);
+                            }
+                            DB::table('orders')->insert($data);
+                        }
+                    });
+                    if($this->errornum == 0){
+                        admin_toastr('导入成功','success');
+                    }else{
+                        admin_warning('未导入订单',$this->errorsheet);
+                    }
+                    return redirect('/admin/orders');
+                }catch (\Exception $e){
+                    $msg = $e->getMessage();
+                    admin_error($msg);
+                    return redirect('/admin/orders');
+                }
+            }
+        }
     }
 }
