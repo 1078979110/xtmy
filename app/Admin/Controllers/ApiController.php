@@ -223,12 +223,12 @@ class ApiController extends AdminController {
                                 if(!$category_id){
                                     $category_id = DB::table('categories')->insertGetId(['categoryname'=>$val['产品分类'],'line_id'=> $line_id,'producer_id'=>$producer_id, 'created_at'=>date('Y-m-d H:i:s'), 'updated_at'=>date('Y-m-d H:i:s')]);
                                 }
-                                $has_insert = DB::table('medicinal')->where([['medicinalnum', $val['产品货号']],['producer_id', $producer_id],['line_id',$line_id],['category_id',$category_id]])->exists();
+                                /*$has_insert = DB::table('medicinal')->where([['medicinalnum', $val['产品货号']],['producer_id', $producer_id],['line_id',$line_id],['category_id',$category_id]])->exists();
                                 if ($has_insert) {
                                     $this->errornum ++;
                                     $this->errorrow .= '第'.($k+1).'表第'.($key+2).'行已存在，';
                                     continue;
-                                }
+                                }*/
                                 $makedate = is_object($val['生产日期']) ? $val['生产日期']->format('Y-m-d H:i:s') : $val['生产日期'];
                                 $invalidate = is_object($val['失效日期']) ? $val['失效日期']->format('Y-m-d H:i:s') : $val['失效日期'];
                                 $registivalidate = is_object($val['注册证失效日期']) ? $val['注册证失效日期']->format('Y-m-d H:i:s') : $val['注册证失效日期'];
