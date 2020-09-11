@@ -374,15 +374,7 @@ class ApiController extends AdminController {
         admin_toastr('操作成功', 'success');
         return redirect('/admin/orders');
     }
-
-    protected function checkOrderId($orderid){
-        $has = DB::table('orders')->where('orderid', $orderid)->exists();
-        if($has){
-            $orderid = date('Ymd', time()) . rand(1000, 9999);
-            $orderid = $this->checkOrderId($orderid);
-        }
-            return $orderid;
-    }
+    
 
     public function orders(Request $request){
         if (request()->isMethod('post')) {
