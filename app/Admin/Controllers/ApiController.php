@@ -370,6 +370,7 @@ class ApiController extends AdminController {
             $infos[$key]['invalidate'] = $data['info'][$info['id']]['invalidate'];
             $infos[$key]['boxformat'] = $data['info'][$info['id']]['boxformat'];
             $infos[$key]['novirus'] = $data['info'][$info['id']]['novirus'];
+            $infos[$key]['originmake'] = $data['info'][$info['id']]['originmake'];
         }
         Order::where('id', $data['id'])->update(['orderinfo'=>json_encode($infos)]);
         admin_toastr('操作成功', 'success');

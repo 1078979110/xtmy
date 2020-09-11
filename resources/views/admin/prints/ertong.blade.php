@@ -34,22 +34,7 @@
     			
     		</tr>
     		@endforeach
-    		<tr style="line-height: 30px; height: 30px"><td colspan="10" style="border-top: 1px solid #000;border-left:1px solid #000;border-right:1px solid #000;">{{$tabletitle[8]}}{{$total}}</td></tr>
-			<tr style="line-height: 30px; height: 30px"><td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="10" align="center">赠品信息</td></tr>
-			<tr style="line-height: 30px; height: 30px">
-				<td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="3">名称</td>
-				<td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="2">产品货号</td>
-				<td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="2">数量</td>
-				<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center" colspan="3">来源</td>
-			</tr>
-			@foreach($gift as $key=>$val)
-				<tr style="line-height: 30px; height: 30px">
-					<td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="3">{{$val['medicinal']}}</td>
-					<td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="2">{{$val['medicinalnum']}}</td>
-					<td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="2">{{$val['num']}}</td>
-					<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center" colspan="3">{{$val['origin']}}</td>
-				</tr>
-			@endforeach
+			<tr style="line-height: 30px; height: 30px"><td colspan="10" style="border-top: 1px solid #000;border-left:1px solid #000;border-right:1px solid #000;">{{$tabletitle[8]}}{{$total}}</td></tr>
     		<tr style="line-height: 30px; height: 30px">
     			<td colspan="3" style="border-top: 1px solid #000">{{$tabletitle[9]}}</td>
     			<td colspan="4" style="border-top: 1px solid #000">{{$tabletitle[10]}}</td>
@@ -58,45 +43,36 @@
     	</tbody>
     </table>
 	  </div>
-	  {{--<div class="horizontal">
+	  <div class="horizontal" style="margin-top: 10px">
 		  <div class="form-group" id="template_forfinance" style="margin:0; padding:0">
 			  <table style="font-size:14px;" cellpadding="0" cellspacing="0">
 				  <tbody>
-				  <tr><td colspan="6" align="center" style="font-size: 16px; font-weight:bold">{{$financename[0]}}</td></tr>
-				  <tr><td colspan="3" align="left">{{$financename[1]}}</td><td colspan="3" align="right">{{$financename[2]}}</td></tr>
+				  <tr style="line-height: 30px; height: 30px"><td colspan="10" align="center" style="font-size: 16px; font-weight:bold">赠品信息</td></tr>
+				  <tr style="line-height: 30px; height: 30px"><td colspan="10">{{$tabletitle[5]}}</td></tr>
 				  <tr style="line-height: 30px; height: 30px">
-					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:200px" align="center">{{$financedatatitle[0]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$financedatatitle[1]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$financedatatitle[2]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$financedatatitle[3]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$financedatatitle[4]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$financedatatitle[5]}}</td>
+					  <td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="3">名称</td>
+					  <td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="2">产品货号</td>
+					  <td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="2">数量</td>
+					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center" colspan="3">来源</td>
 				  </tr>
-				  @foreach($lists as $key => $list)
+				  @foreach($gift as $key=>$val)
 					  <tr style="line-height: 30px; height: 30px">
-						  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['specification']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['prices']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center"></td>
+						  <td style="border-left:1px solid #000;border-top:1px solid #000; border-bottom: 1px solid #000" align="center" colspan="3">{{$val['medicinal']}}</td>
+						  <td style="border-left:1px solid #000;border-top:1px solid #000; border-bottom: 1px solid #000" align="center" colspan="2">{{$val['medicinalnum']}}</td>
+						  <td style="border-left:1px solid #000;border-top:1px solid #000; border-bottom: 1px solid #000" align="center" colspan="2">{{$val['num']}}</td>
+						  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; border-bottom: 1px solid #000" align="center" colspan="3">{{$val['origin']}}</td>
 					  </tr>
 				  @endforeach
-
-				  <tr style="line-height: 30px; height: 30px">
-					  <td colspan="3" style="border-top: 1px solid #000">{{$financename[3]}}</td>
-					  <td colspan="3" style="border-top: 1px solid #000">{{$financename[4]}}<span tindex="5" tdata="SubSum" format="###,###,###,###,###.00">##########元</span></td>
-				  </tr>
 				  </tbody>
 			  </table>
 		  </div>
-	  </div>--}}
+	  </div>
   </div>
   <div class="panel-footer">
 	  <button type="button" class="btn btn-primary" onclick="print_view('table');">预览随货同行单</button>
 	  <button type="button" class="btn btn-primary" onclick="print('table');">打印随货同行单</button>
-	  {{--<button type="button" class="btn btn-info" onclick="print_view('template_forfinance');">预览出库单</button>
-	  <button type="button" class="btn btn-info" onclick="print('template_forfinance');">打印出库单</button>--}}
+	  <button type="button" class="btn btn-info" onclick="print_view('template_forfinance');">预览赠品单</button>
+	  <button type="button" class="btn btn-info" onclick="print('template_forfinance');">打印赠品单</button>
   </div>
 </div>
 <script language="javascript" src="/js/LodopFuncs.js"></script>

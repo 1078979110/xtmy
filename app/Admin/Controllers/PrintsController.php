@@ -212,6 +212,7 @@ class PrintsController extends AdminController{
                 'boxformat' =>isset($val['boxformat'])?$val['boxformat']:'',//装箱规格
                 'novirus' =>isset($val['novirus'])?$val['novirus']:'',//灭菌批号
                 'depart' => '',//部门
+                'originmake'=> isset($val['originmake'])?$val['originmake']:''//原产地
             );
         }
         $gift_arr = !empty(json_decode($orderAllInfo['gift'], true))?json_decode($orderAllInfo['gift'], true):[];
@@ -245,7 +246,7 @@ class PrintsController extends AdminController{
                 $headername['hk'][0].$hospitalinfo['hospital'],
                 $headername['hk'][1].$orderAllInfo['orderid'],
                 $headername['hk'][2],
-                $headername['hk'][3],
+                $headername['hk'][3].$buyername,
                 $headername['hk'][4],
                 $headername['hk'][5].date('Y-m-d',strtotime($orderAllInfo['created_at'])),
                 $headername['hk'][6],
@@ -263,8 +264,8 @@ class PrintsController extends AdminController{
             $tabletitle = [$title, 
                 $headername['xzb'][0].$orderAllInfo['orderid'],
                 $headername['xzb'][1].date('Y-m-d',strtotime($orderAllInfo['created_at'])),
-                $sendcompany,
-                $hospitalinfo['hospital'],
+                $headername['xzb'][2].$sendcompany,
+                $headername['xzb'][3].$hospitalinfo['hospital'],
                 $headername['xzb'][4],
                 $headername['xzb'][5],
                 $headername['xzb'][6],
@@ -277,14 +278,14 @@ class PrintsController extends AdminController{
         }else if($hospitalinfo['hospital'] == '武汉亚心总医院有限公司'){
             $title = $ext1;
             $tabletitle = [$title,
-                $headername['xzb'][0].$orderAllInfo['orderid'],
-                $headername['xzb'][1].date('Y-m-d',strtotime($orderAllInfo['created_at'])),
-                $sendcompany,
-                $hospitalinfo['hospital'],
-                $headername['xzb'][4],
-                $headername['xzb'][5],
-                $headername['xzb'][6],
-                $headername['xzb'][7]
+                $headername['yx'][0].$orderAllInfo['orderid'],
+                $headername['yx'][1].date('Y-m-d',strtotime($orderAllInfo['created_at'])),
+                $headername['yx'][2].$sendcompany,
+                $headername['yx'][3].$hospitalinfo['hospital'],
+                $headername['yx'][4],
+                $headername['yx'][5],
+                $headername['yx'][6],
+                $headername['yx'][7]
             ];
             $content->body(view('admin.prints.yaxin',
                 ['tabletitle'=>$tabletitle,'datatitle'=>$dataname['xzb'],'lists'=>$data, 'gift'=>$gifts,'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn, 'financename'=>$financename, 'financedatatitle'=>$financedatatitle]
@@ -343,7 +344,7 @@ class PrintsController extends AdminController{
         }else if($hospitalinfo['hospital'] == '武汉大学人民医院'){
             $title = $hospitalinfo['hospital'].$ext2;
             $tabletitle = [$title,
-                $headername['rm'][0].$hospitalinfo['hospital'],
+                $headername['rm'][0].$sendcompany,
                 $headername['rm'][1].date('Y/m/d',strtotime($orderAllInfo['created_at'])),
                 $headername['rm'][2],
                 $headername['rm'][3]
@@ -355,7 +356,7 @@ class PrintsController extends AdminController{
         }else if($hospitalinfo['hospital'] == '省妇幼'){
             $title = $hospitalinfo['hospital'].$ext;
             $tabletitle = [$title,
-                $headername['fy'][0].$sendcompany,
+                $headername['fy'][0].$hospitalinfo['hospital'],
                 $headername['fy'][1].$orderAllInfo['orderid'],
                 $headername['fy'][2],
                 $headername['fy'][3].$buyername,
