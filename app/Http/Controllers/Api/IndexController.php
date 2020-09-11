@@ -138,6 +138,7 @@ class IndexController extends Controller {
 	 */
 	public function lineList(Request $request) {
 	    $pname = $request->pid;
+        $pname = str_replace('-','&',$pname);
 	    $pid = Producer::where('name',$pname)->value('id');
 		$lines = Productline::where('producer_id', $pid)->pluck('linename')->toArray(true);
         array_splice($lines, 0, 0, '产品线');
@@ -150,8 +151,12 @@ class IndexController extends Controller {
 	 */
 	public function categoryList(Request $request) {
 	    $lname = $request->lid;
-	    $lid = Productline::where('linename',$lname)->value('id');
-		$categories = Category::where('line_id', $lid)->pluck('categoryname')->toArray(true);
+	    $pname = $request->pid;
+	    $pname = str_replace('-','&',$pname);
+        $pid = Producer::where('name', $pname)->value('id');
+	    $lid = Productline::where([['linename',$lname],['producer_id', $pid]])->value('id');
+		$categories = Category::where([['producer_id', $pid],['line_id', $lid]])->pluck('categoryname')->toArray(true);
+
         array_splice($categories, 0, 0, '分类');
 		return $this->successData('分类', ['list' => $categories]);
 	}
@@ -189,15 +194,17 @@ class IndexController extends Controller {
 		$producerid = '';
 		$lineid = '';
 		$categoryid = '';
+        $pname = str_replace('-','&',$pid);
 		if ($pid) {
 			$producerid = Producer::where('name', $pid)->value('id');
 		}
 		if ($lid) {
-			$lineid = Productline::where('linename', $lid)->value('id');
+			$lineid = Productline::where([['linename', $lid],['producer_id',$producerid]])->value('id');
 		}
 		if ($cid) {
-			$categoryid = Category::where('categoryname', $cid)->value('id');
+			$categoryid = Category::where([['categoryname', $cid],['producer_id', $producerid],['line_id',$lineid]])->value('id');
 		}
+		DB::connection()->enableQueryLog();
 		$data = Medicinal::where('status', 0)->where(function ($db) use ($producerid, $lineid, $categoryid) {
 			if ($producerid != '') {
 				$db->where('producer_id', $producerid)->where(function ($db) use ($lineid, $categoryid) {
