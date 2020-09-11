@@ -26,7 +26,7 @@ class ProducerController extends AdminController {
 		$grid->column('id', 'ID');
 		$grid->column('name', '厂家');
 		$grid->column('productionlicense', '许可证书');
-		$grid->column('productionaddress', '生产地址');
+		$grid->column('productionaddress', '生产厂商');
 		$grid->column('image', '图片')->image();
 		$states = [
 			'on' => ['value' => 1, 'text' => '是', 'color' => 'success'],
