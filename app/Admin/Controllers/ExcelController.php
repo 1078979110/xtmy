@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Hospital;
 use App\Order;
 use Illuminate\Http\Request;
+use Encore\Admin\Widgets\Form;
 class ExcelController extends AdminController{
     public function excel(Content $content){
         $url = $_SERVER['HTTP_REFERER'];
@@ -66,10 +67,19 @@ class ExcelController extends AdminController{
             $infos[$key]['makedate'] = empty($info['makedate'])?'':$info['makedate'];
             $infos[$key]['boxformat'] = empty($info['boxformat'])?'':$info['boxformat'];
             $infos[$key]['novirus'] = empty($info['novirus'])?'':$info['novirus'];
+            $infos[$key]['originmake'] = empty($info['originmake'])?'':$info['originmake'];
         }
         $content->body(view('admin.order.updateattr', ['products'=>$infos,'id'=>$oid])->render());
         return $content;
     }
     
-    
+    public function order(Content $content){
+        $content->title('订单导入');
+        $form = new Form();
+        $form->action('/admin/api/orders');
+        $form->file('file', '订单excel')->rules('mimes:xls,xlsx')->required();
+        $content->body($form);
+        return $content;
+
+    }
 }
