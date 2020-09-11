@@ -534,7 +534,7 @@ class IndexController extends Controller {
 		$lists = $request['data'];
 		$gift = $request->gift;
 		$data = [];
-		$data['orderid'] = date('Ymd', time()) . rand(1000, 9999);
+		//$data['orderid'] = date('Ymd', time()) . rand(1000, 9999);
 		$data['ordermonth'] = date('Ym', time());
         if (isset($userinfo->type) && $userinfo->type == 2) {
 
@@ -551,6 +551,7 @@ class IndexController extends Controller {
 		}
 		$data['buyerid'] = $userinfo['id'];
 		$data['buyertype'] = $userinfo['type'];
+		$data['orderid'] = date('YmdHis', time()) .$data['buyerid']. rand(100, 999);
 		$orderinfo = [];
         $giftinfo = [];
 		$total = 0;

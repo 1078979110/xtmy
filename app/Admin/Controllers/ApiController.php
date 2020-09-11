@@ -375,6 +375,15 @@ class ApiController extends AdminController {
         return redirect('/admin/orders');
     }
 
+    protected function checkOrderId($orderid){
+        $has = DB::table('orders')->where('orderid', $orderid)->exists();
+        if($has){
+            $orderid = date('Ymd', time()) . rand(1000, 9999);
+            $orderid = $this->checkOrderId($orderid);
+        }
+            return $orderid;
+    }
+
     public function orders(Request $request){
         if (request()->isMethod('post')) {
             $this->errornum = 0;
@@ -396,7 +405,7 @@ class ApiController extends AdminController {
                         $insertdata = $reader->all()->toArray(true);
                         foreach ($insertdata as $key=>$val){
                             $data = [
-                                'orderid' => date('Ymd', time()) . rand(1000, 9999),
+                                //'orderid' => date('Ymd', time()) . rand(1000, 9999),
                                 'ordermonth' => date('Ym', time()),
                                 'buyertype' => 1,
                                 'orderstatus' => 3,
@@ -410,10 +419,11 @@ class ApiController extends AdminController {
                                     $data['buyerid'] = Salelist::where('telephone', $v['经销商'])->value('id');
                                     if(!$data['buyerid']){
                                         $this->errornum++;
-                                        $this->errorsheet = $v['经销商'].'表：经销商不存在';
+                                        $this->errorsheet .= $v['经销商'].'表：经销商不存在';
                                         break 2;
                                     }else{
-                                        $this->errorsheet = $v['经销商'].'表：';
+                                        $data['orderid'] = date('YmdHis', time()).$data['buyerid']. rand(100, 999);
+                                        $this->errorsheet .= $v['经销商'].'表：';
                                     }
                                 }
                                 if(!$v['产品货号']){
