@@ -200,9 +200,17 @@ EOT;
                 }else{
                     $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button>';
                 }
-            }else{
-                if($orderstatus !=7){
-                    $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button>';
+            }else {
+                if ($orderstatus == 1) {
+                    $str = '<button class="btn btn-default btn-xs">' . $button_[$orderstatus - 1] . '</button>';
+                }else if($orderstatus == 3){
+                    $str = '<button class="btn btn-primary btn-xs">' . $button_[$orderstatus - 1] . '</button>';
+                }else if($orderstatus == 4){
+                    $str = '<button class="btn btn-info btn-xs">' . $button_[$orderstatus - 1] . '</button>';
+                }else if($orderstatus == 5){
+                    $str = '<button class="btn btn-warning btn-xs">' . $button_[$orderstatus - 1] . '</button>';
+                }else if($orderstatus == 6){
+                    $str = '<button class="btn btn-danger btn-xs">' . $button_[$orderstatus - 1] . '</button>';
                 }else{
                     $str = '<button class="btn btn-success btn-xs">'.$button_[$orderstatus-1].'</button>';
                 }
