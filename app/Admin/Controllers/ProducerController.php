@@ -53,7 +53,7 @@ class ProducerController extends AdminController {
 		$show->field('id', 'ID');
 		$show->field('name', '厂家');
 		$show->field('productionlicense', '许可证书');
-		$show->field('productionaddress', '生产地址');
+		$show->field('productionaddress', '生产厂商');
 		$show->field('created_at', '创建时间');
 		$show->field('updated_at', '修改时间');
 
@@ -74,7 +74,7 @@ class ProducerController extends AdminController {
 		$form = new Form(new Producer());
 		$form->text('name', '厂家名称')->rules('required|max:50');
 		$form->text('productionlicense', '生产许可')->rules('required|max:50');
-		$form->text('productionaddress', '生产地址');
+		$form->text('productionaddress', '生产厂商');
 		$form->image('image', '图片')->help('图片尺寸：380*300');
 		$states = [
 			'on' => ['value' => 1, 'text' => '是', 'color' => 'success'],
