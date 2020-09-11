@@ -195,8 +195,8 @@ class ApiController extends AdminController {
                                     $this->errorrow .= '第'.($k+1).'表第'.($key+2).'行器械名称为空，';
                                     continue;
                                 }
-                                $has_insert = Medicinal::where('medicinalnum', $val['产品货号'])->first();
-                                if (!empty($has_insert)) {
+                                $has_insert = DB::table('medicinal')->where('medicinalnum', $val['产品货号'])->exists();
+                                if ($has_insert) {
                                     $this->errornum ++;
                                     $this->errorrow .= '第'.($k+1).'表第'.($key+2).'行已存在，';
                                     continue;
