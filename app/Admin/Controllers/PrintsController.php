@@ -26,11 +26,13 @@ class PrintsController extends AdminController{
         $tabletitle[2] = ['购货单位：','编号：','部门：','日期：','合计：','发货员：','复核员：','客户签收：'];
         $tabletitle[3] = ['购货单位：','单据号：','地址：','日期：','合计(大写)：','总金额：','本页小计：','发货员：','复核员：','储运条件：常温库','签收：','发货地址：','联系电话：','非质量问题概不退换'];
         $tabletitle[4] = ['购货单位：','单据号：','收货地址：', '日期：', '合计（大写）：','本页小计：', '发货员：', '复核员：', '储运条件：常温库', '签收：','发货地址：','联系电话：','非质量问题概不退换'];
+        $tabletitle[5] = ['购货单位：','单号：', '收货地址：', '日期：','合计（大写）：','本页小计：','发货员：', '复核员：', '储运条件：常温库', '签收：','发货地址：','联系电话：','非质量问题概不退换'];
         $datatitle[0] = ['序号','产品名称','规格型号','数量','单位','批号','失效日期','注册证号'];
         $datatitle[1] = ['器械名称','规格型号','单位','数量','单价','批号','有效期至'];
         $datatitle[2] = ['器械名称','规格型号','单位','数量','批号','有效期至'];
         $datatitle[3] = ['器械名称','生产商','规格型号','单位','数量','单价','金额','批号','注册证号','有效期至'];
         $datatitle[4] = ['器械名称', '生产厂商', '生产企业许可证', '规格型号', '单位','数量', '批号', '注册证号', '生产日期', '失效日期'];
+        $datatitle[5] = ['器械名称', '生产厂商', '许可证号', '规格型号', '单位','数量', '批号', '注册证号', '生产日期', '有效期至'];;
         $financetitle = ['购货单位：','日期：', '合计（大写）', '本页小计：',];
         $financedatatitle = ['器械名称','规格型号','单位','数量','金额', '备注'];
         $dataname = [];//表格各项信息
@@ -100,7 +102,7 @@ class PrintsController extends AdminController{
             $tabletitle[3][8],
             $tabletitle[3][9],
             $tabletitle[3][10],
-            $tabletitle[3][11].$siteinfo['address'],
+            $tabletitle[3][11].$siteinfo['siteaddress'],
             $tabletitle[3][12].$siteinfo['telephone'],
             $tabletitle[3][13]
         ];
@@ -119,6 +121,21 @@ class PrintsController extends AdminController{
             $tabletitle[4][11].$siteinfo['telephone'],
             $tabletitle[4][12]
 
+        ];
+        $dataname[5] = [
+            $tabletitle[5][0].$jxsinfo['name'],
+            $tabletitle[5][1].$orderinfo['orderid'],
+            $tabletitle[5][2].$jxsinfo['address'],
+            $tabletitle[5][3].date('Y/m/d', time()),
+            $tabletitle[5][4],
+            $tabletitle[5][5],
+            $tabletitle[5][6],
+            $tabletitle[5][7],
+            $tabletitle[5][8],
+            $tabletitle[5][9],
+            $tabletitle[5][10].$siteinfo['siteaddress'],
+            $tabletitle[5][11].$siteinfo['telephone'],
+            $tabletitle[5][12]
         ];
         $financename = [
             $siteinfo['sitename'].$ext2,
