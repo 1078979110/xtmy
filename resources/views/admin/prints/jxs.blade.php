@@ -250,7 +250,8 @@
 					  </tr>
 				  @endforeach
 				  <tr style="line-height: 30px; height: 30px">
-					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="10" align="left">{{$tabletitle[5][4]}}</td>
+					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="7" align="left">{{$tabletitle[5][4]}}</td>
+					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="3" align="left">{{$tabletitle[5][5]}}</td>
 				  </tr>
 				  <tr style="line-height: 30px; height: 30px">
 					  <td colspan="2" style="border-top: 1px solid #000">{{$tabletitle[5][6]}}</td>
