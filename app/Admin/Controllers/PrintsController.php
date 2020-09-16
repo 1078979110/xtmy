@@ -12,7 +12,9 @@ use Encore\Admin\Layout\Content;
 use App\Prints;
 class PrintsController extends AdminController{
     public function jxsPrint(Content $content){
-        $orderid = request()->get('id');
+        $request = request();
+        $orderid = $request->id;
+        $zy = isset($request->zhuanyun)?$request->zhuanyun:0;
         $jxsid = Order::where('id',$orderid)->value('buyerid');
         $jxsinfo = Salelist::find($jxsid)->toArray(true);//经销商信息
         $orderinfo = Order::find($orderid)->toArray(true);
@@ -36,6 +38,11 @@ class PrintsController extends AdminController{
         $financetitle = ['购货单位：','日期：', '合计（大写）', '本页小计：',];
         $financedatatitle = ['器械名称','规格型号','单位','数量','金额', '备注'];
         $dataname = [];//表格各项信息
+        $zhuanyun = [];
+        $zhuanyun['header'] = '现有我公司今日订购一批货，特委托国药集团上海医疗器械有限公司直接发货给湖北省武汉市东西湖区金银潭大道130号临空一号企业总部2栋4 楼， 陈雷 ，电话15802715519。 请随货请附检验报告。特此证明。';
+        $zhuanyun['title'] = ['产品编号','产品名称','单位','数量'];
+        $zhuanyun['footer'] = $siteinfo['sitename'];
+        $zhuanyun['date'] = date('Y.m.d', time());
         $totalprice = 0;
         $data = [];
         $infos = json_decode($orderinfo['orderinfo'], true);
@@ -150,10 +157,25 @@ class PrintsController extends AdminController{
             return redirect('/admin/orders');
         }
         $content->title($jxsinfo['name'].$ext);
-        $id = request()->get('id');
-        $content->body(view('admin.prints.jxs',
-            ['title'=>$siteinfo['sitename'].$ext,'tabletitle'=>$dataname,'datatitle'=>$datatitle,'lists'=>$data,'gift'=>$gifts, 'jsondata'=>json_encode($data) ,'total'=>$totalprice, 'totalcn'=>$totalcn,'financename'=>$financename, 'financedatatitle'=>$financedatatitle]
+        //$id = request()->get('id');
+
+        if($zy == '1'){
+            $content->body(view('admin.prints.zhuanyun',
+                [
+                    'title'=>$siteinfo['sitename'].$ext,'tabletitle'=>$dataname,'datatitle'=>$datatitle,
+                    'lists'=>$data,'gift'=>$gifts, 'jsondata'=>json_encode($data) ,'total'=>$totalprice,
+                    'totalcn'=>$totalcn,'financename'=>$financename, 'financedatatitle'=>$financedatatitle, 'zhuanyun'=>$zhuanyun
+                ]
             )->render());
+        }else{
+            $content->body(view('admin.prints.jxs',
+                [
+                    'title'=>$siteinfo['sitename'].$ext,'tabletitle'=>$dataname,'datatitle'=>$datatitle,
+                    'lists'=>$data,'gift'=>$gifts, 'jsondata'=>json_encode($data) ,'total'=>$totalprice,
+                    'totalcn'=>$totalcn,'financename'=>$financename, 'financedatatitle'=>$financedatatitle, 'zhuanyun'=>$zhuanyun
+                ]
+            )->render());
+        }
         return $content;
     }
     
