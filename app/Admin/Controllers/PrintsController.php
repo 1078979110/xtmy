@@ -141,7 +141,7 @@ class PrintsController extends AdminController{
             $siteinfo['sitename'].$ext2,
             $financetitle[0].$jxsinfo['name'],
             $financetitle[1].date('Y/m/d', time()),
-            $financetitle[2].$this->get_amount($totalprice),
+            $financetitle[2],
             $financetitle[3]
         ];
         $totalcn = $this->get_amount($totalprice);
