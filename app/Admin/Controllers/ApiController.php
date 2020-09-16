@@ -239,7 +239,7 @@ class ApiController extends AdminController {
                                 $value['producer_id'] = $producer_id;
                                 $value['line_id'] = $line_id;
                                 $value['category_id'] = $category_id;
-                                $value['specification'] = isset($val['规格']) ? $val['规格'] : '';
+                                $value['specification'] = isset($val['规格型号']) ? $val['规格型号'] : '';
                                 $value['unit'] = isset($val['单位'])?$val['单位']:'';
                                 $value['batchnumber'] = isset($val['批号']) ? $val['批号'] : '';
                                 $value['makedate'] = $makedate;
@@ -468,6 +468,19 @@ class ApiController extends AdminController {
                     return redirect('/admin/orders');
                 }
             }
+        }
+    }
+
+    public function diaoDu(Request $request){
+        $id = $request->id;
+        $diaodu = $request->diaodu;
+        foreach ($diaodu as $key => $item){
+            $_d = [
+                'orderid'=>$id,
+                'medicinalid' => $item['medicinalid'],
+                'num' => $item['num'],
+                'warehouseid' => $item['warehouseid']
+            ];
         }
     }
 }
