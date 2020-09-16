@@ -35,9 +35,9 @@ class OrderController extends AdminController
         $username = DB::table('admin_users')->where('id',$user_id)->value('username');
         $buyerid = Salelist::where('telephone',$username)->value('id');
         $user_roles = Admin::user()->roles->toArray();
-        if($user_roles[0]['id'] ==4 || $user_roles[0]['id'] ==5){//如果是销售人员（包括经销商）则只能查询自己名下的订单，其他分组不受限制
+        /*if($user_roles[0]['id'] ==4 || $user_roles[0]['id'] ==5){//如果是销售人员（包括经销商）则只能查询自己名下的订单，其他分组不受限制
             $grid->model()->where('buyerid',$buyerid);
-        }
+        }*/
         
         $grid->filter(function($filter)use($user_roles){
             $filter->disableIdFilter();
@@ -144,6 +144,10 @@ class OrderController extends AdminController
                 window.location.href='/admin/print/hostpital?id='+id;
                 }
             });
+            $(".zhuanyun").click(function(){
+                id = $(this).attr('data-id');
+                window.location.href='/admin/print/jxs?id='+id+'&zhuanyun=1';
+            });
             $(".over").click(function(){
                 id = $(this).attr('data-id');
                 $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
@@ -164,19 +168,7 @@ class OrderController extends AdminController
 EOT;
             $str = '';
             $button_ = ['待确认','待报价','待报价','待审核','待发货','已出库','已完成'];
-            /*if($user_roles[0]['id'] == 4){//业务员组
-                if($orderstatus ==1){
-                    $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button> | <button class="btn btn-warning btn-xs comfirmorder" data-id="'.$this->id.'">确认订单</button>';
-                }else{
-                    $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button>';
-                }
-            }else if($user_roles[0]['id'] == 5){//经销商组
-                if($orderstatus ==2){
-                    $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button>';
-                }else{
-                    $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button>';
-                }
-            }else*/ if($user_roles[0]['id'] == 6){//批发部
+            if($user_roles[0]['id'] == 6){//批发部
                 if($orderstatus == 3 || $orderstatus ==2){
                     $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button> | <button class="btn btn-warning btn-xs comfirmorder" data-id="'.$this->id.'">确认报价</button> | <button class="btn btn-danger btn-xs changeprice" data-id="'.$this->id.'">改价</button>';
                 }else{
@@ -193,8 +185,11 @@ EOT;
                     $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button> | <button class="btn btn-warning btn-xs updateattr" data-id="'.$this->id.'">补充信息</button> | <button class="btn btn-warning btn-xs comfirmorder" data-id="'.$this->id.'">开始发货</button>';
                 }else if( $orderstatus == 6 ){//确定发货，打印出货单
                     $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button> | <button class="btn btn-warning btn-xs updateattr" data-id="'.$this->id.'">补充信息</button> | 
-                            <button class="btn btn-warning btn-xs print" data-type="'.$this->buyertype.'" data-id="'.$this->id.'">打印出货单</button> | 
-                            <button class="btn btn-danger btn-xs over" data-id="'.$this->id.'">确认完成</button>';
+                            <button class="btn btn-warning btn-xs print" data-type="'.$this->buyertype.'" data-id="'.$this->id.'">打印出货单</button> | ';
+                    if($this->buyertype ==1){
+                        $str .= '<button class="btn btn-warning btn-xs zhuanyun" data-id="'.$this->id.'">转运证明</button> | ';
+                    }
+                        $str .= '<button class="btn btn-danger btn-xs over" data-id="'.$this->id.'">确认完成</button>';
                 }else if($orderstatus == 7){
                     $str = '<button class="btn btn-success btn-xs">'.$button_[$orderstatus-1].'</button>';
                 }else{
@@ -218,6 +213,25 @@ EOT;
             Admin::script($js);
             return $str;
         });
+        /*if(Admin::user()->isRole('administrator')){
+            $grid->column('调货操作')->display(function(){
+                $js = <<<EOT
+                    $(".diaodu").click(function(){
+                    id = $(this).attr('data-id');
+                        window.location.href='/admin/excel/diaodu?id='+id;
+                    });
+EOT;
+                Admin::script($js);
+                return '<button class="btn btn-xs btn-primary diaodu" data-id="'.$this->id.'">调度</button>';
+            });
+        }
+        if(Admin::user()->isRole('administrator') || Admin::user()->isRole('warehouse')){
+            $grid->column('调货详情')->display(function(){
+                return '查看';
+            })->modal('调度详情',function(){
+
+            });
+        }*/
         $grid->disableCreateButton();
         $grid->disableColumnSelector();
         $grid->disableActions();

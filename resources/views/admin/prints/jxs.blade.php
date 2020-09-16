@@ -301,14 +301,13 @@
 			  </table>
 		  </div>
 	  </div>
-
   </div>
   <div class="panel-footer">
   	<label class="control-label col-sm-2"></label>
   	<div class="form-group">
   		<div class="button-group col-sm offset-2">
-  			<button type="button" class="btn btn-primary" onclick="print_view();">预览</button>
-  			<button type="button" class="btn btn-primary" onclick="print();">打印</button>
+  			<button type="button" class="btn btn-primary" onclick="print_view();">预览同行单</button>
+  			<button type="button" class="btn btn-primary" onclick="print();">打印同行单</button>
 			<button type="button" class="btn btn-success" onclick="togglecn()">显示/隐藏合计（大写）</button>
   		</div>
   	</div>
