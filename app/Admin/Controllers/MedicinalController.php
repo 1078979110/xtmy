@@ -159,7 +159,7 @@ class MedicinalController extends AdminController
         $form->date('makedate','生产日期')->format('YYYY-MM-DD');
         $form->date('invalidate','失效日期')->format('YYYY-MM-DD');
         $form->text('registnum','注册证号');
-        $form->date('registivalidate','注册证失效日期')->format('YYYY-MM-DD');
+        $form->date('registivalidate','注册证失效日期')->format('YYYY-MM-DD')->help('不填写则为长期有效');
         $form->saving(function($form){
             if($form->registivalidate == ''){
                 $form->registivalidate = '长期有效';
