@@ -13,6 +13,7 @@
       				<option value="4">模板四</option>
 					<option value="5">模板五</option>
 					<option value="6">模板六</option>
+					<option value="7">模板七（出库单）</option>
       			</select>
       		</div>
       	</div>
@@ -45,7 +46,7 @@
             			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['registnum']}}</td>
             		</tr>
             		@endforeach
-            		<tr style="line-height: 30px; height: 30px"><td style="border-top:1px solid #000" colspan="6" align="left">{{$tabletitle[0][3]}}</td><td style="border-top:1px solid #000" colspan="2" align="left">{{$tabletitle[0][4]}}</td></tr>
+            		<tr style="line-height: 30px; height: 30px"><td style="border-top:1px solid #000" colspan="6" align="left">{{$tabletitle[0][3]}}<span class="totalcn" style="display: none">{{$totalcn}}</span></td><td style="border-top:1px solid #000" colspan="2" align="left">{{$tabletitle[0][4]}}</td></tr>
       			</tbody>
       		</table>
       	</div>
@@ -76,7 +77,7 @@
             			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['invalidate']}}</td>
             		</tr>
             		@endforeach
-            		<tr style="line-height: 30px; height: 30px"><td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="7" align="left">{{$tabletitle[1][4]}}</td></tr>
+            		<tr style="line-height: 30px; height: 30px"><td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="7" align="left">{{$tabletitle[1][4]}}<span class="totalcn" style="display: none">{{$totalcn}}</span></td></tr>
             		<tr style="line-height: 30px; height: 30px">
             			<td colspan="3" style="border-top: 1px solid #000">{{$tabletitle[1][5]}}</td>
             			<td colspan="2" style="border-top: 1px solid #000">{{$tabletitle[1][6]}}</td>
@@ -110,7 +111,7 @@
             			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['invalidate']}}</td>
             		</tr>
             		@endforeach
-            		<tr style="line-height: 30px; height: 30px"><td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="6" align="left">{{$tabletitle[2][4]}}</td></tr>
+            		<tr style="line-height: 30px; height: 30px"><td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="6" align="left">{{$tabletitle[2][4]}}<span class="totalcn" style="display: none">{{$totalcn}}</span></td></tr>
             		<tr style="line-height: 30px; height: 30px">
             			<td colspan="2" style="border-top: 1px solid #000">{{$tabletitle[2][5]}}</td>
             			<td colspan="2" style="border-top: 1px solid #000">{{$tabletitle[2][6]}}</td>
@@ -153,7 +154,7 @@
             		</tr>
             		@endforeach
             		<tr style="line-height: 30px; height: 30px">
-            			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="4" align="left">{{$tabletitle[3][4]}}</td>
+            			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="4" align="left">{{$tabletitle[3][4]}}<span class="totalcn" style="display: none">{{$totalcn}}</span></td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000" colspan="3" align="left">{{$tabletitle[3][5]}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000" colspan="3" align="left">{{$tabletitle[3][6]}}<span tindex="7" tdata="SubSum" format="###,###,###,###,###.00">##########元</span></td>
             		</tr>
@@ -200,7 +201,7 @@
 					  </tr>
 				  @endforeach
 				  <tr style="line-height: 30px; height: 30px">
-					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="10" align="left">{{$tabletitle[4][4]}}</td>
+					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="10" align="left">{{$tabletitle[4][4]}}<span class="totalcn" style="display: none">{{$totalcn}}</span></td>
 				  </tr>
 				  <tr style="line-height: 30px; height: 30px">
 					  <td colspan="2" style="border-top: 1px solid #000">{{$tabletitle[4][6]}}</td>
@@ -250,7 +251,7 @@
 					  </tr>
 				  @endforeach
 				  <tr style="line-height: 30px; height: 30px">
-					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="7" align="left">{{$tabletitle[5][4]}}</td>
+					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="7" align="left">{{$tabletitle[5][4]}}<span class="totalcn" style="display: none">{{$totalcn}}</span></td>
 					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="3" align="left">{{$tabletitle[5][5]}}</td>
 				  </tr>
 				  <tr style="line-height: 30px; height: 30px">
@@ -267,10 +268,8 @@
 				  </tbody>
 			  </table>
 		  </div>
-	  </div>
-	  <div class="horizontal">
-		  <div class="form-group col-sm-offset-2" id="template_forfinance" style="margin:0; padding:0">
-			  <label class="col-sm-2 control-label"></label>
+		  <div class="form-group col-sm-offset-2 template" id="template7" style="display: none;margin:0; padding:0">
+			  <label class="col-sm-2 control-label">模板</label>
 			  <table style="font-size:14px;" cellpadding="0" cellspacing="0">
 				  <tbody>
 				  <tr><td colspan="6" align="center" style="font-size: 16px; font-weight:bold">{{$financename[0]}}</td></tr>
@@ -295,22 +294,22 @@
 				  @endforeach
 
 				  <tr style="line-height: 30px; height: 30px">
-					  <td colspan="3" style="border-top: 1px solid #000">{{$financename[3]}}</td>
+					  <td colspan="3" style="border-top: 1px solid #000">{{$financename[3]}}<span class="totalcn" style="display: none">{{$totalcn}}</span></td>
 					  <td colspan="3" style="border-top: 1px solid #000">{{$financename[4]}}<span tindex="5" tdata="SubSum" format="###,###,###,###,###.00">##########元</span></td>
 				  </tr>
 				  </tbody>
 			  </table>
 		  </div>
 	  </div>
+
   </div>
   <div class="panel-footer">
   	<label class="control-label col-sm-2"></label>
   	<div class="form-group">
   		<div class="button-group col-sm offset-2">
-  			<button type="button" class="btn btn-primary" onclick="print_view();">预览随货同行单</button>
-  			<button type="button" class="btn btn-primary" onclick="print();">打印随货同行单</button>
-			<button type="button" class="btn btn-info" onclick="print_view('template_forfinance');">预览出库单</button>
-			<button type="button" class="btn btn-info" onclick="print('template_forfinance');">打印出库单</button>
+  			<button type="button" class="btn btn-primary" onclick="print_view();">预览</button>
+  			<button type="button" class="btn btn-primary" onclick="print();">打印</button>
+			<button type="button" class="btn btn-success" onclick="togglecn()">显示/隐藏合计（大写）</button>
   		</div>
   	</div>
   </div>
@@ -367,6 +366,14 @@ function check_isnull(data){
     			return false;
     		}
 		}
+	}
+}
+function togglecn(){
+    var dd = $('.totalcn').css('display');
+    if(dd == 'none'){
+        $('.totalcn').show();
+	}else{
+        $('.totalcn').hide();
 	}
 }
 </script>
