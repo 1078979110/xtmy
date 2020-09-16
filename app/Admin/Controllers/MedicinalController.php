@@ -160,6 +160,11 @@ class MedicinalController extends AdminController
         $form->date('invalidate','失效日期')->format('YYYY-MM-DD');
         $form->text('registnum','注册证号');
         $form->date('registivalidate','注册证失效日期')->format('YYYY-MM-DD');
+        $form->saving(function($form){
+            if($form->date == ''){
+                $form->date = '长期有效';
+            }
+        });
         $form->text('storagecondition','储存条件');
         $state = [
             'on'=>['value'=>0, 'text'=>'上架','color'=>'success'],
