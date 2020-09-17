@@ -148,6 +148,10 @@ class OrderController extends AdminController
                 id = $(this).attr('data-id');
                 window.location.href='/admin/print/jxs?id='+id+'&zhuanyun=1';
             });
+            $(".foc").click(function(){
+                id = $(this).attr('data-id');
+                window.location.href='/admin/print/jxs?id='+id+'&foc=1';
+            });
             $(".over").click(function(){
                 id = $(this).attr('data-id');
                 $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
@@ -187,7 +191,8 @@ EOT;
                     $str = '<button class="btn btn-primary btn-xs">'.$button_[$orderstatus-1].'</button> | <button class="btn btn-warning btn-xs updateattr" data-id="'.$this->id.'">补充信息</button> | 
                             <button class="btn btn-warning btn-xs print" data-type="'.$this->buyertype.'" data-id="'.$this->id.'">打印出货单</button> | ';
                     if($this->buyertype ==1){
-                        $str .= '<button class="btn btn-warning btn-xs zhuanyun" data-id="'.$this->id.'">转运证明</button> | ';
+                        $str .= '<button class="btn btn-warning btn-xs zhuanyun" data-id="'.$this->id.'">转运证明</button> | 
+                                 <button class="btn btn-warning btn-xs foc" data-id="'.$this->id.'">销售订单/FOC申请表</button> | ';
                     }
                         $str .= '<button class="btn btn-danger btn-xs over" data-id="'.$this->id.'">确认完成</button>';
                 }else if($orderstatus == 7){
