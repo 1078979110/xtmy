@@ -9,12 +9,13 @@ use Encore\Admin\Controllers\AdminController;
 use App\Hospital;
 use App\Hospitalprice;
 use Encore\Admin\Layout\Content;
-use App\Prints;
+use Illuminate\Support\Facades\DB;
 class PrintsController extends AdminController{
     public function jxsPrint(Content $content){
         $request = request();
         $orderid = $request->id;
         $zy = isset($request->zhuanyun)?$request->zhuanyun:0;
+        $foc = isset($request->foc)?$request->foc:0;
         $jxsid = Order::where('id',$orderid)->value('buyerid');
         $jxsinfo = Salelist::find($jxsid)->toArray(true);//经销商信息
         $orderinfo = Order::find($orderid)->toArray(true);
@@ -43,6 +44,12 @@ class PrintsController extends AdminController{
         $zhuanyun['title'] = ['产品编号','产品名称','单位','数量'];
         $zhuanyun['footer'] = $siteinfo['sitename'];
         $zhuanyun['date'] = date('Y.m.d', time());
+        $salefoc = [];
+        $salefoc['header'] = ['客户：', '日期：', '地址：'];
+        $salefoc['listtitle'] = ['产品编号','产品名称', '单位', '数量', '单价', '总价(RMB)','备注/特别说明'];
+        $salefoc['listtotal'] = ['总金额（RMB）'];
+        $salefoc['foctitle'] = ['FOC产品','说明','金额','总金额'];
+        $salefoc['foctotal'] = ['调整后订单总金额（RMB）'];
         $totalprice = 0;
         $data = [];
         $infos = json_decode($orderinfo['orderinfo'], true);
@@ -151,6 +158,11 @@ class PrintsController extends AdminController{
             $financetitle[2],
             $financetitle[3]
         ];
+        $focname = [
+            $salefoc['header'][0].$jxsinfo['name'],
+            $salefoc['header'][1].date('Y/m/d', time()),
+            $salefoc['header'][2].$jxsinfo['address']
+        ];
         $totalcn = $this->get_amount($totalprice);
         if(isset($totalcn['status'])){
             admin_toastr($totalcn['msg'],'error');
@@ -160,11 +172,21 @@ class PrintsController extends AdminController{
         //$id = request()->get('id');
 
         if($zy == '1'){
+            $content->title($jxsinfo['name'].'转运证明');
             $content->body(view('admin.prints.zhuanyun',
                 [
-                    'title'=>$siteinfo['sitename'].$ext,'tabletitle'=>$dataname,'datatitle'=>$datatitle,
-                    'lists'=>$data,'gift'=>$gifts, 'jsondata'=>json_encode($data) ,'total'=>$totalprice,
-                    'totalcn'=>$totalcn,'financename'=>$financename, 'financedatatitle'=>$financedatatitle, 'zhuanyun'=>$zhuanyun
+                    'title'=>$jxsinfo['name'].'转运证明',
+                    'lists'=>$data,'total'=>$totalprice,
+                    'totalcn'=>$totalcn,'zhuanyun'=>$zhuanyun
+                ]
+            )->render());
+        }else if($foc == '1'){
+            $content->title($jxsinfo['name'].'销售订单/FOC申请表');
+            $content->body(view('admin.prints.foc',
+                [
+                    'title'=>$jxsinfo['name'].'销售订单/FOC申请表',
+                    'lists'=>$data ,'total'=>$totalprice,
+                    'totalcn'=>$totalcn,'focname'=>$focname,'salefoc'=>$salefoc
                 ]
             )->render());
         }else{
