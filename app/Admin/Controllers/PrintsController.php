@@ -69,7 +69,8 @@ class PrintsController extends AdminController{
                 'manufactur' => $medicinal['manufactur'],
                 'makedate' => isset($val['makedate'])?$val['makedate']:'',
                 'price' => $val['price'],
-                'prices' => $val['num']*$val['price']
+                'prices' => $val['num']*$val['price'],
+                'tips' => isset($val['tips'])?$val['tips']:$medicinal['tips']
             ];
             $data[] = $t_;
         }
