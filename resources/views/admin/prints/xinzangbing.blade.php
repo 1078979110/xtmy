@@ -38,7 +38,7 @@
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['invalidate']}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['registnum']}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['registivalidate']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000"></td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000">{{$list['tips']}}</td>
     		</tr>
     		@endforeach
     		<tr style="line-height: 30px; height: 30px">

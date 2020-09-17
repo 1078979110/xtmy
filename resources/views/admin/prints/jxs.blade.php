@@ -289,7 +289,7 @@
 						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
 						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
 						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['prices']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center"></td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['tips']}}</td>
 					  </tr>
 				  @endforeach
 
