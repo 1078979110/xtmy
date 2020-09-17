@@ -371,6 +371,7 @@ class ApiController extends AdminController {
             $infos[$key]['boxformat'] = $data['info'][$info['id']]['boxformat'];
             $infos[$key]['novirus'] = $data['info'][$info['id']]['novirus'];
             $infos[$key]['originmake'] = $data['info'][$info['id']]['originmake'];
+            $infos[$key]['tips'] = $data['info'][$info['id']]['tips'];
         }
         Order::where('id', $data['id'])->update(['orderinfo'=>json_encode($infos)]);
         admin_toastr('操作成功', 'success');
@@ -474,13 +475,37 @@ class ApiController extends AdminController {
     public function diaoDu(Request $request){
         $id = $request->id;
         $diaodu = $request->diaodu;
-        foreach ($diaodu as $key => $item){
-            $_d = [
-                'orderid'=>$id,
-                'medicinalid' => $item['medicinalid'],
-                'num' => $item['num'],
-                'warehouseid' => $item['warehouseid']
-            ];
+        try{
+            foreach ($diaodu as $key => $item){
+                if(is_numeric($key)){
+                    $_d = [
+                        'orderid'=>$id,
+                        'medicinalid' => $item['medicinalid'],
+                        'num' => $item['num'],
+                        'warehouseid' => $item['warehouseid'],
+                        'created_at' => date('Y-m-d H:i:s', time()),
+                        'updated_at' => date('Y-m-d H:i:s', time())
+                    ];
+                    DB::table('orders_diaodu')->where('id',$key)->update($_d);
+                }else{
+                    $_d = [
+                        'orderid'=>$id,
+                        'medicinalid' => $item['medicinalid'],
+                        'num' => $item['num'],
+                        'warehouseid' => $item['warehouseid'],
+                        'created_at' => date('Y-m-d H:i:s', time()),
+                        'updated_at' => date('Y-m-d H:i:s', time())
+                    ];
+                    DB::table('orders_diaodu')->insert($_d);
+                }
+            }
+            admin_toastr('操作成功','success');
+            return redirect('/admin/orders');
+        }catch (\Exception $e){
+            $msg = $e->getMessage();
+            admin_error($msg);
+            return redirect('/admin/orders');
         }
+
     }
 }

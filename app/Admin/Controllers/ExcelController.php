@@ -1,8 +1,6 @@
 <?php
 namespace App\Admin\Controllers;
 
-use App\Medicinal;
-use App\Producer;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Layout\Content;
 use Illuminate\Support\Facades\DB;
@@ -23,11 +21,6 @@ class ExcelController extends AdminController{
         $form->action('/admin/api/medicinals');
         $form->file('excel','数据源')->rules('mimes:xls,xlsx')->move(env('APP_URL').'/upload/')
             ->required()->help('必须包含器械名称，产品货号，厂家，产品线和产品分类列');
-        /*$form->select('producer_id','厂家')->options(function(){
-            return Producer::pluck('name','id');
-        })->load('line_id','/admin/api/line')->required();
-        $form->select('line_id','产品线')->load('category_id','/admin/api/category')->required();
-        $form->select('category_id','产品分类')->required();*/
         $content->body($form);
         return $content;
     }
@@ -68,6 +61,7 @@ class ExcelController extends AdminController{
             $infos[$key]['boxformat'] = empty($info['boxformat'])?'':$info['boxformat'];
             $infos[$key]['novirus'] = empty($info['novirus'])?'':$info['novirus'];
             $infos[$key]['originmake'] = empty($info['originmake'])?'':$info['originmake'];
+            $infos[$key]['tips'] = empty($info['tips'])?'':$info['tips'];
         }
         $content->body(view('admin.order.updateattr', ['products'=>$infos,'id'=>$oid])->render());
         return $content;
@@ -80,6 +74,23 @@ class ExcelController extends AdminController{
         $form->file('file', '订单excel')->rules('mimes:xls,xlsx')->required();
         $content->body($form);
         return $content;
+    }
 
+    public function diaoDu(Content $content){
+        $content->title('订单调度');
+        $request = request();
+        $id= $request->id;
+        $orderinfo = DB::table('orders')->where('id', $id)->value('orderinfo');
+        $warehouses = DB::table('admin_users')
+            ->leftJoin('admin_role_users','admin_role_users.user_id','admin_users.id')
+            ->where('admin_role_users.role_id',8)
+            ->get(['id','username'])->toArray(true);
+        $medicinals = json_decode($orderinfo, true);
+        $diaodu = DB::table('orders_diaodu')->where('orderid',$id)->get(['id','medicinalid', 'num', 'warehouseid'])->toArray(true);
+
+        $content->body(view('admin.order.diaodu',
+            ['id'=>$id,'medicinals'=>$medicinals, 'medicinals_json'=>$orderinfo,'warehouses'=>$warehouses, 'warehouses_json'=>json_encode($warehouses),'diaodu'=>$diaodu]
+        )->render());
+        return $content;
     }
 }
