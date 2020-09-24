@@ -320,6 +320,10 @@ EOT;
 
             });
         });
+        $grid->tools(function($tools){
+            //if(Admin::user()->isRole('administrator')) //批量导入经销商订单
+            //$tools->append(new OrderImport());
+        });
         $grid->disableActions();
         return $grid;
     }
