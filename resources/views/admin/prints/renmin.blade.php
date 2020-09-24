@@ -39,6 +39,7 @@
     	</tbody>
     </table>
 	  </div>
+	  @if(!empty($gift))
 	  <div class="horizontal" style="margin-top: 10px">
 		  <div class="form-group" id="template_forfinance" style="margin:0; padding:0">
 			  <table style="font-size:14px;" cellpadding="0" cellspacing="0">
@@ -62,12 +63,15 @@
 			  </table>
 		  </div>
 	  </div>
+	  @endif
   </div>
   <div class="panel-footer">
 	  <button type="button" class="btn btn-primary" onclick="print_view('table');">预览随货同行单</button>
 	  <button type="button" class="btn btn-primary" onclick="print('table');">打印随货同行单</button>
+	  @if(!empty($gift))
 	  <button type="button" class="btn btn-info" onclick="print_view('template_forfinance');">预览出库单</button>
 	  <button type="button" class="btn btn-info" onclick="print('template_forfinance');">打印出库单</button>
+	  @endif
   </div>
 </div>
 <script language="javascript" src="/js/LodopFuncs.js"></script>

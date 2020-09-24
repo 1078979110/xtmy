@@ -559,6 +559,7 @@ class IndexController extends Controller {
 		$data['buyerid'] = $userinfo['id'];
 		$data['buyertype'] = $userinfo['type'];
 		$data['orderid'] = date('YmdHis', time()) .$data['buyerid']. rand(100, 999);
+		$data['splitstatus'] = 0;
 		$orderinfo = [];
         $giftinfo = [];
 		$total = 0;
@@ -590,11 +591,35 @@ class IndexController extends Controller {
                 }
                 Mycart::where('id', $val['id'])->delete();
             }
-            $data['gift'] = json_encode($giftinfo);
+            //$data['gift'] = json_encode($giftinfo);
             $data['totalprice'] = $total;
-            $data['orderinfo'] = json_encode($orderinfo);
+            //$data['orderinfo'] = json_encode($orderinfo);
             $data['created_at'] = date('Y-m-d H:i:s', time());
             $result = Order::insertGetId($data);
+            foreach ($orderinfo as $key=>$val){
+                $_d = [
+                    'order_id' => $result,
+                    'medicinal_id' => $val['id'],
+                    'price' => $val['price'],
+                    'num' => $val['num'],
+                    'created_at' => date('Y-m-d H:i:s', time()),
+                    'updated_at' => date('Y-m-d H:i:s', time())
+                ];
+                DB::table('order_medicinals')->insert($_d);
+            }
+            if($giftinfo){
+                foreach ($giftinfo as $key => $val){
+                    $_d = [
+                        'order_id' => $result,
+                        'medicinal_id' => $val['id'],
+                        'origin_id' => $val['originid'],
+                        'num' => $val['num'],
+                        'created_at' => date('Y-m-d H:i:s', time()),
+                        'updated_at' => date('Y-m-d H:i:s', time())
+                    ];
+                    DB::table('order_gift')->insert($_d);
+                }
+            }
             DB::commit();
         }catch (\Exception $e){
 		    DB::rollBack();
@@ -614,24 +639,44 @@ class IndexController extends Controller {
 	 */
 	public function myOrder() {
 		$userinfo = $this->checkSession();
+		$where[] = ['buyerid', $userinfo->id];
 		if($userinfo->type == 2){
             $hid = request()->hid;
-            $lists = Order::where([['buyerid', $userinfo->id],['hospital',$hid]])->orderBy('id', 'desc')->get(['id', 'orderid', 'gift','orderinfo', 'totalprice', 'orderstatus', 'created_at'])->toArray(true);
+            $where[] = ['hospital',$hid];
+            //$lists = Order::where([['buyerid', $userinfo->id],['hospital',$hid]])->orderBy('id', 'desc')->get(['id', 'orderid', 'gift','orderinfo', 'totalprice', 'orderstatus', 'created_at'])->toArray(true);
         }else{
-            $lists = Order::where([['buyerid', $userinfo->id]])->orderBy('id', 'desc')->get(['id', 'orderid', 'orderinfo', 'totalprice', 'orderstatus', 'created_at'])->toArray(true);
+            //$lists = Order::where([['buyerid', $userinfo->id]])->orderBy('id', 'desc')->get(['id', 'orderid', 'orderinfo', 'totalprice', 'orderstatus', 'created_at'])->toArray(true);
         }
-		foreach ($lists as $key=>$list){
+        $lists = Order::where($where)->orderBy('id', 'desc')->get(['id', 'orderid', 'totalprice', 'orderstatus', 'created_at'])->toArray();
+        foreach ($lists as $key=>$list){
+            $orderinfo = DB::table('order_medicinals')
+                ->where('order_id', $list['id'])
+                ->get()->toArray();
+            $medicinallistfororder = [];
+            foreach ($orderinfo as $k=>$v){
+                $_info = DB::table('medicinal')->where('id', $v->medicinal_id)->first();
+                $_d = [
+                    'medicinal'=>$_info->medicinal,
+                    'medicinalnum' =>$_info->medicinalnum,
+                    'price' => $v->price?$v->price:'0.00',
+                    'num' => $v->num
+                ];
+                $medicinallistfororder[] = $_d;
+            }
+            $lists[$key]['orderinfo'] = json_encode($medicinallistfororder);
             if($userinfo->type == 2){
-            $gift = json_decode($list['gift'], true);
+            $gift = DB::table('order_gift')
+                ->where('order_id', $list['id'])
+                ->get()->toArray();
             $g = [];
                 foreach ($gift as $k=>$v){
-                    $medicinal = Medicinal::where('id',$v['id'])->first();
+                    $medicinal = Medicinal::where('id',$v->medicinal_id)->first();
                     //print_r(DB::getQueryLog());
-                    $origin = Medicinal::where('id',$v['originid'])->first();
-                    $g[$k]['medicinal'] = $medicinal['medicinal'];
-                    $g[$k]['medicinalnum'] = $medicinal['medicinalnum'];
-                    $g[$k]['num'] = $v['num'];
-                    $g[$k]['origin'] = $origin['medicinal'].'/'.$origin['medicinalnum'];
+                    $origin = Medicinal::where('id',$v->origin_id)->first();
+                    $g[$k]['medicinal'] = $medicinal->medicinal;
+                    $g[$k]['medicinalnum'] = $medicinal->medicinalnum;
+                    $g[$k]['num'] = $v->num;
+                    $g[$k]['origin'] = $origin->medicinal.'/'.$origin->medicinalnum;
                 }
                 $lists[$key]['gift'] = json_encode($g);
             }
@@ -644,12 +689,13 @@ class IndexController extends Controller {
 		$request = request();
 		$id = $request['oid'];
 		$orderInfo = Order::where('id', $id)->first();
-		$order_arr = json_decode($orderInfo->orderinfo, true);
+		//$order_arr = json_decode($orderInfo->orderinfo, true);
+        $order_arr = DB::table('order_medicinals')->where('order_id', $id)->get()->toArray();
 		$total = 0;
 		$totalnum = 0;
 		foreach ($order_arr as $key => $value) {
-			$total += $value['price'] * $value['num'];
-			$totalnum += $value['num'];
+			$total += $value->price * $value->num;
+			$totalnum += $value->num;
 		}
 		$orderInfo['total'] = $total;
 		$orderInfo['totalnum'] = $totalnum;

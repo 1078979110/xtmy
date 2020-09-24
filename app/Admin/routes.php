@@ -43,7 +43,10 @@ Route::group([
     $router->get('/api/gifts','ApiController@gifts');
     $router->get('/excel/updateattr', 'ExcelController@updateAttr');
     $router->get('excel/order', 'ExcelController@Order');
-    
+    $router->get('excel/splitorder', 'ExcelController@splitOrder');
+    $router->get('/excel/fenpi', 'ExcelController@fenpiOrder');
+    $router->get('excel/shipping', 'ExcelController@startShipping');
+
     //自定义接收数据页面
     $router->post('/password/setadmin', 'PasswordController@setAdmin');
     $router->post('/password/setpwd', 'PasswordController@setPwd');
@@ -58,4 +61,7 @@ Route::group([
     $router->post('/api/searchm', 'ApiController@searchmedicinal');
     $router->post('/api/updateattr', 'ApiController@updateAttr');
     $router->post('/api/orders', 'ApiController@Orders');
+    $router->post('/api/splitorder', 'ApiController@splitOrder');
+    $router->post('/api/fenpiorder', 'ApiController@fenpiOrder');
+    $router->post('/api/shipping', 'ApiController@shipping');
 });

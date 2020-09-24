@@ -27,9 +27,23 @@ class Order extends Model
     }
 
     public static function hasDiaoDu($orderid, $userid){
-        return DB::table('orders_diaodu')->where([['order_id', $orderid],['warehouse_id', $userid]])->exists();
+        $result = DB::table('orders_diaodu')->where([['order_id', $orderid],['warehouse_id', $userid]])->exists();
+        return $result;
+
     }
     public static function diaodu($orderid, $userid){
         return DB::table('orders_diaodu')->where([['order_id', $orderid],['warehouse_id', $userid]])->get();
+    }
+
+    public static function fenpi($orderid, $userid){
+        return DB::table('order_fenpi')->where([['order_id', $orderid],['warehouse_id', $userid]])->get();
+    }
+
+    public static function hasFenPi($orderid, $userid){
+        return DB::table('order_fenpi')->where([['order_id', $orderid],['warehouse_id', $userid]])->exists();
+    }
+
+    public static function getGiftByOriginId($orderid, $userid,$medicinalid){
+        return DB::table('order_gift')->where([['order_id', $orderid],['warehouse_id', $userid],['origin_id', $medicinalid]])->first();
     }
 }

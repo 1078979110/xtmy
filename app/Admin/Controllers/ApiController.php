@@ -68,6 +68,10 @@ class ApiController extends AdminController {
             }else if($curr_status ==3 ){
 			    if(Admin::user()->isRole('wholesale'))
 			    $curr_status = 4;
+			    $hasSplit = DB::table('orders_diaodu')->where('order_id', $id)->first();
+			    if(empty($hasSplit)){
+                    return ['status' => false, 'title' => '订单', 'msg' => '失败，该订单还未分库，无法确认'];
+                }
             }else if($curr_status ==4){
                 if(Admin::user()->isRole('finance'))
                 $curr_status = 5;
@@ -87,22 +91,33 @@ class ApiController extends AdminController {
 		}
 	}
 
-	public function changeOrderInfoPrice() {
-		if (request()->isMethod('post')) {
-			$data = $_POST['info'];
-			$id = $_POST['id'];
+	public function changeOrderInfoPrice(Request $request) {
+		if ($request->isMethod('post')) {
+			$data = $request->info;
+			$id = $request->id;
 			$totalprice = 0;
-			foreach ($data as $key => $val) {
-				$totalprice += $val['num'] * $val['price'];
-			}
-			$result = Order::where('id', $id)->update(['totalprice' => $totalprice, 'orderinfo' => json_encode($data)]);
-			if ($result) {
-				admin_toastr('修改价格成功', 'success');
-				return redirect('/admin/orders');
-			} else {
-				admin_toastr('修改价格失败，请稍后重试', 'error');
-				return redirect('/admin/orders');
-			}
+			DB::beginTransaction();
+			try{
+                foreach ($data as $key => $val) {
+                    $totalprice += $val['num']* $val['price'];
+                    DB::table('order_medicinals')->where('id', $val['id'])->update(['price'=>$val['price']]);
+                }
+                $result = Order::where('id', $id)->update(['totalprice' => $totalprice]);
+                if ($result) {
+                    DB::commit();
+                    admin_toastr('修改价格成功', 'success');
+                    return redirect('/admin/orders');
+                } else {
+                    DB::commit();
+                    admin_toastr('修改价格失败，请稍后重试', 'error');
+                    return redirect('/admin/orders');
+                }
+            }catch (\Exception $e){
+			    DB::rollBack();
+			    $msg = $e->getMessage();
+			    admin_warning('改价失败',$msg);
+			    return redirect('admin/orders');
+            }
 		}
 	}
 
@@ -348,34 +363,34 @@ class ApiController extends AdminController {
 		}
 	}
 
-	public function gifts(Content $content, Request $request) {
-		$content->title('赠品设置');
-		$id = $request->get('id');
-		$content->body(view('admin.order.selectgift', ['id' => $id])->render());
-		return $content;
-	}
-
 	public function searchmedicinal(Request $request) {
 		$q = $request->get('q');
 		$m = Medicinal::where('medicinal', 'like', '%' . $q . '%')->orWhere('specification', $q)->get(['id', 'medicinal', 'specification', 'stock'])->toArray();
 		return $m;
 	}
     public function updateAttr(Request $request){
-        $data = $_POST;
-        $orderinfo = Order::where('id', $data['id'])->value('orderinfo');
-        $infos = json_decode($orderinfo, true);
-        foreach ($infos as $key => $info){
-            $infos[$key]['batchnumber'] = $data['info'][$info['id']]['batchnumber'];
-            $infos[$key]['makedate'] = $data['info'][$info['id']]['makedate'];
-            $infos[$key]['invalidate'] = $data['info'][$info['id']]['invalidate'];
-            $infos[$key]['boxformat'] = $data['info'][$info['id']]['boxformat'];
-            $infos[$key]['novirus'] = $data['info'][$info['id']]['novirus'];
-            $infos[$key]['originmake'] = $data['info'][$info['id']]['originmake'];
-            $infos[$key]['tips'] = $data['info'][$info['id']]['tips'];
+	    if($request->isMethod('post')){
+	        $id = $request->id;
+	        $info = $request->info;
+            if(!$info){
+                admin_toastr('未提交任何信息','warning');
+                return redirect('/admin/excel/fenpi?id='.$id);
+            }
+	        foreach ($info as $key=>$val){
+                $_i = [
+                    'batchnumber' => $val['batchnumber'],
+                    'makedate' => $val['makedate'],
+                    'invalidate' => $val['invalidate'],
+                    'boxformat' => $val['boxformat'],
+                    'novirus' => $val['novirus'],
+                    'originmake' => $val['originmake'],
+                    'tips' => $val['tips']
+                ];
+                DB::table('order_fenpi')->where('id', $key)->update($_i);
+            }
+            admin_toastr('操作成功', 'success');
+            return redirect('/admin/orders');
         }
-        Order::where('id', $data['id'])->update(['orderinfo'=>json_encode($infos)]);
-        admin_toastr('操作成功', 'success');
-        return redirect('/admin/orders');
     }
     
 
@@ -472,40 +487,159 @@ class ApiController extends AdminController {
         }
     }
 
-    public function diaoDu(Request $request){
-        $id = $request->id;
-        $diaodu = $request->diaodu;
-        try{
-            foreach ($diaodu as $key => $item){
-                if(is_numeric($key)){
-                    $_d = [
-                        'orderid'=>$id,
-                        'medicinalid' => $item['medicinalid'],
-                        'num' => $item['num'],
-                        'warehouseid' => $item['warehouseid'],
-                        'created_at' => date('Y-m-d H:i:s', time()),
-                        'updated_at' => date('Y-m-d H:i:s', time())
-                    ];
-                    DB::table('orders_diaodu')->where('id',$key)->update($_d);
+    public function splitOrder(Request $request){
+        if($request->isMethod('post')){
+            $id = $request->id;
+            $diaodu = $request->diaodu;
+            $gifts = $request->gift;
+            $medicinalnum = DB::table('order_medicinals')
+                ->where('order_id', $id)->groupBy('medicinal_id')
+                ->pluck(DB::raw('sum(num) as num'),'medicinal_id');
+            $sum = [];
+
+            foreach ($diaodu as $key=> $item){
+                if(isset($sum[$item['medicinal_id']])){
+                    $sum[$item['medicinal_id']] += $item['num'];
                 }else{
-                    $_d = [
-                        'orderid'=>$id,
-                        'medicinalid' => $item['medicinalid'],
-                        'num' => $item['num'],
-                        'warehouseid' => $item['warehouseid'],
-                        'created_at' => date('Y-m-d H:i:s', time()),
-                        'updated_at' => date('Y-m-d H:i:s', time())
-                    ];
-                    DB::table('orders_diaodu')->insert($_d);
+                    $sum[$item['medicinal_id']] = $item['num'];
                 }
             }
-            admin_toastr('操作成功','success');
-            return redirect('/admin/orders');
-        }catch (\Exception $e){
-            $msg = $e->getMessage();
-            admin_error($msg);
+            if(sizeof($medicinalnum) != sizeof($sum)){
+                admin_warning('警告', '还有产品未分配仓库');
+                return redirect('/admin/excel/splitorder?id='.$id);
+            }
+            foreach($medicinalnum as $key=>$val){
+                if($val != $sum[$key]){
+                    $medicinalnum = DB::table('medicinal')->where('id', $key)->value('medicinalnum');
+                    admin_warning('警告', '货号为'.$medicinalnum.'的产品数量不正确');
+                    return redirect('/admin/excel/splitorder?id='.$id);
+                }
+            }
+            try{
+                DB::beginTransaction();
+                foreach ($diaodu as $key => $item){
+                    if(is_numeric($key)){
+                        $_d = [
+                            'order_id'=>$id,
+                            'medicinal_id' => $item['medicinal_id'],
+                            'num' => $item['num'],
+                            'warehouse_id' => $item['warehouse_id'],
+                            'created_at' => date('Y-m-d H:i:s', time()),
+                            'updated_at' => date('Y-m-d H:i:s', time())
+                        ];
+                        DB::table('orders_diaodu')->where('id',$key)->update($_d);
+                    }else{
+                        $_d = [
+                            'order_id'=>$id,
+                            'medicinal_id' => $item['medicinal_id'],
+                            'num' => $item['num'],
+                            'warehouse_id' => $item['warehouse_id'],
+                            'created_at' => date('Y-m-d H:i:s', time()),
+                            'updated_at' => date('Y-m-d H:i:s', time())
+                        ];
+                        DB::table('orders_diaodu')->insert($_d);
+                    }
+                }
+                if(!empty($gifts)){
+                    foreach ($gifts as $key=>$gift){
+                        DB::table('order_gift')->where('id', $gift['id'])->update(['warehouse_id'=>$gift['warehouse_id']]);
+                    }
+                }
+                DB::table('orders')->where('id',$id)->update(['splitstatus'=>1]);
+                DB::commit();
+                admin_toastr('操作成功','success');
+                return redirect('/admin/orders');
+            }catch (\Exception $e){
+                DB::rollBack();
+                $msg = $e->getMessage();
+                admin_error($msg);
+                return redirect('/admin/orders');
+            }
+        }
+    }
+
+    public function fenpiOrder(Request $request){
+        if($request->isMethod('post')){
+            $id = $request->id;
+            $user_id = Admin::user()->id;
+            $fenpi = $request->fenpi;
+            if(!$fenpi){
+                admin_toastr('未提交任何信息','warning');
+                return redirect('/admin/excel/fenpi?id='.$id);
+            }
+            $medicinalnum = DB::table('orders_diaodu')
+                ->where([['order_id', $id],['warehouse_id', $user_id]])->groupBy('medicinal_id')
+                ->pluck(DB::raw('sum(num) as num'),'medicinal_id');
+            $sum = [];
+
+            foreach ($fenpi as $key=> $item){
+                if(isset($sum[$item['medicinal_id']])){
+                    $sum[$item['medicinal_id']] += $item['num'];
+                }else{
+                    $sum[$item['medicinal_id']] = $item['num'];
+                }
+            }
+
+            if(sizeof($medicinalnum) != sizeof($sum)){
+                admin_warning('警告', '还有产品未分批');
+                return redirect('/admin/excel/fenpi?id='.$id);
+            }
+            foreach($medicinalnum as $key=>$val){
+                if($val != $sum[$key]){
+                    $medicinalnum = DB::table('medicinal')->where('id', $key)->value('medicinalnum');
+                    admin_warning('警告', '货号为'.$medicinalnum.'的产品数量不正确');
+                    return redirect('/admin/excel/fenpi?id='.$id);
+                }
+            }
+            try{
+                DB::beginTransaction();
+                foreach ($fenpi as $key => $item){
+                    if(is_numeric($key)){
+                        $_d = [
+                            'order_id'=>$id,
+                            'medicinal_id' => $item['medicinal_id'],
+                            'num' => $item['num'],
+                            'warehouse_id' => $user_id,
+                            'created_at' => date('Y-m-d H:i:s', time()),
+                            'updated_at' => date('Y-m-d H:i:s', time())
+                        ];
+                        DB::table('order_fenpi')->where('id',$key)->update($_d);
+                    }else{
+                        $_d = [
+                            'order_id'=>$id,
+                            'medicinal_id' => $item['medicinal_id'],
+                            'num' => $item['num'],
+                            'warehouse_id' => $user_id,
+                            'created_at' => date('Y-m-d H:i:s', time()),
+                            'updated_at' => date('Y-m-d H:i:s', time())
+                        ];
+                        DB::table('order_fenpi')->insert($_d);
+                    }
+                }
+                DB::commit();
+                admin_toastr('操作成功','success');
+                return redirect('/admin/orders');
+            }catch (\Exception $e){
+                DB::rollBack();
+                $msg = $e->getMessage();
+                admin_error($msg);
+                return redirect('/admin/orders');
+            }
+        }
+    }
+
+    public function shipping(Request $request){
+        if($request->isMethod('post')){
+            $id = $request->id;
+            $user_id = Admin::user()->id;
+            DB::table('order_fenpi')->where([['order_id',$id],['warehouse_id', $user_id]])->update(['status'=>1]);
+            DB::table('orders_diaodu')->where([['order_id', $id],['warehouse_id', $user_id]])->update(['status'=>1]);
+            $hasNoDiaoDu = DB::table('orders_diaodu')->where([['order_id',$id],['status', 2]])->exists();
+            if(!$hasNoDiaoDu){
+                DB::table('orders')->where('id', $id)->update(['orderstatus'=>6]);
+            }
+            admin_toastr('发货成功','success');
             return redirect('/admin/orders');
         }
-
     }
 }

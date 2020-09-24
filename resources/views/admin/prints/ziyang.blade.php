@@ -25,7 +25,7 @@
 				@foreach($lists as $key => $list)
 				<tr style="height: 30px">
 					<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
-					<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['specification']}}</td>
+					<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
 					<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
 					<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
 					<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['boxformat']}}</td>
@@ -44,6 +44,7 @@
     			</tbody>
     	 </table>
 	  </div>
+	  @if (!empty($gift))
 	  <div class="horizontal" style="margin-top: 10px">
 		  <div class="form-group" id="template_forfinance" style="margin:0; padding:0">
 			  <table style="font-size:14px;" cellpadding="0" cellspacing="0">
@@ -68,6 +69,7 @@
 			  </table>
 		  </div>
 	  </div>
+	  @endif
   </div>
 	<div class="panel-footer">
 		<button type="button" class="btn btn-primary" onclick="print_view('table');">预览随货同行单</button>
