@@ -120,7 +120,7 @@ class ExcelController extends AdminController{
         $warehouses = DB::table('admin_users')
             ->leftJoin('admin_role_users','admin_role_users.user_id','admin_users.id')
             ->where('admin_role_users.role_id',8)
-            ->get(['id','username'])->toArray(true);
+            ->get(['id','username','name'])->toArray(true);
         $diaodu = DB::table('orders_diaodu')->where('order_id',$id)->get(['id','medicinal_id', 'num', 'warehouse_id'])->toArray(true);
         $content->body(view('admin.order.diaodu',
             ['id'=>$id,'medicinals'=>$orderinfo->toArray(), 'medicinals_json'=>$orderinfo->toJson(),

@@ -88,7 +88,7 @@
                     <select name="gift[{{$gift->id}}][warehouse_id]" class="form-control">
                         <option value="0">==请选择==</option>
                         @foreach($warehouses as $k=>$warehouse)
-                            <option value="{{$warehouse->id}}" @if($gift->warehouse_id == $warehouse->id)selected="selected"@endif>{{$warehouse->username}}</option>
+                            <option value="{{$warehouse->id}}" @if($gift->warehouse_id == $warehouse->id)selected="selected"@endif>{{$warehouse->username}}-{{$warehouse->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -134,7 +134,7 @@
                 '<select name="diaodu[' + key + '][warehouse_id]" class="form-control">\n' +
                 '<option value="0">==请选择==</option>';
         for(var j in warehouses){
-            str += '<option value="' + warehouses[j].id +'">' +  warehouses[j].username + '</option>\n';
+            str += '<option value="' + warehouses[j].id +'">' +  warehouses[j].username+ '-' + warehouses[j].name + '</option>\n';
         }
         str +=  '</select>\n'+
                 '</div>\n'+
