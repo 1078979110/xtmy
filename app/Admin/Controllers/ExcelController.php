@@ -125,7 +125,7 @@ class ExcelController extends AdminController{
         $content->body(view('admin.order.diaodu',
             ['id'=>$id,'medicinals'=>$orderinfo->toArray(), 'medicinals_json'=>$orderinfo->toJson(),
                 'warehouses'=>$warehouses, 'warehouses_json'=>json_encode($warehouses),'diaodu'=>$diaodu,
-                'gifts'=> $ordergift->toArray(true)
+                'gifts'=> $ordergift->toArray(true), 'gifts_josn'=>$ordergift->toJson()
             ]
         )->render());
         return $content;
