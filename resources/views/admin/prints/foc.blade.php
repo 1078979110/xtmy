@@ -42,25 +42,25 @@
                             <td style="border-top: 1px solid #000; border-left:1px solid #000; border-right: 1px solid #000">{{$salefoc['foctitle'][3]}}</td>
                         </tr>
                         <tr>
-                            <td style="border-top: 1px solid #000; border-left:1px solid #000; height: 35px;"><input type="text" class="form-control" ></td>
-                            <td colspan="4" style="border-top: 1px solid #000; border-left:1px solid #000;height: 35px;"><input type="text" class="form-control" ></td>
-                            <td style="border-top: 1px solid #000; border-left:1px solid #000;height: 35px;"><input type="text" class="form-control" ></td>
-                            <td style="border-top: 1px solid #000; border-left:1px solid #000; border-right: 1px solid #000;height: 35px;"><input type="text" class="form-control" ></td>
+                            <td style="border-top: 1px solid #000; border-left:1px solid #000; height: 35px;"><input type="text" placeholder="请输入内容" class="form-control" ></td>
+                            <td colspan="4" style="border-top: 1px solid #000; border-left:1px solid #000;height: 35px;"><input type="text" placeholder="请输入内容" class="form-control" ></td>
+                            <td style="border-top: 1px solid #000; border-left:1px solid #000;height: 35px;"><input type="text" placeholder="请输入内容" class="form-control" ></td>
+                            <td style="border-top: 1px solid #000; border-left:1px solid #000; border-right: 1px solid #000;height: 35px;"><input type="text" placeholder="请输入内容" class="form-control" ></td>
                         </tr>
                         <tr>
-                            <td style="border-top: 1px solid #000; border-left:1px solid #000; height: 35px;"><input type="text" class="form-control" ></td>
-                            <td colspan="4" style="border-top: 1px solid #000; border-left:1px solid #000;height: 35px;"><input type="text" class="form-control" ></td>
-                            <td style="border-top: 1px solid #000; border-left:1px solid #000;height: 35px;"><input type="text" class="form-control" ></td>
-                            <td style="border-top: 1px solid #000; border-left:1px solid #000; border-right: 1px solid #000;height: 35px;"><input type="text" class="form-control" ></td>
+                            <td style="border-top: 1px solid #000; border-left:1px solid #000; height: 35px;"><input type="text" placeholder="请输入内容" class="form-control" ></td>
+                            <td colspan="4" style="border-top: 1px solid #000; border-left:1px solid #000;height: 35px;"><input type="text" placeholder="请输入内容" class="form-control" ></td>
+                            <td style="border-top: 1px solid #000; border-left:1px solid #000;height: 35px;"><input type="text" placeholder="请输入内容" class="form-control" ></td>
+                            <td style="border-top: 1px solid #000; border-left:1px solid #000; border-right: 1px solid #000;height: 35px;"><input type="text" placeholder="请输入内容" class="form-control" ></td>
                         </tr>
                         <tr>
-                            <td style="border-top: 1px solid #000; border-left:1px solid #000; height: 35px;"><input type="text" class="form-control" ></td>
-                            <td colspan="4" style="border-top: 1px solid #000; border-left:1px solid #000;height: 35px;"><input type="text" class="form-control" ></td>
-                            <td style="border-top: 1px solid #000; border-left:1px solid #000;height: 35px;"><input type="text" class="form-control" ></td>
-                            <td style="border-top: 1px solid #000; border-left:1px solid #000; border-right: 1px solid #000;height: 35px;"><input type="text" class="form-control" ></td>
+                            <td style="border-top: 1px solid #000; border-left:1px solid #000; height: 35px;"><input type="text" placeholder="请输入内容" class="form-control" ></td>
+                            <td colspan="4" style="border-top: 1px solid #000; border-left:1px solid #000;height: 35px;"><input type="text" placeholder="请输入内容" class="form-control" ></td>
+                            <td style="border-top: 1px solid #000; border-left:1px solid #000;height: 35px;"><input type="text" placeholder="请输入内容" class="form-control" ></td>
+                            <td style="border-top: 1px solid #000; border-left:1px solid #000; border-right: 1px solid #000;height: 35px;"><input type="text" placeholder="请输入内容" class="form-control" ></td>
                         </tr>
                         <tr>
-                            <td colspan="6" style="border-top: 1px solid #000;border-left:1px solid #000; border-bottom: 1px solid #000;height: 35px;"><input type="text" class="form-control" placeholder="{{$salefoc['foctotal'][0]}}"> </td>
+                            <td colspan="6" style="border-top: 1px solid #000;border-left:1px solid #000; border-bottom: 1px solid #000;height: 35px;"><input type="text" class="form-control" placeholder="请输入{{$salefoc['foctotal'][0]}}"> </td>
                             <td style="border-top: 1px solid #000;border-left:1px solid #000; border-right: 1px solid #000;border-bottom: 1px solid #000"></td>
                         </tr>
                         <tr>

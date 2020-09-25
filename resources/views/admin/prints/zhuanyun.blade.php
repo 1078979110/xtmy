@@ -8,7 +8,7 @@
                 <div class="col-sm-8" id="zhuanyun">
                     <table style="font-size: 14px; width: 500px" cellpadding="0"; cellspacing="0">
                         <tr><td colspan="4" align="center">转运证明</td></tr>
-                        <tr><td colspan="4" style="text-indent: 2em;padding: 20px;"><textarea id="header" class="form-control" style="min-height: 100px"></textarea></td></tr>
+                        <tr><td colspan="4" style="text-indent: 2em;padding: 20px;"><textarea placeholder="请输入转运声明内容" id="header" class="form-control" style="min-height: 100px"></textarea></td></tr>
                         <tr>
                             <td align="center" style="border-top: 1px solid #000;border-left:1px solid #000;">{{$zhuanyun['title'][0]}}</td>
                             <td align="center" style="border-top: 1px solid #000;border-left:1px solid #000;">{{$zhuanyun['title'][1]}}</td>
