@@ -37,7 +37,7 @@
 
 				</tr>
 				@endforeach
-				<tr style="line-height: 30px; height: 30px"><td colspan="11" style="border-top: 1px solid #000;border-left:1px solid #000;border-right:1px solid #000;">{{$tabletitle[7]}}{{$total}}</td></tr>
+				<tr style="line-height: 30px; height: 30px"><td colspan="11" style="border-top: 1px solid #000;border-left:1px solid #000;border-right:1px solid #000;">{{$tabletitle[7]}}<span class="totalcn">{{$total}}</span></td></tr>
 				<tr style="line-height: 30px; height: 30px">
 					<td colspan="11" style="border-top: 1px solid #000">{{$tabletitle[8]}}</td>
 				</tr>
@@ -76,6 +76,7 @@
 			<div class="button-group col-sm offset-2">
 				<button type="button" class="btn btn-primary" onclick="print_view('table');">预览随货同行单</button>
 				<button type="button" class="btn btn-primary" onclick="print('table');">打印随货同行单</button>
+				<button type="button" class="btn btn-success" onclick="togglecn()">显示/隐藏合计</button>
 				@if(!empty($gift))
 				<button type="button" class="btn btn-info" onclick="print_view('template_forfinance');">预览赠品单</button>
 				<button type="button" class="btn btn-info" onclick="print('template_forfinance');">打印赠品单</button>
@@ -102,5 +103,12 @@
 		LODOP.ADD_PRINT_TABLE(40,10,"RightMargin:0.3cm",'100%',document.getElementById(temp).innerHTML);
         LODOP.PRINT();
     }
-
+    function togglecn(){
+        var dd = $('.totalcn').css('display');
+        if(dd == 'none'){
+            $('.totalcn').show();
+        }else{
+            $('.totalcn').hide();
+        }
+    }
 </script>
