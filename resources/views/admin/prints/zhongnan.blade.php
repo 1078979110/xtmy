@@ -22,7 +22,7 @@
     		@foreach($lists as $key => $list)
     		<tr style="line-height: 30px; height: 30px">
     			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['specification']}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['price']}}</td>

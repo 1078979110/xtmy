@@ -38,7 +38,7 @@
             		<tr style="line-height: 30px; height: 30px">
             			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$key+1}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['specification']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['batchnumber']}}</td>
@@ -69,7 +69,7 @@
       				@foreach($lists as $key => $list)
             		<tr style="line-height: 30px; height: 30px">
             			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['specification']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['price']}}</td>
@@ -104,7 +104,7 @@
       				@foreach($lists as $key => $list)
             		<tr style="line-height: 30px; height: 30px">
             			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['specification']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['batchnumber']}}</td>
@@ -143,7 +143,7 @@
             		<tr style="line-height: 30px; height: 30px">
             			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['manufactur']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['specification']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['price']}}</td>
@@ -191,7 +191,7 @@
 						  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
 						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['manufactur']}}</td>
 						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['manufacturinglicense']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['specification']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
 						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
 						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
 						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['batchnumber']}}</td>
@@ -241,7 +241,7 @@
 						  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
 						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['manufactur']}}</td>
 						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['manufacturinglicense']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['specification']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
 						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
 						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
 						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['batchnumber']}}</td>
@@ -285,7 +285,7 @@
 				  @foreach($lists as $key => $list)
 					  <tr style="line-height: 30px; height: 30px">
 						  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['specification']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
 						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
 						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
 						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['prices']}}</td>
@@ -333,13 +333,7 @@ function print_view(temp){
 	}else{
         LODOP.ADD_PRINT_TABLE(40,10,"RightMargin:0.3cm",'100%',document.getElementById(temp).innerHTML);
 	}
-	check_isnull(data);
-	if(isnull == true){
-		isprint = confirm('该出货单中存在未填写的项,确定打印？');
-		if(isprint == true){
-			LODOP.PREVIEW();
-		}
-	}
+	LODOP.PREVIEW();
 }
 function print(temp){
 	LODOP=getLodop(); 
@@ -349,23 +343,7 @@ function print(temp){
     }else{
         LODOP.ADD_PRINT_TABLE(40,10,"RightMargin:0.3cm",'100%',document.getElementById(temp).innerHTML);
     }
-	check_isnull(data);
-	if(isnull == true){
-		isprint = confirm('该出货单中存在未填写的项,确定打印？');
-		if(isprint == true){
-			LODOP.PRINT();
-		}
-	}
-}
-function check_isnull(data){
-	for(var i in data){
-		for(var j in data[i]){
-    		if(data[i][j].indexOf("") != -1){
-    			isnull = true;
-    			return false;
-    		}
-		}
-	}
+	LODOP.PRINT();
 }
 function togglecn(){
     var dd = $('.totalcn').css('display');
