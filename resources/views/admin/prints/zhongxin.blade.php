@@ -89,36 +89,12 @@
         LODOP=getLodop();
         LODOP.PRINT_INIT();
         LODOP.ADD_PRINT_TABLE(40,10,"RightMargin:0.3cm",'100%',document.getElementById(temp).innerHTML);
-        check_isnull(data);
-        if(isnull == true){
-            isprint = confirm('该出货单中存在未填写的项,确定打印？');
-            if(isprint == true){
-                LODOP.PREVIEW();
-            }
-        }
+        LODOP.PREVIEW();
     }
     function print(temp){
         LODOP=getLodop();
         LODOP.PRINT_INIT();
         LODOP.ADD_PRINT_TABLE(40,10,"RightMargin:0.3cm",'100%',document.getElementById(temp).innerHTML);
-        check_isnull(data);
-        if(isnull == true){
-            isprint = confirm('该出货单中存在未填写的项,确定打印？');
-            if(isprint == true){
-                LODOP.PRINT();
-            }
-        }
+        LODOP.PRINT();
     }
-
-    function check_isnull(data){
-        for(var i in data){
-            for(var j in data[i]){
-                if(data[i][j].indexOf("") != -1){
-                    isnull = true;
-                    return false;
-                }
-            }
-        }
-    }
-
 </script>
