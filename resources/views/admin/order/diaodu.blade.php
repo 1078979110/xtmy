@@ -40,7 +40,7 @@
                         <select name="diaodu[{{$item->id}}][warehouse_id]" class="form-control warehouse">
                             <option value="0">==请选择==</option>
                             @foreach($warehouses as $k=>$warehouse)
-                                <option value="{{$warehouse->id}}" @if($item->warehouse_id == $warehouse->id)selected="selected"@endif>{{$warehouse->username}}</option>
+                                <option value="{{$warehouse->id}}" @if($item->warehouse_id == $warehouse->id)selected="selected"@endif>{{$warehouse->username}}-{{$warehouse->name}}</option>
                             @endforeach
                         </select>
                     </div>
