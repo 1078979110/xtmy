@@ -5,7 +5,9 @@
     <table  style="font-size:12px" cellpadding="0" cellspacing="0">
     	<tbody>
     		<tr style="line-height: 30px; height: 30px"><td colspan="12" align="center" style="font-size: 16px; font-weight:bold">{{$tabletitle[0]}}</td></tr>
-    		<tr style="line-height: 30px; height: 30px"><td colspan="4">{{$tabletitle[1]}}</td><td colspan="4">{{$tabletitle[2]}}</td><td colspan="4">{{$tabletitle[3]}}</td></tr>
+    		<tr style="line-height: 30px; height: 30px"><td colspan="2">{{$tabletitle[1]}}</td>
+				<td colspan="6"><span class="pull-left">{{$tabletitle[2]}}</span><span class="pull-left"><input type="text" class="form-control" style="width: 150px" id="orderdate" value=""></span> </td>
+				<td colspan="4">{{$tabletitle[3]}}</td></tr>
     		<tr style="line-height: 30px; height: 30px">
     			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[0]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width:200px" align="center">{{$datatitle[1]}}</td>
@@ -22,10 +24,10 @@
     		</tr>
     		@foreach($lists as $key => $list)
     		<tr style="line-height: 30px; height: 30px">
-    			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
+    			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center"><input type="text" class="form-control num" value=""></td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['manufactur']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['specification']}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['price']}}</td>
@@ -33,7 +35,7 @@
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['batchnumber']}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['novirus']}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['invalidate']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['depart']}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center"><input type="text" class="form-control keshi" value=""></td>
     		</tr>
     		@endforeach
 			<tr style="line-height: 30px; height: 30px"><td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="12" >{{$tabletitle[4]}}<span class="totalcn">{{$total}}</span></td></tr>
@@ -75,6 +77,7 @@
 	  <button type="button" class="btn btn-primary" onclick="print_view('table');">预览随货同行单</button>
 	  <button type="button" class="btn btn-primary" onclick="print('table');">打印随货同行单</button>
 	  <button type="button" class="btn btn-success" onclick="togglecn()">显示/隐藏合计</button>
+	  <button type="button" class="btn btn-success btnsure">确定</button>
 	  @if(!empty($gift))
 	  <button type="button" class="btn btn-info" onclick="print_view('template_forfinance');">预览赠品单</button>
 	  <button type="button" class="btn btn-info" onclick="print('template_forfinance');">打印赠品单</button>
@@ -107,4 +110,16 @@ function togglecn(){
         $('.totalcn').hide();
     }
 }
+$(".btnsure").click(function(){
+    orderdate = $("#orderdate").val();
+    $("#orderdate").parent().text(orderdate);
+    $(".num").each(function(index,item){
+        text = $(this).val();
+        $(this).parent().text(text);
+    })
+    $(".keshi").each(function(index,item){
+        text = $(this).val();
+        $(this).parent().text(text);
+    })
+});
 </script>

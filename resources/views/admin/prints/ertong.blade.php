@@ -5,8 +5,8 @@
     <table  style="font-size:12px" cellpadding="0" cellspacing="0">
     	<tbody>
     		<tr style="line-height: 30px; height: 30px"><td colspan="10" align="center" style="font-size: 16px; font-weight:bold">{{$tabletitle[0]}}</td></tr>
-    		<tr style="line-height: 30px; height: 30px"><td colspan="2">{{$tabletitle[1]}}</td><td colspan="2">{{$tabletitle[2]}}</td><td colspan="2">{{$tabletitle[3]}}</td><td colspan="2">{{$tabletitle[4]}}</td><td colspan="2">{{$tabletitle[5]}}</td></tr>
-    		<tr style="line-height: 30px; height: 30px"><td colspan="5">{{$tabletitle[6]}}</td><td colspan="5">{{$tabletitle[7]}}</td></tr>
+    		<tr style="line-height: 30px; height: 30px"><td colspan="2">{{$tabletitle[1]}}</td><td colspan="2">{{$tabletitle[2]}}</td><td colspan="2">{{$tabletitle[3]}}</td><td colspan="2">{{$tabletitle[4]}}</td><td colspan="2"><span class="pull-left">{{$tabletitle[5]}}</span><span class="pull-left"> <input type="text" class="form-control orderid" value="{{$orderinfo->orderid}}"></span></td></tr>
+    		<tr style="line-height: 30px; height: 30px"><td colspan="5"><span class="pull-left"> {{$tabletitle[6]}}</span><span class="pull-left"> <input type="text" id="orderdate" class="form-control" style="width: 150px" value="{{date('Y/m/d', strtotime($orderinfo->created_at))}}"></span></td><td colspan="5"><span class="pull-left"> {{$tabletitle[7]}}</span><span class="pull-left"> <input type="text" value="" id="expressid" class="form-control" placeholder="请输入运单号" style="width: 150px"></span></td></tr>
     		<tr style="line-height: 30px; height: 30px">
     			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:150px" align="center">{{$datatitle[0]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[1]}}</td>
@@ -49,7 +49,7 @@
 			  <table style="font-size:14px;" cellpadding="0" cellspacing="0">
 				  <tbody>
 				  <tr style="line-height: 30px; height: 30px"><td colspan="10" align="center" style="font-size: 16px; font-weight:bold">赠品信息</td></tr>
-				  <tr style="line-height: 30px; height: 30px"><td colspan="10">{{$tabletitle[5]}}</td></tr>
+				  <tr style="line-height: 30px; height: 30px"><td colspan="10"><span class="pull-left">{{$tabletitle[5]}}</span><span class="pull-left"> <input type="text" class="form-control orderid" value="{{$orderinfo->orderid}}"></span></td></tr>
 				  <tr style="line-height: 30px; height: 30px">
 					  <td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="3">名称</td>
 					  <td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="2">产品货号</td>
@@ -74,6 +74,7 @@
 	  <button type="button" class="btn btn-primary" onclick="print_view('table');">预览随货同行单</button>
 	  <button type="button" class="btn btn-primary" onclick="print('table');">打印随货同行单</button>
 	  <button type="button" class="btn btn-success" onclick="togglecn()">显示/隐藏合计</button>
+	  <button type="button" class="btn btn-success btnsure">确定</button>
 	  @if(!empty($gift))
 	  <button type="button" class="btn btn-info" onclick="print_view('template_forfinance');">预览赠品单</button>
 	  <button type="button" class="btn btn-info" onclick="print('template_forfinance');">打印赠品单</button>
@@ -106,4 +107,12 @@ function togglecn(){
         $('.totalcn').hide();
     }
 }
+$(".btnsure").click(function(){
+    orderid = $(".orderid").val();
+    $(".orderid").parent().text(orderid);
+    orderdate = $("#orderdate").val();
+    $("#orderdate").parent().text(orderdate);
+    expressid = $("#expressid").val();
+    $("#expressid").parent().text(expressid);
+});
 </script>

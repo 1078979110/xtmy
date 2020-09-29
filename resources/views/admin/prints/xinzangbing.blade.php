@@ -5,15 +5,16 @@
     <table  style="font-size:12px" cellpadding="0" cellspacing="0">
     	<tbody>
     		<tr style="line-height: 30px; height: 30px"><td colspan="14" align="center" style="font-size: 16px; font-weight:bold">{{$tabletitle[0]}}</td></tr>
-    		<tr style="line-height: 30px; height: 30px"><td colspan="7">{{$tabletitle[1]}}</td><td colspan="7">{{$tabletitle[2]}}</td></tr>
+    		<tr style="line-height: 30px; height: 30px"><td colspan="7"><span class="pull-left">{{$tabletitle[1]}}</span><span class="pull-left"><input type="text" class="form-control orderid" value="{{$orderinfo->orderid}}"></span> </td>
+				<td colspan="7"><span class="pull-left">{{$tabletitle[2]}}</span> <span class="pull-left"><input type="text" class="form-control" id="orderdate" value="{{date('Y.m.d', strtotime($orderinfo->created_at))}}"></span> </td></tr>
     		<tr style="line-height: 30px; height: 30px"><td colspan="7">{{$tabletitle[3]}}</td><td colspan="7">{{$tabletitle[4]}}</td></tr>
     		<tr style="line-height: 30px; height: 30px">
     			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:30px" align="center">{{$datatitle[0]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[1]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:150px" align="center">{{$datatitle[2]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:200px" align="center">{{$datatitle[2]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[3]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[4]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:250px" align="center">{{$datatitle[5]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:150px" align="center">{{$datatitle[5]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[6]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[7]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[8]}}</td>
@@ -26,9 +27,9 @@
     		@foreach($lists as $key => $list)
     		<tr style="line-height: 30px; height: 30px">
     			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$key+1}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center"><input type="text" value="" class="form-control nnn"></td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['specification']}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['boxformat']}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['manufactur']}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
@@ -37,7 +38,7 @@
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['batchnumber']}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['invalidate']}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['registnum']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['registivalidate']}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{date('Y/m/d', strtotime($list['registivalidate']))}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000">{{$list['tips']}}</td>
     		</tr>
     		@endforeach
@@ -56,7 +57,7 @@
 			  <table style="font-size:14px;" cellpadding="0" cellspacing="0">
 				  <tbody>
 				  <tr style="line-height: 30px; height: 30px"><td colspan="10" align="center" style="font-size: 16px; font-weight:bold">赠品信息</td></tr>
-				  <tr style="line-height: 30px; height: 30px"><td colspan="10">{{$tabletitle[1]}}</td></tr>
+				  <tr style="line-height: 30px; height: 30px"><td colspan="10"><span class="pull-left">{{$tabletitle[1]}}</span><span class="pull-left"><input type="text" class="form-control orderid" value="{{$orderinfo->orderid}}"></span></td></tr>
 				  <tr style="line-height: 30px; height: 30px">
 					  <td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="3">名称</td>
 					  <td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="2">产品货号</td>
@@ -80,6 +81,7 @@
   <div class="panel-footer">
 	  <button type="button" class="btn btn-primary" onclick="print_view('table');">预览随货同行单</button>
 	  <button type="button" class="btn btn-primary" onclick="print('table');">打印随货同行单</button>
+	  <button type="button" class="btn btn-success btnsure">确定</button>
 	  @if(!empty($gift))
 	  <button type="button" class="btn btn-info" onclick="print_view('template_forfinance');">预览赠品单</button>
 	  <button type="button" class="btn btn-info" onclick="print('template_forfinance');">打印赠品单</button>
@@ -103,4 +105,17 @@ function print(temp){
 	LODOP.ADD_PRINT_TABLE(40,10,"RightMargin:0.3cm",'100%',document.getElementById(temp).innerHTML);
 	LODOP.PRINT();
 }
+
+$(".btnsure").click(function(){
+    orderid = $(".orderid").val();
+    $(".orderid").parent().text(orderid);
+    orderdate = $("#orderdate").val();
+    $("#orderdate").parent().text(orderdate);
+    expressid = $("#expressid").val();
+    $("#expressid").parent().text(expressid);
+    $(".nnn").each(function(index,item){
+        text = $(this).val();
+        $(this).parent().text(text);
+    })
+});
 </script>
