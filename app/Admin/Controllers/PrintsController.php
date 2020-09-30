@@ -513,7 +513,14 @@ class PrintsController extends AdminController{
     }
 
     public function finance(Content $content){
-        $content->title('财务专用');
+        if(Admin::user()->isRole('finance')){
+            $viewer = 'admin.prints.finance';
+            $content->title('财务专用');
+        }else if(Admin::user()->isRole('wholesale')){
+            $viewer = 'admin.prints.wholesale';
+            $content->title('批发专用');
+        }
+
         $request = request();
         $id = $request->id;
         $orderInfo = DB::table('orders')->find($id);
@@ -530,7 +537,7 @@ class PrintsController extends AdminController{
                 'prices'=>$product->num*$product->price
             ];
         }
-        $content->body(view('admin.prints.finance',[
+        $content->body(view($viewer,[
             'orderinfo'=>$orderInfo, 'medicinals'=>$medicinals
         ])->render());
         return $content;
