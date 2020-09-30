@@ -28,7 +28,7 @@
                         <tr><td>特别说明</td><td colspan="3"><textarea placeholder="特别说明" id="explain" class="form-control" style="min-height: 50px; margin-top: 20px"></textarea></td></tr>
                         <tr><td colspan="4" style="height: 20px"></td></tr>
                         <tr>
-                            <td colspan="2"></td><td colspan="2" style="padding-top: 20px">{{$zhuanyun['footer']}}</td>
+                            <td colspan="2"></td><td colspan="2" style="padding-top: 20px;position: relative">{{$zhuanyun['footer']}}<img src="/images/yinzhang.png" class="yinzhang"> </td>
                         </tr>
                         <tr>
                             <td colspan="2"></td><td style="">{{$zhuanyun['date']}}</td>
@@ -50,7 +50,15 @@
         </div>
     </div>
 </div>
-
+<style>
+    .yinzhang{
+        width: 100px;
+        position: absolute;
+        left: 0;
+        top: -22px;
+        z-index: 2;
+    }
+</style>
 <script language="javascript" type="text/javascript">
     var LODOP;
     function print_view(){

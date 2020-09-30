@@ -64,7 +64,7 @@
                         <tr><td>特别说明</td><td colspan="6"><textarea placeholder="特别说明" id="explain" class="form-control" style="min-height: 50px; margin-top: 20px"></textarea></td></tr>
                         <tr><td colspan="7" style="height: 20px"></td></tr>
                         <tr>
-                            <td colspan="7" style="height: 100px">客户盖章：</td>
+                            <td colspan="7" style="height: 100px;position: relative">客户盖章：<img src="/images/yinzhang.png" class="yinzhang"></td>
                         </tr>
                     </table>
                 </div>
@@ -83,7 +83,15 @@
         </div>
     </div>
 </div>
-
+<style>
+    .yinzhang{
+        width: 100px;
+        position: absolute;
+        left: 0;
+        top: -7px;
+        z-index: 2;
+    }
+</style>
 <script language="javascript" type="text/javascript">
     $(".btnsure").click(function(){
         var totals = $("#totals").text();
