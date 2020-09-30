@@ -109,8 +109,8 @@
     </div>
 </div>
 <script>
-    var medicinals = '';
-    var warehouses = '';
+    var medicinals = {!! $medicinals_json !!};
+    var warehouses = {!! $warehouses_json !!};
     var gifts = {!! $gifts_josn !!}
     var key = '';
     //删除
@@ -215,7 +215,7 @@
         })
 
         if(endList.length != medicinals.length){
-            alert('请完成商品分库')
+            alert('请完成商品分库1111')
             return false
         }
         //console.log(endList)
