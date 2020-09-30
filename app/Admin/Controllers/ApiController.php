@@ -63,14 +63,24 @@ class ApiController extends AdminController {
 		if (request()->isMethod('post')) {
 			$id = $_POST['id'];
 			$curr_status = Order::where('id', $id)->value('orderstatus');
+			$curr_buyertype = Order::where('id', $id)->value('buyertype');
+			$curr_accountstatus = Order::where('id', $id)->value('accountstatus');
 			if($curr_status == 1 || $curr_status ==2){
 			    $curr_status = 3;
             }else if($curr_status ==3 ){
-			    if(Admin::user()->isRole('wholesale'))
-			    $curr_status = 4;
+			    if(Admin::user()->isRole('wholesale')){
+			        if($curr_buyertype == 1){
+                        $curr_status = 4;
+                    }else{
+                        $curr_status = 5;
+                    }
+                }
 			    $hasSplit = DB::table('orders_diaodu')->where('order_id', $id)->first();
 			    if(empty($hasSplit)){
                     return ['status' => false, 'title' => '订单', 'msg' => '失败，该订单还未分库，无法确认'];
+                }
+                if($curr_accountstatus ==0){
+                    return ['status' => false, 'title' => '订单', 'msg' => '失败，还未登账，无法确认'];
                 }
             }else if($curr_status ==4){
                 if(Admin::user()->isRole('finance'))
@@ -90,6 +100,18 @@ class ApiController extends AdminController {
 			}
 		}
 	}
+
+	public function account(Request $request){
+        if($request->isMethod('post')){
+            $id = $request->id;
+            $result = Order::where('id', $id)->update(['accountstatus' => 1]);
+            if ($result >=0) {
+                return ['status' => true, 'title' => '订单', 'msg' => '操作成功'];
+            } else {
+                return ['status' => false, 'title' => '订单', 'msg' => '失败，请稍后再试'];
+            }
+        }
+    }
 
 	public function changeOrderInfoPrice(Request $request) {
 		if ($request->isMethod('post')) {
@@ -432,7 +454,7 @@ class ApiController extends AdminController {
                                         $this->errorsheet .= $v['经销商'].'表：经销商不存在';
                                         break 2;
                                     }else{
-                                        $data['orderid'] = date('YmdHis', time()).$data['buyerid']. rand(100, 999);
+                                        $data['orderid'] = date('Ymd', time()).substr(time(), 6,4).rand(100, 999);
                                         $this->errorsheet .= $v['经销商'].'表：';
                                     }
                                 }
@@ -517,28 +539,17 @@ class ApiController extends AdminController {
             }
             try{
                 DB::beginTransaction();
+                DB::table('orders_diaodu')->where('order_id', $id)->delete();
                 foreach ($diaodu as $key => $item){
-                    if(is_numeric($key)){
-                        $_d = [
-                            'order_id'=>$id,
-                            'medicinal_id' => $item['medicinal_id'],
-                            'num' => $item['num'],
-                            'warehouse_id' => $item['warehouse_id'],
-                            'created_at' => date('Y-m-d H:i:s', time()),
-                            'updated_at' => date('Y-m-d H:i:s', time())
-                        ];
-                        DB::table('orders_diaodu')->where('id',$key)->update($_d);
-                    }else{
-                        $_d = [
-                            'order_id'=>$id,
-                            'medicinal_id' => $item['medicinal_id'],
-                            'num' => $item['num'],
-                            'warehouse_id' => $item['warehouse_id'],
-                            'created_at' => date('Y-m-d H:i:s', time()),
-                            'updated_at' => date('Y-m-d H:i:s', time())
-                        ];
-                        DB::table('orders_diaodu')->insert($_d);
-                    }
+                    $_d = [
+                        'order_id'=>$id,
+                        'medicinal_id' => $item['medicinal_id'],
+                        'num' => $item['num'],
+                        'warehouse_id' => $item['warehouse_id'],
+                        'created_at' => date('Y-m-d H:i:s', time()),
+                        'updated_at' => date('Y-m-d H:i:s', time())
+                    ];
+                    DB::table('orders_diaodu')->insert($_d);
                 }
                 if(!empty($gifts)){
                     foreach ($gifts as $key=>$gift){

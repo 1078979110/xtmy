@@ -9,6 +9,7 @@ use Encore\Admin\Controllers\AdminController;
 use App\Hospital;
 use App\Hospitalprice;
 use Encore\Admin\Layout\Content;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Encore\Admin\Facades\Admin;
 class PrintsController extends AdminController{
@@ -38,7 +39,7 @@ class PrintsController extends AdminController{
         $datatitle[4] = ['器械名称', '生产厂商', '生产企业许可证', '货号', '单位','数量', '批号', '注册证号', '生产日期', '失效日期'];
         $datatitle[5] = ['器械名称', '生产厂商', '许可证号', '货号', '单位','数量', '批号', '注册证号', '生产日期', '有效期至'];;
         $financetitle = ['购货单位：','日期：', '合计（大写）：', '本页小计：',];
-        $financedatatitle = ['器械名称','货号','单位','数量','金额', '备注'];
+        $financedatatitle = ['器械名称','货号','单位','数量', '单价','金额', '备注'];
         $dataname = [];//表格各项信息
         $zhuanyun = [];
         $zhuanyun['header'] = '现有我公司今日订购一批货，特委托国药集团上海医疗器械有限公司直接发货给湖北省武汉市东西湖区金银潭大道130号临空一号企业总部2栋4 楼， 陈雷 ，电话15802715519。 请随货请附检验报告。特此证明。';
@@ -103,14 +104,14 @@ class PrintsController extends AdminController{
 
 
         $dataname[0] = [
-            $tabletitle[0][0].$buyerInfo->name,
+            $tabletitle[0][0],
             $tabletitle[0][1].$orderInfo->orderid,
             $tabletitle[0][2].date('Y/m/d', time()),
             $tabletitle[0][3],
             $tabletitle[0][4]
         ];
         $dataname[1] = [
-            $tabletitle[1][0].$buyerInfo->name,
+            $tabletitle[1][0],
             $tabletitle[1][1].$orderInfo->orderid,
             $tabletitle[1][2].$buyerInfo->depart,
             $tabletitle[1][3].date('Y/m/d', time()),
@@ -121,7 +122,7 @@ class PrintsController extends AdminController{
         ];
         $dataname[2] = $dataname[1];
         $dataname[3] = [
-            $tabletitle[3][0].$buyerInfo->name,
+            $tabletitle[3][0],
             $tabletitle[3][1].$orderInfo->orderid,
             $tabletitle[3][2].$buyerInfo->address,
             $tabletitle[3][3].date('Y/m/d', time()),
@@ -137,7 +138,7 @@ class PrintsController extends AdminController{
             $tabletitle[3][13]
         ];
         $dataname[4] = [
-            $tabletitle[4][0].$buyerInfo->name,
+            $tabletitle[4][0],
             $tabletitle[4][1].$orderInfo->orderid,
             $tabletitle[4][2].$buyerInfo->address,
             $tabletitle[4][3].date('Y/m/d', time()),
@@ -153,9 +154,9 @@ class PrintsController extends AdminController{
 
         ];
         $dataname[5] = [
-            $tabletitle[5][0].$buyerInfo->name,
+            $tabletitle[5][0],
             $tabletitle[5][1].$orderInfo->orderid,
-            $tabletitle[5][2].$buyerInfo->address,
+            $tabletitle[5][2],
             $tabletitle[5][3].date('Y/m/d', time()),
             $tabletitle[5][4],
             $tabletitle[5][5],
@@ -169,13 +170,13 @@ class PrintsController extends AdminController{
         ];
         $financename = [
             $siteInfo->sitename.$ext2,
-            $financetitle[0].$buyerInfo->name,
+            $financetitle[0],
             $financetitle[1].date('Y/m/d', time()),
             $financetitle[2],
             $financetitle[3]
         ];
         $focname = [
-            $salefoc['header'][0].$buyerInfo->name,
+            $salefoc['header'][0],
             $salefoc['header'][1].date('Y/m/d', time()),
             $salefoc['header'][2].$buyerInfo->address
         ];
@@ -209,7 +210,8 @@ class PrintsController extends AdminController{
                 [
                     'title'=>$siteInfo->sitename.$ext,'tabletitle'=>$dataname,'datatitle'=>$datatitle,
                     'lists'=>$data,'jsondata'=>json_encode($data) ,'total'=>$totalprice,
-                    'totalcn'=>$totalcn,'financename'=>$financename, 'financedatatitle'=>$financedatatitle, 'zhuanyun'=>$zhuanyun
+                    'totalcn'=>$totalcn,'financename'=>$financename, 'financedatatitle'=>$financedatatitle, 'zhuanyun'=>$zhuanyun,
+                    'buyerinfo'=>$buyerInfo
                 ]
             )->render());
         }
@@ -223,27 +225,27 @@ class PrintsController extends AdminController{
         $sendcompany = "武汉协同贸易有限公司";
         $headername['hk'] = ['购货单位：','编号：','部门：','业务员：','开票员：','日期：','合计：','发货员：','复核员：','客户签字'];
         $headername['xzb'] =['采购订单号：','订单日期：','供应商：','收货单位：','送货人：','送货日期：','收货人：','收货日期：'];
-        $headername['yx'] =['采购订单号：','订单日期：','供应商：','收货单位：','送货人：','送货日期：','收货人：','收货日期：'];
-        $headername['et'] = ['供应单位：','采购人：','采购类型：','仓库：','订单号：','订单日期：','送货单号：','合计：','发货员：','复核员：','客户签收：'];
+        $headername['yx'] =['采购订单号：','订单日期：','供应商编码及名称：V30022 武汉协同贸易有限公司','收货单位：','送货人：','送货日期：','收货人：','收货日期：'];
+        $headername['et'] = ['供应单位：','采购人：姚勇康','采购类型：购销','仓库：设备耗材库','订单号：','订单日期：','送货单号：','合计：','发货员：','复核员：','客户签收：'];
         $headername['tj'] = ['商业公司全称：','送货单号：','单位地址电话：','收货单位：','科室','送货日期：','合计：','收货单位及经手人签字：'];
         $headername['ds'] = ['购货单位：','开票日期：','发票号：','合计：','送货人：','收货人：','联系方式：'];
         $headername['rm'] = ['经销商：','采购日期：', '科室：','合计：'];
         $headername['fy'] = ['购货单位：','编号：','部门：', '业务员：','日期：','合计：','发货员：','复核员：','客户签收'];
-        $headername['zx'] = ['购货单位：','编号：','部门：呼吸及危重症二病区（后湖）','业务员：','开票员：','日期：','合计：','发货员：','复核员：','客户签收'];
+        $headername['zx'] = ['购货单位：','编号：','部门：','业务员：','开票员：','日期：','合计：','发货员：','复核员：','客户签收'];
         $headername['zn'] = ['购货单位：','编号：','部门：','业务员：','开票员：','日期：','合计：','发货员：','复核员：','客户签收'];
         $headername['zy'] = ['经销商：','采购日期：','科室：湖北省紫阳医业公司','合计：'];
 
-        $dataname['hk'] = ['器械名称','货号','单位','数量','单价','金额','生产日期','批号','注册证书','有效期至'];
-        $dataname['xzb'] = ['序号','货号','产品名称','规格型号','装箱规格','生产厂家','数量','单位','单价(元)','产品批号','产品有效期','医疗器械注册证书','医疗器械注册证有效期','备注'];
-        $dataname['yx'] = ['序号','货号','产品名称','规格型号','装箱规格','生产厂家','数量','单位','单价(元)','产品批号','产品有效期','医疗器械注册证书','医疗器械注册证有效期'];
-        $dataname['et'] = ['材料名称','货号','单位','生产批号','有效日期','单价(元)','数量','总价(元)','生产厂家','灭菌日期'];
-        $dataname['tj'] = ['货号','品名','规格','单位','数量','单价','金额','生产批号','有效期','备注','产地'];
-        $dataname['ds'] = ['货号','商品名称','生产厂家','型号规格','单位','数量','单价','金额','生产批号','灭菌批号','有效期至','科室'];
-        $dataname['rm'] = ['产品名称','货号','数量','单位','单价','金额','生产批号','灭菌批号','注册证号','产品有效期','生产厂家','原产地'];
-        $dataname['fy'] = ['器械名称','货号','单位','数量','单价','金额','生产日期','批号','注册证号','有效期至'];
-        $dataname['zx'] = ['器械名称','生产商','货号','单位','数量','单价','金额','生产日期','批号','注册证号','有效期至'];
-        $dataname['zn'] = ['器械名称','货号','单位','数量','单价','金额','生产日期','批号','注册证号','有效期至'];
-        $dataname['zy'] = ['产品名称','货号','单位','数量','包装规格','单价','金额','产品批号','灭菌批号','生产日期','产品有效期','产品注册证','注册证有效期','生产厂家'];
+        $dataname['hk'] = ['器械名称','规格型号','单位','数量','单价','金额','生产日期','批号','注册证书','有效期至'];
+        $dataname['xzb'] = ['序号','产品编码','产品名称','规格型号','装箱规格','生产厂家','数量','单位','单价(元)','产品批号','产品有效期','医疗器械注册证书','医疗器械注册证有效期','备注'];
+        $dataname['yx'] = ['序号','产品编码','产品名称','规格型号','装箱规格','生产厂家','数量','单位','单价(元)','产品批号','产品有效期','医疗器械注册证书','医疗器械注册证有效期'];
+        $dataname['et'] = ['材料名称','规格型号','单位','生产批号','有效日期','单价(元)','数量','总价(元)','生产厂家','灭菌日期'];
+        $dataname['tj'] = ['产品编号','品名','规格','单位','数量','单价','金额','生产批号','有效期','备注','产地'];
+        $dataname['ds'] = ['招标编号','商品名称','生产厂家','型号规格','单位','数量','单价','金额','生产批号','灭菌批号','有效期至','科室'];
+        $dataname['rm'] = ['产品名称','规格型号','数量','单位','单价','金额','生产批号','灭菌批号','注册证号','产品有效期','生产厂家','原产地'];
+        $dataname['fy'] = ['器械名称','规格型号','单位','数量','单价','金额','生产日期','批号','注册证号','有效期至'];
+        $dataname['zx'] = ['器械名称','生产商','规格型号','单位','数量','单价','金额','生产日期','批号','注册证号','有效期至'];
+        $dataname['zn'] = ['器械名称','规格型号','单位','数量','单价','金额','生产日期','批号','注册证号','有效期至'];
+        $dataname['zy'] = ['产品名称','规格型号','单位','数量','包装规格','单价','金额','产品批号','灭菌批号','生产日期','产品有效期','产品注册证','注册证有效期','生产厂家'];
         //$financetitle = ['购货单位：','日期：', '合计（大写）', '本页小计：',];
         //$financedatatitle = ['器械名称','规格型号','单位','数量','金额', '备注'];
 
@@ -341,14 +343,14 @@ class PrintsController extends AdminController{
 
             ];
             $content->body(view('admin.prints.hankou',
-                ['tabletitle'=>$tabletitle,'datatitle'=>$dataname['hk'],'lists'=>$data, 'gift'=>$gifts, 'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn,]
+                ['orderinfo'=>$orderInfo,'tabletitle'=>$tabletitle,'datatitle'=>$dataname['hk'],'lists'=>$data, 'gift'=>$gifts, 'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn,]
             )->render());
             return $content;
         }else if($hospitalInfo->hospital == '武汉亚洲心脏病医院'){
             $title = $ext1;
             $tabletitle = [$title,
-                $headername['xzb'][0].$orderInfo->orderid,
-                $headername['xzb'][1].date('Y-m-d',strtotime($orderInfo->created_at)),
+                $headername['xzb'][0],
+                $headername['xzb'][1],
                 $headername['xzb'][2].$sendcompany,
                 $headername['xzb'][3].$hospitalInfo->hospital,
                 $headername['xzb'][4],
@@ -357,14 +359,14 @@ class PrintsController extends AdminController{
                 $headername['xzb'][7]
             ];
             $content->body(view('admin.prints.xinzangbing',
-                ['tabletitle'=>$tabletitle,'datatitle'=>$dataname['xzb'],'lists'=>$data, 'gift'=>$gifts,'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn]
+                ['orderinfo'=>$orderInfo,'tabletitle'=>$tabletitle,'datatitle'=>$dataname['xzb'],'lists'=>$data, 'gift'=>$gifts,'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn]
             )->render());
             return $content;
         }else if($hospitalInfo->hospital == '武汉亚心总医院有限公司'){
             $title = $ext1;
             $tabletitle = [$title,
-                $headername['yx'][0].$orderInfo->orderid,
-                $headername['yx'][1].date('Y-m-d',strtotime($orderInfo->created_at)),
+                $headername['yx'][0],
+                $headername['yx'][1],
                 $headername['yx'][2].$sendcompany,
                 $headername['yx'][3].$hospitalInfo->hospital,
                 $headername['yx'][4],
@@ -373,18 +375,18 @@ class PrintsController extends AdminController{
                 $headername['yx'][7]
             ];
             $content->body(view('admin.prints.yaxin',
-                ['tabletitle'=>$tabletitle,'datatitle'=>$dataname['xzb'],'lists'=>$data, 'gift'=>$gifts,'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn]
+                ['orderinfo'=>$orderInfo,'tabletitle'=>$tabletitle,'datatitle'=>$dataname['xzb'],'lists'=>$data, 'gift'=>$gifts,'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn]
             )->render());
             return $content;
         }else if($hospitalInfo->hospital == '武汉儿童医院'){
             $title = $hospitalInfo->hospital.$ext1;
             $tabletitle = [$title,
                 $headername['et'][0].$sendcompany,
-                $headername['et'][1].$hospitalInfo->contactman,
+                $headername['et'][1],
                 $headername['et'][2],
                 $headername['et'][3],
-                $headername['et'][4].$orderInfo->orderid,
-                $headername['et'][5].date('Y/m/d', strtotime($orderInfo->created_at)),
+                $headername['et'][4],
+                $headername['et'][5],
                 $headername['et'][6],
                 $headername['et'][7],
                 $headername['et'][8],
@@ -392,7 +394,7 @@ class PrintsController extends AdminController{
                 $headername['et'][10]
             ];
             $content->body(view('admin.prints.ertong',
-                ['tabletitle'=>$tabletitle,'datatitle'=>$dataname['et'],'lists'=>$data, 'gift'=>$gifts,'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn]
+                ['orderinfo'=>$orderInfo,'tabletitle'=>$tabletitle,'datatitle'=>$dataname['et'],'lists'=>$data, 'gift'=>$gifts,'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn]
             )->render());
             return $content;
         }else if($hospitalInfo->hospital == '同济医院' || $hospitalInfo->hospital == '同济生活服务部'){
@@ -408,7 +410,7 @@ class PrintsController extends AdminController{
                 $headername['tj'][7]
             ];
             $content->body(view('admin.prints.tongji',
-                ['tabletitle'=>$tabletitle,'datatitle'=>$dataname['tj'],'lists'=>$data, 'gift'=>$gifts,'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn]
+                ['orderinfo'=>$orderInfo,'tabletitle'=>$tabletitle,'datatitle'=>$dataname['tj'],'lists'=>$data, 'gift'=>$gifts,'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn]
             )->render());
             return $content;
         }else if($hospitalInfo->hospital == '武汉市第四医院' || $hospitalInfo->hospital == '武汉市第四医院西院'){
@@ -423,7 +425,7 @@ class PrintsController extends AdminController{
                 $headername['ds'][6]
             ];
             $content->body(view('admin.prints.disi',
-                ['tabletitle'=>$tabletitle,'datatitle'=>$dataname['ds'],'lists'=>$data, 'gift'=>$gifts,'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn]
+                ['orderinfo'=>$orderInfo,'tabletitle'=>$tabletitle,'datatitle'=>$dataname['ds'],'lists'=>$data, 'gift'=>$gifts,'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn]
             )->render());
             return $content;
         }else if($hospitalInfo->hospital == '武汉大学人民医院'){
@@ -435,7 +437,7 @@ class PrintsController extends AdminController{
                 $headername['rm'][3]
             ];
             $content->body(view('admin.prints.renmin',
-                ['tabletitle'=>$tabletitle,'datatitle'=>$dataname['rm'],'lists'=>$data, 'gift'=>$gifts,'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn]
+                ['orderinfo'=>$orderInfo,'tabletitle'=>$tabletitle,'datatitle'=>$dataname['rm'],'lists'=>$data, 'gift'=>$gifts,'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn]
             )->render());
             return $content;
         }else if($hospitalInfo->hospital == '省妇幼'){
@@ -452,7 +454,7 @@ class PrintsController extends AdminController{
                 $headername['fy'][8]
             ];
             $content->body(view('admin.prints.fuyou',
-                ['tabletitle'=>$tabletitle,'datatitle'=>$dataname['fy'],'lists'=>$data,'gift'=>$gifts, 'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn]
+                ['orderinfo'=>$orderInfo,'tabletitle'=>$tabletitle,'datatitle'=>$dataname['fy'],'lists'=>$data,'gift'=>$gifts, 'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn]
             )->render());
             return $content;
         }else if($hospitalInfo->hospital == '武汉市中心医院'){
@@ -470,7 +472,7 @@ class PrintsController extends AdminController{
                 $headername['zx'][9]
             ];
             $content->body(view('admin.prints.zhongxin',
-                ['tabletitle'=>$tabletitle,'datatitle'=>$dataname['zx'],'lists'=>$data, 'gift'=>$gifts,'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn]
+                ['orderinfo'=>$orderInfo,'tabletitle'=>$tabletitle,'datatitle'=>$dataname['zx'],'lists'=>$data, 'gift'=>$gifts,'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn]
             )->render());
             return $content;
         }else if($hospitalInfo->hospital == '武汉大学中南医院' || $hospitalInfo->hospital == '湖北楚汉精诚医药有限公司武昌分公司'){
@@ -488,7 +490,7 @@ class PrintsController extends AdminController{
                 $headername['zn'][9]
             ];
             $content->body(view('admin.prints.zhongnan',
-                ['tabletitle'=>$tabletitle,'datatitle'=>$dataname['zn'],'lists'=>$data,'gift'=>$gifts, 'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn]
+                ['orderinfo'=>$orderInfo,'tabletitle'=>$tabletitle,'datatitle'=>$dataname['zn'],'lists'=>$data,'gift'=>$gifts, 'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn]
             )->render());
             return $content;
         }elseif($hospitalInfo->hospital == '湖北省紫阳医业公司'){
@@ -501,7 +503,7 @@ class PrintsController extends AdminController{
 
             ];
             $content->body(view('admin.prints.ziyang',
-                ['tabletitle'=>$tabletitle,'datatitle'=>$dataname['zy'],'lists'=>$data, 'gift'=>$gifts,'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn]
+                ['orderinfo'=>$orderInfo,'tabletitle'=>$tabletitle,'datatitle'=>$dataname['zy'],'lists'=>$data, 'gift'=>$gifts,'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn]
             )->render());
             return $content;
         }else{
@@ -509,6 +511,31 @@ class PrintsController extends AdminController{
             return redirect('/admin/orders');
         }
     }
+
+    public function finance(Content $content){
+        $content->title('财务专用');
+        $request = request();
+        $id = $request->id;
+        $orderInfo = DB::table('orders')->find($id);
+        $orderProducts = DB::table('order_medicinals')->where('order_id', $id)->get(['order_id', 'medicinal_id', 'price','num']);
+        $medicinals = [];
+        foreach ($orderProducts as $key=>$product){
+            $medicinal = DB::table('medicinal')->where('id', $product->medicinal_id)->first();
+            $medicinals[$key] = [
+                'medicinal' => $medicinal->medicinal,
+                'medicinalnum'=>$medicinal->medicinalnum,
+                'unit'=>$medicinal->unit,
+                'num'=>$product->num,
+                'price'=>$product->price,
+                'prices'=>$product->num*$product->price
+            ];
+        }
+        $content->body(view('admin.prints.finance',[
+            'orderinfo'=>$orderInfo, 'medicinals'=>$medicinals
+        ])->render());
+        return $content;
+    }
+
    
     /*    
     * 数字金额转换成中文大写金额的函数

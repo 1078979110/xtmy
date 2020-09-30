@@ -204,6 +204,9 @@ class OrderController extends AdminController
             }else{
                 $str = '<button class="btn btn-success btn-xs" style="background-color: #985f0d; border-color:#985f0d">'.$button_[$this->orderstatus-1].'</button>';
             }
+            if($this->accountstatus == 1 && Admin::user()->isRole('wholesale')){
+                $str .= ' <button class="btn btn-success btn-xs" style="background-color: #985f0d; border-color:#985f0d">已登账</button>';
+            }
             return $str;
         });
         if(!Admin::user()->isRole('administrator')){
@@ -227,6 +230,24 @@ class OrderController extends AdminController
                         }
                     });
                 });
+                
+                $(".account").click(function(){
+                    id = $(this).attr('data-id');
+                    $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+                    $.ajax({
+                        url:'/admin/api/account',
+                        method:'post',
+                        data:{'id':id},
+                        success:function(res){
+                            if(res.status){        
+                                    toastr.success(res.msg,res.title,setTimeout(function (){window.location.reload();}, 4000))
+                                }else{
+                                    toastr.warning(res.msg,res.title,setTimeout(function (){window.location.reload();}, 4000))
+                            }
+                        }
+                    });
+                });
+                
                 $(".changeprice").click(function(){
                     id = $(this).attr('data-id');
                     window.location.href='/admin/excel/changeprice?id='+id;
@@ -235,6 +256,7 @@ class OrderController extends AdminController
                     id = $(this).attr('data-id');
                     window.location.href='/admin/excel/fenpi?id=' +id;
                 });
+                
                 $(".splitorder").click(function(){
                     id = $(this).attr('data-id');
                         window.location.href='/admin/excel/splitorder?id='+id;
@@ -256,6 +278,12 @@ class OrderController extends AdminController
                     window.location.href='/admin/print/hostpital?id='+id;
                     }
                 });
+                
+                $(".printfinance").click(function(){
+                    id = $(this).attr('data-id');
+                    window.location.href="/admin/print/finance?id="+id
+                });
+                
                 $(".zhuanyun").click(function(){
                     id = $(this).attr('data-id');
                     window.location.href='/admin/print/jxs?id='+id+'&zhuanyun=1';
@@ -284,16 +312,17 @@ class OrderController extends AdminController
 EOT;
                 if(Admin::user()->isRole('wholesale') && $this->orderstatus == 3){
                     $str = '<button class="btn btn-warning btn-xs comfirmorder" data-id="'.$this->id.'">确认报价</button> | ';
-                    //if($this->splitstatus == 0){
                      $str .= '<button class="btn btn-danger btn-xs splitorder" data-id="'.$this->id.'">分库</button> | ';
-                    //}
-                    $str .= '<button class="btn btn-danger btn-xs changeprice" data-id="'.$this->id.'">改价</button>';
+                    $str .= '<button class="btn btn-danger btn-xs changeprice" data-id="'.$this->id.'">改价</button> |';
+                    if($this->accountstatus ==0){
+                        $str .= '<button class="btn btn-danger btn-xs account" data-id="'.$this->id.'">登账</button>';
+                    }
+
                 }else if(Admin::user()->isRole('finance')){
                     if($this->orderstatus == 4){
                         $str = '<button class="btn btn-info btn-xs comfirmorder" data-id="'.$this->id.'">确认收款</button>';
-                    }else if($this->orderstatus == 6){
-                        $str = '<button class="btn btn-warning btn-xs print" data-type="'.$this->buyertype.'" data-id="'.$this->id.'">打印出货单</button>';
                     }
+                        $str .= '<button class="btn btn-warning btn-xs printfinance" data-id="'.$this->id.'">打印出货单</button>';
                 }else if(Admin::user()->isRole('warehouse')){
                     if($this->orderstatus == 5){
                         $str = '<button class="btn btn-primary btn-xs fenpi" data-id="'.$this->id.'">产品分批</button> | 
@@ -304,6 +333,7 @@ EOT;
                                     <button class="btn btn-warning btn-xs foc" data-id="'.$this->id.'">销售订单/FOC申请表</button> | ';
                         }
                             $str .= '<button class="btn btn-warning btn-xs shipping" data-id="'.$this->id.'">确认发货</button>';
+
                     }/*else if($this->orderstatus == 6){
                         $str = '<button class="btn btn-warning btn-xs shipping" data-id="'.$this->id.'">已发货</button> | ';
                     }*/
@@ -321,8 +351,8 @@ EOT;
             });
         });
         $grid->tools(function($tools){
-            //if(Admin::user()->isRole('administrator')) //批量导入经销商订单
-            //$tools->append(new OrderImport());
+            if(Admin::user()->isRole('administrator')) //批量导入经销商订单
+            $tools->append(new OrderImport());
         });
         $grid->disableActions();
         return $grid;

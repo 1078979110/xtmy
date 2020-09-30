@@ -40,6 +40,7 @@ Route::group([
     $router->get('/setting/prints','SettingController@selectPrint');
     $router->get('/print/hostpital','PrintsController@hospitalPrint');
     $router->get('/print/jxs','PrintsController@jxsPrint');
+    $router->get('/print/finance','PrintsController@finance');
     $router->get('/api/gifts','ApiController@gifts');
     $router->get('/excel/updateattr', 'ExcelController@updateAttr');
     $router->get('excel/order', 'ExcelController@Order');
@@ -54,6 +55,7 @@ Route::group([
     $router->post('/api/medicinalstatus', 'ApiController@medicinalStatus');
     $router->post('/api/setprice', 'ApiController@setPrice');
     $router->post('/api/changestatus', 'ApiController@changeOrderStatus');
+    $router->post('/api/account', 'ApiController@account');
     $router->post('/api/gift', 'ApiController@orderGift');
     $router->post('/api/changeprice', 'ApiController@changeOrderInfoPrice');
     $router->post('/api/changeinfo', 'ApiController@changeInfo');

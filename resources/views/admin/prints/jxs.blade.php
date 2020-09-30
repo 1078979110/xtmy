@@ -14,6 +14,7 @@
 					<option value="5">模板五</option>
 					<option value="6">模板六</option>
 					<option value="7">模板七（出库单）</option>
+					<option value="8">模板八</option>
       			</select>
       		</div>
       	</div>
@@ -22,7 +23,7 @@
       		<table style="font-size:14px;" cellpadding="0" cellspacing="0">
       			<tbody>
       				<tr style="line-height: 30px; height: 30px"><td colspan="8" align="center" style="font-size: 16px; font-weight:bold">{{$title}}</td></tr>
-      				<tr style="line-height: 30px; height: 30px"><td colspan="4" align="left">{{$tabletitle[0][0]}}</td><td colspan="4" align="right">{{$tabletitle[0][1]}}</td></tr>
+      				<tr style="line-height: 30px; height: 30px"><td colspan="4" align="left" class="title-excel-1"><span class="pull-left">{{$tabletitle[0][0]}}</span> <span class="pull-left"><input type="text" class="form-control jxsname-1" value=""></span></td><td colspan="4" align="right">{{$tabletitle[0][1]}}</td></tr>
       				<tr style="line-height: 30px; height: 30px"><td colspan="8" align="right">{{$tabletitle[0][2]}}</td></tr>
       				<tr style="line-height: 30px; height: 30px">
       					<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:30px" align="center">{{$datatitle[0][0]}}</td>
@@ -55,7 +56,7 @@
       		<table style="font-size:14px;" cellpadding="0" cellspacing="0">
       			<tbody>
       				<tr style="line-height: 30px; height: 30px"><td colspan="7" align="center" style="font-size: 16px; font-weight:bold">{{$title}}</td></tr>
-      				<tr style="line-height: 30px; height: 30px"><td colspan="4" align="left">{{$tabletitle[1][0]}}</td><td colspan="3" align="right">{{$tabletitle[1][1]}}</td></tr>
+      				<tr style="line-height: 30px; height: 30px"><td colspan="4" align="left" class="title-excel-2"><span class="pull-left">{{$tabletitle[1][0]}}</span> <span class="pull-left"><input type="text" class="form-control jxsname-2" value=""></span></td><td colspan="3" align="right">{{$tabletitle[1][1]}}</td></tr>
       				<tr><td colspan="4" align="left">{{$tabletitle[1][2]}}</td><td colspan="3" align="right">{{$tabletitle[1][3]}}</td></tr>
       				<tr style="line-height: 30px; height: 30px">
             			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:200px" align="center">{{$datatitle[1][0]}}</td>
@@ -91,7 +92,7 @@
       		<table style="font-size:14px;" cellpadding="0" cellspacing="0">
       			<tbody>
       				<tr><td colspan="6" align="center" style="font-size: 16px; font-weight:bold">{{$title}}</td></tr>
-      				<tr><td colspan="3" align="left">{{$tabletitle[2][0]}}</td><td colspan="3" align="right">{{$tabletitle[2][1]}}</td></tr>
+      				<tr><td colspan="3" align="left" class="title-excel-3"><span class="pull-left">{{$tabletitle[2][0]}}</span> <span class="pull-left"><input type="text" class="form-control jxsname-3" value=""></span></td><td colspan="3" align="right">{{$tabletitle[2][1]}}</td></tr>
       				<tr><td colspan="3" align="left">{{$tabletitle[2][2]}}</td><td colspan="3" align="right">{{$tabletitle[2][3]}}</td></tr>
       				<tr style="line-height: 30px; height: 30px">
             			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:200px" align="center">{{$datatitle[2][0]}}</td>
@@ -125,7 +126,7 @@
       		<table style="font-size:14px;" cellpadding="0" cellspacing="0">
       			<tbody>
       				<tr style="line-height: 30px; height: 30px"><td colspan="10" align="center" style="font-size: 16px; font-weight:bold">{{$title}}</td></tr>
-      				<tr style="line-height: 30px; height: 30px"><td colspan="5" align="left">{{$tabletitle[3][0]}}</td><td colspan="5" align="right">{{$tabletitle[3][1]}}</td></tr>
+      				<tr style="line-height: 30px; height: 30px"><td colspan="5" align="left" class="title-excel-4"><span class="pull-left">{{$tabletitle[3][0]}}</span> <span class="pull-left"><input type="text" class="form-control jxsname-4" value=""></span></td><td colspan="5" align="right">{{$tabletitle[3][1]}}</td></tr>
       				<tr style="line-height: 30px; height: 30px"><td colspan="5" align="left">{{$tabletitle[3][2]}}</td><td colspan="5" align="right">{{$tabletitle[3][3]}}</td></tr>
       				<tr style="line-height: 30px; height: 30px">
             			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:120px" align="center">{{$datatitle[3][0]}}</td>
@@ -172,7 +173,7 @@
 			  <table style="font-size:14px;" cellpadding="0" cellspacing="0">
 				  <tbody>
 				  <tr style="line-height: 30px; height: 30px"><td colspan="10" align="center" style="font-size: 16px; font-weight:bold">{{$title}}</td></tr>
-				  <tr style="line-height: 30px; height: 30px"><td colspan="5" align="left">{{$tabletitle[4][0]}}</td><td colspan="5" align="right">{{$tabletitle[4][1]}}</td></tr>
+				  <tr style="line-height: 30px; height: 30px"><td colspan="5" align="left" class="title-excel-5"><span class="pull-left">{{$tabletitle[4][0]}}</span> <span class="pull-left"><input type="text" class="form-control jxsname-5" value=""></span></td><td colspan="5" align="right">{{$tabletitle[4][1]}}</td></tr>
 				  <tr style="line-height: 30px; height: 30px"><td colspan="5" align="left">{{$tabletitle[4][2]}}</td><td colspan="5" align="right">{{$tabletitle[4][3]}}</td></tr>
 				  <tr style="line-height: 30px; height: 30px">
 					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:120px" align="center">{{$datatitle[4][0]}}</td>
@@ -222,8 +223,8 @@
 			  <table style="font-size:14px;" cellpadding="0" cellspacing="0">
 				  <tbody>
 				  <tr style="line-height: 30px; height: 30px"><td colspan="10" align="center" style="font-size: 16px; font-weight:bold">{{$title}}</td></tr>
-				  <tr style="line-height: 30px; height: 30px"><td colspan="5" align="left">{{$tabletitle[5][0]}}</td><td colspan="5" align="right">{{$tabletitle[5][1]}}</td></tr>
-				  <tr style="line-height: 30px; height: 30px"><td colspan="5" align="left">{{$tabletitle[5][2]}}</td><td colspan="5" align="right">{{$tabletitle[5][3]}}</td></tr>
+				  <tr style="line-height: 30px; height: 30px"><td colspan="5" align="left" class="title-excel-6"><span class="pull-left">{{$tabletitle[5][0]}}</span> <span class="pull-left"><input type="text" class="form-control jxsname-6" value=""></span></td><td colspan="5" align="right">{{$tabletitle[5][1]}}</td></tr>
+				  <tr style="line-height: 30px; height: 30px"><td colspan="5" align="left"><span class="pull-left">{{$tabletitle[5][2]}}</span></span> <span class="pull-left saddress"><input type="text" class="form-control iaddress" value=""></span></td><td colspan="5" align="right">{{$tabletitle[5][3]}}</td></tr>
 				  <tr style="line-height: 30px; height: 30px">
 					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:120px" align="center">{{$datatitle[5][0]}}</td>
 					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:120px" align="center">{{$datatitle[5][1]}}</td>
@@ -262,7 +263,7 @@
 				  </tr>
 				  <tr style="line-height: 30px; height: 30px">
 					  <td colspan="4">{{$tabletitle[5][10]}}</td>
-					  <td colspan="4">{{$tabletitle[5][11]}}</td>
+					  <td colspan="4">{{$tabletitle[5][11]}} </td>
 					  <td colspan="2">{{$tabletitle[5][12]}}</td>
 				  </tr>
 				  </tbody>
@@ -272,8 +273,9 @@
 			  <label class="col-sm-2 control-label">模板</label>
 			  <table style="font-size:14px;" cellpadding="0" cellspacing="0">
 				  <tbody>
-				  <tr><td colspan="6" align="center" style="font-size: 16px; font-weight:bold">{{$financename[0]}}</td></tr>
-				  <tr><td colspan="3" align="left">{{$financename[1]}}</td><td colspan="3" align="right">{{$financename[2]}}</td></tr>
+				  <tr><td colspan="7" align="center" style="font-size: 16px; font-weight:bold">{{$financename[0]}}</td></tr>
+				  <tr><td colspan="4" align="left" class="title-excel-7"><span class="pull-left">{{$financename[1]}}</span> <span class="pull-left "><input type="text" class="form-control jxsname-7" value=""></span> </td>
+					  <td colspan="3" align="right">{{$financename[2]}}</td></tr>
 				  <tr style="line-height: 30px; height: 30px">
 					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:200px" align="center">{{$financedatatitle[0]}}</td>
 					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$financedatatitle[1]}}</td>
@@ -281,6 +283,7 @@
 					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$financedatatitle[3]}}</td>
 					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$financedatatitle[4]}}</td>
 					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$financedatatitle[5]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$financedatatitle[6]}}</td>
 				  </tr>
 				  @foreach($lists as $key => $list)
 					  <tr style="line-height: 30px; height: 30px">
@@ -288,14 +291,50 @@
 						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
 						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
 						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['price']}}</td>
 						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['prices']}}</td>
 						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['tips']}}</td>
 					  </tr>
 				  @endforeach
 
 				  <tr style="line-height: 30px; height: 30px">
-					  <td colspan="3" style="border-top: 1px solid #000">{{$financename[3]}}<span class="totalcn" style="display: none">{{$totalcn}}</span></td>
-					  <td colspan="3" style="border-top: 1px solid #000">{{$financename[4]}}<span tindex="5" tdata="SubSum" format="###,###,###,###,###.00">##########元</span></td>
+					  <td colspan="4" style="border-top: 1px solid #000">{{$financename[3]}}<span class="totalcn" style="display: none">{{$totalcn}}</span></td>
+					  <td colspan="3" style="border-top: 1px solid #000">{{$financename[4]}}<span tindex="5" class="totalcn"  tdata="SubSum" format="###,###,###,###,###.00">##########元</span></td>
+				  </tr>
+				  </tbody>
+			  </table>
+		  </div>
+		  <div class="form-group col-sm-offset-2 template" id="template8" style="display: none;margin:0; padding:0">
+			  <label class="col-sm-2 control-label">模板</label>
+			  <table style="font-size:14px;" cellpadding="0" cellspacing="0">
+				  <tbody>
+				  <tr><td colspan="7" align="center" style="font-size: 16px; font-weight:bold">{{$financename[0]}}</td></tr>
+				  <tr><td colspan="4" align="left" class="title-excel-8"><span class="pull-left">{{$financename[1]}}</span> <span class="pull-left "><input type="text" class="form-control jxsname-8" value=""></span> </td>
+					  <td colspan="3" align="right">{{$financename[2]}}</td></tr>
+				  <tr style="line-height: 30px; height: 30px">
+					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:200px" align="center">{{$financedatatitle[0]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$financedatatitle[1]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$financedatatitle[2]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$financedatatitle[3]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$financedatatitle[4]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$financedatatitle[5]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$financedatatitle[6]}}</td>
+				  </tr>
+				  @foreach($lists as $key => $list)
+					  <tr style="line-height: 30px; height: 30px">
+						  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center"><input type="number" value="{{$list['price']}}" class="form-control price"></td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center" class="minitotal"><input type="number" name="minitotal" value="{{$list['prices']}}" class="form-control price"></td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['tips']}}</td>
+					  </tr>
+				  @endforeach
+
+				  <tr style="line-height: 30px; height: 30px">
+					  <td colspan="4" style="border-top: 1px solid #000">{{$financename[3]}}<span class="totalcn big" style="display: none">{{$totalcn}}</span></td>
+					  <td colspan="3" style="border-top: 1px solid #000">{{$financename[4]}}<span tindex="5" class="totalcn"  tdata="SubSum" format="###,###,###,###,###.00">##########元</span></td>
 				  </tr>
 				  </tbody>
 			  </table>
@@ -309,19 +348,21 @@
   			<button type="button" class="btn btn-primary" onclick="print_view();">预览同行单</button>
   			<button type="button" class="btn btn-primary" onclick="print();">打印同行单</button>
 			<button type="button" class="btn btn-success" onclick="togglecn()">显示/隐藏合计（大写）</button>
+			<button type="button" class="btn btn-primary expert" onclick="getTable()">导出</button>
+			<button type="button" class="btn btn-primary btnsrue">确定</button>
   		</div>
   	</div>
   </div>
 </div>
-
+<script language="javascript" src="/js/dist/xlsx.full.min.js"></script>
 <script language="javascript" type="text/javascript">
+	var jxsname = '';
 var tid = 1;
 var LODOP;
 var isnull= false;
 var data = {!! $jsondata  !!};
 $("select[name='template']").change(function(){
 	tid = $(this).val();
-	console.log(tid);
 	$(".template").hide();
 	$("#template"+tid).show();
 });
@@ -352,5 +393,79 @@ function togglecn(){
 	}else{
         $('.totalcn').hide();
 	}
+}
+
+$(".btnsrue").click(function(){
+    $(".jxsname-"+tid).parent('span').text(jxsname);
+    iaddress = $(".iaddress").val();
+    $(".iaddress").parent('span').text(iaddress);
+    if(tid == 8){
+		$(".price").each(function(){
+			vals = $(this).val();
+			$(this).parent('td').text(vals);
+		})
+        var totalnew = 0.00;
+		var arr_price = [];
+		$("input[name='minitotal']").each(function(){
+			vals = $(this).val();
+			alert(vals);
+            totalnew = totalnew+vals;
+			$(this).parent('td').text(vals);
+		})
+
+		$(".big").text(totalnew);
+    }
+});
+
+function checkprice(){
+
+}
+
+function getTable(){
+    var sheet  = XLSX.utils.table_to_sheet($("#template"+tid)[0]);
+    openDownloadDialog(sheet2blob(sheet), jxsname+ '.xls');
+}
+
+function openDownloadDialog(url, saveName)
+{
+    if(typeof url == 'object' && url instanceof Blob)
+    {
+        url = URL.createObjectURL(url); // 创建blob地址
+    }
+    var aLink = document.createElement('a');
+    aLink.href = url;
+    aLink.download = saveName || ''; // HTML5新增的属性，指定保存文件名，可以不要后缀，注意，file:///模式下不会生效
+    var event;
+    if(window.MouseEvent) event = new MouseEvent('click');
+    else
+    {
+        event = document.createEvent('MouseEvents');
+        event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+    }
+    aLink.dispatchEvent(event);
+}
+function sheet2blob(sheet, sheetName) {
+    sheetName = sheetName || 'sheet1';
+    var workbook = {
+        SheetNames: [sheetName],
+        Sheets: {}
+    };
+    workbook.Sheets[sheetName] = sheet;
+    // 生成excel的配置项
+    var wopts = {
+        bookType: 'xlsx', // 要生成的文件类型
+        bookSST: false, // 是否生成Shared String Table，官方解释是，如果开启生成速度会下降，但在低版本IOS设备上有更好的兼容性
+        type: 'binary'
+    };
+    var wbout = XLSX.write(workbook, wopts);
+    var blob = new Blob([s2ab(wbout)], {type:"application/octet-stream"});
+    // 字符串转ArrayBuffer
+    function s2ab(s) {
+        var buf = new ArrayBuffer(s.length);
+        var view = new Uint8Array(buf);
+        for (var i=0; i!=s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+        return buf;
+    }
+    return blob;
 }
 </script>

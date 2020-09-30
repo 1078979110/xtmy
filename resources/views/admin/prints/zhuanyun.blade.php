@@ -23,12 +23,17 @@
                                 <td align="center" style="border-top: 1px solid #000;border-left:1px solid #000; border-right: 1px solid #000">{{$list['num']}}</td>
                             </tr>
                         @endforeach
+                        <tr><td style="border-top: 1px solid #000; border-left:1px solid #000;">订单金额</td><td colspan="3" style="border-top: 1px solid #000;border-left:1px solid #000; border-right: 1px solid #000">{{$total}}元</td> </tr>
+                        <tr><td colspan="4" style="height: 20px;border-top: 1px solid #000;"></td></tr>
+                        <tr><td>特别说明</td><td colspan="3"><textarea placeholder="特别说明" id="explain" class="form-control" style="min-height: 50px; margin-top: 20px"></textarea></td></tr>
+                        <tr><td colspan="4" style="height: 20px"></td></tr>
                         <tr>
-                            <td colspan="2" style="border-top: 1px solid #000;"></td><td colspan="2" style="border-top: 1px solid #000; padding-top: 20px">{{$zhuanyun['footer']}}</td>
+                            <td colspan="2"></td><td colspan="2" style="padding-top: 20px">{{$zhuanyun['footer']}}</td>
                         </tr>
                         <tr>
                             <td colspan="2"></td><td style="">{{$zhuanyun['date']}}</td>
                         </tr>
+
                     </table>
                 </div>
             </div>
@@ -62,6 +67,8 @@
     }
     $(".btnsure").click(function(){
         textvalue = $("#header").val();
+        explain = $("#explain").val();
         $("#header").parent('td').text(textvalue);
+        $("#explain").parent('td').text(explain);
     });
 </script>

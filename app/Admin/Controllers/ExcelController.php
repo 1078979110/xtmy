@@ -59,11 +59,22 @@ class ExcelController extends AdminController{
         $request = request();
         $id = $request->id;
         $user_id = Admin::user()->id;
+
+        $diaodu = DB::table('orders_diaodu')->where([['order_id', $id],['warehouse_id', $user_id]])->get();
+        foreach ($diaodu as $key=>$item){
+            $d_ = [
+                'order_id' => $id,
+                'warehouse_id' => $user_id,
+                'medicinal_id' => $item->medicinal_id,
+                'num' => $item->num
+            ];
+            DB::table('order_fenpi')->insert($d_);
+        }
         $infos = DB::table('order_fenpi')->where([['order_id', $id],['warehouse_id', $user_id]])->get();
-        if(empty($infos->toArray())){
+        /*if(empty($infos->toArray())){
             admin_toastr('未执行分批操作,无法补充信息','warning');
             return redirect('/admin/orders');
-        }
+        }*/
         foreach ($infos as $key=>$info){
             $medicinal = DB::table('medicinal')->find($info->medicinal_id);
             $order_medicinals = DB::table('order_medicinals')->where([['order_id', $id],['medicinal_id', $info->medicinal_id]])->first();
@@ -124,7 +135,7 @@ class ExcelController extends AdminController{
         $diaodu = DB::table('orders_diaodu')->where('order_id',$id)->get(['id','medicinal_id', 'num', 'warehouse_id'])->toArray(true);
         $content->body(view('admin.order.diaodu',
             ['id'=>$id,'medicinals'=>$orderinfo->toArray(), 'medicinals_json'=>$orderinfo->toJson(),
-                'warehouses'=>$warehouses, 'warehouses_json'=>json_encode($warehouses),'diaodu'=>$diaodu,
+                'warehouses'=>$warehouses, 'warehouses_json'=>json_encode($warehouses),'diaodu'=>$diaodu, 'diaodu_json'=>json_encode($diaodu),
                 'gifts'=> $ordergift->toArray(true), 'gifts_josn'=>$ordergift->toJson()
             ]
         )->render());

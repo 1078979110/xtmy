@@ -558,7 +558,7 @@ class IndexController extends Controller {
 		}
 		$data['buyerid'] = $userinfo['id'];
 		$data['buyertype'] = $userinfo['type'];
-		$data['orderid'] = date('YmdHis', time()) .$data['buyerid']. rand(100, 999);
+        $data['orderid'] = date('Ymd', time()).substr(time(), 6,4).rand(100, 999);
 		$data['splitstatus'] = 0;
 		$orderinfo = [];
         $giftinfo = [];
