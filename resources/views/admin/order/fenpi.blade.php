@@ -47,7 +47,7 @@
 </div>
 <script>
 
-    var medicinals = '';
+    var medicinals = {!! $medicinals_json !!};
     var key = '';
 
     //删除

@@ -604,33 +604,22 @@ class ApiController extends AdminController {
             }
             try{
                 DB::beginTransaction();
+                DB::table('order_fenpi')->where([['order_id', $id],['warehouse_id', $user_id]])->delete();
                 foreach ($fenpi as $key => $item){
-                    if(is_numeric($key)){
-                        $_d = [
-                            'order_id'=>$id,
-                            'medicinal_id' => $item['medicinal_id'],
-                            'num' => $item['num'],
-                            'warehouse_id' => $user_id,
-                            'created_at' => date('Y-m-d H:i:s', time()),
-                            'updated_at' => date('Y-m-d H:i:s', time())
-                        ];
-                        DB::table('order_fenpi')->where('id',$key)->update($_d);
-                    }else{
-                        $_d = [
-                            'order_id'=>$id,
-                            'medicinal_id' => $item['medicinal_id'],
-                            'num' => $item['num'],
-                            'warehouse_id' => $user_id,
-                            'created_at' => date('Y-m-d H:i:s', time()),
-                            'updated_at' => date('Y-m-d H:i:s', time())
-                        ];
-                        DB::table('order_fenpi')->insert($_d);
-                    }
+                    $_d = [
+                        'order_id'=>$id,
+                        'medicinal_id' => $item['medicinal_id'],
+                        'num' => $item['num'],
+                        'warehouse_id' => $user_id,
+                        'created_at' => date('Y-m-d H:i:s', time()),
+                        'updated_at' => date('Y-m-d H:i:s', time())
+                    ];
+                    DB::table('order_fenpi')->insert($_d);
                 }
                 DB::commit();
                 admin_toastr('操作成功','success');
                 return redirect('/admin/orders');
-            }catch (\Exception $e){
+            }catch (\Exception $e) {
                 DB::rollBack();
                 $msg = $e->getMessage();
                 admin_error($msg);
