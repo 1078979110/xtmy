@@ -396,7 +396,9 @@ function togglecn(){
 }
 
 $(".btnsrue").click(function(){
+    jxsname = $(".jxsname-"+tid).val();
     $(".jxsname-"+tid).parent('span').text(jxsname);
+    console.log();
     iaddress = $(".iaddress").val();
     $(".iaddress").parent('span').text(iaddress);
     if(tid == 8){
