@@ -8,7 +8,7 @@
     		<tr style="line-height: 30px; height: 30px"><td colspan="7"><span class="pull-left">{{$tabletitle[1]}}</span><span class="pull-left"><input type="text" class="form-control orderid" style="width: 150px" value="{{$orderinfo->orderid}}"></span> </td>
 				<td colspan="7"><span class="pull-left">{{$tabletitle[2]}}</span><span class="pull-left"><input type="text" class="form-control" id="orderdate" value="{{date('Y.m.d', strtotime($orderinfo->created_at))}}"></span> </td></tr>
     		<tr style="line-height: 30px; height: 30px"><td colspan="7">{{$tabletitle[3]}}</td><td colspan="7">{{$tabletitle[4]}}</td></tr>
-    		<tr style="line-height: 30px; height: 30px">
+    		<tr style="line-height: 20px; height: 20px">
     			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:30px" align="center">{{$datatitle[0]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[1]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width:150px" align="center">{{$datatitle[2]}}</td>
@@ -21,10 +21,10 @@
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[9]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[10]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$datatitle[11]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$datatitle[12]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000;width:55px" align="center">{{$datatitle[12]}}</td>
     		</tr>
     		@foreach($lists as $key => $list)
-    		<tr style="line-height: 30px; height: 30px">
+    		<tr style="line-height: 20px; height: 20px">
     			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$key+1}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center"><input type="text" value="" class="form-control nnn"></td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
@@ -37,7 +37,7 @@
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['batchnumber']}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['invalidate']}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['registnum']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['registivalidate']}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{date('Y-m-d', strtotime($list['registivalidate']))}}</td>
     		</tr>
     		@endforeach
 			<tr style="line-height: 30px; height: 30px">

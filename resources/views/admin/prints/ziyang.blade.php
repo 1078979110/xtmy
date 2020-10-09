@@ -6,7 +6,7 @@
     			<tbody>
 				<tr style="height: 30px"><td colspan="14" align="center" style="font-size: 16px; font-weight:bold">{{$tabletitle[0]}}</td></tr>
 				<tr style="height: 30px"><td colspan="5">{{$tabletitle[1]}}</td><td colspan="4">{{$tabletitle[2]}}</td><td colspan="5">{{$tabletitle[3]}}</td></tr>
-				<tr style="height: 30px;line-height: 20px">
+				<tr style="height: 20px;line-height: 20px">
 					<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:130px" align="center">{{$datatitle[0]}}</td>
 					<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[1]}}</td>
 					<td style="border-right:1px solid #000;border-top:1px solid #000; width:30px" align="center">{{$datatitle[2]}}</td>
@@ -23,7 +23,7 @@
 					<td style="border-right:1px solid #000;border-top:1px solid #000; width:180px" align="center">{{$datatitle[13]}}</td>
 				</tr>
 				@foreach($lists as $key => $list)
-				<tr style="height: 30px">
+				<tr style="height: 20px; line-height: 20px">
 					<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
 					<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
 					<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>

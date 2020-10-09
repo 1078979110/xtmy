@@ -7,7 +7,7 @@
     		<tr style="line-height: 30px; height: 30px"><td colspan="10" align="center" style="font-size: 16px; font-weight:bold">{{$tabletitle[0]}}</td></tr>
     		<tr style="line-height: 30px; height: 30px"><td colspan="2">{{$tabletitle[1]}}</td><td colspan="2">{{$tabletitle[2]}}</td><td colspan="2">{{$tabletitle[3]}}</td><td colspan="2">{{$tabletitle[4]}}</td><td colspan="2"><span class="pull-left">{{$tabletitle[5]}}</span><span class="pull-left"> <input type="text" class="form-control orderid" value="{{$orderinfo->orderid}}"></span></td></tr>
     		<tr style="line-height: 30px; height: 30px"><td colspan="5"><span class="pull-left"> {{$tabletitle[6]}}</span><span class="pull-left"> <input type="text" id="orderdate" class="form-control" style="width: 150px" value="{{date('Y/m/d', strtotime($orderinfo->created_at))}}"></span></td><td colspan="5"><span class="pull-left"> {{$tabletitle[7]}}</span><span class="pull-left"> <input type="text" value="" id="expressid" class="form-control" placeholder="请输入运单号" style="width: 150px"></span></td></tr>
-    		<tr style="line-height: 30px; height: 30px">
+    		<tr style="line-height: 20px; height: 20px">
     			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:150px" align="center">{{$datatitle[0]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[1]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[2]}}</td>
@@ -20,7 +20,7 @@
     			<td style="border-right:1px solid #000;border-top:1px solid #000;" align="center">{{$datatitle[9]}}</td>
     		</tr>
     		@foreach($lists as $key => $list)
-    		<tr style="line-height: 30px; height: 30px">
+    		<tr style="line-height: 20px; height: 20px">
     			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
