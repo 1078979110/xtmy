@@ -8,7 +8,7 @@
                 <div class="col-sm-8" id="zhuanyun">
                     <table style="font-size: 14px; width: 500px" cellpadding="0"; cellspacing="0">
                         <tr><td colspan="4" align="center">转运证明</td></tr>
-                        <tr><td colspan="4" style="text-indent: 2em;padding: 20px;"><textarea placeholder="请输入转运声明内容" id="header" class="form-control" style="min-height: 100px"></textarea></td></tr>
+                        <tr><td colspan="4" style="text-indent: 2em;padding: 20px;"><textarea placeholder="请输入转运声明内容" id="header" class="form-control" style="min-height: 100px">{{$zhuanyun['header']}}</textarea></td></tr>
                         <tr>
                             <td align="center" style="border-top: 1px solid #000;border-left:1px solid #000;">{{$zhuanyun['title'][0]}}</td>
                             <td align="center" style="border-top: 1px solid #000;border-left:1px solid #000;">{{$zhuanyun['title'][1]}}</td>
@@ -25,7 +25,7 @@
                         @endforeach
                         <tr><td style="border-top: 1px solid #000; border-left:1px solid #000;">订单金额</td><td colspan="3" style="border-top: 1px solid #000;border-left:1px solid #000; border-right: 1px solid #000">{{$total}}元</td> </tr>
                         <tr><td colspan="4" style="height: 20px;border-top: 1px solid #000;"></td></tr>
-                        <tr><td>特别说明</td><td colspan="3"><textarea placeholder="特别说明" id="explain" class="form-control" style="min-height: 50px; margin-top: 20px"></textarea></td></tr>
+                        <tr><td>特别说明</td><td colspan="3"><textarea placeholder="请输入特别说明" id="explain" class="form-control" style="min-height: 50px; margin-top: 20px"></textarea></td></tr>
                         <tr><td colspan="4" style="height: 20px"></td></tr>
                         <tr>
                             <td colspan="2"></td><td colspan="2" style="padding-top: 20px;position: relative">{{$zhuanyun['footer']}}<img src="/images/yinzhang.png" class="yinzhang"> </td>

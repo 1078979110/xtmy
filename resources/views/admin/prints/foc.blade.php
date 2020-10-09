@@ -127,8 +127,9 @@
     }
 
     function getTable(table){
+        title = '{{$title}}';
         var sheet  = XLSX.utils.table_to_sheet($('#'+table)[0]);
-        openDownloadDialog(sheet2blob(sheet), './storage/files/foc.xls');
+        openDownloadDialog(sheet2blob(sheet), title + '.xls');
     }
 
     function openDownloadDialog(url, saveName)

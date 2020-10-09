@@ -325,16 +325,16 @@
 						  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
 						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
 						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center" class="num">{{$list['num']}}</td>
 						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center"><input type="number" value="{{$list['price']}}" class="form-control price"></td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center" class="minitotal"><input type="number" name="minitotal" value="{{$list['prices']}}" class="form-control price"></td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center" class="minitotal"><input type="number" name="minitotal" value="{{$list['prices']}}" class="form-control"></td>
 						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['tips']}}</td>
 					  </tr>
 				  @endforeach
 
 				  <tr style="line-height: 30px; height: 30px">
 					  <td colspan="4" style="border-top: 1px solid #000">{{$financename[3]}}<span class="totalcn big" style="display: none">{{$totalcn}}</span></td>
-					  <td colspan="3" style="border-top: 1px solid #000">{{$financename[4]}}<span tindex="5" class="totalcn"  tdata="SubSum" format="###,###,###,###,###.00">##########元</span></td>
+					  <td colspan="3" style="border-top: 1px solid #000">{{$financename[4]}}<span tindex="5" class="totalcn"  tdata="SubSum" format="###,###,###,###,###">##########元</span></td>
 				  </tr>
 				  </tbody>
 			  </table>
@@ -402,27 +402,25 @@ $(".btnsrue").click(function(){
     if(tid == 8){
 		$(".price").each(function(){
 			vals = $(this).val();
-			$(this).parent('td').text(vals);
+			$(this).parent().text(vals);
 		})
         var totalnew = 0.00;
-		var arr_price = [];
 		$("input[name='minitotal']").each(function(){
 			vals = $(this).val();
-			alert(vals);
-            totalnew = totalnew+vals;
-			$(this).parent('td').text(vals);
+            totalnew = parseFloat(totalnew)+parseFloat(vals);
+            console.log(vals);
+			$(this).parent().text(vals);
 		})
-
-		$(".big").text(totalnew);
+		$(".big").text(digitUppercase(totalnew));
+		$(".totalcn").attr('tdata',totalnew);
     }
 });
 
-function checkprice(){
-
-}
-
 function getTable(){
     var sheet  = XLSX.utils.table_to_sheet($("#template"+tid)[0]);
+    if(!jxsname){
+        jxsname = '{{$title}}';
+	}
     openDownloadDialog(sheet2blob(sheet), jxsname+ '.xls');
 }
 
@@ -468,4 +466,35 @@ function sheet2blob(sheet, sheetName) {
     }
     return blob;
 }
+
+    digitUppercase = function(n) {
+        var fraction = ['角', '分'];
+        var digit = [
+            '零', '壹', '贰', '叁', '肆',
+            '伍', '陆', '柒', '捌', '玖'
+        ];
+        var unit = [
+            ['元', '万', '亿'],
+            ['', '拾', '佰', '仟']
+        ];
+        var head = n < 0 ? '欠' : '';
+        n = Math.abs(n);
+        var s = '';
+        for (var i = 0; i < fraction.length; i++) {
+            s += (digit[Math.floor(n * 10 * Math.pow(10, i)) % 10] + fraction[i]).replace(/零./, '');
+        }
+        s = s || '整';
+        n = Math.floor(n);
+        for (var i = 0; i < unit[0].length && n > 0; i++) {
+            var p = '';
+            for (var j = 0; j < unit[1].length && n > 0; j++) {
+                p = digit[n % 10] + unit[1][j] + p;
+                n = Math.floor(n / 10);
+            }
+            s = p.replace(/(零.)*零$/, '').replace(/^$/, '零') + unit[0][i] + s;
+        }
+        return head + s.replace(/(零.)*零元/, '元')
+            .replace(/(零.)+/g, '零')
+            .replace(/^整$/, '零元整');
+    }
 </script>
