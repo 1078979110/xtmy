@@ -215,7 +215,7 @@
         })
 
         if(endList.length != medicinals.length){
-            alert('请完成商品分库1111')
+            alert('请完成商品分库')
             return false
         }
         //console.log(endList)
