@@ -527,6 +527,7 @@ class PrintsController extends AdminController{
         $orderProducts = DB::table('order_medicinals')->where('order_id', $id)->get(['order_id', 'medicinal_id', 'price','num']);
         $medicinals = [];
         foreach ($orderProducts as $key=>$product){
+
             $medicinal = DB::table('medicinal')->where('id', $product->medicinal_id)->first();
             $medicinals[$key] = [
                 'medicinal' => $medicinal->medicinal,

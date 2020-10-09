@@ -22,8 +22,8 @@
                 <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
                 <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
                 <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
-                <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
                 <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['price']}}</td>
+                <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
                 <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['prices']}}</td>
             </tr>
             @endforeach
