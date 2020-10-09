@@ -457,7 +457,7 @@ class PrintsController extends AdminController{
                 ['orderinfo'=>$orderInfo,'tabletitle'=>$tabletitle,'datatitle'=>$dataname['fy'],'lists'=>$data,'gift'=>$gifts, 'jsondata'=>json_encode($data), 'total'=>$totalprice, 'totalcn'=>$totalcn]
             )->render());
             return $content;
-        }else if($hospitalInfo->hospital == '武汉市中心医院'){
+        }else if($hospitalInfo->hospital == '武汉市中心医院' || $hospitalInfo->hospital == '武汉市中心医院（后湖）'){
             $title = $sendcompany.$ext;
             $tabletitle = [$title,
                 $headername['zx'][0].$hospitalInfo->hospital,
