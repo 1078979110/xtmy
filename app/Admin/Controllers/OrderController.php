@@ -71,6 +71,9 @@ class OrderController extends AdminController
                 $sarr = [];
                 foreach ($orderinfo as $key => $val) {
                     $medicinal = Order::medicinalInfo($val->medicinal_id);
+                    if(!$medicinal){
+                        continue;
+                    }
                     $sarr[$key]['id'] = $key + 1;
                     $sarr[$key]['medicinal'] = $medicinal->medicinal;
                     $sarr[$key]['medicinalnum'] = $medicinal->medicinalnum;
