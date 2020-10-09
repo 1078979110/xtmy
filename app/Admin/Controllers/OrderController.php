@@ -316,10 +316,10 @@ EOT;
                         $str .= '<button class="btn btn-danger btn-xs splitorder" data-id="' . $this->id . '">分库</button> | ';
                         $str .= '<button class="btn btn-danger btn-xs changeprice" data-id="' . $this->id . '">改价</button> |';
                         if ($this->accountstatus == 0) {
-                            $str .= ' <button class="btn btn-danger btn-xs account" data-id="' . $this->id . '">登账</button>';
+                            $str .= ' <button class="btn btn-danger btn-xs account" data-id="' . $this->id . '">登账</button> | ';
                         }
                     }
-                    $str .= ' | <button class="btn btn-warning btn-xs printfinance" data-id="'.$this->id.'">打印出货单</button>';
+                    $str .= '<button class="btn btn-warning btn-xs printfinance" data-id="'.$this->id.'">打印出货单</button>';
                 }else if(Admin::user()->isRole('finance')){
                     if($this->orderstatus == 4){
                         $str = '<button class="btn btn-info btn-xs comfirmorder" data-id="'.$this->id.'">确认收款</button> | ';
