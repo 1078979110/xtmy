@@ -89,7 +89,8 @@ class SalelistController extends AdminController
     {
         $form = new Form(new Salelist());
         $form->text('name','名称');
-        $form->mobile('telephone','电话');
+        $form->mobile('telephone','电话')->creationRules(['required', "unique:users"])
+            ->updateRules(['required', "unique:users,telephone,{{id}}"]);
         $form->select('type','销售类型')->options(function(){
            return Salelist::getTypeIdName(); 
         });

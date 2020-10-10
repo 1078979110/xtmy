@@ -437,7 +437,7 @@ class ApiController extends AdminController {
                         $insertdata = $reader->all()->toArray(true);
                         foreach ($insertdata as $key=>$val){
                             $data = [
-                                //'orderid' => date('Ymd', time()) . rand(1000, 9999),
+                                'orderid' => date('Ymd', time()).substr(time(), 6,4).rand(100, 999),
                                 'ordermonth' => date('Ym', time()),
                                 'buyertype' => 1,
                                 'orderstatus' => 3,
@@ -448,13 +448,18 @@ class ApiController extends AdminController {
                             $info = [];
                             foreach ($val as $k=>$v){
                                 if($k == 0){
-                                    $data['buyerid'] = Salelist::where('telephone', $v['经销商'])->value('id');
+                                    $data['buyerid'] = Salelist::where('name', $v['经销商'])->value('id');
                                     if(!$data['buyerid']){
-                                        $this->errornum++;
+                                        /*$this->errornum++;
                                         $this->errorsheet .= $v['经销商'].'表：经销商不存在';
-                                        break 2;
+                                        break 2;*/
+                                        $d_  = [
+                                            'name' => $v['经销商'],
+                                            'type' => 1,
+                                            'password'=> bcrypt(123456)
+                                        ];
+                                        $data['buyerid'] = DB::table('users')->insertGetId($d_);
                                     }else{
-                                        $data['orderid'] = date('Ymd', time()).substr(time(), 6,4).rand(100, 999);
                                         $this->errorsheet .= $v['经销商'].'表：';
                                     }
                                 }
@@ -481,17 +486,20 @@ class ApiController extends AdminController {
                                 }
 
                                 $info[] = [
-                                    'id' => $medicinalinfo->id,
-                                    'medicinal' => $medicinalinfo->medicinal,
-                                    'medicinalnum' => $v['产品货号'],
+                                    'medicinal_id' => $medicinalinfo->id,
                                     'price' => round($v['价格'],2),
-                                    'unit' => $medicinalinfo->unit,
-                                    'num' => $v['数量']
+                                    'num' => $v['数量'],
+                                    'created_at' => date('Y-m-d H:i:s', time()),
+                                    'updated_at' => date('Y-m-d H:i:s', time())
                                 ];
                                 $data['totalprice'] += round($v['价格'],2)*$v['数量'];
-                                $data['orderinfo'] = json_encode($info);
+                                //$data['orderinfo'] = json_encode($info);
                             }
-                            DB::table('orders')->insert($data);
+                            $id = DB::table('orders')->insertGetId($data);
+                            foreach ($info as $key=>$val){
+                                $info[$key]['order_id'] = $id;
+                            }
+                            DB::table('order_medicinals')->insert($info);
                         }
                     });
                     if($this->errornum == 0){
