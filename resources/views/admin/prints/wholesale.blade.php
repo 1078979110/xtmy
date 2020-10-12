@@ -29,8 +29,8 @@
             @endforeach
 
             <tr style="line-height: 30px; height: 30px">
-                <td colspan="4" style="border-top: 1px solid #000">总计：{{$orderinfo->totalprice}}</td>
-                <td colspan="3" style="border-top: 1px solid #000">本页小计<span tindex="7"  tdata="SubSum" format="###,###,###,###,###.00">##########元</span></td>
+                <td colspan="7" style="border-top: 1px solid #000">总计：{{$orderinfo->totalprice}}</td>
+                {{--<td colspan="3" style="border-top: 1px solid #000">本页小计<span tindex="7"  tdata="SubSum" format="###,###,###,###,###.00">##########元</span></td>--}}
             </tr>
             </tbody>
         </table>
