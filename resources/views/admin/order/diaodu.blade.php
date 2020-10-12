@@ -27,7 +27,10 @@
                         <select name="diaodu[{{$item->id}}][medicinal_id]" class="form-control product">
                             <option value="0">==请选择==</option>
                             @foreach($medicinals as $k=>$medicinal)
-                                <option value="{{$medicinal->medicinal_id}}" @if($item->medicinal_id == $medicinal->medicinal_id)selected="selected"@endif>
+                                <option value="{{$medicinal->medicinal_id}}"
+                                        @if($medicinal->id == $item->order_medicinals_id)
+                                            selected="selected"
+                                        @endif>
                                     [名称：{{$medicinal->medicinal}}]-[货号：{{$medicinal->medicinalnum}}]-[数量：{{$medicinal->num}}]
                                 </option>
                             @endforeach
@@ -46,6 +49,7 @@
                     </div>
                     <div class="col-sm-1">
                         <button type="button" class="btn btn-danger btndel"><i class="fa fa-trash"></i></button>
+                        <input type="hidden" name="diaodu[{{$item->id}}][order_medicinals_id]" value="{{$item->order_medicinals_id}}">
                     </div>
                 </div>
             @endforeach
@@ -119,8 +123,8 @@
     });
     //新增
     $('.btnadd').click(function(){
-        medicinals ={!! $medicinals_json !!}
-            warehouses ={!! $warehouses_json !!}
+        var medicinals ={!! $medicinals_json !!}
+        var warehouses ={!! $warehouses_json !!}
             str = '';
             key = random_str();
             str =  '<div class="form-group liView" >\n'+
@@ -129,7 +133,7 @@
                     '<select name="diaodu[' + key + '][medicinal_id]" class="form-control product">\n' +
                     '<option value="0">==请选择==</option>\n';
         for(var i in medicinals){
-            str += '<option value="' + medicinals[i].medicinal_id + '">[名称：' +  medicinals[i].medicinal + ']-[货号：' + medicinals[i].medicinalnum + ']-[数量：'+medicinals[i].num+']</option>\n';
+            str += '<option data-id="'+ medicinals[i].id +'" value="' + medicinals[i].medicinal_id + '">[名称：' +  medicinals[i].medicinal + ']-[货号：' + medicinals[i].medicinalnum + ']-[数量：'+medicinals[i].num+']</option>\n';
         }
         str +=  '</select>\n'+
                 '</div>\n'+
@@ -144,12 +148,17 @@
         }
         str +=  '</select>\n'+
                 '</div>\n'+
-                '<div class="col-sm-1">\n' +
+                '<div class="col-sm-1 order_medicinals_id" >\n' +
                 '<button type="button" class="btn btn-danger btndel"><i class="fa fa-trash"></i></button>\n' +
+                '<input type="hidden" name="diaodu['+key+'][order_medicinals_id]" value="">'+
                 '</div>';
         $("#line").before(str);
         $(".btndel").click(function(){
             $(this).parent().parent().remove();
+        });
+        $(".product").change(function(){
+            selected_ = $(this).find("option:selected").attr('data-id');
+            $(this).parent().parent().children().find("input[type='hidden']").val(selected_);
         });
     });
 //
@@ -170,13 +179,10 @@
         var allList = [];
         var checkList = [];
 
-        console.log()
-        console.log($('.liView').length)
-
 
 
         if(medicinals==''){
-            alert('请完成商品分库')
+            alert('请完成商品分库1')
             return false
         }
 
@@ -213,15 +219,35 @@
             })
 
         })
+        //console.log(endList);
+        console.log(medicinals);
 
-        if(endList.length != medicinals.length){
-            alert('请完成商品分库')
+        var medicinals_o = [];
+        var tem_id = [];
+        medicinals.forEach(function(item, index){
+            offset = tem_id.indexOf(item.medicinal_id);
+            console.log(offset);
+           if( offset == -1){
+               medicinals_o.push({
+                   id:item.id,
+                   order_id:item.order_id,
+                   medicinal_id:item.medicinal_id,
+                   num:item.num
+               });
+               tem_id.push(item.medicinal_id);
+           }else{
+                medicinals_o[offset].num = item.num + medicinals_o[offset].num;
+           }
+        });
+        console.log(medicinals_o);
+        if(endList.length != medicinals_o.length){
+            alert('请完成商品分库2')
             return false
         }
         //console.log(endList)
-        console.log(gifts)
+        //console.log(gifts)
         var flag = true
-        medicinals.forEach((item,index)=>{
+        medicinals_o.forEach((item,index)=>{
             endList.forEach((item_,index_)=>{
                 if(item.medicinal_id == item_.id){
                     if(item_.num != item.num){
@@ -242,7 +268,7 @@
             }
         })
 
-        console.log(endList)
+        //console.log(endList)
         console.log('1111111')
         if(!flag){
             alert('请选择对应的仓库管理员')

@@ -136,7 +136,7 @@ class ExcelController extends AdminController{
             ->leftJoin('admin_role_users','admin_role_users.user_id','admin_users.id')
             ->where('admin_role_users.role_id',8)
             ->get(['id','username','name'])->toArray(true);
-        $diaodu = DB::table('orders_diaodu')->where('order_id',$id)->get(['id','medicinal_id', 'num', 'warehouse_id'])->toArray(true);
+        $diaodu = DB::table('orders_diaodu')->where('order_id',$id)->get(['id','medicinal_id', 'num', 'order_medicinals_id','warehouse_id'])->toArray(true);
         $content->body(view('admin.order.diaodu',
             ['id'=>$id,'medicinals'=>$orderinfo->toArray(), 'medicinals_json'=>$orderinfo->toJson(),
                 'warehouses'=>$warehouses, 'warehouses_json'=>json_encode($warehouses),'diaodu'=>$diaodu, 'diaodu_json'=>json_encode($diaodu),

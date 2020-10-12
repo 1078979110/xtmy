@@ -554,6 +554,7 @@ class ApiController extends AdminController {
                         'medicinal_id' => $item['medicinal_id'],
                         'num' => $item['num'],
                         'warehouse_id' => $item['warehouse_id'],
+                        'order_medicinals_id'=>$item['order_medicinals_id'],
                         'created_at' => date('Y-m-d H:i:s', time()),
                         'updated_at' => date('Y-m-d H:i:s', time())
                     ];
