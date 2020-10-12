@@ -61,20 +61,24 @@ class ExcelController extends AdminController{
         $user_id = Admin::user()->id;
 
         $diaodu = DB::table('orders_diaodu')->where([['order_id', $id],['warehouse_id', $user_id]])->get();
-        foreach ($diaodu as $key=>$item){
-            $d_ = [
-                'order_id' => $id,
-                'warehouse_id' => $user_id,
-                'medicinal_id' => $item->medicinal_id,
-                'num' => $item->num
-            ];
-            DB::table('order_fenpi')->insert($d_);
+        $hasId = DB::table('order_fenpi')->where([['order_id', $id],['warehouse_id', $user_id]])->exists();
+        if(!$hasId){
+            foreach ($diaodu as $key=>$item){
+                $d_ = [
+                    'order_id' => $id,
+                    'warehouse_id' => $user_id,
+                    'medicinal_id' => $item->medicinal_id,
+                    'num' => $item->num
+                ];
+                DB::table('order_fenpi')->insert($d_);
+            }
         }
         $infos = DB::table('order_fenpi')->where([['order_id', $id],['warehouse_id', $user_id]])->get();
-        /*if(empty($infos->toArray())){
-            admin_toastr('未执行分批操作,无法补充信息','warning');
+        if(empty($infos->toArray())){
+            admin_toastr('该订单暂无分配任务','warning');
             return redirect('/admin/orders');
-        }*/
+        }
+
         foreach ($infos as $key=>$info){
             $medicinal = DB::table('medicinal')->find($info->medicinal_id);
             $order_medicinals = DB::table('order_medicinals')->where([['order_id', $id],['medicinal_id', $info->medicinal_id]])->first();
