@@ -8,13 +8,13 @@
             <tr><td colspan="7" align="center" style="font-size: 16px; font-weight:bold">批发专用</td></tr>
             <tr><td colspan="7" align="right">订单号：{{$orderinfo->orderid}}</td></tr>
             <tr style="line-height: 30px; height: 30px">
-                <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">序号</td>
+                <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">序号</td>
                 <td style="border-right:1px solid #000;border-top:1px solid #000; width:150px" align="center">药品名称</td>
                 <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">货号</td>
                 <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">单位</td>
-                {{--<td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">单价</td>--}}
+                <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">单价</td>
                 <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">数量</td>
-                {{--<td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">小计</td>--}}
+                <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">小计</td>
             </tr>
             @foreach($medicinals as $key => $list)
             <tr style="line-height: 30px; height: 30px">
@@ -22,15 +22,15 @@
                 <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
                 <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
                 <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
-                {{--<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['price']}}</td>--}}
+                <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['price']}}</td>
                 <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
-                {{--<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['prices']}}</td>--}}
+                <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['prices']}}</td>
             </tr>
             @endforeach
 
             <tr style="line-height: 30px; height: 30px">
-                <td colspan="7" style="border-top: 1px solid #000">总计：{{--{{$orderinfo->totalprice}}--}}</td>
-                {{--<td colspan="3" style="border-top: 1px solid #000">本页小计<span tindex="7"  tdata="SubSum" format="###,###,###,###,###.00">##########元</span></td>--}}
+                <td colspan="4" style="border-top: 1px solid #000">总计：{{$orderinfo->totalprice}}</td>
+                <td colspan="3" style="border-top: 1px solid #000">本页小计<span tindex="7"  tdata="SubSum" format="###,###,###,###,###.00">##########元</span></td>
             </tr>
             </tbody>
         </table>
