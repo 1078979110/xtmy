@@ -141,7 +141,26 @@
         console.log(checkList);
         console.log(endList);
         console.log(medicinals);
-        if(endList.length != medicinals.length){
+        var medicinals_o = [];
+        var tem_id = [];
+        medicinals.forEach(function(item, index){
+            offset = tem_id.indexOf(item.medicinal_id);
+            console.log(offset);
+            if( offset == -1){
+                medicinals_o.push({
+                    id:item.id,
+                    order_id:item.order_id,
+                    medicinal_id:item.medicinal_id,
+                    num:item.num
+                });
+                tem_id.push(item.medicinal_id);
+            }else{
+                medicinals_o[offset].num = item.num + medicinals_o[offset].num;
+            }
+        });
+
+
+        if(endList.length != medicinals_o.length){
             alert('有部分商品没有完成商品分批')
             return false
         }
