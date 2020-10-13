@@ -166,7 +166,7 @@
         }
         //console.log(endList)
         var flag = true
-        medicinals.forEach((item,index)=>{
+        medicinals_o.forEach((item,index)=>{
             endList.forEach((item_,index_)=>{
                 if(item.medicinal_id == item_.id){
                     if(item_.num != item.num){
