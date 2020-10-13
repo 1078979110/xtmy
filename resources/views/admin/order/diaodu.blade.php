@@ -182,7 +182,7 @@
 
 
         if(medicinals==''){
-            alert('请完成商品分库1')
+            alert('请完成商品分库')
             return false
         }
 
@@ -241,7 +241,7 @@
         });
         console.log(medicinals_o);
         if(endList.length != medicinals_o.length){
-            alert('请完成商品分库2')
+            alert('请完成商品分库')
             return false
         }
         //console.log(endList)
