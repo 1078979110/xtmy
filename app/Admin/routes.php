@@ -47,6 +47,7 @@ Route::group([
     $router->get('excel/splitorder', 'ExcelController@splitOrder');
     $router->get('/excel/fenpi', 'ExcelController@fenpiOrder');
     $router->get('excel/shipping', 'ExcelController@startShipping');
+    $router->get('/api/defaultsplit', 'ApiController@defaultSplitOrder');
 
     //自定义接收数据页面
     $router->post('/password/setadmin', 'PasswordController@setAdmin');

@@ -156,7 +156,7 @@
             		@endforeach
             		<tr style="line-height: 30px; height: 30px">
             			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="4" align="left">{{$tabletitle[3][4]}}<span class="totalcn" style="display: none">{{$totalcn}}</span></td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" colspan="3" align="left">{{$tabletitle[3][5]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" colspan="3" align="left">{{$tabletitle[3][5]}}{{$total}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000" colspan="3" align="left">{{$tabletitle[3][6]}}<span tindex="7" tdata="SubSum" format="###,###,###,###,###.00">##########元</span></td>
             		</tr>
             		<tr style="line-height: 30px; height: 30px">
@@ -252,8 +252,8 @@
 					  </tr>
 				  @endforeach
 				  <tr style="line-height: 30px; height: 30px">
-					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="7" align="left">{{$tabletitle[5][4]}}<span class="totalcn" style="display: none">{{$totalcn}}</span></td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000" colspan="3" align="left">{{$tabletitle[5][5]}}</td>
+					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="10" align="left">{{$tabletitle[5][4]}}<span class="totalcn" style="display: none">{{$totalcn}}</span></td>
+					  {{--<td style="border-right:1px solid #000;border-top:1px solid #000" colspan="3" align="left">{{$tabletitle[5][5]}}</td>--}}
 				  </tr>
 				  <tr style="line-height: 30px; height: 30px">
 					  <td colspan="2" style="border-top: 1px solid #000">{{$tabletitle[5][6]}}</td>

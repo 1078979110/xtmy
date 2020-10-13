@@ -10,6 +10,7 @@ use App\Order;
 use App\Producer;
 use App\Productline;
 use App\Salelist;
+use App\Site;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
@@ -575,6 +576,32 @@ class ApiController extends AdminController {
                 admin_error($msg);
                 return redirect('/admin/orders');
             }
+        }
+    }
+
+    public function defaultSplitOrder(Request $request){
+        if($request->isMethod('get')){
+            $id = $request->id;
+            $defaultWarehouse = Site::where('id',1)->value('warehouse');
+            if(!$defaultWarehouse){
+                return ['msg'=>'未设置默认仓库，无法执行操作','title'=>'分批操作','status'=>'warning'];
+            }
+            $orderInfo = DB::table('order_medicinals')->where('order_id', $id)->get()->toArray();
+            $data = [];
+            foreach ($orderInfo as $key=>$order){
+                $data[] = [
+                  'order_id'=>$id,
+                  'medicinal_id' => $order->medicinal_id,
+                  'num' => $order->num,
+                  'warehouse_id' => $defaultWarehouse,
+                  'status' => 2,
+                  'order_medicinals_id'=> $order->id,
+                  'created_at' => date('Y-m-d H:i:s', time()),
+                   'updated_at' => date('Y-m-d H:i:s', time())
+                ];
+            }
+            DB::table('orders_diaodu')->insert($data);
+            return ['msg'=>'分批成功','title'=>'分批操作','status'=>'success'];
         }
     }
 

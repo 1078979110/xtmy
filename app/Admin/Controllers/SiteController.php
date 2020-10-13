@@ -25,6 +25,10 @@ class SiteController extends AdminController
         $grid->column('telephone','电话');
         $grid->column('copyright','版权');
         $grid->column('banners','轮播图')->carousel();
+        $grid->column('warehouse', '默认仓库')->display(function(){
+            $warehouse = Site::getWareHouse($this->warehouse);
+            return $warehouse->name;
+        });
         $grid->actions(function($actions){
             $actions->disableDelete();
             $actions->disableView();
@@ -44,6 +48,9 @@ class SiteController extends AdminController
         $form->text('telephone','电话');
         $form->text('copyright','版权');
         $form->multipleImage('banners','轮播图')->sortable()->removable()->help('轮播图推荐尺寸为：1200*280像素');
+        $form->select('warehouse', '默认仓库')->options(function(){
+            return Site::getWareHouseForSelect();
+        });
         $form->disableEditingCheck();
         $form->disableCreatingCheck();
         $form->disableViewCheck();

@@ -182,6 +182,10 @@ class ExcelController extends AdminController{
         }
         $products = [];
         foreach ($orderinfos as $key=>$val){
+            if(!$val->batchnumber){
+                admin_toastr('未补充信息，无法执行确认发货操作','warning');
+                return redirect('/admin/orders');
+            }
             $medicinalinfo = DB::table('medicinal')->find($val->medicinal_id);
             $ordermedicinals = DB::table('order_medicinals')->where([['order_id', $id],['medicinal_id', $val->medicinal_id]])->first();
             $products[] = [

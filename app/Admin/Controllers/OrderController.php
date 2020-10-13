@@ -35,8 +35,12 @@ class OrderController extends AdminController
             $filter->disableIdFilter();
             $filter->like('orderid','订单号');
             $filter->where(function($query){
-                $buyerid = Salelist::where('name',$this->input)->value('id');
-                $query->where('buyerid',$buyerid);
+                $buyerids = Salelist::where('name','like','%'.$this->input.'%')->get(['id']);
+                $ids = [];
+                foreach ($buyerids as $buyerid){
+                    $ids[]=$buyerid->id;
+                }
+                $query->whereIn('buyerid',$ids);
             },'下单人');
             $stat = ['1'=>'待确认','3'=>'待报价','4'=>'待审核','5'=>'待发货','6'=>'已出库','7'=>'已完成'];
             $filter->equal('orderstatus','订单状态')->select($stat);
@@ -259,8 +263,18 @@ class OrderController extends AdminController
                 
                 $(".splitorder").click(function(){
                     id = $(this).attr('data-id');
-                        window.location.href='/admin/excel/splitorder?id='+id;
+                    window.location.href='/admin/excel/splitorder?id='+id;
+                });
+                $(".defaultsplit").click(function(){
+                    id = $(this).attr('data-id');
+                    $.get('/admin/api/defaultsplit?id='+id, function(res){
+                        if(res.status){        
+                                toastr.success(res.msg,res.title,setTimeout(function (){window.location.reload();}, 4000))
+                            }else{
+                                toastr.warning(res.msg,res.title,setTimeout(function (){window.location.reload();}, 4000))
+                        }
                     });
+                });
                 $(".updateattr").click(function(){
                     id = $(this).attr('data-id');
                     window.location.href='/admin/excel/updateattr?id='+id;
@@ -314,6 +328,9 @@ EOT;
                     if ($this->orderstatus == 3){
                         $str = '<button class="btn btn-warning btn-xs comfirmorder" data-id="' . $this->id . '">确认报价</button> | ';
                         $str .= '<button class="btn btn-danger btn-xs splitorder" data-id="' . $this->id . '">分库</button> | ';
+                        $has = DB::table('orders_diaodu')->where('order_id', $this->id)->exists();
+                        if(!$has)
+                        $str .= '<button class="btn btn-danger btn-xs defaultsplit" data-id="' . $this->id . '">默认分库</button> | ';
                         $str .= '<button class="btn btn-danger btn-xs changeprice" data-id="' . $this->id . '">改价</button> |';
                         if ($this->accountstatus == 0) {
                             $str .= ' <button class="btn btn-danger btn-xs account" data-id="' . $this->id . '">登账</button> | ';

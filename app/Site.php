@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\DB;
 class Site extends Model
 {
     //
@@ -23,5 +23,17 @@ class Site extends Model
         }else{
             return json_decode($Banners, true);
         }
+    }
+
+    public static function getWareHouse($id){
+        return DB::table('admin_users')->where('id', $id)->first();
+    }
+
+    public static function getWareHouseForSelect(){
+        return  DB::table('admin_users')
+            ->leftJoin('admin_role_users', 'user_id','=','id')
+            ->where('role_id','=',8)
+            ->pluck('name', 'id');
+
     }
 }
