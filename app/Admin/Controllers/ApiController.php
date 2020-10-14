@@ -601,7 +601,7 @@ class ApiController extends AdminController {
                 ];
             }
             DB::table('orders_diaodu')->insert($data);
-            return ['msg'=>'分批成功','title'=>'分批操作','status'=>'success'];
+            return ['msg'=>'分库成功','title'=>'分库操作','status'=>'success'];
         }
     }
 
