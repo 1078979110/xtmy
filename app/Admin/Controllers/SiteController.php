@@ -27,6 +27,7 @@ class SiteController extends AdminController
         $grid->column('banners','轮播图')->carousel();
         $grid->column('warehouse', '默认仓库')->display(function(){
             $warehouse = Site::getWareHouse($this->warehouse);
+            if($warehouse)
             return $warehouse->name;
         });
         $grid->actions(function($actions){
