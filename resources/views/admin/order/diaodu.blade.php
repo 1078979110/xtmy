@@ -275,6 +275,17 @@
             return false
         }
 
+        allList.forEach(function(item, index){
+            if(item.warehouse_id == '0'){
+                flag = false;
+            }
+        });
+
+        if(!flag){
+            alert('请选择对应的仓库管理员')
+            return false
+        }
+
         var giftList = []
         gifts.forEach((item,index)=>{
             giftList.push({
