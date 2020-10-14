@@ -353,6 +353,8 @@ EOT;
                         }
                             $str .= '<button class="btn btn-warning btn-xs shipping" data-id="'.$this->id.'">确认发货</button>';
 
+                    }else if($this->orderstatus >5){
+                        $str = '<button class="btn btn-success btn-xs print" data-type="'.$this->buyertype.'" data-id="'.$this->id.'">打印出货单</button> | ';
                     }/*else if($this->orderstatus == 6){
                         $str = '<button class="btn btn-warning btn-xs shipping" data-id="'.$this->id.'">已发货</button> | ';
                     }*/
