@@ -355,6 +355,10 @@ EOT;
 
                     }else if($this->orderstatus >5){
                         $str = '<button class="btn btn-success btn-xs print" data-type="'.$this->buyertype.'" data-id="'.$this->id.'">打印出货单</button> | ';
+                        if($this->buyertype ==1){
+                            $str .= '<button class="btn btn-warning btn-xs zhuanyun" data-id="'.$this->id.'">转运证明</button> | 
+                                    <button class="btn btn-warning btn-xs foc" data-id="'.$this->id.'">销售订单/FOC申请表</button>';
+                        }
                     }/*else if($this->orderstatus == 6){
                         $str = '<button class="btn btn-warning btn-xs shipping" data-id="'.$this->id.'">已发货</button> | ';
                     }*/
