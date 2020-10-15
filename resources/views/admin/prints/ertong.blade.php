@@ -9,13 +9,13 @@
     		<tr style="line-height: 30px; height: 30px"><td colspan="5"><span class="pull-left"> {{$tabletitle[6]}}</span><span class="pull-left"> <input type="text" id="orderdate" class="form-control" style="width: 150px" value="{{date('Y/m/d', strtotime($orderinfo->created_at))}}"></span></td><td colspan="5"><span class="pull-left"> {{$tabletitle[7]}}</span><span class="pull-left"> <input type="text" value="" id="expressid" class="form-control" placeholder="请输入运单号" style="width: 150px"></span></td></tr>
     		<tr style="line-height: 20px; height: 20px">
     			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:150px" align="center">{{$datatitle[0]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[1]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[2]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[3]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[4]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[5]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[6]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[7]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000;" align="center">{{$datatitle[1]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000;" align="center">{{$datatitle[2]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000;" align="center">{{$datatitle[3]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000;" align="center">{{$datatitle[4]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000;" align="center">{{$datatitle[5]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000;" align="center">{{$datatitle[6]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000;" align="center">{{$datatitle[7]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width:200px" align="center">{{$datatitle[8]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000;" align="center">{{$datatitle[9]}}</td>
     		</tr>
@@ -91,14 +91,16 @@ var data = {!! $jsondata  !!};
 function print_view(temp){
     LODOP=getLodop();
     LODOP.PRINT_INIT();
-	LODOP.ADD_PRINT_TABLE(40,10,"RightMargin:0.3cm",'100%',document.getElementById(temp).innerHTML);
+    LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
+    LODOP.ADD_PRINT_TABLE(10,10,"100%",'100%',document.getElementById(temp).innerHTML);
 	LODOP.PREVIEW();
 
 }
 function print(temp){
     LODOP=getLodop();
     LODOP.PRINT_INIT();
-	LODOP.ADD_PRINT_TABLE(40,10,"RightMargin:0.3cm",'100%',document.getElementById(temp).innerHTML);
+    LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
+    LODOP.ADD_PRINT_TABLE(10,10,"100%",'100%',document.getElementById(temp).innerHTML);
 	LODOP.PRINT();
 }
 function togglecn(){

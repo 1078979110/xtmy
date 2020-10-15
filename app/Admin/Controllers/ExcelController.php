@@ -162,7 +162,7 @@ class ExcelController extends AdminController{
             $orderinfo[$key]->medicinal = $medicinal->medicinal;
             $orderinfo[$key]->medicinalnum = $medicinal->medicinalnum;
         }
-        $fenpi = DB::table('order_fenpi')->where([['order_id',$id],['warehouse_id', $user_id]])->get(['id','medicinal_id', 'num', 'warehouse_id'])->toArray(true);
+        $fenpi = DB::table('order_fenpi')->where([['order_id',$id],['warehouse_id', $user_id]])->get(['id','medicinal_id', 'num', 'warehouse_id', 'orders_diaodu_id'])->toArray(true);
         $content->body(view('admin.order.fenpi',[
             'id'=>$id,'medicinals'=>$orderinfo->toArray(), 'medicinals_json'=>$orderinfo->toJson(),'fenpi'=>$fenpi
         ])->render());

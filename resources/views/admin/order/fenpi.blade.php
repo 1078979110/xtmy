@@ -21,7 +21,7 @@
                         <select name="fenpi[{{$item->id}}][medicinal_id]" class="form-control product">
                             <option value="0">==请选择==</option>
                             @foreach($medicinals as $k=>$medicinal)
-                                <option value="{{$medicinal->medicinal_id}}" @if($item->medicinal_id == $medicinal->medicinal_id)selected="selected"@endif>
+                                <option data-id="{{$medicinal->id}}" value="{{$medicinal->medicinal_id}}" @if($item->orders_diaodu_id == $medicinal->id)selected="selected"@endif>
                                     [名称：{{$medicinal->medicinal}}]-[货号：{{$medicinal->medicinalnum}}]-[数量：{{$medicinal->num}}]
                                 </option>
                             @endforeach
@@ -32,6 +32,7 @@
                     </div>
                     <div class="col-sm-1">
                         <button type="button" class="btn btn-danger btndel"><i class="fa fa-trash"></i></button>
+                        <input type="hidden" name="fenpi[{{$item->id}}][orders_diaodu_id]" value="{{$item->orders_diaodu_id}}">
                     </div>
                 </div>
             @endforeach
@@ -65,7 +66,7 @@
             '<select name="fenpi[' + key + '][medicinal_id]" class="form-control product">\n' +
             '<option value="0">==请选择==</option>\n';
         for(var i in medicinals){
-            str += '<option value="' + medicinals[i].medicinal_id + '">[名称：' +  medicinals[i].medicinal + ']-[货号：' + medicinals[i].medicinalnum + ']-[数量：'+medicinals[i].num+']</option>\n';
+            str += '<option data-id="'+ medicinals[i].id +'" value="' + medicinals[i].medicinal_id + '">[名称：' +  medicinals[i].medicinal + ']-[货号：' + medicinals[i].medicinalnum + ']-[数量：'+medicinals[i].num+']</option>\n';
         }
         str +=  '</select>\n'+
             '</div>\n'+
@@ -74,12 +75,22 @@
             '</div>\n';
         str += '<div class="col-sm-1">\n' +
             '<button type="button" class="btn btn-danger btndel"><i class="fa fa-trash"></i></button>\n' +
+            '<input type="hidden" name="fenpi['+key+'][orders_diaodu_id]" value="">'+
             '</div>';
 
         $("#foot").before(str);
         $(".btndel").click(function(){
             $(this).parent().parent().remove();
         });
+        $(".product").change(function(){
+            selected_ = $(this).find("option:selected").attr('data-id');
+            $(this).parent().parent().children().find("input[type='hidden']").val(selected_);
+        });
+    });
+
+    $(".product").change(function(){
+        selected_ = $(this).find("option:selected").attr('data-id');
+        $(this).parent().parent().children().find("input[type='hidden']").val(selected_);
     });
 
     function random_str(){
@@ -166,6 +177,8 @@
         }
         //console.log(endList)
         var flag = true
+        console.log(medicinals_o);
+        console.log(endList);
         medicinals_o.forEach((item,index)=>{
             endList.forEach((item_,index_)=>{
                 if(item.medicinal_id == item_.id){

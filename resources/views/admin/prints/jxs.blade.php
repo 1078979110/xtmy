@@ -131,14 +131,14 @@
       				<tr style="line-height: 30px; height: 30px">
             			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:120px" align="center">{{$datatitle[3][0]}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000; width:120px" align="center">{{$datatitle[3][1]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[3][2]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:30px" align="center">{{$datatitle[3][3]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[3][4]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[3][5]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[3][6]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$datatitle[3][7]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:60px" align="center">{{$datatitle[3][8]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:70px" align="center">{{$datatitle[3][9]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; " align="center">{{$datatitle[3][2]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; " align="center">{{$datatitle[3][3]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; " align="center">{{$datatitle[3][4]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; " align="center">{{$datatitle[3][5]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; " align="center">{{$datatitle[3][6]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; " align="center">{{$datatitle[3][7]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; " align="center">{{$datatitle[3][8]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; " align="center">{{$datatitle[3][9]}}</td>
       				</tr>
       				@foreach($lists as $key => $list)
             		<tr style="line-height: 30px; height: 30px">
@@ -179,12 +179,12 @@
 					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:120px" align="center">{{$datatitle[4][0]}}</td>
 					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:120px" align="center">{{$datatitle[4][1]}}</td>
 					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[4][2]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:30px" align="center">{{$datatitle[4][3]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[4][4]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[4][5]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[4][6]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$datatitle[4][7]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:60px" align="center">{{$datatitle[4][8]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000;" align="center">{{$datatitle[4][3]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; " align="center">{{$datatitle[4][4]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; " align="center">{{$datatitle[4][5]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; " align="center">{{$datatitle[4][6]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; " align="center">{{$datatitle[4][7]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; " align="center">{{$datatitle[4][8]}}</td>
 					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:70px" align="center">{{$datatitle[4][9]}}</td>
 				  </tr>
 				  @foreach($lists as $key => $list)
@@ -228,14 +228,14 @@
 				  <tr style="line-height: 30px; height: 30px">
 					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:120px" align="center">{{$datatitle[5][0]}}</td>
 					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:120px" align="center">{{$datatitle[5][1]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[5][2]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:30px" align="center">{{$datatitle[5][3]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[5][4]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[5][5]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[5][6]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$datatitle[5][7]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:60px" align="center">{{$datatitle[5][8]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:70px" align="center">{{$datatitle[5][9]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000;" align="center">{{$datatitle[5][2]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000;" align="center">{{$datatitle[5][3]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000;" align="center">{{$datatitle[5][4]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000;" align="center">{{$datatitle[5][5]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000;" align="center">{{$datatitle[5][6]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000;" align="center">{{$datatitle[5][7]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000;" align="center">{{$datatitle[5][8]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000;" align="center">{{$datatitle[5][9]}}</td>
 				  </tr>
 				  @foreach($lists as $key => $list)
 					  <tr style="line-height: 30px; height: 30px">
@@ -369,20 +369,22 @@ $("select[name='template']").change(function(){
 function print_view(temp){
 	LODOP=getLodop(); 
 	LODOP.PRINT_INIT();
+    LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
 	if(!temp){
-        LODOP.ADD_PRINT_TABLE(40,10,"RightMargin:0.3cm",'100%',document.getElementById('template'+tid).innerHTML);
+        LODOP.ADD_PRINT_TABLE(10,10,"100%",'100%',document.getElementById('template'+tid).innerHTML);
 	}else{
-        LODOP.ADD_PRINT_TABLE(40,10,"RightMargin:0.3cm",'100%',document.getElementById(temp).innerHTML);
+        LODOP.ADD_PRINT_TABLE(10,10,"100%",'100%',document.getElementById(temp).innerHTML);
 	}
 	LODOP.PREVIEW();
 }
 function print(temp){
 	LODOP=getLodop(); 
 	LODOP.PRINT_INIT();
+    LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
     if(!temp){
-        LODOP.ADD_PRINT_TABLE(40,10,"RightMargin:0.3cm",'100%',document.getElementById('template'+tid).innerHTML);
+        LODOP.ADD_PRINT_TABLE(10,10,"100%",'100%',document.getElementById('template'+tid).innerHTML);
     }else{
-        LODOP.ADD_PRINT_TABLE(40,10,"RightMargin:0.3cm",'100%',document.getElementById(temp).innerHTML);
+        LODOP.ADD_PRINT_TABLE(10,10,"100%",'100%',document.getElementById(temp).innerHTML);
     }
 	LODOP.PRINT();
 }

@@ -548,18 +548,30 @@ class ApiController extends AdminController {
             }
             try{
                 DB::beginTransaction();
-                DB::table('orders_diaodu')->where('order_id', $id)->delete();
+                //DB::table('orders_diaodu')->where('order_id', $id)->delete();
                 foreach ($diaodu as $key => $item){
-                    $_d = [
-                        'order_id'=>$id,
-                        'medicinal_id' => $item['medicinal_id'],
-                        'num' => $item['num'],
-                        'warehouse_id' => $item['warehouse_id'],
-                        'order_medicinals_id'=>$item['order_medicinals_id'],
-                        'created_at' => date('Y-m-d H:i:s', time()),
-                        'updated_at' => date('Y-m-d H:i:s', time())
-                    ];
-                    DB::table('orders_diaodu')->insert($_d);
+                    if(is_numeric($key)){
+                        $_d = [
+                            'order_id'=>$id,
+                            'medicinal_id' => $item['medicinal_id'],
+                            'num' => $item['num'],
+                            'warehouse_id' => $item['warehouse_id'],
+                            'order_medicinals_id'=>$item['order_medicinals_id'],
+                            'updated_at' => date('Y-m-d H:i:s', time())
+                        ];
+                        DB::table('orders_diaodu')->where('id', $key)->update($_d);
+                    }else{
+                        $_d = [
+                            'order_id'=>$id,
+                            'medicinal_id' => $item['medicinal_id'],
+                            'num' => $item['num'],
+                            'warehouse_id' => $item['warehouse_id'],
+                            'order_medicinals_id'=>$item['order_medicinals_id'],
+                            'created_at' => date('Y-m-d H:i:s', time()),
+                            'updated_at' => date('Y-m-d H:i:s', time())
+                        ];
+                        DB::table('orders_diaodu')->insert($_d);
+                    }
                 }
                 if(!empty($gifts)){
                     foreach ($gifts as $key=>$gift){
@@ -640,17 +652,31 @@ class ApiController extends AdminController {
             }
             try{
                 DB::beginTransaction();
-                DB::table('order_fenpi')->where([['order_id', $id],['warehouse_id', $user_id]])->delete();
+                //DB::table('order_fenpi')->where([['order_id', $id],['warehouse_id', $user_id]])->delete();
+
                 foreach ($fenpi as $key => $item){
-                    $_d = [
-                        'order_id'=>$id,
-                        'medicinal_id' => $item['medicinal_id'],
-                        'num' => $item['num'],
-                        'warehouse_id' => $user_id,
-                        'created_at' => date('Y-m-d H:i:s', time()),
-                        'updated_at' => date('Y-m-d H:i:s', time())
-                    ];
-                    DB::table('order_fenpi')->insert($_d);
+                    if(is_numeric($key)){
+                        $_d = [
+                            'order_id'=>$id,
+                            'medicinal_id' => $item['medicinal_id'],
+                            'num' => $item['num'],
+                            'warehouse_id' => $user_id,
+                            'orders_diaodu_id' => $item['orders_diaodu_id'],
+                            'updated_at' => date('Y-m-d H:i:s', time())
+                        ];
+                        DB::table('order_fenpi')->where('id', $key)->update($_d);
+                    }else{
+                        $_d = [
+                            'order_id'=>$id,
+                            'medicinal_id' => $item['medicinal_id'],
+                            'num' => $item['num'],
+                            'warehouse_id' => $user_id,
+                            'orders_diaodu_id' => $item['orders_diaodu_id'],
+                            'created_at' => date('Y-m-d H:i:s', time()),
+                            'updated_at' => date('Y-m-d H:i:s', time())
+                        ];
+                        DB::table('order_fenpi')->insert($_d);
+                    }
                 }
                 DB::commit();
                 admin_toastr('操作成功','success');

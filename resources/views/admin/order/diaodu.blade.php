@@ -27,7 +27,7 @@
                         <select name="diaodu[{{$item->id}}][medicinal_id]" class="form-control product">
                             <option value="0">==请选择==</option>
                             @foreach($medicinals as $k=>$medicinal)
-                                <option value="{{$medicinal->medicinal_id}}"
+                                <option data-id="{{$medicinal->id}}" value="{{$medicinal->medicinal_id}}"
                                         @if($medicinal->id == $item->order_medicinals_id)
                                             selected="selected"
                                         @endif>
@@ -160,6 +160,11 @@
             selected_ = $(this).find("option:selected").attr('data-id');
             $(this).parent().parent().children().find("input[type='hidden']").val(selected_);
         });
+    });
+
+    $(".product").change(function(){
+        selected_ = $(this).find("option:selected").attr('data-id');
+        $(this).parent().parent().children().find("input[type='hidden']").val(selected_);
     });
 //
     function random_str(){
