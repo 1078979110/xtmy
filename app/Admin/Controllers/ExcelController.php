@@ -68,6 +68,7 @@ class ExcelController extends AdminController{
                     'order_id' => $id,
                     'warehouse_id' => $user_id,
                     'medicinal_id' => $item->medicinal_id,
+                    'orders_diaodu_id'=>$item->id,
                     'num' => $item->num
                 ];
                 DB::table('order_fenpi')->insert($d_);
