@@ -46,6 +46,7 @@ class OrderController extends AdminController
             $filter->equal('orderstatus','订单状态')->select($stat);
             $arr = ['1'=>'经销商','2'=>'医院'];
             $filter->equal('buyertype','订单类型')->select($arr);
+            $filter->between('created_at', '下单时间')->datetime();
         });
         $grid->disableRowSelector();
         $grid->disableCreateButton();
