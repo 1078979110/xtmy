@@ -23,7 +23,7 @@ class ExcelExport extends AbstractExporter
                 $sheet->setWidth('F',20);
                 $sheet->setWidth('G',20);
                 $sheet->setWidth('H',20);
-                $sheet->setWidth('I',20);
+                $sheet->setWidth('I',40);
                 $sheet->setWidth('J',20);
                 $titlecolor = '#F8CBAD';
                 $sheet->mergeCells('A1:A2');
