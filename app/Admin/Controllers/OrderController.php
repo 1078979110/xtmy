@@ -370,13 +370,13 @@ EOT;
                 return $str;
             });
         }
-        $grid->export(function($export){
+        /*$grid->export(function($export){
             $export->only(['orderid', 'totalprice' ,'buyerid', 'hospital','created_at']);
             $export->column('orderid', function($value, $original){
                 return '\''.$value;
             });
-        });
-        //$grid->exporter(new ExcelExport());
+        });*/
+        $grid->exporter(new ExcelExport());
         $grid->tools(function($tools){
             if(Admin::user()->isRole('administrator')) //批量导入经销商订单
             $tools->append(new OrderImport());
