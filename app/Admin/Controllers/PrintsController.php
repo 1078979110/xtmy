@@ -524,6 +524,7 @@ class PrintsController extends AdminController{
         $request = request();
         $id = $request->id;
         $orderInfo = DB::table('orders')->find($id);
+        $buyerInfo = DB::table('users')->find($orderInfo->buyerid);
         $orderProducts = DB::table('order_medicinals')->where('order_id', $id)->get(['order_id', 'medicinal_id', 'price','num']);
         $medicinals = [];
         foreach ($orderProducts as $key=>$product){
@@ -539,7 +540,7 @@ class PrintsController extends AdminController{
             ];
         }
         $content->body(view($viewer,[
-            'orderinfo'=>$orderInfo, 'medicinals'=>$medicinals
+            'orderinfo'=>$orderInfo, 'medicinals'=>$medicinals, 'buyerinfo'=>$buyerInfo
         ])->render());
         return $content;
     }
