@@ -4,18 +4,20 @@
     <div class="panel-heading">财务专用</div>
     <div class="panel-body" id="table" >
         <table style="font-size:14px;" cellpadding="0" cellspacing="0">
-            <tbody>
+            <thead>
             <tr><td colspan="7" align="center" style="font-size: 16px; font-weight:bold">财务专用</td></tr>
-            <tr><td colspan="7" align="right">订单号：{{$orderinfo->orderid}}</td></tr>
+            <tr><td colspan="4">收货单位：{{$buyerinfo->name}}</td> <td colspan="3" align="right">订单号：{{$orderinfo->orderid}}</td></tr>
             <tr style="line-height: 30px; height: 30px">
-                <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:200px" align="center">序号</td>
-                <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">药品名称</td>
-                <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">货号</td>
+                <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">序号</td>
+                <td style="border-right:1px solid #000;border-top:1px solid #000; width:200px" align="center">药品名称</td>
+                <td style="border-right:1px solid #000;border-top:1px solid #000; width:100px" align="center">货号</td>
                 <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">单位</td>
                 <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">单价</td>
                 <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">数量</td>
                 <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">小计</td>
             </tr>
+            </thead>
+            <tbody>
             @foreach($medicinals as $key => $list)
             <tr style="line-height: 30px; height: 30px">
                 <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$key+1}}</td>
@@ -27,12 +29,15 @@
                 <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['prices']}}</td>
             </tr>
             @endforeach
-
+            </tbody>
+            <tfoot>
             <tr style="line-height: 30px; height: 30px">
-                <td colspan="7" style="border-top: 1px solid #000">总计：{{$orderinfo->totalprice}}</td>
+                <td style="border-top: 1px solid #000; border-bottom: 1px solid #000; border-left: 1px solid #000"></td>
+                <td style="border-top: 1px solid #000; border-bottom: 1px solid #000" colspan="5">总计：</td>
+                <td style="border-top: 1px solid #000; border-bottom: 1px solid #000; border-right: 1px solid #000">{{$orderinfo->totalprice}}</td>
                 {{--<td colspan="3" style="border-top: 1px solid #000">本页小计<span tindex="7"  tdata="SubSum" format="###,###,###,###,###.00">##########元</span></td>--}}
             </tr>
-            </tbody>
+            </tfoot>
         </table>
     </div>
     <div class="panel-footer">
