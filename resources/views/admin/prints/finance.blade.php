@@ -5,7 +5,7 @@
     <div class="panel-body" id="table" >
         <table style="font-size:14px;" cellpadding="0" cellspacing="0">
             <thead>
-            <tr><td colspan="7" align="center" style="font-size: 16px; font-weight:bold">财务专用</td></tr>
+            <tr><td colspan="7" align="center" style="font-size: 16px; font-weight:bold">送货单</td></tr>
             <tr><td colspan="4">收货单位：{{$buyerinfo->name}}</td> <td colspan="3" align="right">订单号：{{$orderinfo->orderid}}</td></tr>
             <tr style="line-height: 30px; height: 30px">
                 <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">序号</td>
