@@ -118,7 +118,7 @@ class ExcelExport extends AbstractExporter
                         $cells->setAlignment('center');
                         $cells->setValignment('center');
                         $cells->setBackground($color);
-                        $cells->setValue($val['order_id']);
+                        $cells->setValue('\''.$val['order_id']);
                     });
                     $sheet->mergeCells('B' . $rowNum . ':B' . $n);
                     //$sheet->cell('B'.$rowNum, $val['total']);
