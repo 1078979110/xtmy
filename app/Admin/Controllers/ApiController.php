@@ -704,4 +704,15 @@ class ApiController extends AdminController {
             return redirect('/admin/orders');
         }
     }
+
+    public function updateFinacePrintStatus(Request $request){
+        $id = $request->id;
+        $orderInfo = Order::find($id);
+        if(empty($orderInfo->toArray())){
+            return ['msg'=>'未找到相关打印信息', 'status'=>'error'];
+        }
+        $orderInfo->financeprintstatus = 1;
+        $orderInfo->save();
+        return ['msg'=>'打印完成', 'status'=>'success'];
+    }
 }

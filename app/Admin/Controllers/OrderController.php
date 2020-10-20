@@ -343,7 +343,11 @@ EOT;
                     if($this->orderstatus == 4){
                         $str = '<button class="btn btn-info btn-xs comfirmorder" data-id="'.$this->id.'">确认收款</button> | ';
                     }
+                    if($this->financeprintstatus == 0){
                         $str .= '<button class="btn btn-warning btn-xs printfinance" data-id="'.$this->id.'">打印出货单</button>';
+                    }else{
+                        $str .= '<button class="btn btn-default btn-xs printfinance" data-id="'.$this->id.'">打印出货单</button>';
+                    }
                 }else if(Admin::user()->isRole('warehouse')){
                     if($this->orderstatus == 5){
                         $str = '<button class="btn btn-primary btn-xs fenpi" data-id="'.$this->id.'">产品分批</button> | 

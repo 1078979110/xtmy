@@ -61,11 +61,21 @@
         LODOP.PREVIEW();
     }
     function print(){
+
         LODOP=getLodop();
         LODOP.PRINT_INIT();
         LODOP.ADD_PRINT_TABLE(40,10,"RightMargin:0.3cm",'100%',document.getElementById('table').innerHTML);
         LODOP.PRINT();
+        updateprint();
     }
+
+    function updateprint(){
+        id = '{{$orderinfo->id}}'
+        $.get('/admin/api/finaceprint?id='+id, function(res){
+            console.log(res);
+        });
+    }
+
     function getTable(){
         var sheet  = XLSX.utils.table_to_sheet($("#table")[0]);
         openDownloadDialog(sheet2blob(sheet),  '财务专用-'+ {{$orderinfo->orderid}}+'.xls');
