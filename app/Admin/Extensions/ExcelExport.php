@@ -27,11 +27,13 @@ class ExcelExport extends AbstractExporter
                 $sheet->setWidth('J',20);
                 $titlecolor = '#F8CBAD';
                 $sheet->mergeCells('A1:A2');
+
                 $sheet->cell('A1', function ($cells)use($titlecolor){
                     $cells->setAlignment('center');
                     $cells->setValignment('center');
                     $cells->setBackground($titlecolor);
-                    $cells->setValue('订单详情');
+                    $cells->setBorder('thin','thin','thin','thin');
+                    $cells->setValue('订单号');
                 });
                 $sheet->mergeCells('B1:B2');
                 //$sheet->cell('B1', '订单金额');
@@ -39,6 +41,7 @@ class ExcelExport extends AbstractExporter
                     $cells->setAlignment('center');
                     $cells->setValignment('center');
                     $cells->setBackground($titlecolor);
+                    $cells->setBorder('thin','thin','thin','thin');
                     $cells->setValue('订单金额');
                 });
                 $sheet->mergeCells('C1:G1');
@@ -47,6 +50,7 @@ class ExcelExport extends AbstractExporter
                     $cells->setAlignment('center');
                     $cells->setValignment('center');
                     $cells->setBackground($titlecolor);
+                    $cells->setBorder('thin','thin','thin','thin');
                     $cells->setValue('订单详情');
                 });
                 $sheet->mergeCells('H1:H2');
@@ -55,6 +59,7 @@ class ExcelExport extends AbstractExporter
                     $cells->setAlignment('center');
                     $cells->setValignment('center');
                     $cells->setBackground($titlecolor);
+                    $cells->setBorder('thin','thin','thin','thin');
                     $cells->setValue('下单人');
                 });
                 $sheet->mergeCells('I1:I2');
@@ -63,6 +68,7 @@ class ExcelExport extends AbstractExporter
                     $cells->setAlignment('center');
                     $cells->setValignment('center');
                     $cells->setBackground($titlecolor);
+                    $cells->setBorder('thin','thin','thin','thin');
                     $cells->setValue('医院');
                 });
                 $sheet->mergeCells('J1:J2');
@@ -71,36 +77,42 @@ class ExcelExport extends AbstractExporter
                     $cells->setAlignment('center');
                     $cells->setValignment('center');
                     $cells->setBackground($titlecolor);
+                    $cells->setBorder('thin','thin','thin','thin');
                     $cells->setValue('下单时间');
                 });
                 //$sheet->cell('C2', '药品名称');
                 $sheet->cell('C2', function($cells)use($titlecolor){
                     $cells->setAlignment('center');
                     $cells->setBackground($titlecolor);
+                    $cells->setBorder('thin','thin','thin','thin');
                     $cells->setValue('药品名称');
                 });
                 //$sheet->cell('D2', '货号');
                 $sheet->cell('D2', function($cells)use($titlecolor){
                     $cells->setAlignment('center');
                     $cells->setBackground($titlecolor);
+                    $cells->setBorder('thin','thin','thin','thin');
                     $cells->setValue('货号');
                 });
                 //$sheet->cell('E2', '单位');
                 $sheet->cell('E2', function($cells)use($titlecolor){
                     $cells->setAlignment('center');
                     $cells->setBackground($titlecolor);
+                    $cells->setBorder('thin','thin','thin','thin');
                     $cells->setValue('单位');
                 });
                 //$sheet->cell('F2', '单价');
                 $sheet->cell('F2', function($cells)use($titlecolor){
                     $cells->setAlignment('center');
                     $cells->setBackground($titlecolor);
+                    $cells->setBorder('thin','thin','thin','thin');
                     $cells->setValue('单价');
                 });
                 //$sheet->cell('G2', '数量');
                 $sheet->cell('G2', function($cells)use($titlecolor){
                     $cells->setAlignment('center');
                     $cells->setBackground($titlecolor);
+                    $cells->setBorder('thin','thin','thin','thin');
                     $cells->setValue('数量');
                 });
                 $rowNum = 3;
@@ -118,6 +130,7 @@ class ExcelExport extends AbstractExporter
                         $cells->setAlignment('center');
                         $cells->setValignment('center');
                         $cells->setBackground($color);
+                        $cells->setBorder('thin','thin','thin','thin');
                         $cells->setValue('\''.$val['order_id']);
                     });
                     $sheet->mergeCells('B' . $rowNum . ':B' . $n);
@@ -126,6 +139,7 @@ class ExcelExport extends AbstractExporter
                         $cells->setAlignment('center');
                         $cells->setValignment('center');
                         $cells->setBackground($color);
+                        $cells->setBorder('thin','thin','thin','thin');
                         $cells->setValue($val['total']);
                     });
                     foreach ($val['order_info'] as $k => $v) {
@@ -133,26 +147,31 @@ class ExcelExport extends AbstractExporter
                         $sheet->cell('C' . $m, function ($cells) use ($v, $color) {
                             $cells->setAlignment('center');
                             $cells->setBackground($color);
+                            $cells->setBorder('thin','thin','thin','thin');
                             $cells->setValue($v['medicinal']);
                         });
                         $sheet->cell('D' . $m, function ($cells) use ($v, $color) {
                             $cells->setAlignment('center');
                             $cells->setBackground($color);
+                            $cells->setBorder('thin','thin','thin','thin');
                             $cells->setValue($v['medicinalnum']);
                         });
                         $sheet->cell('E' . $m, function ($cells) use ($v, $color) {
                             $cells->setAlignment('center');
                             $cells->setBackground($color);
+                            $cells->setBorder('thin','thin','thin','thin');
                             $cells->setValue($v['unit']);
                         });
                         $sheet->cell('F' . $m, function ($cells) use ($v, $color) {
                             $cells->setAlignment('center');
                             $cells->setBackground($color);
+                            $cells->setBorder('thin','thin','thin','thin');
                             $cells->setValue($v['price']);
                         });
                         $sheet->cell('G' . $m, function ($cells) use ($v, $color) {
                             $cells->setAlignment('center');
                             $cells->setBackground($color);
+                            $cells->setBorder('thin','thin','thin','thin');
                             $cells->setValue($v['num']);
                         });
                     }
@@ -162,6 +181,7 @@ class ExcelExport extends AbstractExporter
                         $cells->setAlignment('center');
                         $cells->setValignment('center');
                         $cells->setBackground($color);
+                        $cells->setBorder('thin','thin','thin','thin');
                         $cells->setValue($val['buyer_name']);
                     });
                     $sheet->mergeCells('I' . $rowNum . ':I' . $n);
@@ -169,6 +189,7 @@ class ExcelExport extends AbstractExporter
                         $cells->setAlignment('center');
                         $cells->setValignment('center');
                         $cells->setBackground($color);
+                        $cells->setBorder('thin','thin','thin','thin');
                         $cells->setValue($val['hospital']);
                     });
                     $sheet->mergeCells('J' . $rowNum . ':J' . $n);
@@ -176,6 +197,7 @@ class ExcelExport extends AbstractExporter
                         $cells->setAlignment('center');
                         $cells->setValignment('center');
                         $cells->setBackground($color);
+                        $cells->setBorder('thin','thin','thin','thin');
                         $cells->setValue($val['created_at']);
                     });
                     $rowNum = $n + 1;
