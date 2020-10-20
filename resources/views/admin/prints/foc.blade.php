@@ -14,9 +14,9 @@
                         <tr>
                             <td align="center" style="border-top: 1px solid #000;border-left:1px solid #000;">{{$salefoc['listtitle'][0]}}</td>
                             <td align="center" style="border-top: 1px solid #000;border-left:1px solid #000;">{{$salefoc['listtitle'][1]}}</td>
-                            <td align="center" style="border-top: 1px solid #000;border-left:1px solid #000;">{{$salefoc['listtitle'][2]}}</td>
-                            <td align="center" style="border-top: 1px solid #000;border-left:1px solid #000;">{{$salefoc['listtitle'][3]}}</td>
-                            <td align="center" style="border-top: 1px solid #000;border-left:1px solid #000;">{{$salefoc['listtitle'][4]}}</td>
+                            <td align="center" style="border-top: 1px solid #000;border-left:1px solid #000; width: 50px">{{$salefoc['listtitle'][2]}}</td>
+                            <td align="center" style="border-top: 1px solid #000;border-left:1px solid #000;width: 50px">{{$salefoc['listtitle'][3]}}</td>
+                            <td align="center" style="border-top: 1px solid #000;border-left:1px solid #000;width: 50px">{{$salefoc['listtitle'][4]}}</td>
                             <td align="center" style="border-top: 1px solid #000;border-left:1px solid #000;">{{$salefoc['listtitle'][5]}}</td>
                             <td align="center" style="border-top: 1px solid #000;border-left:1px solid #000; border-right: 1px solid #000">{{$salefoc['listtitle'][6]}}</td>
                         </tr>
@@ -85,10 +85,10 @@
 </div>
 <style>
     .yinzhang{
-        width: 100px;
+        width: 130px;
         position: absolute;
         left: 0;
-        top: -7px;
+        top: -12px;
         z-index: 2;
     }
 </style>
