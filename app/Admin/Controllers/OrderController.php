@@ -334,9 +334,9 @@ EOT;
                         if(!$has)
                         $str .= '<button class="btn btn-danger btn-xs defaultsplit" data-id="' . $this->id . '">默认分库</button> | ';
                         $str .= '<button class="btn btn-danger btn-xs changeprice" data-id="' . $this->id . '">改价</button> |';
-                        if ($this->accountstatus == 0) {
-                            $str .= ' <button class="btn btn-danger btn-xs account" data-id="' . $this->id . '">登账</button> | ';
-                        }
+                    }
+                    if ($this->accountstatus == 0) {
+                        $str .= ' <button class="btn btn-danger btn-xs account" data-id="' . $this->id . '">登账</button> | ';
                     }
                     $str .= '<button class="btn btn-warning btn-xs printfinance" data-id="'.$this->id.'">打印出货单</button>';
                 }else if(Admin::user()->isRole('finance')){
@@ -365,6 +365,7 @@ EOT;
                             $str .= '<button class="btn btn-warning btn-xs zhuanyun" data-id="'.$this->id.'">转运证明</button> | 
                                     <button class="btn btn-warning btn-xs foc" data-id="'.$this->id.'">销售订单/FOC申请表</button>';
                         }
+
                     }/*else if($this->orderstatus == 6){
                         $str = '<button class="btn btn-warning btn-xs shipping" data-id="'.$this->id.'">已发货</button> | ';
                     }*/
