@@ -80,9 +80,9 @@ class ApiController extends AdminController {
 			    if(empty($hasSplit)){
                     return ['status' => false, 'title' => '订单', 'msg' => '失败，该订单还未分库，无法确认'];
                 }
-                if($curr_accountstatus ==0){
+                /*if($curr_accountstatus ==0){
                     return ['status' => false, 'title' => '订单', 'msg' => '失败，还未登账，无法确认'];
-                }
+                }*/
             }else if($curr_status ==4){
                 if(Admin::user()->isRole('finance'))
                 $curr_status = 5;
