@@ -4,35 +4,43 @@
     <div class="panel-heading">批发专用</div>
     <div class="panel-body" id="table" >
         <table style="font-size:14px;" cellpadding="0" cellspacing="0">
-            <tbody>
-            <tr><td colspan="7" align="center" style="font-size: 16px; font-weight:bold">批发专用</td></tr>
-            <tr><td colspan="7" align="right">订单号：{{$orderinfo->orderid}}</td></tr>
-            <tr style="line-height: 30px; height: 30px">
-                <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">序号</td>
-                <td style="border-right:1px solid #000;border-top:1px solid #000; width:150px" align="center">药品名称</td>
-                <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">货号</td>
-                <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">单位</td>
-                <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">单价</td>
-                <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">数量</td>
-                <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">小计</td>
+            <thead>
+            <tr><td colspan="7" align="center" style="font-size: 16px; font-weight:bold">出库清单</td></tr>
+            <tr>
+                <td colspan="4" align="left">收货单位：{{$buyerinfo->name}}</td>
+                <td colspan="3" align="right">日期：{{date('Y年m月d日',strtotime($orderinfo->created_at))}}</td>
             </tr>
+            <tr style="line-height: 30px; height: 30px">
+                <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:150px" align="center">产品名称</td>
+                <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">货号/规格</td>
+                <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">单位</td>
+                <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">数量</td>
+                <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">单价</td>
+                <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">金额</td>
+                <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">仓库</td>
+            </tr>
+            </thead>
+            <tbody>
             @foreach($medicinals as $key => $list)
             <tr style="line-height: 30px; height: 30px">
-                <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$key+1}}</td>
-                <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
+                <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
                 <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
                 <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
                 <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['price']}}</td>
                 <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
                 <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['prices']}}</td>
+                <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['warehouse']}}</td>
             </tr>
             @endforeach
-
+            </tbody>
+            <tfoot>
             <tr style="line-height: 30px; height: 30px">
-                <td colspan="7" style="border-top: 1px solid #000">总计：{{$orderinfo->totalprice}}</td>
+                <td style="border-top: 1px solid #000; border-left: 1px solid #000; border-bottom: 1px solid #000">总计：</td>
+                <td colspan="5" style="border-top: 1px solid #000;border-left: 1px solid #000; border-bottom: 1px solid #000">{{$orderinfo->totalprice}}</td>
+                <td style="border: 1px solid #000"></td>
                 {{--<td colspan="3" style="border-top: 1px solid #000">本页小计<span tindex="7"  tdata="SubSum" format="###,###,###,###,###.00">##########元</span></td>--}}
             </tr>
-            </tbody>
+            </tfoot>
         </table>
     </div>
     <div class="panel-footer">

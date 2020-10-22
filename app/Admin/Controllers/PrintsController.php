@@ -528,7 +528,6 @@ class PrintsController extends AdminController{
         $orderProducts = DB::table('order_medicinals')->where('order_id', $id)->get(['order_id', 'medicinal_id', 'price','num']);
         $medicinals = [];
         foreach ($orderProducts as $key=>$product){
-
             $medicinal = DB::table('medicinal')->where('id', $product->medicinal_id)->first();
             $medicinals[$key] = [
                 'medicinal' => $medicinal->medicinal,
@@ -538,6 +537,23 @@ class PrintsController extends AdminController{
                 'price'=>$product->price,
                 'prices'=>$product->num*$product->price
             ];
+        }
+        if(Admin::user()->isRole('wholesale')){
+            $orderProducts = DB::table('orders_diaodu')->where('order_id', $id)->get(['order_id', 'medicinal_id', 'warehouse_id','num', 'order_medicinals_id']);
+            foreach ($orderProducts as $key=>$product){
+                $medicinal = DB::table('medicinal')->where('id', $product->medicinal_id)->first();
+                $warehouse = DB::table('admin_users')->where('id', $product->warehouse_id)->first();
+                $medicinals[$key] = [
+                    'medicinal' => $medicinal->medicinal,
+                    'medicinalnum'=>$medicinal->medicinalnum,
+                    'unit'=>$medicinal->unit,
+                    'num'=>$product->num,
+                    'warehouse' => $warehouse->name
+                ];
+                $orderMedicinals = DB::table('order_medicinals')->where('id', $product->order_medicinals_id)->first();
+                $medicinals[$key]['price'] = $orderMedicinals->price;
+                $medicinals[$key]['prices'] = $orderMedicinals->price * $product->num;
+            }
         }
         $content->body(view($viewer,[
             'orderinfo'=>$orderInfo, 'medicinals'=>$medicinals, 'buyerinfo'=>$buyerInfo
