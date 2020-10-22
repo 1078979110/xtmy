@@ -15,43 +15,35 @@ class ExcelExport extends AbstractExporter
         $finename = date('订单导出'.'Y-m-d H-i-s', time());
         Excel::create($finename, function($excel) use ($cellData){
             $excel->sheet('sheet', function($sheet) use($cellData){
-                $sheet->setWidth('A',20);
+                $sheet->setWidth('A',40);
                 $sheet->setWidth('B',20);
-                $sheet->setWidth('C',40);
-                $sheet->setWidth('D',20);
+                $sheet->setWidth('C',10);
+                $sheet->setWidth('D',10);
                 $sheet->setWidth('E',20);
                 $sheet->setWidth('F',20);
                 $sheet->setWidth('G',20);
                 $sheet->setWidth('H',20);
-                $sheet->setWidth('I',40);
-                $sheet->setWidth('J',20);
+                $sheet->setWidth('I',20);
+                $sheet->setWidth('J',40);
+                $sheet->setWidth('K',20);
                 $titlecolor = '#F8CBAD';
-                $sheet->mergeCells('A1:A2');
-
-                $sheet->cell('A1', function ($cells)use($titlecolor){
+                $sheet->mergeCells('A1:F1');
+                //$sheet->cell('C1', '订单详情');
+                $sheet->cell('A1', function($cells)use($titlecolor){
                     $cells->setAlignment('center');
                     $cells->setValignment('center');
                     $cells->setBackground($titlecolor);
                     $cells->setBorder('thin','thin','thin','thin');
-                    $cells->setValue('订单号');
+                    $cells->setValue('送货单');
                 });
-                $sheet->mergeCells('B1:B2');
+                $sheet->mergeCells('G1:G2');
                 //$sheet->cell('B1', '订单金额');
-                $sheet->cell('B1', function($cells)use($titlecolor){
+                $sheet->cell('G1', function($cells)use($titlecolor){
                     $cells->setAlignment('center');
                     $cells->setValignment('center');
                     $cells->setBackground($titlecolor);
                     $cells->setBorder('thin','thin','thin','thin');
                     $cells->setValue('订单金额');
-                });
-                $sheet->mergeCells('C1:G1');
-                //$sheet->cell('C1', '订单详情');
-                $sheet->cell('C1', function($cells)use($titlecolor){
-                    $cells->setAlignment('center');
-                    $cells->setValignment('center');
-                    $cells->setBackground($titlecolor);
-                    $cells->setBorder('thin','thin','thin','thin');
-                    $cells->setValue('订单详情');
                 });
                 $sheet->mergeCells('H1:H2');
                 //$sheet->cell('H1', '下单人');
@@ -62,18 +54,28 @@ class ExcelExport extends AbstractExporter
                     $cells->setBorder('thin','thin','thin','thin');
                     $cells->setValue('下单人');
                 });
+
                 $sheet->mergeCells('I1:I2');
+                $sheet->cell('I1', function ($cells)use($titlecolor){
+                    $cells->setAlignment('center');
+                    $cells->setValignment('center');
+                    $cells->setBackground($titlecolor);
+                    $cells->setBorder('thin','thin','thin','thin');
+                    $cells->setValue('订单号');
+                });
+
+                $sheet->mergeCells('J1:J2');
                 //$sheet->cell('I1', '医院');
-                $sheet->cell('I1', function($cells)use($titlecolor){
+                $sheet->cell('J1', function($cells)use($titlecolor){
                     $cells->setAlignment('center');
                     $cells->setValignment('center');
                     $cells->setBackground($titlecolor);
                     $cells->setBorder('thin','thin','thin','thin');
                     $cells->setValue('医院');
                 });
-                $sheet->mergeCells('J1:J2');
+                $sheet->mergeCells('K1:K2');
                 //$sheet->cell('J1', '下单时间');
-                $sheet->cell('J1', function($cells)use($titlecolor){
+                $sheet->cell('K1', function($cells)use($titlecolor){
                     $cells->setAlignment('center');
                     $cells->setValignment('center');
                     $cells->setBackground($titlecolor);
@@ -81,39 +83,45 @@ class ExcelExport extends AbstractExporter
                     $cells->setValue('下单时间');
                 });
                 //$sheet->cell('C2', '药品名称');
-                $sheet->cell('C2', function($cells)use($titlecolor){
+                $sheet->cell('A2', function($cells)use($titlecolor){
                     $cells->setAlignment('center');
                     $cells->setBackground($titlecolor);
                     $cells->setBorder('thin','thin','thin','thin');
                     $cells->setValue('药品名称');
                 });
                 //$sheet->cell('D2', '货号');
-                $sheet->cell('D2', function($cells)use($titlecolor){
+                $sheet->cell('B2', function($cells)use($titlecolor){
                     $cells->setAlignment('center');
                     $cells->setBackground($titlecolor);
                     $cells->setBorder('thin','thin','thin','thin');
                     $cells->setValue('货号');
                 });
                 //$sheet->cell('E2', '单位');
-                $sheet->cell('E2', function($cells)use($titlecolor){
+                $sheet->cell('C2', function($cells)use($titlecolor){
                     $cells->setAlignment('center');
                     $cells->setBackground($titlecolor);
                     $cells->setBorder('thin','thin','thin','thin');
                     $cells->setValue('单位');
                 });
                 //$sheet->cell('F2', '单价');
-                $sheet->cell('F2', function($cells)use($titlecolor){
+                $sheet->cell('D2', function($cells)use($titlecolor){
                     $cells->setAlignment('center');
                     $cells->setBackground($titlecolor);
                     $cells->setBorder('thin','thin','thin','thin');
                     $cells->setValue('单价');
                 });
                 //$sheet->cell('G2', '数量');
-                $sheet->cell('G2', function($cells)use($titlecolor){
+                $sheet->cell('E2', function($cells)use($titlecolor){
                     $cells->setAlignment('center');
                     $cells->setBackground($titlecolor);
                     $cells->setBorder('thin','thin','thin','thin');
                     $cells->setValue('数量');
+                });
+                $sheet->cell('F2', function($cells)use($titlecolor){
+                    $cells->setAlignment('center');
+                    $cells->setBackground($titlecolor);
+                    $cells->setBorder('thin','thin','thin','thin');
+                    $cells->setValue('小计');
                 });
                 $rowNum = 3;
                 foreach ($cellData as $key=>$val) {
@@ -125,79 +133,89 @@ class ExcelExport extends AbstractExporter
                     }
                     $len = sizeof($val['order_info']);
                     $n = $rowNum + $len - 1;
-                    $sheet->mergeCells('A' . $rowNum . ':A' . $n);
-                    $sheet->cell('A' . $rowNum, function ($cells) use ($val, $color) {
-                        $cells->setAlignment('center');
-                        $cells->setValignment('center');
-                        $cells->setBackground($color);
-                        $cells->setBorder('thin','thin','thin','thin');
-                        $cells->setValue('\''.$val['order_id']);
-                    });
-                    $sheet->mergeCells('B' . $rowNum . ':B' . $n);
-                    //$sheet->cell('B'.$rowNum, $val['total']);
-                    $sheet->cell('B' . $rowNum, function ($cells) use ($val, $color) {
-                        $cells->setAlignment('center');
-                        $cells->setValignment('center');
-                        $cells->setBackground($color);
-                        $cells->setBorder('thin','thin','thin','thin');
-                        $cells->setValue($val['total']);
-                    });
                     foreach ($val['order_info'] as $k => $v) {
                         $m = $rowNum + $k;
+                        $sheet->cell('A' . $m, function ($cells) use ($v, $color) {
+                            $cells->setAlignment('center');
+                            $cells->setBackground($color);
+                            $cells->setBorder('thin', 'thin', 'thin', 'thin');
+                            $cells->setValue($v['medicinal']);
+                        });
+                        $sheet->cell('B' . $m, function ($cells) use ($v, $color) {
+                            $cells->setAlignment('center');
+                            $cells->setBackground($color);
+                            $cells->setBorder('thin', 'thin', 'thin', 'thin');
+                            $cells->setValue($v['medicinalnum']);
+                        });
                         $sheet->cell('C' . $m, function ($cells) use ($v, $color) {
                             $cells->setAlignment('center');
                             $cells->setBackground($color);
-                            $cells->setBorder('thin','thin','thin','thin');
-                            $cells->setValue($v['medicinal']);
+                            $cells->setBorder('thin', 'thin', 'thin', 'thin');
+                            $cells->setValue($v['unit']);
                         });
                         $sheet->cell('D' . $m, function ($cells) use ($v, $color) {
                             $cells->setAlignment('center');
                             $cells->setBackground($color);
-                            $cells->setBorder('thin','thin','thin','thin');
-                            $cells->setValue($v['medicinalnum']);
+                            $cells->setBorder('thin', 'thin', 'thin', 'thin');
+                            $cells->setValue($v['price']);
                         });
                         $sheet->cell('E' . $m, function ($cells) use ($v, $color) {
                             $cells->setAlignment('center');
                             $cells->setBackground($color);
-                            $cells->setBorder('thin','thin','thin','thin');
-                            $cells->setValue($v['unit']);
+                            $cells->setBorder('thin', 'thin', 'thin', 'thin');
+                            $cells->setValue($v['num']);
                         });
                         $sheet->cell('F' . $m, function ($cells) use ($v, $color) {
                             $cells->setAlignment('center');
                             $cells->setBackground($color);
-                            $cells->setBorder('thin','thin','thin','thin');
-                            $cells->setValue($v['price']);
-                        });
-                        $sheet->cell('G' . $m, function ($cells) use ($v, $color) {
-                            $cells->setAlignment('center');
-                            $cells->setBackground($color);
-                            $cells->setBorder('thin','thin','thin','thin');
-                            $cells->setValue($v['num']);
+                            $cells->setBorder('thin', 'thin', 'thin', 'thin');
+                            $cells->setValue($v['num'] * $v['price']);
                         });
                     }
+
+                    $sheet->mergeCells('G' . $rowNum . ':G' . $n);
+                    //$sheet->cell('B'.$rowNum, $val['total']);
+                    $sheet->cell('G' . $rowNum, function ($cells) use ($val, $color) {
+                        $cells->setAlignment('center');
+                        $cells->setValignment('center');
+                        $cells->setBackground($color);
+                        $cells->setBorder('thin', 'thin', 'thin', 'thin');
+                        $cells->setValue($val['total']);
+                    });
 
                     $sheet->mergeCells('H' . $rowNum . ':H' . $n);
                     $sheet->cell('H' . $rowNum, function ($cells) use ($val, $color) {
                         $cells->setAlignment('center');
                         $cells->setValignment('center');
                         $cells->setBackground($color);
-                        $cells->setBorder('thin','thin','thin','thin');
+                        $cells->setBorder('thin', 'thin', 'thin', 'thin');
                         $cells->setValue($val['buyer_name']);
                     });
+
                     $sheet->mergeCells('I' . $rowNum . ':I' . $n);
                     $sheet->cell('I' . $rowNum, function ($cells) use ($val, $color) {
                         $cells->setAlignment('center');
                         $cells->setValignment('center');
                         $cells->setBackground($color);
-                        $cells->setBorder('thin','thin','thin','thin');
-                        $cells->setValue($val['hospital']);
+                        $cells->setBorder('thin', 'thin', 'thin', 'thin');
+                        $cells->setValue('\'' . $val['order_id']);
                     });
+
+
                     $sheet->mergeCells('J' . $rowNum . ':J' . $n);
                     $sheet->cell('J' . $rowNum, function ($cells) use ($val, $color) {
                         $cells->setAlignment('center');
                         $cells->setValignment('center');
                         $cells->setBackground($color);
-                        $cells->setBorder('thin','thin','thin','thin');
+                        $cells->setBorder('thin', 'thin', 'thin', 'thin');
+                        $cells->setValue($val['hospital']);
+                    });
+                    $sheet->mergeCells('K' . $rowNum . ':K' . $n);
+                    $sheet->cell('K' . $rowNum, function ($cells) use ($val, $color) {
+                        $cells->setAlignment('center');
+                        $cells->setValignment('center');
+                        $cells->setBackground($color);
+                        $cells->setBorder('thin', 'thin', 'thin', 'thin');
                         $cells->setValue($val['created_at']);
                     });
                     $rowNum = $n + 1;
