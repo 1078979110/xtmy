@@ -254,6 +254,7 @@ class ExcelExport extends AbstractExporter
                 'hospital' => !empty($hospitalInfo)?$hospitalInfo->hospital:'',
                 'created_at' => $model['created_at']
             ];
+            DB::table('orders')->where('id', $model['id'])->update(['financeexportstatus'=>1]);
         }
         return $data;
     }

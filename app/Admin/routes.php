@@ -49,6 +49,7 @@ Route::group([
     $router->get('excel/shipping', 'ExcelController@startShipping');
     $router->get('/api/defaultsplit', 'ApiController@defaultSplitOrder');
     $router->get('/api/finaceprint', 'ApiController@updateFinacePrintStatus');
+    $router->get('/api/finaceexport', 'ApiController@updateFinaceExportStatus');
 
     //自定义接收数据页面
     $router->post('/password/setadmin', 'PasswordController@setAdmin');

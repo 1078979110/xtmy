@@ -76,8 +76,16 @@
         });
     }
 
+    function updateexport(){
+        id = '{{$orderinfo->id}}'
+        $.get('/admin/api/finaceexport?id='+id, function(res){
+            console.log(res);
+        });
+    }
+
     function getTable(){
         var sheet  = XLSX.utils.table_to_sheet($("#table")[0]);
+        updateexport();
         openDownloadDialog(sheet2blob(sheet),  '财务专用-'+ {{$orderinfo->orderid}}+'.xls');
     }
 

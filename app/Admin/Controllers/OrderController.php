@@ -213,6 +213,9 @@ class OrderController extends AdminController
             if($this->accountstatus == 1 && Admin::user()->isRole('wholesale')){
                 $str .= ' <button class="btn btn-success btn-xs" style="background-color: #985f0d; border-color:#985f0d">已登账</button>';
             }
+            if($this->financeexportstatus ==1 && Admin::user()->isRole('finance')){
+                $str .= ' <button class="btn btn-success btn-xs" style="background-color: #985f0d; border-color:#985f0d">已导出</button>';
+            }
             return $str;
         });
         if(!Admin::user()->isRole('administrator')){
