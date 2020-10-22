@@ -49,10 +49,10 @@ class OrderController extends AdminController
             $filter->equal('buyertype','订单类型')->select($arr);
             $filter->between('created_at', '下单时间')->datetime();
         });
-        //$grid->disableRowSelector();
+        $grid->disableRowSelector();
         $grid->disableCreateButton();
         $grid->disableColumnSelector();
-        //$grid->disableExport();
+        $grid->disableExport();
         if(Admin::user()->isRole('administrator') || Admin::user()->isRole('finance')){
             $grid->disableRowSelector(false);
             $grid->disableExport(false);
