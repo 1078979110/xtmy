@@ -52,7 +52,7 @@ class OrderController extends AdminController
         //$grid->disableRowSelector();
         $grid->disableCreateButton();
         $grid->disableColumnSelector();
-        $grid->disableExport();
+        //$grid->disableExport();
         if(Admin::user()->isRole('administrator') || Admin::user()->isRole('finance')){
             $grid->disableRowSelector(false);
             $grid->disableExport(false);
