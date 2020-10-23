@@ -521,7 +521,7 @@ class ExcelExport extends AbstractExporter
                 $oMedicinal = DB::table('order_medicinals')->where([['order_id', $model['id']],['medicinal_id', $medicinal->medicinal_id]])->first();
                 if($isD){
                     $warehouse = DB::table('admin_users')->where('id', $medicinal->warehouse_id)->first();
-                    $name = isset($warehouse->name)?$warehouse->name:$warehouse['name'];
+                    $name = isset($warehouse->name)?$warehouse->name:$warehouse['name'];//如果出现仓库列为空，则说明该仓库可能被删除，导致无法获取到仓库名称
                 }else{
                     $name = '未分库';
                 }
