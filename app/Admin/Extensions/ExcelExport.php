@@ -19,12 +19,12 @@ class ExcelExport extends AbstractExporter
                     $str .= $val['orderid'].'，\n';
                 }
             }
-            if($str != '') {
+            /*if($str != '') {
                 $str = '存在未发货订单,请在订单全部发货后再进行导出，未完成发货订单为：\n' . $str;
                 admin_error('导出订单', $str);
                 echo "<script>alert('{$str}');window.location.href = '/admin/orders'</script>";
                 exit;
-            }
+            }*/
             $cellData = $this->adminDataTools($data);
             $finename = date('订单导出'.'Y-m-d H-i-s', time());
             Excel::create($finename, function($excel) use ($cellData){
@@ -195,6 +195,9 @@ class ExcelExport extends AbstractExporter
                             $sheet->cell('G' . $m, function ($cells) use ($v, $color) {
                                 $cells->setAlignment('center');
                                 $cells->setBackground($color);
+/*                                if($v['warehouse'] == '未分库'){
+                                    $cells->setFontColor('200,10,10');
+                                }*/
                                 $cells->setBorder('thin', 'thin', 'thin', 'thin');
                                 $cells->setValue($v['warehouse']);
                             });
@@ -520,7 +523,7 @@ class ExcelExport extends AbstractExporter
                     $warehouse = DB::table('admin_users')->where('id', $medicinal->warehouse_id)->first();
                     $name = $warehouse->name;
                 }else{
-                    $name = '';
+                    $name = '未分库';
                 }
                 $orderInfo[] = [
                     'medicinal' => $medicinal->medicinal,
