@@ -19,8 +19,8 @@ class ExcelExport extends AbstractExporter
                     $str .= $val['orderid'].'，\n';
                 }
             }
-            if($str != ''){
-                $str = '存在未发货订单,请在订单全部发货后再进行导出，未完成发货订单为：\n'.$str;
+            if($str != '') {
+                $str = '存在未发货订单,请在订单全部发货后再进行导出，未完成发货订单为：\n' . $str;
                 admin_error('导出订单', $str);
                 echo "<script>alert('{$str}');window.location.href = '/admin/orders'</script>";
                 exit;
