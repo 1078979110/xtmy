@@ -521,7 +521,7 @@ class ExcelExport extends AbstractExporter
                 $oMedicinal = DB::table('order_medicinals')->where([['order_id', $model['id']],['medicinal_id', $medicinal->medicinal_id]])->first();
                 if($isD){
                     $warehouse = DB::table('admin_users')->where('id', $medicinal->warehouse_id)->first();
-                    $name = $warehouse['name'];
+                    $name = $warehouse->name;
                 }else{
                     $name = '未分库';
                 }
