@@ -15,12 +15,12 @@ class ExcelExport extends AbstractExporter
         if(Admin::user()->isRole('administrator')){
             $str = '';
             foreach ($data as $key=>$val){
-                if($val['splitstatus'] == 0){
-                    $str .= $val['orderid'].',';
+                if($val['orderstatus'] < 6){
+                    $str .= $val['orderid'].'，\n';
                 }
             }
             if($str != ''){
-                $str = '存在未分库订单,请排除未分库订单或者等待订单分库后再进行导出，未分库订单为：'.$str;
+                $str = '存在未发货订单,请在订单全部发货后再进行导出，未完成发货订单为：\n'.$str;
                 admin_error('导出订单', $str);
                 echo "<script>alert('{$str}');window.location.href = '/admin/orders'</script>";
                 exit;
