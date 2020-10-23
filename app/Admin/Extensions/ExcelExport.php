@@ -11,19 +11,20 @@ class ExcelExport extends AbstractExporter
     public function export()
     {
         $data = $this->getData();
-        $str = '';
-        foreach ($data as $key=>$val){
-            if($val['splitstatus'] == 0){
-                $str .= $val['orderid'].',';
-            }
-        }
-        if($str != ''){
-            $str = '存在未分库订单,请排除未分库订单或者等待订单分库后再进行导出，未分库订单为：'.$str;
-            admin_warning('导出订单', $str);
-            echo "<script>alert('{$str}');window.location.href = '/admin/orders'</script>";
-            exit;
-        }
+
         if(Admin::user()->isRole('administrator')){
+            $str = '';
+            foreach ($data as $key=>$val){
+                if($val['splitstatus'] == 0){
+                    $str .= $val['orderid'].',';
+                }
+            }
+            if($str != ''){
+                $str = '存在未分库订单,请排除未分库订单或者等待订单分库后再进行导出，未分库订单为：'.$str;
+                admin_error('导出订单', $str);
+                echo "<script>alert('{$str}');window.location.href = '/admin/orders'</script>";
+                exit;
+            }
             $cellData = $this->adminDataTools($data);
             $finename = date('订单导出'.'Y-m-d H-i-s', time());
             Excel::create($finename, function($excel) use ($cellData){
