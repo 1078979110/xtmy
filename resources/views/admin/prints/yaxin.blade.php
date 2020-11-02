@@ -27,19 +27,19 @@
 		<tbody>
     		@foreach($lists as $key => $list)
     		<tr style="line-height: 15px; height: 15px; padding: 0">
-    			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$key+1}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center"><input type="text" value="" class="form-control nnn"></td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['boxformat']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['manufactur']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['price']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['batchnumber']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['invalidate']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['registnum']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{date('Y-m-d', strtotime($list['registivalidate']))}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$key+1}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center"><input type="text" value="" class="form-control nnn"></td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['boxformat']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['manufactur']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['price']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['batchnumber']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['invalidate']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['registnum']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{date('Y-m-d', strtotime($list['registivalidate']))}}</td>
     		</tr>
     		@endforeach
 		</tbody>

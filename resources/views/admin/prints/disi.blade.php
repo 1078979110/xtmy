@@ -26,18 +26,18 @@
 		<tbody>
     		@foreach($lists as $key => $list)
     		<tr style="line-height: 15px; height: 15px">
-    			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center"><input type="text" class="form-control num" value=""></td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['manufactur']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['price']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['prices']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['batchnumber']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['novirus']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['invalidate']}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center"><input type="text" class="form-control keshi" value=""></td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center"><input type="text" class="form-control num" value=""></td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['manufactur']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['price']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['prices']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['batchnumber']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['novirus']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['invalidate']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center"><input type="text" class="form-control keshi" value=""></td>
     		</tr>
     		@endforeach
 			<tr style="line-height: 30px; height: 30px"><td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="12" >{{$tabletitle[4]}}<span class="totalcn">{{$total}}</span></td></tr>
