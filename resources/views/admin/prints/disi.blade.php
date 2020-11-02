@@ -17,10 +17,10 @@
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[5]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[6]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 40px" align="center">{{$datatitle[7]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 70px" align="center">{{$datatitle[8]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 70px" align="center">{{$datatitle[9]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 70px" align="center">{{$datatitle[10]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 70px" align="center">{{$datatitle[11]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[8]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[9]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[10]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[11]}}</td>
     		</tr>
 			</thead>
 		<tbody>
