@@ -9,25 +9,25 @@
 				<td colspan="7"><span class="pull-left">{{$tabletitle[2]}}</span> <span class="pull-left"><input type="text" class="form-control" id="orderdate" value="{{date('Y.m.d', strtotime($orderinfo->created_at))}}"></span> </td></tr>
     		<tr style="line-height: 20px; height: 20px"><td colspan="7">{{$tabletitle[3]}}</td><td colspan="7">{{$tabletitle[4]}}</td></tr>
     		<tr style="line-height: 15px; height: 15px; padding: 0">
-    			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000;width: 20px" align="center">{{$datatitle[0]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 40px" align="center">{{$datatitle[1]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:180px" align="center">{{$datatitle[2]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[3]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[4]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:150px" align="center">{{$datatitle[5]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[6]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 30px" align="center">{{$datatitle[7]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 30px" align="center">{{$datatitle[8]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 60px" align="center">{{$datatitle[9]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[10]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 80px" align="center">{{$datatitle[11]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[12]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 60px" align="center">{{$datatitle[13]}}</td>
+    			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000;" width="20" align="center">{{$datatitle[0]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="40" align="center">{{$datatitle[1]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="180" align="center">{{$datatitle[2]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="50" align="center">{{$datatitle[3]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="50" align="center">{{$datatitle[4]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="150" align="center">{{$datatitle[5]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="50" align="center">{{$datatitle[6]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="30" align="center">{{$datatitle[7]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="30" align="center">{{$datatitle[8]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="60" align="center">{{$datatitle[9]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="50" align="center">{{$datatitle[10]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="80" align="center">{{$datatitle[11]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="50" align="center">{{$datatitle[12]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="60" align="center">{{$datatitle[13]}}</td>
     		</tr>
 		</thead>
 		<tbody>
     		@foreach($lists as $key => $list)
-    		<tr style="line-height: 20px; height: 20px">
+    		<tr style="line-height: 15px; height: 15px">
     			<td style="word-break:break-all; word-wrap:break-word;border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$key+1}}</td>
     			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center"><input type="text" value="" class="form-control nnn"></td>
     			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
