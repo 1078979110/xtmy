@@ -2,7 +2,7 @@
   <div class="panel-heading">{{$tabletitle[0]}}</div>
   <div class="panel-body"  >
 	  <div class="horizontal" id="table">
-		  <table  style="font-size:10px;word-break:break-all; word-wrap:break-word; word-break-wrap: all" cellpadding="0" cellspacing="0">
+		  <table width="890"  style="font-size:10px;word-break:break-all; word-wrap:break-word; word-break-wrap: all" cellpadding="0" cellspacing="0">
 				<thead>
 				<tr style="height: 30px"><td colspan="14" align="center" style="font-size: 16px; font-weight:bold">{{$tabletitle[0]}}</td></tr>
 				<tr style="height: 30px"><td colspan="5">{{$tabletitle[1]}}</td><td colspan="4">{{$tabletitle[2]}}</td><td colspan="5">{{$tabletitle[3]}}</td></tr>
@@ -18,7 +18,7 @@
 					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="50" align="center">{{$datatitle[8]}}</td>
 					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="50" align="center">{{$datatitle[9]}}</td>
 					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="50" align="center">{{$datatitle[10]}}</td>
-					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="110" align="center">{{$datatitle[11]}}</td>
+					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="80" align="center">{{$datatitle[11]}}</td>
 					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="60" align="center">{{$datatitle[12]}}</td>
 					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="150" align="center">{{$datatitle[13]}}</td>
 				</tr>

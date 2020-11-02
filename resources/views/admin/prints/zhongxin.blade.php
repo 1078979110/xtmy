@@ -2,7 +2,7 @@
   <div class="panel-heading">{{$tabletitle[0]}}</div>
   <div class="panel-body"  >
 	  <div class="horizontal" id="table">
-    <table style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
+    <table width="890" style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
 			<thead>
     		<tr style="line-height: 30px; height: 30px"><td colspan="11" align="center" style="font-size: 16px; font-weight:bold">{{$tabletitle[0]}}</td></tr>
     		<tr style="line-height: 30px; height: 30px"><td colspan="6">{{$tabletitle[1]}}</td><td colspan="5">{{$tabletitle[2]}}</td></tr>

@@ -20,7 +20,7 @@
       	</div>
       	<div class="form-group template " id="template1" style="margin: 0; padding:0; ">
       		<label class="col-sm-2 control-label">模板</label>
-      		<table style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
+      		<table width="890" style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
 				<thead>
       				<tr style="line-height: 15px; height: 15px"><td colspan="8" align="center" style="font-size: 16px; font-weight:bold">{{$title}}</td></tr>
       				<tr style="line-height: 15px; height: 15px"><td colspan="4" align="left" class="title-excel-1"><span class="pull-left">{{$tabletitle[0][0]}}</span> <span class="pull-left"><input type="text" class="form-control jxsname-1" value=""></span></td><td colspan="4" align="right">{{$tabletitle[0][1]}}</td></tr>
@@ -57,7 +57,7 @@
       	</div>
       	<div class="form-group col-sm-offset-2 template" id="template2" style="display: none; margin:5px; padding:0">
       		<label class="col-sm-2 control-label">模板</label>
-      		<table style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
+      		<table width="890" style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
       			<thead>
       				<tr style="line-height: 15px; height: 15px"><td colspan="7" align="center" style="font-size: 16px; font-weight:bold">{{$title}}</td></tr>
       				<tr style="line-height: 15px; height: 15px"><td colspan="4" align="left" class="title-excel-2"><span class="pull-left">{{$tabletitle[1][0]}}</span> <span class="pull-left"><input type="text" class="form-control jxsname-2" value=""></span></td><td colspan="3" align="right">{{$tabletitle[1][1]}}</td></tr>
@@ -97,7 +97,7 @@
       	</div>
       	<div class="form-group col-sm-offset-2 template" id="template3" style="display: none;margin:0; padding:0">
       		<label class="col-sm-2 control-label">模板</label>
-      		<table style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
+      		<table width="890" style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
       			<thead>
       				<tr><td colspan="6" align="center" style="font-size: 16px; font-weight:bold">{{$title}}</td></tr>
       				<tr><td colspan="3" align="left" class="title-excel-3"><span class="pull-left">{{$tabletitle[2][0]}}</span> <span class="pull-left"><input type="text" class="form-control jxsname-3" value=""></span></td><td colspan="3" align="right">{{$tabletitle[2][1]}}</td></tr>
@@ -135,7 +135,7 @@
       	</div>
       	<div class="form-group col-sm-offset-2 template" id="template4" style="display: none;margin:0; padding:0">
       		<label class="col-sm-2 control-label">模板</label>
-      		<table style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
+      		<table width="890" style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
 				<thead>
       				<tr style="line-height: 15px; height: 15px"><td colspan="10" align="center" style="font-size: 16px; font-weight:bold">{{$title}}</td></tr>
       				<tr style="line-height: 15px; height: 15px"><td colspan="5" align="left" class="title-excel-4"><span class="pull-left">{{$tabletitle[3][0]}}</span> <span class="pull-left"><input type="text" class="form-control jxsname-4" value=""></span></td><td colspan="5" align="right">{{$tabletitle[3][1]}}</td></tr>
@@ -186,7 +186,7 @@
       	</div>
 		  <div class="form-group col-sm-offset-2 template" id="template5" style="display: none;margin:0; padding:0">
 			  <label class="col-sm-2 control-label">模板</label>
-			  <table style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
+			  <table width="890" style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
 				  <thead>
 				  <tr style="line-height: 15px; height: 15px"><td colspan="10" align="center" style="font-size: 16px; font-weight:bold">{{$title}}</td></tr>
 				  <tr style="line-height: 15px; height: 15px"><td colspan="5" align="left" class="title-excel-5"><span class="pull-left">{{$tabletitle[4][0]}}</span> <span class="pull-left"><input type="text" class="form-control jxsname-5" value=""></span></td><td colspan="5" align="right">{{$tabletitle[4][1]}}</td></tr>
@@ -240,7 +240,7 @@
 		  </div>
 		  <div class="form-group col-sm-offset-2 template" id="template6" style="display: none;margin:0; padding:0">
 			  <label class="col-sm-2 control-label">模板</label>
-			  <table style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
+			  <table width="890" style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
 				  <thead>
 				  <tr style="line-height: 15px; height: 15px"><td colspan="10" align="center" style="font-size: 16px; font-weight:bold">{{$title}}</td></tr>
 				  <tr style="line-height: 15px; height: 15px"><td colspan="5" align="left" class="title-excel-6"><span class="pull-left">{{$tabletitle[5][0]}}</span> <span class="pull-left"><input type="text" class="form-control jxsname-6" value=""></span></td><td colspan="5" align="right">{{$tabletitle[5][1]}}</td></tr>
@@ -295,7 +295,7 @@
 		  </div>
 		  <div class="form-group col-sm-offset-2 template" id="template7" style="display: none;margin:0; padding:0">
 			  <label class="col-sm-2 control-label">模板</label>
-			  <table style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
+			  <table width="890" style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
 				  <thead>
 				  <tr><td colspan="7" align="center" style="font-size: 16px; font-weight:bold">{{$financename[0]}}</td></tr>
 				  <tr><td colspan="4" align="left" class="title-excel-7"><span class="pull-left">{{$financename[1]}}</span> <span class="pull-left "><input type="text" class="form-control jxsname-7" value=""></span> </td>
@@ -333,7 +333,7 @@
 		  </div>
 		  <div class="form-group col-sm-offset-2 template" id="template8" style="display: none;margin:0; padding:0">
 			  <label class="col-sm-2 control-label">模板</label>
-			  <table style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
+			  <table width="890" style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
 				  <thead>
 				  <tr><td colspan="7" align="center" style="font-size: 16px; font-weight:bold">{{$financename[0]}}</td></tr>
 				  <tr><td colspan="4" align="left" class="title-excel-8"><span class="pull-left">{{$financename[1]}}</span> <span class="pull-left "><input type="text" class="form-control jxsname-8" value=""></span> </td>
