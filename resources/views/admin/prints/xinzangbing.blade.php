@@ -15,7 +15,7 @@
     			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="50" align="center">{{$datatitle[3]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="50" align="center">{{$datatitle[4]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="150" align="center">{{$datatitle[5]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="50" align="center">{{$datatitle[6]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="30" align="center">{{$datatitle[6]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="30" align="center">{{$datatitle[7]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="30" align="center">{{$datatitle[8]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="50" align="center">{{$datatitle[9]}}</td>
