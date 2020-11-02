@@ -25,7 +25,7 @@
 				</thead>
 			  <tbody>
 				@foreach($lists as $key => $list)
-				<tr style="height: 15px; line-height: 15px">
+				<tr style="height: 15px; line-height: 15px; padding:0; margin: 0;">
 					<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
 					<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
 					<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
