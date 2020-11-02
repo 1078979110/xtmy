@@ -2,27 +2,27 @@
   <div class="panel-heading">{{$tabletitle[0]}}</div>
   <div class="panel-body"  >
 	  <div class="horizontal" id="table">
-    <table  style="font-size:12px" cellpadding="0" cellspacing="0">
-    	<tbody>
-    		<tr style="line-height: 30px; height: 30px"><td colspan="14" align="center" style="font-size: 16px; font-weight:bold">{{$tabletitle[0]}}</td></tr>
-    		<tr style="line-height: 30px; height: 30px"><td colspan="7"><span class="pull-left">{{$tabletitle[1]}}</span><span class="pull-left"><input type="text" class="form-control orderid" value="{{$orderinfo->orderid}}"></span> </td>
+    <table  style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
+    	<thead>
+    		<tr style="line-height: 20px; height: 20px"><td colspan="14" align="center" style="font-size: 16px; font-weight:bold">{{$tabletitle[0]}}</td></tr>
+    		<tr style="line-height: 20px; height: 20px"><td colspan="7"><span class="pull-left">{{$tabletitle[1]}}</span><span class="pull-left"><input type="text" class="form-control orderid" value="{{$orderinfo->orderid}}"></span> </td>
 				<td colspan="7"><span class="pull-left">{{$tabletitle[2]}}</span> <span class="pull-left"><input type="text" class="form-control" id="orderdate" value="{{date('Y.m.d', strtotime($orderinfo->created_at))}}"></span> </td></tr>
-    		<tr style="line-height: 30px; height: 30px"><td colspan="7">{{$tabletitle[3]}}</td><td colspan="7">{{$tabletitle[4]}}</td></tr>
-    		<tr style="line-height: 20px; height: 20px">
-    			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000;" align="center">{{$datatitle[0]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000;" align="center">{{$datatitle[1]}}</td>
+    		<tr style="line-height: 20px; height: 20px"><td colspan="7">{{$tabletitle[3]}}</td><td colspan="7">{{$tabletitle[4]}}</td></tr>
+    		<tr style="line-height: 15px; height: 15px; padding: 0">
+    			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000;width: 20px" align="center">{{$datatitle[0]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 40px" align="center">{{$datatitle[1]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width:180px" align="center">{{$datatitle[2]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; " align="center">{{$datatitle[3]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; " align="center">{{$datatitle[4]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:170px" align="center">{{$datatitle[5]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; " align="center">{{$datatitle[6]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; " align="center">{{$datatitle[7]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; " align="center">{{$datatitle[8]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; " align="center">{{$datatitle[9]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; " align="center">{{$datatitle[10]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; " align="center">{{$datatitle[11]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; " align="center">{{$datatitle[12]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; " align="center">{{$datatitle[13]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 70px" align="center">{{$datatitle[3]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[4]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:150px" align="center">{{$datatitle[5]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[6]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 30px" align="center">{{$datatitle[7]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 30px" align="center">{{$datatitle[8]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 65px" align="center">{{$datatitle[9]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[10]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[11]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[12]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 65px" align="center">{{$datatitle[13]}}</td>
     		</tr>
 		</thead>
 		<tbody>
@@ -46,7 +46,7 @@
     		@endforeach
 		</tbody>
 		<tfoot>
-    		<tr style="line-height: 30px; height: 30px">
+    		<tr style="line-height: 20px; height: 20px">
     			<td colspan="3" style="border-top: 1px solid #000">{{$tabletitle[5]}}</td>
     			<td colspan="4" style="border-top: 1px solid #000">{{$tabletitle[6]}}</td>
     			<td colspan="3" style="border-top: 1px solid #000">{{$tabletitle[7]}}</td>
@@ -58,18 +58,18 @@
 	  @if(!empty($gift))
 	  <div class="horizontal" style="margin-top: 10px">
 		  <div class="form-group" id="template_forfinance" style="margin:0; padding:0">
-			  <table style="font-size:14px;" cellpadding="0" cellspacing="0">
+			  <table style="font-size:10px;" cellpadding="0" cellspacing="0">
 				  <tbody>
-				  <tr style="line-height: 30px; height: 30px"><td colspan="10" align="center" style="font-size: 16px; font-weight:bold">赠品信息</td></tr>
-				  <tr style="line-height: 30px; height: 30px"><td colspan="10"><span class="pull-left">{{$tabletitle[1]}}</span><span class="pull-left"><input type="text" class="form-control orderid" value="{{$orderinfo->orderid}}"></span></td></tr>
-				  <tr style="line-height: 30px; height: 30px">
+				  <tr style="line-height: 20px; height: 20px"><td colspan="10" align="center" style="font-size: 16px; font-weight:bold">赠品信息</td></tr>
+				  <tr style="line-height: 20px; height: 20px"><td colspan="10"><span class="pull-left">{{$tabletitle[1]}}</span><span class="pull-left"><input type="text" class="form-control orderid" value="{{$orderinfo->orderid}}"></span></td></tr>
+				  <tr style="line-height: 20px; height: 20px">
 					  <td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="3">名称</td>
 					  <td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="2">产品货号</td>
 					  <td style="border-left:1px solid #000;border-top:1px solid #000" align="center" colspan="2">数量</td>
 					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center" colspan="3">来源</td>
 				  </tr>
 				  @foreach($gift as $key=>$val)
-					  <tr style="line-height: 30px; height: 30px">
+					  <tr style="line-height: 20px; height: 20px">
 						  <td style="border-left:1px solid #000;border-top:1px solid #000; border-bottom: 1px solid #000" align="center" colspan="3">{{$val['medicinal']}}</td>
 						  <td style="border-left:1px solid #000;border-top:1px solid #000; border-bottom: 1px solid #000" align="center" colspan="2">{{$val['medicinalnum']}}</td>
 						  <td style="border-left:1px solid #000;border-top:1px solid #000; border-bottom: 1px solid #000" align="center" colspan="2">{{$val['num']}}</td>
@@ -102,14 +102,14 @@ var data = {!! $jsondata  !!};
 function print_view(temp){
     LODOP=getLodop();
     LODOP.PRINT_INIT();
-    //LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
+    LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
 	LODOP.ADD_PRINT_TABLE(10,10,"100%",'100%',document.getElementById(temp).innerHTML);
 	LODOP.PREVIEW();
 }
 function print(temp){
     LODOP=getLodop();
     LODOP.PRINT_INIT();
-    //LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
+    LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
     LODOP.ADD_PRINT_TABLE(10,10,"100%",'100%',document.getElementById(temp).innerHTML);
 	LODOP.PRINT();
 }
