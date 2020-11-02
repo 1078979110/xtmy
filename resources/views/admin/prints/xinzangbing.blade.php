@@ -12,17 +12,17 @@
     			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000;width: 20px" align="center">{{$datatitle[0]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 40px" align="center">{{$datatitle[1]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width:180px" align="center">{{$datatitle[2]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 70px" align="center">{{$datatitle[3]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[3]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[4]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width:150px" align="center">{{$datatitle[5]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[6]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 30px" align="center">{{$datatitle[7]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 30px" align="center">{{$datatitle[8]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 65px" align="center">{{$datatitle[9]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 60px" align="center">{{$datatitle[9]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[10]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[11]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 80px" align="center">{{$datatitle[11]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[12]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 65px" align="center">{{$datatitle[13]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 60px" align="center">{{$datatitle[13]}}</td>
     		</tr>
 		</thead>
 		<tbody>
