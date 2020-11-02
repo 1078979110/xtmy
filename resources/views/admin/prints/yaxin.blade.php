@@ -3,7 +3,7 @@
   <div class="panel-body"  >
 	  <div class="horizontal" id="table">
     <table  style="font-size:12px;" cellpadding="0" cellspacing="0">
-    	<tbody>
+			<thead>
     		<tr style="line-height: 30px; height: 30px"><td colspan="14" align="center" style="font-size: 16px; font-weight:bold">{{$tabletitle[0]}}</td></tr>
     		<tr style="line-height: 30px; height: 30px"><td colspan="7"><span class="pull-left">{{$tabletitle[1]}}</span><span class="pull-left"><input type="text" class="form-control orderid" style="width: 150px" value="{{$orderinfo->orderid}}"></span> </td>
 				<td colspan="7"><span class="pull-left">{{$tabletitle[2]}}</span><span class="pull-left"><input type="text" class="form-control" id="orderdate" value="{{date('Y.m.d', strtotime($orderinfo->created_at))}}"></span> </td></tr>
@@ -23,6 +23,8 @@
     			<td style="border-right:1px solid #000;border-top:1px solid #000; " align="center">{{$datatitle[11]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000;" align="center">{{$datatitle[12]}}</td>
     		</tr>
+			</thead>
+		<tbody>
     		@foreach($lists as $key => $list)
     		<tr style="line-height: 20px; height: 20px">
     			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$key+1}}</td>
@@ -40,13 +42,15 @@
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{date('Y-m-d', strtotime($list['registivalidate']))}}</td>
     		</tr>
     		@endforeach
+		</tbody>
+		<tfoot>
 			<tr style="line-height: 30px; height: 30px">
 				<td colspan="3" style="border-top: 1px solid #000">{{$tabletitle[5]}}</td>
 				<td colspan="4" style="border-top: 1px solid #000">{{$tabletitle[6]}}</td>
 				<td colspan="3" style="border-top: 1px solid #000">{{$tabletitle[7]}}</td>
 				<td colspan="4" style="border-top: 1px solid #000">{{$tabletitle[8]}}</td>
 			</tr>
-    	</tbody>
+		</tfoot>
     </table>
 	  </div>
 	  @if(!empty($gift))

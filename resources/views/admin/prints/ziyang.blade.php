@@ -3,7 +3,7 @@
   <div class="panel-body"  >
 	  <div class="horizontal" id="table">
 		  <table  style="font-size:12px" cellpadding="0" cellspacing="0">
-    			<tbody>
+				<thead>
 				<tr style="height: 30px"><td colspan="14" align="center" style="font-size: 16px; font-weight:bold">{{$tabletitle[0]}}</td></tr>
 				<tr style="height: 30px"><td colspan="5">{{$tabletitle[1]}}</td><td colspan="4">{{$tabletitle[2]}}</td><td colspan="5">{{$tabletitle[3]}}</td></tr>
 				<tr style="height: 20px;line-height: 20px">
@@ -22,6 +22,8 @@
 					<td style="border-right:1px solid #000;border-top:1px solid #000; " align="center">{{$datatitle[12]}}</td>
 					<td style="border-right:1px solid #000;border-top:1px solid #000; width:180px" align="center">{{$datatitle[13]}}</td>
 				</tr>
+				</thead>
+			  <tbody>
 				@foreach($lists as $key => $list)
 				<tr style="height: 20px; line-height: 20px">
 					<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
@@ -40,8 +42,10 @@
 					<td style="border-right:1px solid #000;border-top:1px solid #000" >{{$list['manufactur']}}</td>
 				</tr>
 				@endforeach
+			  </tbody>
+			  <tfoot>
 				<tr style="line-height: 30px; height: 30px"><td style="border:1px solid #000" colspan="14" >{{$tabletitle[4]}}<span class="totalcn">{{$total}}</span></td></tr>
-    			</tbody>
+			  </tfoot>
     	 </table>
 	  </div>
 	  @if (!empty($gift))

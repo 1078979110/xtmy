@@ -3,7 +3,7 @@
   <div class="panel-body" >
 	  <div class="horizontal" id="table">
     <table  style="font-size:12px" cellpadding="0" cellspacing="0">
-    	<tbody>
+			<thead>
     		<tr style="line-height: 30px; height: 30px"><td colspan="12" align="center" style="font-size: 16px; font-weight:bold">{{$tabletitle[0]}}</td></tr>
     		<tr style="line-height: 30px; height: 30px"><td colspan="2">{{$tabletitle[1]}}</td>
 				<td colspan="6"><span class="pull-left">{{$tabletitle[2]}}</span><span class="pull-left"><input type="text" class="form-control" style="width: 150px" id="orderdate" value=""></span> </td>
@@ -22,6 +22,8 @@
     			<td style="border-right:1px solid #000;border-top:1px solid #000;" align="center">{{$datatitle[10]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000;" align="center">{{$datatitle[11]}}</td>
     		</tr>
+			</thead>
+		<tbody>
     		@foreach($lists as $key => $list)
     		<tr style="line-height: 20px; height: 20px">
     			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center"><input type="text" class="form-control num" value=""></td>
@@ -39,12 +41,14 @@
     		</tr>
     		@endforeach
 			<tr style="line-height: 30px; height: 30px"><td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" colspan="12" >{{$tabletitle[4]}}<span class="totalcn">{{$total}}</span></td></tr>
-    		<tr style="line-height: 30px; height: 30px">
+		</tbody>
+		<tfoot>
+			<tr style="line-height: 30px; height: 30px">
     			<td colspan="4" style="border-top: 1px solid #000">{{$tabletitle[5]}}</td>
     			<td colspan="4" style="border-top: 1px solid #000">{{$tabletitle[6]}}</td>
     			<td colspan="4" style="border-top: 1px solid #000">{{$tabletitle[7]}}</td>
     		</tr>
-    	</tbody>
+		</tfoot>
     </table>
 	  </div>
 	  @if(!empty($gift))

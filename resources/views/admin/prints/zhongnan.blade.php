@@ -3,7 +3,7 @@
   <div class="panel-body" >
 	  <div class="horizontal" id="table">
     <table  style="font-size:12px" cellpadding="0" cellspacing="0">
-    	<tbody>
+			<thead>
     		<tr style="line-height: 30px; height: 30px"><td colspan="10" align="center" style="font-size: 16px; font-weight:bold">{{$tabletitle[0]}}</td></tr>
     		<tr style="line-height: 30px; height: 30px"><td colspan="5">{{$tabletitle[1]}}</td><td colspan="5" align="right">{{$tabletitle[2]}}</td></tr>
     		<tr style="line-height: 30px; height: 30px"><td colspan="3"><span class="pull-left">{{$tabletitle[3]}}</span><span class="pull-left"><input type="text" class="form-control" id="depart" value=""></span> </td><td colspan="2">{{$tabletitle[4]}}</td><td colspan="2">{{$tabletitle[5]}}</td><td colspan="3" align="right">{{$tabletitle[6]}}</td></tr>
@@ -19,6 +19,8 @@
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width:130px" align="center">{{$datatitle[8]}}</td>
     			<td style="border-right:1px solid #000;border-top:1px solid #000; width:100px" align="center">{{$datatitle[9]}}</td>
     		</tr>
+			</thead>
+		<tbody>
     		@foreach($lists as $key => $list)
     		<tr style="line-height: 20px; height: 20px">
     			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
@@ -33,13 +35,15 @@
     			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['invalidate']}}</td>
     		</tr>
     		@endforeach
+		</tbody>
+		<tfoot>
     		<tr style="line-height: 30px; height: 30px"><td colspan="10" style="border-top: 1px solid #000;border-left:1px solid #000;border-right:1px solid #000;">{{$tabletitle[7]}}<span class="totalcn">{{$total}}</span></td></tr>
     		<tr style="line-height: 30px; height: 30px">
     			<td colspan="4" style="border-top: 1px solid #000">{{$tabletitle[8]}}</td>
     			<td colspan="3" style="border-top: 1px solid #000">{{$tabletitle[9]}}</td>
     			<td colspan="3" style="border-top: 1px solid #000">{{$tabletitle[10]}}</td>
     		</tr>
-    	</tbody>
+		</tfoot>
     </table>
 	  </div>
 	  @if(!empty($gift))
@@ -90,12 +94,14 @@ var data = {!! $jsondata  !!};
 function print_view(temp){
     LODOP=getLodop();
     LODOP.PRINT_INIT();
+    //LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
 	LODOP.ADD_PRINT_TABLE(40,10,"RightMargin:0.3cm",'100%',document.getElementById(temp).innerHTML);
 	LODOP.PREVIEW();
 }
 function print(temp){
     LODOP=getLodop();
     LODOP.PRINT_INIT();
+    //LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
 	LODOP.ADD_PRINT_TABLE(40,10,"RightMargin:0.3cm",'100%',document.getElementById(temp).innerHTML);
 	LODOP.PRINT();
 }
