@@ -7,20 +7,20 @@
 				<tr style="height: 30px"><td colspan="14" align="center" style="font-size: 16px; font-weight:bold">{{$tabletitle[0]}}</td></tr>
 				<tr style="height: 30px"><td colspan="5">{{$tabletitle[1]}}</td><td colspan="4">{{$tabletitle[2]}}</td><td colspan="5">{{$tabletitle[3]}}</td></tr>
 				<tr style="height: 15px;line-height: 15px">
-					<td style="word-break:break-all; word-wrap:break-word;border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:180px" align="center">{{$datatitle[0]}}</td>
-					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[1]}}</td>
-					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; width: 30px" align="center">{{$datatitle[2]}}</td>
-					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; width: 30px" align="center">{{$datatitle[3]}}</td>
-					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; width: 30px" align="center">{{$datatitle[4]}}</td>
-					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; width: 30px" align="center">{{$datatitle[5]}}</td>
-					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[6]}}</td>
-					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[7]}}</td>
-					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[8]}}</td>
-					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[9]}}</td>
-					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[10]}}</td>
-					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; width: 100px" align="center">{{$datatitle[11]}}</td>
-					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[12]}}</td>
-					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; width:150px" align="center">{{$datatitle[13]}}</td>
+					<td style="word-break:break-all; word-wrap:break-word;border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; " width="170" align="center">{{$datatitle[0]}}</td>
+					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="60" align="center">{{$datatitle[1]}}</td>
+					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="30" align="center">{{$datatitle[2]}}</td>
+					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="30" align="center">{{$datatitle[3]}}</td>
+					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="30" align="center">{{$datatitle[4]}}</td>
+					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="30" align="center">{{$datatitle[5]}}</td>
+					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="50" align="center">{{$datatitle[6]}}</td>
+					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="50" align="center">{{$datatitle[7]}}</td>
+					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="50" align="center">{{$datatitle[8]}}</td>
+					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="50" align="center">{{$datatitle[9]}}</td>
+					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="50" align="center">{{$datatitle[10]}}</td>
+					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="110" align="center">{{$datatitle[11]}}</td>
+					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="60" align="center">{{$datatitle[12]}}</td>
+					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="150" align="center">{{$datatitle[13]}}</td>
 				</tr>
 				</thead>
 			  <tbody>
