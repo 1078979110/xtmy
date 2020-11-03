@@ -2,44 +2,44 @@
   <div class="panel-heading">{{$tabletitle[0]}}</div>
   <div class="panel-body"  >
 	  <div class="horizontal" id="table">
-		  <table width="890"  style="font-size:10px;word-break:break-all; word-wrap:break-word; word-break-wrap: all" cellpadding="0" cellspacing="0">
+		  <table width="680"  style="font-size:10px;word-break:break-all; word-wrap:break-word; word-break-wrap: all; width: 680px" cellpadding="0" cellspacing="0">
 				<thead>
 				<tr style="height: 30px"><td colspan="14" align="center" style="font-size: 16px; font-weight:bold">{{$tabletitle[0]}}</td></tr>
 				<tr style="height: 30px"><td colspan="5">{{$tabletitle[1]}}</td><td colspan="4">{{$tabletitle[2]}}</td><td colspan="5">{{$tabletitle[3]}}</td></tr>
 				<tr style="height: 15px;line-height: 15px">
-					<td style="word-break:break-all; word-wrap:break-word;border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; " width="170" align="center">{{$datatitle[0]}}</td>
-					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="60" align="center">{{$datatitle[1]}}</td>
+					<td style="word-break:break-all; word-wrap:break-word;border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; " width="130" align="center">{{$datatitle[0]}}</td>
+					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="30" align="center">{{$datatitle[1]}}</td>
 					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="30" align="center">{{$datatitle[2]}}</td>
 					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="30" align="center">{{$datatitle[3]}}</td>
 					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="30" align="center">{{$datatitle[4]}}</td>
 					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="30" align="center">{{$datatitle[5]}}</td>
-					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="50" align="center">{{$datatitle[6]}}</td>
-					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="50" align="center">{{$datatitle[7]}}</td>
-					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="50" align="center">{{$datatitle[8]}}</td>
-					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="50" align="center">{{$datatitle[9]}}</td>
-					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="50" align="center">{{$datatitle[10]}}</td>
-					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="80" align="center">{{$datatitle[11]}}</td>
-					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="60" align="center">{{$datatitle[12]}}</td>
-					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="150" align="center">{{$datatitle[13]}}</td>
+					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="30" align="center">{{$datatitle[6]}}</td>
+					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="30" align="center">{{$datatitle[7]}}</td>
+					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="30" align="center">{{$datatitle[8]}}</td>
+					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="30" align="center">{{$datatitle[9]}}</td>
+					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="30" align="center">{{$datatitle[10]}}</td>
+					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="76" align="center">{{$datatitle[11]}}</td>
+					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="30" align="center">{{$datatitle[12]}}</td>
+					<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000; " width="130" align="center">{{$datatitle[13]}}</td>
 				</tr>
 				</thead>
 			  <tbody>
 				@foreach($lists as $key => $list)
 				<tr style="height: 15px; line-height: 15px; padding:0; margin: 0;">
-					<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
-					<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
-					<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
-					<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
-					<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['boxformat']}}</td>
-					<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['price']}}</td>
-					<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['prices']}}</td>
-					<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['batchnumber']}}</td>
-					<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['novirus']}}</td>
-					<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['makedate']}}</td>
-					<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['invalidate']}}</td>
-					<td style="border-right:1px solid #000;border-top:1px solid #000;word-break:break-all; word-wrap:break-word; word-break-wrap: all" align="center">{{$list['registnum']}}</td>
-					<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{date('Y-m-d',strtotime($list['registivalidate']))}}</td>
-					<td style="border-right:1px solid #000;border-top:1px solid #000" >{{$list['manufactur']}}</td>
+					<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" width="130" align="center">{{$list['medicinal']}}</td>
+					<td style="border-right:1px solid #000;border-top:1px solid #000" width="30" align="center">{{$list['medicinalnum']}}</td>
+					<td style="border-right:1px solid #000;border-top:1px solid #000" width="30" align="center">{{$list['unit']}}</td>
+					<td style="border-right:1px solid #000;border-top:1px solid #000" width="30" align="center">{{$list['num']}}</td>
+					<td style="border-right:1px solid #000;border-top:1px solid #000" width="30" align="center">{{$list['boxformat']}}</td>
+					<td style="border-right:1px solid #000;border-top:1px solid #000" width="30" align="center">{{$list['price']}}</td>
+					<td style="border-right:1px solid #000;border-top:1px solid #000" width="30" align="center">{{$list['prices']}}</td>
+					<td style="border-right:1px solid #000;border-top:1px solid #000" width="30" align="center">{{$list['batchnumber']}}</td>
+					<td style="border-right:1px solid #000;border-top:1px solid #000" width="30" align="center">{{$list['novirus']}}</td>
+					<td style="border-right:1px solid #000;border-top:1px solid #000" width="30" align="center">{{$list['makedate']}}</td>
+					<td style="border-right:1px solid #000;border-top:1px solid #000" width="30" align="center">{{$list['invalidate']}}</td>
+					<td style="border-right:1px solid #000;border-top:1px solid #000;word-break:break-all; word-wrap:break-word; word-break-wrap: all" width="76" align="center">{{$list['registnum']}}</td>
+					<td style="border-right:1px solid #000;border-top:1px solid #000" width="30" align="center">{{date('Y-m-d',strtotime($list['registivalidate']))}}</td>
+					<td style="border-right:1px solid #000;border-top:1px solid #000" width="130" >{{$list['manufactur']}}</td>
 				</tr>
 				@endforeach
 			  </tbody>
@@ -95,14 +95,14 @@
     function print_view(temp){
         LODOP=getLodop();
         LODOP.PRINT_INIT();
-        LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
+        //LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
         LODOP.ADD_PRINT_TABLE(10,10,"100%",'100%',document.getElementById(temp).innerHTML);
         LODOP.PREVIEW();
     }
     function print(temp){
         LODOP=getLodop();
         LODOP.PRINT_INIT();
-        LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
+        //LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
         LODOP.ADD_PRINT_TABLE(10,10,"100%",'100%',document.getElementById(temp).innerHTML);
         LODOP.PRINT();
     }

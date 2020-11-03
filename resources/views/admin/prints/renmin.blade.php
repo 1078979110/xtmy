@@ -2,39 +2,39 @@
   <div class="panel-heading">{{$tabletitle[0]}}</div>
   <div class="panel-body" id="table" >
 	  <div class="horizontal" id="table">
-    <table width="890" style="font-size:10px; word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
+    <table width="690" style="font-size:10px; word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
 			<thead>
     		<tr style="line-height: 30px; height: 30px"><td colspan="12" align="center" style="font-size: 16px; font-weight:bold">{{$tabletitle[0]}}</td></tr>
     		<tr style="line-height: 30px; height: 30px"><td colspan="4">{{$tabletitle[1]}}</td><td colspan="4">{{$tabletitle[2]}}</td><td colspan="4">{{$tabletitle[3]}}</td></tr>
     		<tr style="line-height: 15px; height: 15px">
-    			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:170px" align="center">{{$datatitle[0]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:60px" align="center">{{$datatitle[1]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[2]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[3]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[4]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[5]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:40px" align="center">{{$datatitle[6]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:40px" align="center">{{$datatitle[7]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:60px" align="center">{{$datatitle[8]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:60px" align="center">{{$datatitle[9]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:150px" align="center">{{$datatitle[10]}}</td>
-    			<td style="border-right:1px solid #000;border-top:1px solid #000; width:60px" align="center">{{$datatitle[11]}}</td>
+    			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000;" width="130"  align="center">{{$datatitle[0]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="50" align="center">{{$datatitle[1]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="40" align="center">{{$datatitle[2]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="30" align="center">{{$datatitle[3]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="30" align="center">{{$datatitle[4]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="40" align="center">{{$datatitle[5]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="20" align="center">{{$datatitle[6]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="20" align="center">{{$datatitle[7]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="87" align="center">{{$datatitle[8]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="60" align="center">{{$datatitle[9]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="130" align="center">{{$datatitle[10]}}</td>
+    			<td style="border-right:1px solid #000;border-top:1px solid #000; " width="40" align="center">{{$datatitle[11]}}</td>
     		</tr>
 			</thead>
 		<tbody>
     		@foreach($lists as $key => $list)
     		<tr style="line-height: 20px; height: 20px">
-    			<td style="word-break:break-all; word-wrap:break-word;border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
-    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
-    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
-    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
-    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['price']}}</td>
-    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['prices']}}</td>
-    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" colspan="2">{{$list['medicinalnum']}}</td>
-    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['registnum']}}</td>
-    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['invalidate']}}</td>
-    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['manufactur']}}</td>
-    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['originmake']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" width="130" align="center">{{$list['medicinal']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" width="50" align="center">{{$list['medicinalnum']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" width="40" align="center">{{$list['num']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" width="30" align="center">{{$list['unit']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" width="30" align="center">{{$list['price']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" width="40" align="center">{{$list['prices']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" width="40" colspan="2">{{$list['medicinalnum']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" width="87" align="center">{{$list['registnum']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" width="60" align="center">{{$list['invalidate']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" width="130" align="center">{{$list['manufactur']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" width="40" align="center">{{$list['originmake']}}</td>
     		</tr>
     		@endforeach
 		</tbody>
@@ -89,14 +89,14 @@ var data = {!! $jsondata  !!};
 function print_view(temp){
     LODOP=getLodop();
     LODOP.PRINT_INIT();
-    LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
+    //LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
     LODOP.ADD_PRINT_TABLE(10,10,"100%",'100%',document.getElementById(temp).innerHTML);
 	LODOP.PREVIEW();
 }
 function print(temp){
     LODOP=getLodop();
     LODOP.PRINT_INIT();
-    LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
+    //LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
     LODOP.ADD_PRINT_TABLE(10,10,"100%",'100%',document.getElementById(temp).innerHTML);
 	LODOP.PRINT();
 }

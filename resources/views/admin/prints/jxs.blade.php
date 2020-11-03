@@ -20,33 +20,33 @@
       	</div>
       	<div class="form-group template " id="template1" style="margin: 0; padding:0; ">
       		<label class="col-sm-2 control-label">模板</label>
-      		<table width="890" style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
+      		<table width="680" style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
 				<thead>
       				<tr style="line-height: 15px; height: 15px"><td colspan="8" align="center" style="font-size: 16px; font-weight:bold">{{$title}}</td></tr>
       				<tr style="line-height: 15px; height: 15px"><td colspan="4" align="left" class="title-excel-1"><span class="pull-left">{{$tabletitle[0][0]}}</span> <span class="pull-left"><input type="text" class="form-control jxsname-1" value=""></span></td><td colspan="4" align="right">{{$tabletitle[0][1]}}</td></tr>
       				<tr style="line-height: 15px; height: 15px"><td colspan="8" align="right">{{$tabletitle[0][2]}}</td></tr>
       				<tr style="line-height: 15px; height: 15px">
       					<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:30px" align="center">{{$datatitle[0][0]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:200px" align="center">{{$datatitle[0][1]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$datatitle[0][2]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[0][3]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:150px" align="center">{{$datatitle[0][1]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:89px" align="center">{{$datatitle[0][2]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$datatitle[0][3]}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[0][4]}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$datatitle[0][5]}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$datatitle[0][6]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$datatitle[0][7]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:110px" align="center">{{$datatitle[0][7]}}</td>
       				</tr>
 				</thead>
 				<tbody>
       				@foreach($lists as $key => $list)
             		<tr style="line-height: 15px; height: 15px">
-            			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$key+1}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['batchnumber']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['invalidate']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['registnum']}}</td>
+            			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" width="30" align="center">{{$key+1}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="150" align="center">{{$list['medicinal']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="89" align="center">{{$list['medicinalnum']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="80" align="center">{{$list['num']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="50" align="center">{{$list['unit']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="80" align="center">{{$list['batchnumber']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="80" align="center">{{$list['invalidate']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="110" align="center">{{$list['registnum']}}</td>
             		</tr>
             		@endforeach
 				</tbody>
@@ -57,31 +57,31 @@
       	</div>
       	<div class="form-group col-sm-offset-2 template" id="template2" style="display: none; margin:5px; padding:0">
       		<label class="col-sm-2 control-label">模板</label>
-      		<table width="890" style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
+      		<table width="680" style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
       			<thead>
       				<tr style="line-height: 15px; height: 15px"><td colspan="7" align="center" style="font-size: 16px; font-weight:bold">{{$title}}</td></tr>
       				<tr style="line-height: 15px; height: 15px"><td colspan="4" align="left" class="title-excel-2"><span class="pull-left">{{$tabletitle[1][0]}}</span> <span class="pull-left"><input type="text" class="form-control jxsname-2" value=""></span></td><td colspan="3" align="right">{{$tabletitle[1][1]}}</td></tr>
       				<tr><td colspan="4" align="left">{{$tabletitle[1][2]}}</td><td colspan="3" align="right">{{$tabletitle[1][3]}}</td></tr>
       				<tr style="line-height: 15px; height: 15px">
-            			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:200px" align="center">{{$datatitle[1][0]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$datatitle[1][1]}}</td>
+            			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:150px" align="center">{{$datatitle[1][0]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[1][1]}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[1][2]}}</td>
             			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[1][3]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$datatitle[1][4]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$datatitle[1][5]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$datatitle[1][6]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[1][4]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[1][5]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:72px" align="center">{{$datatitle[1][6]}}</td>
       				</tr>
 				</thead>
 				<tbody>
       				@foreach($lists as $key => $list)
             		<tr style="line-height: 15px; height: 15px">
-            			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['price']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['batchnumber']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['invalidate']}}</td>
+            			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" width="150" align="center">{{$list['medicinal']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="50" align="center">{{$list['medicinalnum']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="50" align="center">{{$list['unit']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="50" align="center">{{$list['num']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="50" align="center">{{$list['price']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="50" align="center">{{$list['batchnumber']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="72" align="center">{{$list['invalidate']}}</td>
             		</tr>
             		@endforeach
 				</tbody>
@@ -97,29 +97,29 @@
       	</div>
       	<div class="form-group col-sm-offset-2 template" id="template3" style="display: none;margin:0; padding:0">
       		<label class="col-sm-2 control-label">模板</label>
-      		<table width="890" style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
+      		<table width="680" style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
       			<thead>
       				<tr><td colspan="6" align="center" style="font-size: 16px; font-weight:bold">{{$title}}</td></tr>
       				<tr><td colspan="3" align="left" class="title-excel-3"><span class="pull-left">{{$tabletitle[2][0]}}</span> <span class="pull-left"><input type="text" class="form-control jxsname-3" value=""></span></td><td colspan="3" align="right">{{$tabletitle[2][1]}}</td></tr>
       				<tr><td colspan="3" align="left">{{$tabletitle[2][2]}}</td><td colspan="3" align="right">{{$tabletitle[2][3]}}</td></tr>
       				<tr style="line-height: 15px; height: 15px">
             			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:200px" align="center">{{$datatitle[2][0]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$datatitle[2][1]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[2][2]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[2][3]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$datatitle[2][4]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$datatitle[2][5]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:100px" align="center">{{$datatitle[2][1]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:69px" align="center">{{$datatitle[2][2]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:100px" align="center">{{$datatitle[2][3]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:100px" align="center">{{$datatitle[2][4]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:100px" align="center">{{$datatitle[2][5]}}</td>
       				</tr>
 				</thead>
 				<tbody>
       				@foreach($lists as $key => $list)
             		<tr style="line-height: 15px; height: 15px">
-            			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['batchnumber']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['invalidate']}}</td>
+            			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" width="200" align="center">{{$list['medicinal']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="100" align="center">{{$list['medicinalnum']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="69" align="center">{{$list['unit']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="100" align="center">{{$list['num']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="100" align="center">{{$list['batchnumber']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="100" align="center">{{$list['invalidate']}}</td>
             		</tr>
             		@endforeach
 				</tbody>
@@ -135,37 +135,37 @@
       	</div>
       	<div class="form-group col-sm-offset-2 template" id="template4" style="display: none;margin:0; padding:0">
       		<label class="col-sm-2 control-label">模板</label>
-      		<table width="890" style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
+      		<table width="680" style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
 				<thead>
       				<tr style="line-height: 15px; height: 15px"><td colspan="10" align="center" style="font-size: 16px; font-weight:bold">{{$title}}</td></tr>
       				<tr style="line-height: 15px; height: 15px"><td colspan="5" align="left" class="title-excel-4"><span class="pull-left">{{$tabletitle[3][0]}}</span> <span class="pull-left"><input type="text" class="form-control jxsname-4" value=""></span></td><td colspan="5" align="right">{{$tabletitle[3][1]}}</td></tr>
       				<tr style="line-height: 15px; height: 15px"><td colspan="5" align="left">{{$tabletitle[3][2]}}</td><td colspan="5" align="right">{{$tabletitle[3][3]}}</td></tr>
       				<tr style="line-height: 15px; height: 15px">
-            			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:120px" align="center">{{$datatitle[3][0]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:120px" align="center">{{$datatitle[3][1]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 80px" align="center">{{$datatitle[3][2]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 80px" align="center">{{$datatitle[3][3]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 80px" align="center">{{$datatitle[3][4]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 80px" align="center">{{$datatitle[3][5]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 80px" align="center">{{$datatitle[3][6]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 80px" align="center">{{$datatitle[3][7]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 100px" align="center">{{$datatitle[3][8]}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 80px" align="center">{{$datatitle[3][9]}}</td>
+            			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:130px" align="center">{{$datatitle[3][0]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; width:130px" align="center">{{$datatitle[3][1]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[3][2]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 30px" align="center">{{$datatitle[3][3]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[3][4]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[3][5]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[3][6]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[3][7]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 79px" align="center">{{$datatitle[3][8]}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[3][9]}}</td>
       				</tr>
 				</thead>
 				<tbody>
       				@foreach($lists as $key => $list)
             		<tr style="line-height: 15px; height: 15px">
-            			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['manufactur']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['price']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['prices']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['batchnumber']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['registnum']}}</td>
-            			<td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['invalidate']}}</td>
+            			<td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" width="130" align="center">{{$list['medicinal']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="130" align="center">{{$list['manufactur']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="50" align="center">{{$list['medicinalnum']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="30" align="center">{{$list['unit']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="50" align="center">{{$list['num']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="50" align="center">{{$list['price']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="50" align="center">{{$list['prices']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="50" align="center">{{$list['batchnumber']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="79" align="center">{{$list['registnum']}}</td>
+            			<td style="border-right:1px solid #000;border-top:1px solid #000" width="50" align="center">{{$list['invalidate']}}</td>
             		</tr>
             		@endforeach
             		<tr style="line-height: 15px; height: 15px">
@@ -186,37 +186,37 @@
       	</div>
 		  <div class="form-group col-sm-offset-2 template" id="template5" style="display: none;margin:0; padding:0">
 			  <label class="col-sm-2 control-label">模板</label>
-			  <table width="890" style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
+			  <table width="680" style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
 				  <thead>
 				  <tr style="line-height: 15px; height: 15px"><td colspan="10" align="center" style="font-size: 16px; font-weight:bold">{{$title}}</td></tr>
 				  <tr style="line-height: 15px; height: 15px"><td colspan="5" align="left" class="title-excel-5"><span class="pull-left">{{$tabletitle[4][0]}}</span> <span class="pull-left"><input type="text" class="form-control jxsname-5" value=""></span></td><td colspan="5" align="right">{{$tabletitle[4][1]}}</td></tr>
 				  <tr style="line-height: 15px; height: 15px"><td colspan="5" align="left">{{$tabletitle[4][2]}}</td><td colspan="5" align="right">{{$tabletitle[4][3]}}</td></tr>
 				  <tr style="line-height: 15px; height: 15px">
-					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:120px" align="center">{{$datatitle[4][0]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:120px" align="center">{{$datatitle[4][1]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$datatitle[4][2]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 70px" align="center">{{$datatitle[4][3]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 70px" align="center">{{$datatitle[4][4]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 70px" align="center">{{$datatitle[4][5]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 70px" align="center">{{$datatitle[4][6]}}</td>
+					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:130px" align="center">{{$datatitle[4][0]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:130px" align="center">{{$datatitle[4][1]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:60px" align="center">{{$datatitle[4][2]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[4][3]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 29px" align="center">{{$datatitle[4][4]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[4][5]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[4][6]}}</td>
 					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 70px" align="center">{{$datatitle[4][7]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 70px" align="center">{{$datatitle[4][8]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 70px" align="center">{{$datatitle[4][9]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[4][8]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[4][9]}}</td>
 				  </tr>
 				  </thead>
 				  <tbody>
 				  @foreach($lists as $key => $list)
 					  <tr style="line-height: 15px; height: 15px">
-						  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['manufactur']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['manufacturinglicense']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['batchnumber']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['registnum']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['makedate']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['invalidate']}}</td>
+						  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" width="130" align="center">{{$list['medicinal']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="130" align="center">{{$list['manufactur']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="60" align="center">{{$list['manufacturinglicense']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="50" align="center">{{$list['medicinalnum']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="29" align="center">{{$list['unit']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="50" align="center">{{$list['num']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="50" align="center">{{$list['batchnumber']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="70" align="center">{{$list['registnum']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="50" align="center">{{$list['makedate']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="50" align="center">{{$list['invalidate']}}</td>
 					  </tr>
 				  @endforeach
 				  </tbody>
@@ -240,37 +240,37 @@
 		  </div>
 		  <div class="form-group col-sm-offset-2 template" id="template6" style="display: none;margin:0; padding:0">
 			  <label class="col-sm-2 control-label">模板</label>
-			  <table width="890" style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
+			  <table width="680" style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
 				  <thead>
 				  <tr style="line-height: 15px; height: 15px"><td colspan="10" align="center" style="font-size: 16px; font-weight:bold">{{$title}}</td></tr>
 				  <tr style="line-height: 15px; height: 15px"><td colspan="5" align="left" class="title-excel-6"><span class="pull-left">{{$tabletitle[5][0]}}</span> <span class="pull-left"><input type="text" class="form-control jxsname-6" value=""></span></td><td colspan="5" align="right">{{$tabletitle[5][1]}}</td></tr>
 				  <tr style="line-height: 15px; height: 15px"><td colspan="5" align="left"><span class="pull-left">{{$tabletitle[5][2]}}</span></span> <span class="pull-left saddress"><input type="text" class="form-control iaddress" value=""></span></td><td colspan="5" align="right">{{$tabletitle[5][3]}}</td></tr>
 				  <tr style="line-height: 15px; height: 15px">
-					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:120px" align="center">{{$datatitle[5][0]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:120px" align="center">{{$datatitle[5][1]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 70px" align="center">{{$datatitle[5][2]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 70px" align="center">{{$datatitle[5][3]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 70px" align="center">{{$datatitle[5][4]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 70px" align="center">{{$datatitle[5][5]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 70px" align="center">{{$datatitle[5][6]}}</td>
+					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:130px" align="center">{{$datatitle[5][0]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:130px" align="center">{{$datatitle[5][1]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 60px" align="center">{{$datatitle[5][2]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[5][3]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 29px" align="center">{{$datatitle[5][4]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[5][5]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[5][6]}}</td>
 					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 70px" align="center">{{$datatitle[5][7]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 70px" align="center">{{$datatitle[5][8]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 70px" align="center">{{$datatitle[5][9]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[5][8]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width: 50px" align="center">{{$datatitle[5][9]}}</td>
 				  </tr>
 				  </thead>
 				  <tbody>
 				  @foreach($lists as $key => $list)
 					  <tr style="line-height: 15px; height: 15px">
-						  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['manufactur']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['manufacturinglicense']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['batchnumber']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['registnum']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['makedate']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['invalidate']}}</td>
+						  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" width="130" align="center">{{$list['medicinal']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="130" align="center">{{$list['manufactur']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="60" align="center">{{$list['manufacturinglicense']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="50" align="center">{{$list['medicinalnum']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="29" align="center">{{$list['unit']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="50" align="center">{{$list['num']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="50" align="center">{{$list['batchnumber']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="70" align="center">{{$list['registnum']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="50" align="center">{{$list['makedate']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="50" align="center">{{$list['invalidate']}}</td>
 					  </tr>
 				  @endforeach
 				  </tbody>
@@ -295,31 +295,31 @@
 		  </div>
 		  <div class="form-group col-sm-offset-2 template" id="template7" style="display: none;margin:0; padding:0">
 			  <label class="col-sm-2 control-label">模板</label>
-			  <table width="890" style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
+			  <table width="680" style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
 				  <thead>
 				  <tr><td colspan="7" align="center" style="font-size: 16px; font-weight:bold">{{$financename[0]}}</td></tr>
 				  <tr><td colspan="4" align="left" class="title-excel-7"><span class="pull-left">{{$financename[1]}}</span> <span class="pull-left "><input type="text" class="form-control jxsname-7" value=""></span> </td>
 					  <td colspan="3" align="right">{{$financename[2]}}</td></tr>
 				  <tr style="line-height: 15px; height: 15px">
-					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:200px" align="center">{{$financedatatitle[0]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$financedatatitle[1]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$financedatatitle[2]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$financedatatitle[3]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$financedatatitle[4]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$financedatatitle[5]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$financedatatitle[6]}}</td>
+					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:130px" align="center">{{$financedatatitle[0]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:100px" align="center">{{$financedatatitle[1]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:42px" align="center">{{$financedatatitle[2]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:100px" align="center">{{$financedatatitle[3]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:100px" align="center">{{$financedatatitle[4]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:100px" align="center">{{$financedatatitle[5]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:100px" align="center">{{$financedatatitle[6]}}</td>
 				  </tr>
 				  </thead>
 				  <tbody>
 				  @foreach($lists as $key => $list)
 					  <tr style="line-height: 15px; height: 15px">
-						  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['num']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['price']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['prices']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['tips']}}</td>
+						  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" width="130" align="center">{{$list['medicinal']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="100" align="center">{{$list['medicinalnum']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="42" align="center">{{$list['unit']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="100" align="center">{{$list['num']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="100" align="center">{{$list['price']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="100" align="center">{{$list['prices']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="100" align="center">{{$list['tips']}}</td>
 					  </tr>
 				  @endforeach
 				  </tbody>
@@ -333,31 +333,31 @@
 		  </div>
 		  <div class="form-group col-sm-offset-2 template" id="template8" style="display: none;margin:0; padding:0">
 			  <label class="col-sm-2 control-label">模板</label>
-			  <table width="890" style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
+			  <table width="680" style="font-size:10px;word-break:break-all; word-wrap:break-word;" cellpadding="0" cellspacing="0">
 				  <thead>
 				  <tr><td colspan="7" align="center" style="font-size: 16px; font-weight:bold">{{$financename[0]}}</td></tr>
 				  <tr><td colspan="4" align="left" class="title-excel-8"><span class="pull-left">{{$financename[1]}}</span> <span class="pull-left "><input type="text" class="form-control jxsname-8" value=""></span> </td>
 					  <td colspan="3" align="right">{{$financename[2]}}</td></tr>
 				  <tr style="line-height: 15px; height: 15px">
-					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:200px" align="center">{{$financedatatitle[0]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$financedatatitle[1]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$financedatatitle[2]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:50px" align="center">{{$financedatatitle[3]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$financedatatitle[4]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$financedatatitle[5]}}</td>
-					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:80px" align="center">{{$financedatatitle[6]}}</td>
+					  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000; width:130px" align="center">{{$financedatatitle[0]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:100px" align="center">{{$financedatatitle[1]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:42px" align="center">{{$financedatatitle[2]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:100px" align="center">{{$financedatatitle[3]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:100px" align="center">{{$financedatatitle[4]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:100px" align="center">{{$financedatatitle[5]}}</td>
+					  <td style="border-right:1px solid #000;border-top:1px solid #000; width:100px" align="center">{{$financedatatitle[6]}}</td>
 				  </tr>
 				  </thead>
 				  <tbody>
 				  @foreach($lists as $key => $list)
 					  <tr style="line-height: 15px; height: 15px">
-						  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinal']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['medicinalnum']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['unit']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center" class="num">{{$list['num']}}</td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center"><input type="number" value="{{$list['price']}}" class="form-control price"></td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center" class="minitotal"><input type="number" name="minitotal" value="{{$list['prices']}}" class="form-control"></td>
-						  <td style="border-right:1px solid #000;border-top:1px solid #000" align="center">{{$list['tips']}}</td>
+						  <td style="border-left:1px solid #000;border-right:1px solid #000;border-top:1px solid #000" width="130" align="center">{{$list['medicinal']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="100" align="center">{{$list['medicinalnum']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="42" align="center">{{$list['unit']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="100" align="center" class="num">{{$list['num']}}</td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="100" align="center"><input type="number" value="{{$list['price']}}" class="form-control price"></td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="100" align="center" class="minitotal"><input type="number" name="minitotal" value="{{$list['prices']}}" class="form-control"></td>
+						  <td style="border-right:1px solid #000;border-top:1px solid #000" width="100" align="center">{{$list['tips']}}</td>
 					  </tr>
 				  @endforeach
 				  </tbody>
@@ -399,7 +399,7 @@ $("select[name='template']").change(function(){
 function print_view(temp){
 	LODOP=getLodop(); 
 	LODOP.PRINT_INIT();
-    LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
+    //LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
 	if(!temp){
         LODOP.ADD_PRINT_TABLE(10,10,"100%",'100%',document.getElementById('template'+tid).innerHTML);
 	}else{
@@ -410,7 +410,7 @@ function print_view(temp){
 function print(temp){
 	LODOP=getLodop(); 
 	LODOP.PRINT_INIT();
-    LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
+    //LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
     if(!temp){
         LODOP.ADD_PRINT_TABLE(10,10,"100%",'100%',document.getElementById('template'+tid).innerHTML);
     }else{
