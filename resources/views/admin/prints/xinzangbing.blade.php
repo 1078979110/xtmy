@@ -40,7 +40,7 @@
     			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" width="30" align="center">{{$list['batchnumber']}}</td>
     			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" width="30" align="center">{{$list['invalidate']}}</td>
     			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" width="56" align="center">{{$list['registnum']}}</td>
-    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" width="40"align="center">{{date('Y/m/d', strtotime($list['registivalidate']))}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" width="40"align="center">{{$list['registivalidate']}}</td>
     			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" width="30">{{$list['tips']}}</td>
     		</tr>
     		@endforeach

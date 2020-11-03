@@ -84,7 +84,7 @@ class PrintsController extends AdminController{
                 'specification' => $medicinalInfo->specification,
                 'unit' => $medicinalInfo->unit,
                 'registnum' => $medicinalInfo->registnum,
-                'registivalidate' => $medicinalInfo->registivalidate,
+                'registivalidate' => $medicinalInfo->registivalidate?date('Y/m/d', strtotime($medicinalInfo->registivalidate)):'',
                 'storagecondition'=> $medicinalInfo->storagecondition,
                 //额外信息
                 'price'=> $orderMedicinals->price,
@@ -291,7 +291,7 @@ class PrintsController extends AdminController{
                 'specification' => $medicinalInfo->specification,
                 'unit' => $medicinalInfo->unit,
                 'registnum' => $medicinalInfo->registnum,
-                'registivalidate' => $medicinalInfo->registivalidate,
+                'registivalidate' => $medicinalInfo->registivalidate?date('Y/m/d', strtotime($medicinalInfo->registivalidate)):'',
                 'storagecondition'=> $medicinalInfo->storagecondition,
                  //额外信息
                 'price'=> $orderMedicinals->price,
