@@ -28,7 +28,7 @@
     			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" width="30" align="center">{{$list['unit']}}</td>
     			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" width="60" align="center">{{$list['num']}}</td>
     			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" width="30" align="center">{{$list['price']}}</td>
-    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" width="600" align="center">{{$list['prices']}}</td>
+    			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" width="60" align="center">{{$list['prices']}}</td>
     			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" width="80" align="center">{{$list['makedate']}}</td>
     			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" width="60" align="center">{{$list['batchnumber']}}</td>
     			<td style="word-break:break-all; word-wrap:break-word;border-right:1px solid #000;border-top:1px solid #000" width="99" align="center">{{$list['registnum']}}</td>
