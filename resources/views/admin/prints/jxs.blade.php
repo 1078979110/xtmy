@@ -401,9 +401,9 @@ function print_view(temp){
 	LODOP.PRINT_INIT();
     //LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
 	if(!temp){
-        LODOP.ADD_PRINT_TABLE(10,10,"100%",'100%',document.getElementById('template'+tid).innerHTML);
+        LODOP.ADD_PRINT_TABLE(10,48,"100%",'100%',document.getElementById('template'+tid).innerHTML);
 	}else{
-        LODOP.ADD_PRINT_TABLE(10,10,"100%",'100%',document.getElementById(temp).innerHTML);
+        LODOP.ADD_PRINT_TABLE(10,48,"100%",'100%',document.getElementById(temp).innerHTML);
 	}
 	LODOP.PREVIEW();
 }
@@ -412,9 +412,9 @@ function print(temp){
 	LODOP.PRINT_INIT();
     //LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
     if(!temp){
-        LODOP.ADD_PRINT_TABLE(10,10,"100%",'100%',document.getElementById('template'+tid).innerHTML);
+        LODOP.ADD_PRINT_TABLE(10,48,"100%",'100%',document.getElementById('template'+tid).innerHTML);
     }else{
-        LODOP.ADD_PRINT_TABLE(10,10,"100%",'100%',document.getElementById(temp).innerHTML);
+        LODOP.ADD_PRINT_TABLE(10,48,"100%",'100%',document.getElementById(temp).innerHTML);
     }
 	LODOP.PRINT();
 }

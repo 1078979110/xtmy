@@ -98,15 +98,14 @@ var data = {!! $jsondata  !!};
 function print_view(temp){
     LODOP=getLodop();
     LODOP.PRINT_INIT();
-    //LODOP.SET_PRINT_PAGESIZE(1,'210mm','297mm','A4');
-    LODOP.ADD_PRINT_HTM(10,10,"90%",'90%',document.getElementById(temp).innerHTML);
+    LODOP.ADD_PRINT_HTM(10,48,"100%",'100%',document.getElementById(temp).innerHTML);
 	LODOP.PREVIEW();
 }
 function print(temp){
     LODOP=getLodop();
     LODOP.PRINT_INIT();
     //LODOP.SET_PRINT_PAGESIZE(1,'','','A4');
-    LODOP.ADD_PRINT_TABLE(10,10,"90%",'90%',document.getElementById(temp).innerHTML);
+    LODOP.ADD_PRINT_TABLE(10,48,"100%",'100%',document.getElementById(temp).innerHTML);
 	LODOP.PRINT();
 
 }

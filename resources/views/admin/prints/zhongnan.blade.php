@@ -95,14 +95,14 @@ function print_view(temp){
     LODOP=getLodop();
     LODOP.PRINT_INIT();
     //LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
-	LODOP.ADD_PRINT_TABLE(40,10,"RightMargin:0.3cm",'100%',document.getElementById(temp).innerHTML);
+	LODOP.ADD_PRINT_TABLE(10,48,"RightMargin:0.3cm",'100%',document.getElementById(temp).innerHTML);
 	LODOP.PREVIEW();
 }
 function print(temp){
     LODOP=getLodop();
     LODOP.PRINT_INIT();
     //LODOP.SET_PRINT_PAGESIZE(1,'241mm','93mm','');
-	LODOP.ADD_PRINT_TABLE(40,10,"RightMargin:0.3cm",'100%',document.getElementById(temp).innerHTML);
+	LODOP.ADD_PRINT_TABLE(10,48,"RightMargin:0.3cm",'100%',document.getElementById(temp).innerHTML);
 	LODOP.PRINT();
 }
 function togglecn(){
